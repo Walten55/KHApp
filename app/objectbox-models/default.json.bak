@@ -1,0 +1,306 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:7429315746771958023",
+      "lastPropertyId": "14:7725924311237747347",
+      "name": "POINT_INFO",
+      "properties": [
+        {
+          "id": "1:2379126729032396953",
+          "name": "id"
+        },
+        {
+          "id": "2:6453565981630536842",
+          "name": "PN"
+        },
+        {
+          "id": "3:818977495020410999",
+          "name": "ADDRESS"
+        },
+        {
+          "id": "4:363248368793829836",
+          "name": "DESCRIPTION_CN"
+        },
+        {
+          "id": "5:716895994518489431",
+          "name": "DESCRIPTION_EN"
+        },
+        {
+          "id": "6:4307458275628407159",
+          "name": "DESCRIPTION_FRENCH"
+        },
+        {
+          "id": "7:181329406731835553",
+          "name": "BYTE_COUNT"
+        },
+        {
+          "id": "8:5468798374681873315",
+          "name": "DATA_TYPE"
+        },
+        {
+          "id": "9:123809363883293521",
+          "name": "ACCURACY"
+        },
+        {
+          "id": "10:2135805414771490827",
+          "name": "UNIT"
+        },
+        {
+          "id": "11:2619122351536692925",
+          "name": "DEVICE_TYPE"
+        },
+        {
+          "id": "12:3159969058447374192",
+          "name": "GROUP"
+        },
+        {
+          "id": "13:8986957687186737708",
+          "name": "SGROUP"
+        },
+        {
+          "id": "14:7725924311237747347",
+          "name": "AUTHORITY"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:3568689979493376214",
+      "lastPropertyId": "17:3765002185867570744",
+      "name": "DEVICE_DATA",
+      "properties": [
+        {
+          "id": "1:627310320924166974",
+          "name": "id"
+        },
+        {
+          "id": "2:7108665692967057600",
+          "name": "SN"
+        },
+        {
+          "id": "3:6505160228884205873",
+          "name": "REGISTER_ADDRESS"
+        },
+        {
+          "id": "4:5981814788213760840",
+          "name": "TYPE"
+        },
+        {
+          "id": "5:865957726393532181",
+          "name": "DESCRIPTION_CN"
+        },
+        {
+          "id": "6:5223789173663810644",
+          "name": "DESCRIPTION_EN"
+        },
+        {
+          "id": "7:3494106834616259910",
+          "name": "DESCRIPTION_FRENCH"
+        },
+        {
+          "id": "8:7836313699892637240",
+          "name": "INT_VALUE"
+        },
+        {
+          "id": "9:7042934503118292061",
+          "name": "PARSE_VALUE"
+        },
+        {
+          "id": "10:3509775724807649280",
+          "name": "UNIT"
+        },
+        {
+          "id": "11:5074515514147808363",
+          "name": "UPDATE_TIME"
+        },
+        {
+          "id": "12:8790557039134140139",
+          "name": "GROUP"
+        },
+        {
+          "id": "13:7227615572435587378",
+          "name": "SGROUP"
+        },
+        {
+          "id": "14:7449814921296671271",
+          "name": "AUTHORITY"
+        },
+        {
+          "id": "15:6017082766986288760",
+          "name": "DATA_TYPE"
+        },
+        {
+          "id": "16:1484428228192023888",
+          "name": "ACCURACY"
+        },
+        {
+          "id": "17:3765002185867570744",
+          "name": "BYTE_COUNT"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:1113867799414093019",
+      "lastPropertyId": "7:4414299783079766885",
+      "name": "GROUP_INFO",
+      "properties": [
+        {
+          "id": "1:7156139303154770266",
+          "name": "id"
+        },
+        {
+          "id": "2:4406663361166781432",
+          "name": "PN"
+        },
+        {
+          "id": "3:65908159471979393",
+          "name": "GROUP"
+        },
+        {
+          "id": "4:8149098083137307045",
+          "name": "GROUP_NAME_CN"
+        },
+        {
+          "id": "5:1419861159587730664",
+          "name": "GROUP_NAME_EN"
+        },
+        {
+          "id": "6:7018617218853388818",
+          "name": "GROUP_NAME_FRENCH"
+        },
+        {
+          "id": "7:4414299783079766885",
+          "name": "DEVICE_TYPE"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:8776626427611442927",
+      "lastPropertyId": "11:8922882262181847048",
+      "name": "SGROUP_INFO",
+      "properties": [
+        {
+          "id": "1:7481141456721768914",
+          "name": "id"
+        },
+        {
+          "id": "2:6932742846066893044",
+          "name": "PN"
+        },
+        {
+          "id": "3:5667684467167490448",
+          "name": "GROUP"
+        },
+        {
+          "id": "4:6383634868458182685",
+          "name": "GROUP_NAME_CN"
+        },
+        {
+          "id": "5:954777827001824819",
+          "name": "GROUP_NAME_EN"
+        },
+        {
+          "id": "6:3622335778624036204",
+          "name": "GROUP_NAME_FRENCH"
+        },
+        {
+          "id": "7:5604577116570468607",
+          "name": "SGROUP"
+        },
+        {
+          "id": "8:6741228042154871786",
+          "name": "SGROUP_NAME_CN"
+        },
+        {
+          "id": "9:8661675066170679412",
+          "name": "SGROUP_NAME_EN"
+        },
+        {
+          "id": "10:7062527842486869886",
+          "name": "SGROUP_NAME_FRENCH"
+        },
+        {
+          "id": "11:8922882262181847048",
+          "name": "AUTHORITY"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:4990923695702977951",
+      "lastPropertyId": "10:5392862439258728266",
+      "name": "RECORD_POINT",
+      "properties": [
+        {
+          "id": "1:3259197816602472899",
+          "name": "id"
+        },
+        {
+          "id": "2:5574186274122311327",
+          "name": "TEMPLATE"
+        },
+        {
+          "id": "3:1489330682117639502",
+          "name": "TEMPLATE_NAME"
+        },
+        {
+          "id": "4:8302261504125204140",
+          "name": "CODE"
+        },
+        {
+          "id": "5:3055495887152746635",
+          "name": "MEANS_CN"
+        },
+        {
+          "id": "6:8796459691292819689",
+          "name": "V0"
+        },
+        {
+          "id": "7:8012600621378558162",
+          "name": "V1"
+        },
+        {
+          "id": "8:5964664890946759130",
+          "name": "SIGN"
+        },
+        {
+          "id": "9:7692771464060939294",
+          "name": "UNIT"
+        },
+        {
+          "id": "10:5392862439258728266",
+          "name": "ACCURACY"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "6:4990923695702977951",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [
+    147939732502044329
+  ],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    2011370531672886812,
+    2053269241743362215,
+    487820909121161206,
+    8999422466285590516,
+    3973368442714495012,
+    3523605161990652272,
+    5043841240686340248,
+    6923980688182646008,
+    3045137361385142105
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

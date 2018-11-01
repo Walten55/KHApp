@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/grid_45"
+    android:background="@drawable/bg_white_with_bottom_line">
+
+    <TextView
+        android:id="@+id/tv_local_alarm_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/grid_15"
+        android:text="告警名称"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_size_main" />
+
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/tv_local_alarm_value"
+        android:layout_width="@dimen/grid_10"
+        android:layout_height="@dimen/grid_10"
+        android:layout_alignParentRight="true"
+        app:rv_cornerRadius="@dimen/grid_10"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/grid_15"
+        app:rv_backgroundColor="@color/red" />
+</RelativeLayout>

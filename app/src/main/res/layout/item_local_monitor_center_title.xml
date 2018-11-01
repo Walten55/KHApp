@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <View style="@style/Line"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/grid_50"
+        android:layout_marginRight="@dimen/grid_50"
+        />
+    <TextView
+        android:id="@+id/tv_center_title"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="@dimen/grid_45"
+        android:gravity="center"
+        android:textColor="@color/text_gray_dark"
+        android:textSize="@dimen/text_size_sub_title"
+        android:background="@color/bg_gray"
+        android:text="sdfsdf"
+        android:paddingLeft="@dimen/grid_10"
+        android:paddingRight="@dimen/grid_10"
+        />
+
+
+
+</FrameLayout>

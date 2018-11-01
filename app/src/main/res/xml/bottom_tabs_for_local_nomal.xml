@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <tab
+        icon="@mipmap/cammon_monitor_s"
+        id="@+id/tab_monitor"
+        title="@string/监控" />
+    <tab
+        icon="@mipmap/cammon_arrow_s"
+        id="@+id/tab_alarm"
+        title="@string/告警" />
+    <tab
+        icon="@mipmap/cammon_set_s"
+        id="@+id/tab_setting"
+        title="@string/设置" />
+</tabs>

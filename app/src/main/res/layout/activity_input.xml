@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <me.walten.fastgo.widget.titlebar.XTitleBar
+        android:id="@+id/title_bar"
+        style="@style/ToolbarStyle_White_With_Back_Icon"
+        app:centerText="@string/输入"
+        app:rightText="@string/确定" />
+
+    <View style="@style/Line"
+        android:layout_marginTop="@dimen/grid_10"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_55"
+        android:background="@drawable/bg_white_with_bottom_line">
+
+
+
+
+        <TextView
+            android:id="@+id/tv_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingRight="@dimen/grid_10"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text_size_sub_title"
+            android:gravity="center"
+            android:text="%"
+            />
+
+        <com.flyco.roundview.RoundFrameLayout
+            android:layout_toLeftOf="@id/tv_unit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:rv_cornerRadius="@dimen/grid_2"
+            app:rv_strokeWidth="1px"
+            app:rv_strokeColor="@color/line"
+            android:layout_margin="@dimen/grid_10"
+            >
+        <me.walten.fastgo.widget.XEditText
+            android:id="@+id/edit_text"
+
+            style="@style/EditText_Normal"
+            android:paddingLeft="@dimen/grid_5"
+            android:paddingRight="@dimen/grid_5"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_sub_title"
+            android:gravity="center_vertical"
+            />
+        </com.flyco.roundview.RoundFrameLayout>
+    </RelativeLayout>
+
+</LinearLayout>

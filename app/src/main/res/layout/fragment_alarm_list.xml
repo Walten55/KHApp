@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <me.walten.fastgo.widget.titlebar.XTitleBar
+        android:id="@+id/title_bar"
+        style="@style/ToolbarStyle"
+        app:centerText="@string/告警"
+        app:rightCustomView="@layout/layout_text_with_right_icon"
+        app:rightText="@string/状态"
+        app:rightType="customView" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnableLoadMore="false">
+
+        <com.kehua.energy.monitor.app.view.SimpleHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.AppBarLayout
+                    android:id="@+id/appbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_gray"
+                    app:elevation="0dp">
+
+                    <include
+                        layout="@layout/alarm_count"
+                        app:layout_scrollFlags="scroll|enterAlways" />
+                </android.support.design.widget.AppBarLayout>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:srlEnableOverScrollDrag="true" />
+
+            </android.support.design.widget.CoordinatorLayout>
+
+        <com.kehua.energy.monitor.app.view.SimpleFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

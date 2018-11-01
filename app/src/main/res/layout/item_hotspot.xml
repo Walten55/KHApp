@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_60"
+        android:background="@drawable/bg_white_with_bottom_line">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/grid_15"
+            android:layout_marginRight="@dimen/grid_10"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_ssid"
+                style="@style/Text_Style_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="热点名字" />
+
+            <TextView
+                android:id="@+id/tv_level"
+                style="@style/Text_Style_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="信号：未知"
+                android:textColor="@color/text_gray" />
+        </LinearLayout>
+
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/tv_connect"
+            style="@style/Btn_Green_Stroke_Auto_Width"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/grid_15"
+            android:text="@string/连接" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

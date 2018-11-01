@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <tab
+        icon="@mipmap/cammon_home_s"
+        id="@+id/tab_home"
+        title="@string/主页" />
+    <tab
+        icon="@mipmap/cammon_arrow_s"
+        id="@+id/tab_alarm"
+        title="@string/告警" />
+    <tab
+        icon="@mipmap/cammon_focus_s"
+        id="@+id/tab_favorite"
+        title="@string/关注" />
+    <tab
+        icon="@mipmap/cammon_me_s"
+        id="@+id/tab_personal"
+        title="@string/我的" />
+</tabs>

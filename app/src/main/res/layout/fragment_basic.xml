@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnableLoadMore="false"
+        app:srlEnableOverScrollBounce="true"
+        app:srlEnableOverScrollDrag="true"
+        app:srlEnableRefresh="true">
+
+        <com.kehua.energy.monitor.app.view.SimpleHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.kehua.energy.monitor.app.view.SimpleHeader>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:background="@color/white">
+
+                    <View
+                        style="@style/Line"
+                        android:layout_alignParentBottom="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/开关机"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <com.kyleduo.switchbutton.SwitchButton
+                        android:id="@+id/sb_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        app:kswAnimationDuration="300"
+                        app:kswBackDrawable="@drawable/ios_back_drawable"
+                        app:kswThumbDrawable="@drawable/ios_thumb_selector"
+                        app:kswThumbMarginBottom="-8dp"
+                        app:kswThumbMarginLeft="-5dp"
+                        app:kswThumbMarginRight="-5dp"
+                        app:kswThumbMarginTop="-2.5dp"
+                        app:kswThumbRangeRatio="1.4"
+                        android:visibility="gone"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_reading_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/读取中"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/grid_8"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_system_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:background="@color/white">
+
+                    <View
+                        style="@style/Line"
+                        android:layout_alignParentBottom="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/系统时间设置"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:drawablePadding="@dimen/grid_8"
+                        android:drawableRight="@mipmap/icon_common_enter"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/text_size_sub_title" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_work_pattern"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:background="@color/white"
+                    android:visibility="gone">
+
+                    <View
+                        style="@style/Line"
+                        android:layout_alignParentBottom="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/工作模式"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <TextView
+                        android:id="@+id/tv_work_pattern"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:drawablePadding="@dimen/grid_8"
+                        android:drawableRight="@mipmap/icon_common_enter"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <TextView
+                        android:id="@+id/tv_reading_work_pattern"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/grid_30"
+                        android:text="@string/读取中"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/grid_8"
+                        />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_time_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <!--充电-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/grid_45"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:gravity="center_vertical"
+                        android:text="@string/充电时段最多6个"
+                        android:textColor="@color/text_blue"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <View style="@style/Line" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/grid_45"
+                        android:background="@drawable/bg_white_with_bottom_line"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/grid_70"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/grid_90"
+                            android:layout_marginRight="@dimen/grid_60"
+                            android:gravity="center"
+                            android:text="开始时间"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_size_sub_title" />
+
+                        <TextView
+                            android:layout_width="@dimen/grid_70"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:text="结束时间"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_size_sub_title" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_charge_time_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_add_charge_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/grid_45"
+                        android:background="@drawable/bg_white_with_bottom_line"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/grid_20"
+                        android:textStyle="bold" />
+
+
+                    <!--放电-->
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/grid_45"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:gravity="center_vertical"
+                        android:text="@string/放电时段最多6个"
+                        android:textColor="@color/text_blue"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <View style="@style/Line" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/grid_45"
+                        android:background="@drawable/bg_white_with_bottom_line"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/grid_70"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/grid_90"
+                            android:layout_marginRight="@dimen/grid_60"
+                            android:gravity="center"
+                            android:text="开始时间"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_size_sub_title" />
+
+                        <TextView
+                            android:layout_width="@dimen/grid_70"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:text="结束时间"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_size_sub_title" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_discharge_time_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_add_discharge_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/grid_45"
+                        android:background="@drawable/bg_white_with_bottom_line"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/grid_20"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_time_frame_submit"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/grid_45"
+                        android:background="@color/text_blue"
+                        android:gravity="center"
+                        android:text="@string/提交时段设置"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_sub_title"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</FrameLayout>

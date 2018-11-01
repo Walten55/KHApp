@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnableLoadMore="false"
+        app:srlEnableOverScrollBounce="true"
+        app:srlEnableOverScrollDrag="true"
+        app:srlEnablePreviewInEditMode="false"
+        app:srlEnableRefresh="true">
+
+        <com.kehua.energy.monitor.app.view.SimpleHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_sn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:background="@drawable/bg_white_with_bottom_line">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/串号相关串号"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <TextView
+                        android:id="@+id/tv_sn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:drawablePadding="@dimen/grid_8"
+                        android:drawableRight="@mipmap/icon_common_enter"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/text_size_sub_title"
+                        android:hint="@string/点击设置"
+                        android:textColorHint="@color/text_gray"
+                        android:gravity="right|center_vertical"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_power_on_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:background="@drawable/bg_white_with_bottom_line">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/串号相关开机密码功能"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <com.kyleduo.switchbutton.SwitchButton
+                        android:id="@+id/sb_power_on_pwd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        app:kswAnimationDuration="300"
+                        app:kswBackDrawable="@drawable/ios_back_drawable"
+                        app:kswThumbDrawable="@drawable/ios_thumb_selector"
+                        app:kswThumbMarginBottom="-8dp"
+                        app:kswThumbMarginLeft="-5dp"
+                        app:kswThumbMarginRight="-5dp"
+                        app:kswThumbMarginTop="-2.5dp"
+                        app:kswThumbRangeRatio="1.4"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_probation_period"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:background="@drawable/bg_white_with_bottom_line">
+
+                    <View style="@style/Line" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/串号相关试用期功能"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <com.kyleduo.switchbutton.SwitchButton
+                        android:id="@+id/sb_probation_period"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        app:kswAnimationDuration="300"
+                        app:kswBackDrawable="@drawable/ios_back_drawable"
+                        app:kswThumbDrawable="@drawable/ios_thumb_selector"
+                        app:kswThumbMarginBottom="-8dp"
+                        app:kswThumbMarginLeft="-5dp"
+                        app:kswThumbMarginRight="-5dp"
+                        app:kswThumbMarginTop="-2.5dp"
+                        app:kswThumbRangeRatio="1.4"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_probation_period_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:visibility="gone"
+                    android:background="@drawable/bg_white_with_bottom_line">
+
+                    <View style="@style/Line" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/串号相关试用期天数"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <TextView
+                        android:id="@+id/tv_probation_period_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:drawablePadding="@dimen/grid_8"
+                        android:drawableRight="@mipmap/icon_common_enter"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/text_size_sub_title"
+                        android:hint="@string/点击设置"
+                        android:gravity="right|center_vertical"
+                        android:textColorHint="@color/text_gray"
+                        />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_sn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/text_blue"
+                    android:gravity="center"
+                    android:text="@string/确认设置"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_sub_title" />
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_station_sn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:layout_marginTop="@dimen/grid_10"
+                    android:background="@drawable/bg_white_with_bottom_line">
+
+                    <View style="@style/Line" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/站号配置串号"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <TextView
+                        android:id="@+id/tv_station_sn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:drawablePadding="@dimen/grid_8"
+                        android:drawableRight="@mipmap/icon_common_enter"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/text_size_sub_title"
+                        android:hint="@string/点击设置"
+                        android:textColorHint="@color/text_gray"
+                        android:gravity="right|center_vertical"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_station_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:background="@drawable/bg_white_with_bottom_line">
+
+                    <View style="@style/Line" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/站号配置站号"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <TextView
+                        android:id="@+id/tv_station_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:drawablePadding="@dimen/grid_8"
+                        android:drawableRight="@mipmap/icon_common_enter"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/text_size_sub_title"
+                        android:hint="@string/点击设置"
+                        android:textColorHint="@color/text_gray"
+                        android:gravity="right|center_vertical"
+                        />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_station_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:background="@color/text_blue"
+                    android:gravity="center"
+                    android:text="@string/确认设置"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_sub_title" />
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_mac_adr"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:layout_marginTop="@dimen/grid_10"
+                    android:background="@drawable/bg_white_with_bottom_line">
+
+                    <View style="@style/Line" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/MAC地址"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <TextView
+                        android:id="@+id/tv_mac_adr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:drawablePadding="@dimen/grid_8"
+                        android:drawableRight="@mipmap/icon_common_enter"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/text_size_sub_title"
+                        android:gravity="right|center_vertical"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_reading_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/grid_30"
+                        android:text="@string/读取中"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/grid_8"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_45"
+                    android:background="@drawable/bg_white_with_bottom_line">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:text="@string/机器型号"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_size_sub_title" />
+
+                    <TextView
+                        android:id="@+id/tv_model"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:drawablePadding="@dimen/grid_8"
+                        android:drawableRight="@mipmap/icon_common_enter"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/text_size_sub_title"
+                        android:gravity="right|center_vertical"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_reading_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginRight="@dimen/grid_30"
+                        android:text="@string/读取中"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/grid_8"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</FrameLayout>

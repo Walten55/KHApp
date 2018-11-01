@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray">
+
+    <me.walten.fastgo.widget.titlebar.XTitleBar
+        android:id="@+id/title_bar"
+        style="@style/ToolbarStyle"
+        app:centerText="@string/关于"
+        app:leftType="imageButton"
+        app:leftDrawable="@mipmap/icon_common_back"/>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#a0ffffff"
+            android:orientation="vertical">
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_23"
+                android:lineSpacingExtra="@dimen/grid_3"
+                android:text="@string/about_us_text"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/grid_150" />
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

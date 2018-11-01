@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <me.walten.fastgo.widget.titlebar.XTitleBar
+        android:id="@+id/title_bar"
+        style="@style/ToolbarStyle_White"
+        app:centerText="@string/历史"
+        app:bottomLineColor="@color/line"
+        app:showBottomLine="true"
+        />
+
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnableLoadMore="false"
+        app:srlEnableOverScrollBounce="true"
+        app:srlEnableOverScrollDrag="true"
+        app:srlEnablePreviewInEditMode="false"
+        app:srlEnableRefresh="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/grid_20"
+                android:paddingBottom="@dimen/grid_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.flyco.roundview.RoundTextView
+                    android:id="@+id/item_1"
+                    android:layout_width="@dimen/grid_155"
+                    android:layout_height="@dimen/grid_155"
+                    android:layout_marginLeft="@dimen/grid_10"
+                    android:layout_marginRight="@dimen/grid_10"
+                    android:drawablePadding="@dimen/grid_15"
+                    android:drawableTop="@mipmap/icon_local_record_s"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="@dimen/grid_30"
+                    android:text="@string/并脱网记录"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/grid_18"
+                    app:rv_backgroundColor="@color/colorPrimary"
+                    app:rv_cornerRadius="@dimen/grid_5" />
+
+                <com.flyco.roundview.RoundTextView
+                    android:id="@+id/item_2"
+                    android:layout_width="@dimen/grid_155"
+                    android:layout_height="@dimen/grid_155"
+                    android:layout_marginLeft="@dimen/grid_10"
+                    android:layout_marginRight="@dimen/grid_10"
+                    android:drawablePadding="@dimen/grid_15"
+                    android:drawableTop="@mipmap/icon_local_fault_s"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="@dimen/grid_30"
+                    android:text="@string/历史故障"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/grid_18"
+                    app:rv_backgroundColor="@color/colorPrimary"
+                    app:rv_cornerRadius="@dimen/grid_5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/grid_10"
+                android:paddingBottom="@dimen/grid_10"
+                >
+
+                <com.flyco.roundview.RoundTextView
+                    android:id="@+id/item_3"
+                    android:layout_width="@dimen/grid_155"
+                    android:layout_height="@dimen/grid_155"
+                    android:layout_marginLeft="@dimen/grid_10"
+                    android:layout_marginRight="@dimen/grid_10"
+                    android:drawablePadding="@dimen/grid_15"
+                    android:drawableTop="@mipmap/icon_local_log_s"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="@dimen/grid_30"
+                    android:text="@string/用户日志"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/grid_18"
+                    app:rv_backgroundColor="@color/colorPrimary"
+                    app:rv_cornerRadius="@dimen/grid_5" />
+
+                <com.flyco.roundview.RoundTextView
+                    android:id="@+id/item_4"
+                    android:layout_width="@dimen/grid_155"
+                    android:layout_height="@dimen/grid_155"
+                    android:layout_marginLeft="@dimen/grid_10"
+                    android:layout_marginRight="@dimen/grid_10"
+                    android:drawablePadding="@dimen/grid_15"
+                    android:drawableTop="@mipmap/icon_local_power_s"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="@dimen/grid_30"
+                    android:text="@string/功率调度日志"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/grid_18"
+                    app:rv_backgroundColor="@color/colorPrimary"
+                    app:rv_cornerRadius="@dimen/grid_5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/grid_10"
+                android:paddingBottom="@dimen/grid_10"
+                android:visibility="gone">
+
+                <com.flyco.roundview.RoundTextView
+                    android:id="@+id/item_5"
+                    android:layout_width="@dimen/grid_155"
+                    android:layout_height="@dimen/grid_155"
+                    android:layout_marginLeft="@dimen/grid_15"
+                    android:layout_marginRight="@dimen/grid_15"
+                    android:layout_marginTop="@dimen/grid_15"
+                    android:drawablePadding="@dimen/grid_15"
+                    android:drawableTop="@mipmap/icon_local_operation_s"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="@dimen/grid_30"
+                    android:text="@string/本地操作日志"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/grid_18"
+                    app:rv_backgroundColor="@color/colorPrimary"
+                    app:rv_cornerRadius="@dimen/grid_5" />
+
+                <com.flyco.roundview.RoundTextView
+                    android:layout_width="@dimen/grid_155"
+                    android:layout_height="@dimen/grid_155"
+                    android:layout_marginLeft="@dimen/grid_15"
+                    android:layout_marginRight="@dimen/grid_15"
+                    android:layout_marginTop="@dimen/grid_15"
+                    android:visibility="invisible" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

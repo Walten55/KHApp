@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="btn_blue_unable">#cc2662f2</color>
+    <color name="btn_blue_nor">@color/colorPrimary</color>
+    <color name="btn_blue_pre">@color/colorPrimaryDark</color>
+</resources>

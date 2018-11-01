@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <!--总收益-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_count_total_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_5"
+            android:text="@string/总收益"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_sub_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/金额单位_括号"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_sub_title" />
+    </LinearLayout>
+
+    <View
+        style="@style/Line_ver"
+        android:layout_height="@dimen/grid_25" />
+
+    <!--CO2减排-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_count_co2_reduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_5"
+            android:text="@string/CO2减排"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_sub_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(kg)"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_sub_title" />
+    </LinearLayout>
+
+    <View
+        style="@style/Line_ver"
+        android:layout_height="@dimen/grid_25" />
+
+    <!--等效植树-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_count_equal_tree_plant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_5"
+            android:text="@string/等效植树"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_sub_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/等效植树单位_括号"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_sub_title" />
+    </LinearLayout>
+
+    <View
+        style="@style/Line_ver"
+        android:layout_height="@dimen/grid_25" />
+
+    <!--节能煤标-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_count_conserve_energy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_5"
+            android:text="@string/节能煤标"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_sub_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/节能煤标单位_括号"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_sub_title" />
+    </LinearLayout>
+</LinearLayout>

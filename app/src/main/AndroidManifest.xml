@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.kehua.energy.monitor.app">
+
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:name="me.walten.fastgo.base.application.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:name">
+        <meta-data
+            android:name="com.kehua.energy.monitor.app.configuration.GlobalConfiguration"
+            android:value="ConfigModule" />
+
+        <activity
+            android:name=".business.main.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.NetworkSetting.hotspot.HotspotActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.NetworkSetting.WifiConfig.WifiConfigActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.register.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.forgetpwd.ForgetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.local.LocalMain.LocalMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.input.InputActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.local.login.LocalLoginActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".business.local.setting.workPattern.WorkPatternActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.local.setting.standard.StandardActivity"
+            android:screenOrientation="portrait" />
+        />
+        <activity
+            android:name=".business.personal.language.LanguageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.personal.about.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.local.setting.pattern.patternModelChild.LocalPatternChildActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.local.first.FirstSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.local.history.HistoryInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".business.scanner.ScannerActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/NoTitleFullscreen"
+            android:screenOrientation="portrait"
+            ></activity>
+    </application>
+
+</manifest>

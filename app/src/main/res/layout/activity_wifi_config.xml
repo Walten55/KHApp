@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <me.walten.fastgo.widget.titlebar.XTitleBar
+        android:id="@+id/title_bar"
+        style="@style/ToolbarStyle_With_Back_Icon"
+        app:centerText="WIFI 配置"
+        />
+    <LinearLayout
+        android:id="@+id/rl_cur_linked_msg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_90"
+        android:orientation="vertical"
+        android:background="@drawable/bg_white_with_bottom_line">
+
+        <me.walten.fastgo.widget.XEditText
+            android:id="@+id/et_ssid"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_45"
+            style="@style/EditText_Normal"
+            android:background="@drawable/bg_white_with_bottom_line"
+            android:layout_marginLeft="@dimen/grid_15"
+            android:layout_marginRight="@dimen/grid_15"
+            android:hint="WIFI SSID"
+            />
+        <me.walten.fastgo.widget.XEditText
+            android:id="@+id/et_wifi_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_45"
+            style="@style/EditText_Normal"
+            android:layout_marginLeft="@dimen/grid_15"
+            android:layout_marginRight="@dimen/grid_15"
+            android:hint="WIFI 密码"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_hotspot"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_45"
+        android:layout_below="@id/rl_cur_linked_msg"
+        android:drawableLeft="@mipmap/icon_me_wifi"
+        android:drawablePadding="@dimen/grid_5"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/grid_15"
+        android:text="@string/WIFI列表"
+        android:textColor="@color/text_blue"
+        android:textSize="@dimen/text_size_title" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:srlEnableLoadMore="false"
+        app:srlEnableRefresh="false"
+        app:srlEnableOverScrollDrag="true">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            style="@style/RecycleView_Style">
+        </android.support.v7.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/tv_setting"
+        style="@style/Btn_Blue_Auto_Width"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_44"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:text="@string/设置"
+        app:rv_cornerRadius="0dp" />
+</LinearLayout>

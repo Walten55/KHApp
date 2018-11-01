@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
+    android:id="@+id/refresh_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray">
+
+    <com.kehua.energy.monitor.app.view.SimpleHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--头部-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_status_bar"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <me.walten.fastgo.widget.titlebar.XTitleBar
+                android:id="@+id/title_bar"
+                style="@style/ToolbarStyle"
+                app:leftCustomView="@layout/layout_icon_with_point"
+                app:leftType="customView"
+                app:rightText="@string/状态"
+                app:rightType="textView" />
+
+            <com.flyco.roundview.RoundRelativeLayout
+                android:layout_width="@dimen/grid_65"
+                android:layout_height="@dimen/grid_65"
+                android:layout_marginTop="@dimen/grid_10"
+                android:background="@mipmap/bg_me_img"
+                android:padding="@dimen/grid_3">
+
+                <ImageView
+                    android:id="@+id/iv_user_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/img_me_kehua" />
+
+            </com.flyco.roundview.RoundRelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_10"
+                android:text="@string/用户名"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_size_title" />
+
+            <include
+                layout="@layout/layout_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/grid_10"
+                android:layout_marginTop="@dimen/grid_30" />
+        </LinearLayout>
+
+        <!--菜单部分-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <me.walten.fastgo.widget.ItemView.XItemView
+                android:id="@+id/xiv_user_data"
+                style="@style/XItemview_Style"
+                app:XItemView_icon="@mipmap/icon_me_personal"
+                app:XItemView_item_name="@string/个人信息" />
+
+
+            <me.walten.fastgo.widget.ItemView.XItemView
+                android:id="@+id/xiv_creat_site"
+                style="@style/XItemview_Style"
+                app:XItemView_icon="@mipmap/icon_me_create"
+                app:XItemView_item_name="@string/创建电站" />
+
+            <me.walten.fastgo.widget.ItemView.XItemView
+                android:id="@+id/xiv_language"
+                style="@style/XItemview_Style"
+                app:XItemView_icon="@mipmap/icon_me_language"
+                app:XItemView_item_name="@string/语言" />
+
+
+            <me.walten.fastgo.widget.ItemView.XItemView
+                android:id="@+id/xiv_about"
+                style="@style/XItemview_Style"
+                app:XItemView_icon="@mipmap/icon_me_about"
+                app:XItemView_item_name="@string/关于" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/grid_12"/>
+
+            <me.walten.fastgo.widget.ItemView.XItemView
+                android:id="@+id/xiv_local_mode"
+                style="@style/XItemview_Style"
+                app:XItemView_icon="@mipmap/icon_me_local"
+                app:XItemView_item_name="@string/本地模式" />
+
+
+            <me.walten.fastgo.widget.ItemView.XItemView
+                android:id="@+id/xiv_collection_net"
+                style="@style/XItemview_Style"
+                app:XItemView_icon="@mipmap/icon_me_collector"
+                app:XItemView_item_name="@string/采集器联网" />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

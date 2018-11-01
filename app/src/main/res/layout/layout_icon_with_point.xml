@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="@dimen/grid_50"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/grid_5"
+            android:src="@mipmap/icon_me_news"
+            android:layout_centerInParent="true"/>
+
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/tv_point"
+            android:layout_width="@dimen/grid_10"
+            android:layout_height="@dimen/grid_10"
+            app:rv_backgroundColor="@color/red"
+            app:rv_cornerRadius="@dimen/grid_5"
+            android:layout_alignTop="@id/iv_icon"
+            android:layout_alignRight="@id/iv_icon"/>
+    </RelativeLayout>
+
+</RelativeLayout>

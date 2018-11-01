@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2662f6</color>
+    <color name="colorPrimaryDark">#1c44a8</color>
+    <color name="colorAccent">#dbdbdb</color>
+
+    <color name="divide_gray">@color/colorAccent</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="bg_gray">#f2f2f2</color>
+    <color name="green">#28b438</color>
+    <color name="yellow">#fac40a</color>
+    <color name="orange">#faa80a</color>
+    <color name="red">#f04242</color>
+    <color name="gray">#808694</color>
+
+    <color name="text_black">#333333</color>
+    <color name="text_blue">@color/colorPrimary</color>
+    <color name="text_gray">#999999</color>
+    <color name="text_gray_dark">#7e7e7e</color>
+    <color name="text_white">#ffffff</color>
+
+    <color name="transparent">#00ffffff</color>
+
+    <dimen name="text_size_title">@dimen/grid_16</dimen>
+    <dimen name="text_size_sub_title">@dimen/grid_14</dimen>
+    <dimen name="text_size_main">@dimen/grid_12</dimen>
+
+    <!--边距-->
+    <dimen name="margin">@dimen/grid_15</dimen>
+
+</resources>

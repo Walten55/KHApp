@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/grid_40"
+        android:layout_marginRight="@dimen/grid_40"
+        android:layout_marginTop="@dimen/grid_80"
+        android:orientation="vertical">
+
+        <me.walten.fastgo.widget.XEditText
+            android:id="@+id/et_account"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_50"
+            android:background="@drawable/bg_white_with_bottom_line"
+            android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789@."
+            android:hint="@string/手机号码_邮箱"
+            android:inputType="text"
+            android:maxLength="18"
+            android:paddingLeft="@dimen/grid_5"
+            android:singleLine="true"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_gray"
+            android:textSize="@dimen/text_size_title" />
+
+        <me.walten.fastgo.widget.XEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_50"
+            android:layout_marginTop="@dimen/grid_10"
+            android:background="@drawable/bg_white_with_bottom_line"
+            android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789"
+            android:hint="@string/密码"
+            android:inputType="textPassword"
+            android:maxLength="18"
+            android:paddingLeft="@dimen/grid_5"
+            android:singleLine="true"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_gray"
+            android:textSize="@dimen/text_size_title" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_25">
+
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/grid_5"
+                android:text="@string/立即注册"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main"
+                android:background="@drawable/ripple_custom"/>
+
+            <TextView
+                android:id="@+id/tv_forgetpwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/grid_5"
+                android:text="@string/忘记密码"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main"
+                android:background="@drawable/ripple_custom"/>
+
+        </RelativeLayout>
+
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/tv_login"
+            style="@style/Btn_Blue_Auto_Width"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_45"
+            android:layout_marginTop="@dimen/grid_65"
+            android:text="@string/登录"
+            app:rv_backgroundColor="@color/btn_blue_nor"/>
+
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/tv_示例电站"
+            style="@style/Btn_Blue_Stroke_Auto_Width"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_45"
+            android:layout_marginTop="@dimen/grid_10"
+            android:text="@string/示例电站" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_50">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_centerVertical="true"
+                android:background="@color/divide_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin"
+                android:text="@string/第三方登录"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_title" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_25"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_login_qq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@mipmap/icon_login_qq"
+                android:background="@drawable/ripple_custom"/>
+
+            <ImageView
+                android:id="@+id/iv_login_weixin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@mipmap/icon_login_weixin"
+                android:background="@drawable/ripple_custom"/>
+
+            <ImageView
+                android:id="@+id/iv_login_facebook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@mipmap/icon_login_facebook"
+                android:background="@drawable/ripple_custom"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

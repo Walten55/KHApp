@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <me.walten.fastgo.widget.titlebar.XTitleBar
+        android:id="@+id/title_bar"
+        style="@style/ToolbarStyle_White_With_Back_Icon"
+        android:layout_alignParentTop="true"
+        app:centerText="@string/设置" />
+
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_45"
+        android:layout_alignParentBottom="true"
+        android:background="@color/text_blue"
+        android:gravity="center"
+        android:text="@string/确定"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_sub_title" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tv_submit"
+        android:layout_below="@id/title_bar"
+        app:srlEnableLoadMore="false"
+        app:srlEnableOverScrollDrag="true"
+        app:srlEnableRefresh="false">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            style="@style/RecycleView_Style" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</RelativeLayout>

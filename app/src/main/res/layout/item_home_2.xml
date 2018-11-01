@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_45"
+        android:drawableLeft="@mipmap/icon_home_list"
+        android:drawablePadding="@dimen/grid_5"
+        android:textColor="@color/text_blue"
+        android:textSize="@dimen/text_size_title"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/margin"
+        android:text="@string/电站列表"
+
+        />
+
+</FrameLayout>

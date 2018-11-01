@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <me.walten.fastgo.widget.titlebar.XTitleBar
+        android:id="@+id/title_bar"
+        style="@style/ToolbarStyle_With_Back_Icon"
+        app:centerText="@string/采集器热点"
+        app:bottomLineColor="@color/line"
+        app:showBottomLine="true"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_bar">
+
+        <RelativeLayout
+            android:id="@+id/rl_cur_linked_msg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_60"
+            android:background="@drawable/bg_white_with_bottom_line">
+
+            <TextView
+                android:id="@+id/tv_ssid"
+                style="@style/Text_Style_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/grid_15"
+                android:layout_marginRight="@dimen/grid_10"
+                android:text="--" />
+
+            <com.flyco.roundview.RoundTextView
+                android:id="@+id/tv_state"
+                style="@style/Btn_Green_Auto_Width"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/grid_15"
+                android:text="@string/连接中" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_hotspot"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_45"
+            android:layout_below="@id/rl_cur_linked_msg"
+            android:drawableLeft="@mipmap/icon_me_caiji"
+            android:drawablePadding="@dimen/grid_5"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/grid_15"
+            android:text="@string/热点列表"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/text_size_title" />
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/ll_sys_link"
+            android:layout_below="@id/tv_hotspot"
+            app:srlEnableLoadMore="false"
+            app:srlEnableRefresh="false"
+            app:srlEnableOverScrollDrag="true">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                style="@style/RecycleView_Style">
+            </android.support.v7.widget.RecyclerView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_sys_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_10"
+                android:text="@string/找不到想要的WiFi采集器"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/grid_12" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/点击"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/grid_12" />
+
+                <TextView
+                    android:id="@+id/tv_sys_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/联网设置"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/grid_16" />
+            </LinearLayout>
+
+            <com.flyco.roundview.RoundTextView
+                android:id="@+id/tv_link_setting"
+                style="@style/Btn_Blue_Auto_Width"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/grid_44"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="@dimen/grid_10"
+                android:text="@string/联网设置"
+                app:rv_cornerRadius="0dp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

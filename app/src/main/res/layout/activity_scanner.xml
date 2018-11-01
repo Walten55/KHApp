@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <com.kehua.energy.monitor.app.view.ZoomRelativeLayout
+            android:id="@+id/rv_iv_back"
+            android:layout_width="@dimen/grid_50"
+            android:layout_height="@dimen/grid_45"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/margin">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/icon_common_back" />
+
+        </com.kehua.energy.monitor.app.view.ZoomRelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/grid_45"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/扫描"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_title" />
+
+    </RelativeLayout>
+
+    <com.kehua.energy.monitor.app.view.ZoomRelativeLayout
+        android:id="@+id/rl_scan_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/grid_60"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_scan_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/grid_10"
+            android:drawableTop="@mipmap/icon_lightoff"
+            android:gravity="center"
+            android:text="@string/开灯"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_sub_title" />
+    </com.kehua.energy.monitor.app.view.ZoomRelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_250"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/grid_15"
+        android:paddingLeft="@dimen/grid_30"
+        android:paddingRight="@dimen/grid_30"
+        android:paddingTop="@dimen/grid_15">
+
+        <com.kehua.energy.monitor.app.view.EnergyFlowChart
+            android:id="@+id/energy_flow_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.kehua.energy.monitor.app.view.EnergyFlowChart>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_45"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:background="@color/white">
+
+        <View style="@style/Line" />
+
+        <View
+            style="@style/Line"
+            android:layout_alignParentBottom="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:text="@string/系统运行状态"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_sub_title" />
+
+        <TextView
+            android:id="@+id/tv_running_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:text="--"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text_size_sub_title" />
+    </RelativeLayout>
+
+    <View style="@style/Line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_70"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_daily_grid_generation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/text_size_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_5"
+                android:text="@string/日并网发电量_单位"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main" />
+        </LinearLayout>
+
+        <View
+            style="@style/Line_V"
+            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginTop="@dimen/margin" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_total_grid_generation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/text_size_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_5"
+                android:text="@string/总并网发电量_单位"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/Line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_70"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_daily_pv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/text_size_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_5"
+                android:text="@string/PV日发电量_单位"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main" />
+        </LinearLayout>
+
+        <View
+            style="@style/Line_V"
+            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginTop="@dimen/margin" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_total_pv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/text_size_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_5"
+                android:text="@string/PV总发电量_单位"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_energy_storage_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View style="@style/Line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_70"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_daily_load"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/text_size_title" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_5"
+                    android:text="@string/日负载耗电量_单位"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_main" />
+            </LinearLayout>
+
+            <View
+                style="@style/Line_V"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_total_load"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/text_size_title" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_5"
+                    android:text="@string/总负载耗电量_单位"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_main" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View style="@style/Line" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_70"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_daily_charge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/text_size_title" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_5"
+                    android:text="@string/电池日充电量_单位"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_main" />
+            </LinearLayout>
+
+
+            <View
+                style="@style/Line_V"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_daily_discharge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/text_size_title" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_5"
+                    android:text="@string/电池日放电量_单位"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_main" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/Line" />
+</LinearLayout>

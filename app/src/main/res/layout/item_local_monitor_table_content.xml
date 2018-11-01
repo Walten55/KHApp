@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_45"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_content_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_sub_title"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/tv_content_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/text_size_sub_title"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/tv_content_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/text_size_sub_title"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/tv_content_4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/text_size_sub_title"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+</FrameLayout>

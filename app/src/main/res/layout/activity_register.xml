@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <me.walten.fastgo.widget.titlebar.XTitleBar
+        android:id="@+id/title_bar"
+        style="@style/ToolbarStyle_White_With_Back_Icon"
+        app:centerText="@string/注册" />
+
+    <LinearLayout
+        android:id="@+id/view_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/grid_40"
+        android:layout_marginRight="@dimen/grid_40"
+        android:layout_marginTop="@dimen/grid_50"
+        android:orientation="vertical">
+
+        <me.walten.fastgo.widget.XEditText
+            android:id="@+id/et_nick_name"
+            style="@style/XEdittext_Style"
+            android:hint="@string/昵称" />
+
+        <me.walten.fastgo.widget.XEditText
+            android:id="@+id/et_account"
+            style="@style/XEdittext_Style"
+            android:layout_marginTop="@dimen/grid_10"
+            android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789@."
+            android:hint="@string/手机号码_邮箱"
+            android:inputType="text" />
+
+        <me.walten.fastgo.widget.XEditText
+            android:id="@+id/et_password"
+            style="@style/XEdittext_Style"
+            android:layout_marginTop="@dimen/grid_10"
+            android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789"
+            android:hint="@string/密码"
+            android:inputType="textPassword" />
+
+        <LinearLayout android:id="@+id/view_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_10"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/ripple_inner">
+
+            <CheckBox
+                android:id="@+id/checkbox_agreement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:layout_marginRight="@dimen/grid_5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/我已阅读并同意用户服务协议"
+                android:layout_marginRight="@dimen/grid_5"/>
+        </LinearLayout>
+
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/tv_register"
+            style="@style/Btn_Blue_Auto_Width"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_45"
+            android:layout_marginTop="@dimen/grid_35"
+            android:text="@string/注册"
+            app:rv_backgroundColor="@color/btn_blue_nor"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

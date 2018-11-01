@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <me.walten.fastgo.widget.titlebar.XTitleBar
+        android:id="@+id/title_bar"
+        style="@style/ToolbarStyle_White" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_110"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <View style="@style/Line" />
+
+        <ImageView
+            android:id="@+id/iv_equ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/grid_10"
+            android:src="@mipmap/icon_local_eqp" />
+
+        <ImageView
+            android:id="@+id/iv_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/grid_10"
+            android:src="@mipmap/icon_local_switch" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_toLeftOf="@id/iv_switch"
+            android:layout_toRightOf="@id/iv_equ"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_sn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:text="@string/串号_冒号"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_title" />
+
+            <TextView
+                android:id="@+id/tv_device_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_4"
+                android:gravity="center_vertical"
+                android:text="@string/类型_冒号"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_title" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_bar"
+        android:layout_marginTop="@dimen/grid_50"
+        android:orientation="horizontal">
+
+        <com.kehua.energy.monitor.app.view.ZoomRelativeLayout
+            android:id="@+id/zrl_ops"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawablePadding="@dimen/grid_15"
+                android:drawableTop="@mipmap/icon_local_peration"
+                android:gravity="center"
+                android:text="@string/运维"
+                android:textColor="@color/text_black" />
+        </com.kehua.energy.monitor.app.view.ZoomRelativeLayout>
+
+        <com.kehua.energy.monitor.app.view.ZoomRelativeLayout
+            android:id="@+id/zrl_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawablePadding="@dimen/grid_15"
+                android:drawableTop="@mipmap/icon_local_user_s"
+                android:gravity="center"
+                android:text="@string/用户"
+                android:textColor="@color/text_black" />
+        </com.kehua.energy.monitor.app.view.ZoomRelativeLayout>
+
+        <com.kehua.energy.monitor.app.view.ZoomRelativeLayout
+            android:id="@+id/zrl_factory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawablePadding="@dimen/grid_15"
+                android:drawableTop="@mipmap/icon_local_firm"
+                android:gravity="center"
+                android:text="@string/厂家"
+                android:textColor="@color/text_black" />
+        </com.kehua.energy.monitor.app.view.ZoomRelativeLayout>
+
+    </LinearLayout>
+
+    <me.walten.fastgo.widget.XEditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_50"
+        android:layout_below="@id/ll_switch"
+        android:layout_marginLeft="@dimen/grid_40"
+        android:layout_marginRight="@dimen/grid_40"
+        android:layout_marginTop="@dimen/grid_40"
+        android:background="@drawable/bg_white_with_bottom_line"
+        android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789"
+        android:hint="@string/权限密码"
+        android:inputType="textPassword"
+        android:maxLength="10"
+        android:paddingLeft="@dimen/grid_5"
+        android:singleLine="true"
+        android:textColor="@color/text_black"
+        android:textColorHint="@color/text_gray"
+        android:textSize="@dimen/grid_17"
+        android:visibility="invisible" />
+
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/tv_login"
+        style="@style/Btn_Blue_Auto_Width"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_50"
+        android:layout_below="@id/et_password"
+        android:layout_marginLeft="@dimen/grid_40"
+        android:layout_marginRight="@dimen/grid_40"
+        android:layout_marginTop="@dimen/grid_40"
+        android:clickable="false"
+        android:text="@string/立刻进入本地模式"
+         />
+</RelativeLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_45"
+        android:background="@color/white">
+
+        <View
+            android:id="@+id/view_bottom_line"
+            style="@style/Line"
+            android:layout_alignParentBottom="true" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_sub_title" />
+
+        <TextView
+            android:id="@+id/tv_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:drawablePadding="@dimen/grid_8"
+            android:drawableRight="@mipmap/icon_common_enter"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text_size_sub_title" />
+
+        <TextView
+            android:id="@+id/tv_reading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/grid_30"
+            android:text="@string/读取中"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/grid_8"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</FrameLayout>
