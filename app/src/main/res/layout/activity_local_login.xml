@@ -9,7 +9,11 @@
 
     <me.walten.fastgo.widget.titlebar.XTitleBar
         android:id="@+id/title_bar"
-        style="@style/ToolbarStyle_White" />
+        style="@style/ToolbarStyle_White"
+        app:rightType="textView"
+        app:rightText="@string/语言"
+        app:rightTextColor="@color/text_black"
+        app:rightTextSize="@dimen/text_size_sub_title"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

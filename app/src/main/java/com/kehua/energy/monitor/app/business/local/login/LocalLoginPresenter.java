@@ -17,7 +17,9 @@ import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.model.APPModel;
 import com.kehua.energy.monitor.app.model.entity.Collector;
 import com.kehua.energy.monitor.app.model.entity.InvInfoList;
+import com.kehua.energy.monitor.app.model.local.LocalModel;
 import com.kehua.energy.monitor.app.route.RouterMgr;
+import com.kehua.energy.monitor.app.utils.LanguageUtils;
 import com.kehua.energy.monitor.app.utils.PasswordUtils;
 import com.orhanobut.logger.Logger;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -211,5 +213,15 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                 mView.finishView();
             }
         });
+    }
+
+    @Override
+    public void initLanguage() {
+        LanguageUtils.init(mModel.getLocalModel());
+    }
+
+    @Override
+    public void selectLanguage(String languageName) {
+        LanguageUtils.languageSelect(LanguageUtils.getLangeValueByName(languageName),mModel.getLocalModel(),false);
     }
 }

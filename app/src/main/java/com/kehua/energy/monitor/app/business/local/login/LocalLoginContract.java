@@ -24,5 +24,9 @@ public interface LocalLoginContract {
 
         public abstract void gatherDeviceInfo(int devAddress);
 
+        public abstract void initLanguage();
+
+        public abstract void selectLanguage(String languageName);
+
     }
 }

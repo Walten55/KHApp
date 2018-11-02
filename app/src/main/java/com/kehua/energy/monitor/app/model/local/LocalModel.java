@@ -807,4 +807,13 @@ public class LocalModel extends BaseModel implements IModel {
         String keysStr = SPUtils.getInstance().getString("COLLECTOR_KEYS","");
         return keysStr.contains(key);
     }
+
+    public void saveLanguageSelect(String language){
+        SPUtils.getInstance().put("LANGUAGE",language);
+    }
+
+    public String getLanguageSelect(){
+        return SPUtils.getInstance().getString("LANGUAGE","");
+    }
+
 }

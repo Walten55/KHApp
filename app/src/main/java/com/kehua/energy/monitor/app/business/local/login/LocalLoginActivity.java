@@ -5,19 +5,26 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.flyco.dialog.listener.OnOperItemClickL;
+import com.flyco.dialog.widget.ActionSheetDialog;
 import com.flyco.roundview.RoundTextView;
 import com.gyf.barlibrary.ImmersionBar;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.base.XMVPActivity;
+import com.kehua.energy.monitor.app.cache.CacheManager;
+import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.di.component.DaggerActivityComponent;
 import com.kehua.energy.monitor.app.di.module.ActivityModule;
+import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.route.RouterMgr;
+import com.kehua.energy.monitor.app.utils.LanguageUtils;
 import com.kehua.energy.monitor.app.utils.ViewUtils;
 import com.kehua.energy.monitor.app.view.ZoomRelativeLayout;
 
@@ -25,6 +32,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import me.walten.fastgo.di.component.AppComponent;
 import me.walten.fastgo.widget.XEditText;
+import me.walten.fastgo.widget.titlebar.XTitleBar;
 
 import static com.kehua.energy.monitor.app.application.LocalUserManager.ROLE_FACTORY;
 import static com.kehua.energy.monitor.app.application.LocalUserManager.ROLE_NORMAL;
@@ -59,6 +67,8 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
 
     private int role = ROLE_NORMAL;
 
+    private String[] languageNames = LanguageUtils.getLanguageNames();
+
     @Override
     public int getLayoutResId() {
         return R.layout.activity_local_login;
@@ -69,14 +79,25 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
         setFullScreen();
         cancelFullScreen();
 
-//        mTitleBar.setListener(new XTitleBar.OnTitleBarListener() {
-//            @Override
-//            public void onClicked(View v, int action, String extra) {
-//                if(action == XTitleBar.ACTION_LEFT_BUTTON){
-//                    finish();
-//                }
-//            }
-//        });
+        mPresenter.initLanguage();
+        mTitleBar.setListener(new XTitleBar.OnTitleBarListener() {
+            @Override
+            public void onClicked(View v, int action, String extra) {
+                if (action == XTitleBar.ACTION_RIGHT_TEXT) {
+                    final ActionSheetDialog dialog = new ActionSheetDialog(mContext, languageNames, null);
+                    dialog.isTitleShow(false).show();
+
+                    dialog.setOnOperItemClickL(new OnOperItemClickL() {
+                        @Override
+                        public void onOperItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                            dialog.dismiss();
+                            mPresenter.selectLanguage(languageNames[position]);
+                        }
+                    });
+                }
+            }
+        });
+
     }
 
     @Override
@@ -126,32 +147,32 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
 
     @Override
     public void showDeviceInfo(String sn, String deviceType) {
-        mSnView.setText(getString(R.string.串号_冒号)+sn==null?"":sn);
-        mDeviceTypeView.setText(getString(R.string.类型_冒号)+deviceType);
+        mSnView.setText(getString(R.string.串号_冒号) + sn == null ? "" : sn);
+        mDeviceTypeView.setText(getString(R.string.类型_冒号) + deviceType);
     }
 
     @OnClick(R.id.tv_login)
     @Override
-    public void login(View view){
-        mPresenter.login(role,mPasswordView.getText().toString());
+    public void login(View view) {
+        mPresenter.login(role, mPasswordView.getText().toString());
     }
 
-    @OnClick({R.id.zrl_ops,R.id.zrl_user,R.id.zrl_factory})
+    @OnClick({R.id.zrl_ops, R.id.zrl_user, R.id.zrl_factory})
     @Override
-    public void switchRole(ZoomRelativeLayout layout){
-        switchStyleChange(opsSwitch,R.mipmap.icon_local_peration);
-        switchStyleChange(userSwitch,R.mipmap.icon_local_user);
-        switchStyleChange(factorySwitch,R.mipmap.icon_local_firm);
+    public void switchRole(ZoomRelativeLayout layout) {
+        switchStyleChange(opsSwitch, R.mipmap.icon_local_peration);
+        switchStyleChange(userSwitch, R.mipmap.icon_local_user);
+        switchStyleChange(factorySwitch, R.mipmap.icon_local_firm);
 
-        switch (layout.getId()){
+        switch (layout.getId()) {
             case R.id.zrl_ops:
-                if(mPasswordView.getVisibility()==View.INVISIBLE)
+                if (mPasswordView.getVisibility() == View.INVISIBLE)
                     YoYo.with(Techniques.SlideInRight)
                             .duration(300)
                             .playOn(findViewById(R.id.et_password));
                 role = ROLE_OPS;
                 mPasswordView.setVisibility(View.VISIBLE);
-                switchStyleChange(opsSwitch,R.mipmap.icon_local_peration_s);
+                switchStyleChange(opsSwitch, R.mipmap.icon_local_peration_s);
                 mLoginView.setText(getString(R.string.登录));
                 break;
             case R.id.zrl_user:
@@ -164,18 +185,18 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
                     public void run() {
                         mPasswordView.setVisibility(View.INVISIBLE);
                     }
-                },300);
-                switchStyleChange(userSwitch,R.mipmap.icon_local_user_s);
+                }, 300);
+                switchStyleChange(userSwitch, R.mipmap.icon_local_user_s);
                 mLoginView.setText(R.string.立刻进入本地模式);
                 break;
             case R.id.zrl_factory:
-                if(mPasswordView.getVisibility()==View.INVISIBLE)
+                if (mPasswordView.getVisibility() == View.INVISIBLE)
                     YoYo.with(Techniques.SlideInRight)
                             .duration(300)
                             .playOn(findViewById(R.id.et_password));
                 role = ROLE_FACTORY;
                 mPasswordView.setVisibility(View.VISIBLE);
-                switchStyleChange(factorySwitch,R.mipmap.icon_local_firm_s);
+                switchStyleChange(factorySwitch, R.mipmap.icon_local_firm_s);
                 mLoginView.setText(getString(R.string.登录));
                 break;
         }
@@ -187,8 +208,8 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
         RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);
     }
 
-    private void switchStyleChange(ZoomRelativeLayout layout,int res){
+    private void switchStyleChange(ZoomRelativeLayout layout, int res) {
         TextView child = (TextView) layout.getChildAt(0);
-        ViewUtils.setDrawableTop(child,res);
+        ViewUtils.setDrawableTop(child, res);
     }
 }
