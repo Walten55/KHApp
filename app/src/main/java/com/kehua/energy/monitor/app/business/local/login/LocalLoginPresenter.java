@@ -96,11 +96,13 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
             return;
         }
 
-        mView.startWaiting(Fastgo.getContext().getString(R.string.登录中));
+        if(mView!=null)
+            mView.startWaiting(Fastgo.getContext().getString(R.string.登录中));
         mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
             @Override
             public void accept(final InvInfoList invInfoList) throws Exception {
-                mView.stopWaiting();
+                if(mView!=null)
+                    mView.stopWaiting();
                 switch (role){
                     case ROLE_NORMAL:
 
@@ -161,11 +163,13 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                mView.stopWaiting();
                 Logger.e(throwable.getMessage());
                 XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
                 RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);
-                mView.finishView();
+                if(mView!=null){
+                    mView.stopWaiting();
+                    mView.finishView();
+                }
             }
         });
 
