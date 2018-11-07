@@ -279,9 +279,9 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
     @OnClick(R.id.tv_sn_submit)
     public void onClickSubmitSN(View v) {
         if(TextUtils.isEmpty(mSNTv.getText())){
-            XToast.warning(getString(R.string.请设置串号相关串号));
+            XToast.error(getString(R.string.请设置串号相关串号));
         }else if(mProbationPeriodSwitchButton.isChecked()&&TextUtils.isEmpty(mProbationPeriodDayTv.getText())){
-            XToast.warning(getString(R.string.请设置串号相关试用期天数));
+            XToast.error(getString(R.string.请设置串号相关试用期天数));
         }else {
             mAdvancedPresenter.save(mSNTv.getText().toString(),
                     mPowerOnPwdSwitchButton.isChecked()?1:0,
@@ -303,9 +303,9 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
     @OnClick(R.id.tv_station_submit)
     public void onClickSubmitStation(View v) {
         if(TextUtils.isEmpty(mStationSnTv.getText())){
-            XToast.warning("请设置\"站号配置-串号\"");
+            XToast.error("请设置\"站号配置-串号\"");
         }else if(TextUtils.isEmpty(mStationSnTv.getText())){
-            XToast.warning("请设置\"站号配置-站号\"");
+            XToast.error("请设置\"站号配置-站号\"");
         }else {
             mAdvancedPresenter.save(mStationSnTv.getText().toString(), Integer.valueOf(mStationNoTv.getText().toString()), new Consumer<Boolean>() {
                 @Override

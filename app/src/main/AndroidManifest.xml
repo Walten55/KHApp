@@ -90,11 +90,14 @@
         <activity
             android:name=".business.local.history.HistoryInfoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".business.scanner.ScannerActivity"
+        <activity
+            android:name=".business.scanner.ScannerActivity"
             android:launchMode="singleTask"
-            android:theme="@style/NoTitleFullscreen"
             android:screenOrientation="portrait"
-            ></activity>
+            android:theme="@style/NoTitleFullscreen" />
+        <activity
+            android:name=".business.local.setting.upgrade.UpgradeActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

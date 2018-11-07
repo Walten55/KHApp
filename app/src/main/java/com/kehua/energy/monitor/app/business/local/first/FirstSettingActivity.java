@@ -175,13 +175,13 @@ public class FirstSettingActivity extends XMVPActivity<FirstSettingPresenter> im
     @OnClick(R.id.tv_sn_submit)
     public void onClickSubmitSN(View v) {
         if(TextUtils.isEmpty(mPasswordView.getText())){
-            XToast.warning(Fastgo.getContext().getString(R.string.密码不能为空));
+            XToast.error(Fastgo.getContext().getString(R.string.密码不能为空));
         }else if(!"333".equals(mPasswordView.getText().toString())){
             XToast.error(Fastgo.getContext().getString(R.string.密码错误));
         } else if(TextUtils.isEmpty(mSNTv.getText())){
-            XToast.warning(getString(R.string.请设置串号相关串号));
+            XToast.error(getString(R.string.请设置串号相关串号));
         }else if(mProbationPeriodSwitchButton.isChecked()&&TextUtils.isEmpty(mProbationPeriodDayTv.getText())){
-            XToast.warning(getString(R.string.请设置串号相关试用期天数));
+            XToast.error(getString(R.string.请设置串号相关试用期天数));
         }else {
 
             mPresenter.setPassword(333, new Consumer<Boolean>() {

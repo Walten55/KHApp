@@ -8,8 +8,7 @@
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        />
+        android:visibility="visible" />
 
     <RelativeLayout
         android:id="@+id/rl_title"
@@ -64,5 +63,16 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_sub_title" />
     </com.kehua.energy.monitor.app.view.ZoomRelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rl_scan_light"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/grid_20"
+        android:gravity="center"
+        android:text="@string/对准采集器二维码"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_sub_title" />
 
 </RelativeLayout>

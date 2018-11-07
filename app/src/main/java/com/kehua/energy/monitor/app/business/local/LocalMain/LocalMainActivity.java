@@ -115,10 +115,12 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
     public void onBackPressedSupport() {
         long secondTime = System.currentTimeMillis();
         if (secondTime - firstTime > 2000) {
-            XToast.normal(getString(R.string.再按一次退出程序));
+            XToast.normal(getString(R.string.再按一次退出本地模式));
             firstTime = secondTime;
         } else {
+            RouterMgr.get().localLogin();
             super.onBackPressedSupport();
         }
+
     }
 }

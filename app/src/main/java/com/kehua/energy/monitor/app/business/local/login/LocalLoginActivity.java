@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -18,11 +17,8 @@ import com.flyco.roundview.RoundTextView;
 import com.gyf.barlibrary.ImmersionBar;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.base.XMVPActivity;
-import com.kehua.energy.monitor.app.cache.CacheManager;
-import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.di.component.DaggerActivityComponent;
 import com.kehua.energy.monitor.app.di.module.ActivityModule;
-import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.kehua.energy.monitor.app.utils.LanguageUtils;
 import com.kehua.energy.monitor.app.utils.ViewUtils;
@@ -31,6 +27,7 @@ import com.kehua.energy.monitor.app.view.ZoomRelativeLayout;
 import butterknife.BindView;
 import butterknife.OnClick;
 import me.walten.fastgo.di.component.AppComponent;
+import me.walten.fastgo.utils.XToast;
 import me.walten.fastgo.widget.XEditText;
 import me.walten.fastgo.widget.titlebar.XTitleBar;
 
@@ -62,8 +59,7 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
     @BindView(R.id.tv_login)
     RoundTextView mLoginView;
 
-    @Autowired
-    int devAddress = 0x01;
+    boolean canLogin = true;
 
     private int role = ROLE_NORMAL;
 
@@ -124,7 +120,7 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.gatherDeviceInfo(devAddress);
+        mPresenter.gatherDeviceInfo();
     }
 
     @Override
@@ -147,14 +143,18 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
 
     @Override
     public void showDeviceInfo(String sn, String deviceType) {
-        mSnView.setText(getString(R.string.串号_冒号) + sn == null ? "" : sn);
-        mDeviceTypeView.setText(getString(R.string.类型_冒号) + deviceType);
+        mSnView.setText(getString(R.string.机器编号_冒号) + (sn == null ? "" : sn));
+        mDeviceTypeView.setText(getString(R.string.设备类型_冒号) + deviceType);
     }
 
     @OnClick(R.id.tv_login)
     @Override
     public void login(View view) {
-        mPresenter.login(role, mPasswordView.getText().toString());
+        if(canLogin)
+            mPresenter.login(role, mPasswordView.getText().toString());
+          else {
+            XToast.error(getString(R.string.无法获取设备信息));
+        }
     }
 
     @OnClick({R.id.zrl_ops, R.id.zrl_user, R.id.zrl_factory})
@@ -206,6 +206,11 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
     @Override
     public void switchDevice(View view) {
         RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);
+    }
+
+    @Override
+    public void canLogin(boolean yes) {
+        canLogin = yes;
     }
 
     private void switchStyleChange(ZoomRelativeLayout layout, int res) {

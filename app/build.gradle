@@ -80,6 +80,8 @@ dependencies {
     api 'me.codeboy.android:align-text-view:2.3.2'
     //图表
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    //
+    api 'com.github.codekidX:storage-chooser:2.0.4.2'
 
 }
 

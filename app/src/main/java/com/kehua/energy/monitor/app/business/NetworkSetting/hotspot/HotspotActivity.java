@@ -140,7 +140,7 @@ public class HotspotActivity extends XMVPActivity<HotspotPresenter> implements H
                 mPresenter.invinfo();
             }
         } else
-            XToast.warning(getString(R.string.采集器未连接));
+            XToast.error(getString(R.string.采集器未连接));
     }
 
     @Override

@@ -127,7 +127,13 @@ public class CommonSettingAdapter extends BaseMultiItemQuickAdapter<SettingEntit
                         } else if (deviceData.getRegisterAddress().equals(Frame.充电倍率地址() + "")) {
                             //充电倍率
                             helper.setText(R.id.tv_value, Frame.getChargeRate(deviceData.getIntValue()));
-                        } else if (deviceData.getRegisterAddress().equals("6303") && LocalUserManager.getPn() == Frame.三相协议) {
+                        } else if (deviceData.getRegisterAddress().equals("6320") && LocalUserManager.getPn() == Frame.单相协议) {
+                            //仅单相协议有 外接传感器
+                            helper.setText(R.id.tv_value, Frame.getCXNT(deviceData.getIntValue()));
+                        }else if (deviceData.getRegisterAddress().equals("6321") && LocalUserManager.getPn() == Frame.单相协议) {
+                            //仅单相协议有 CT
+                            helper.setText(R.id.tv_value, Frame.getCT(deviceData.getIntValue()));
+                        }else if (deviceData.getRegisterAddress().equals("6303") && LocalUserManager.getPn() == Frame.三相协议) {
                             //仅三相协议有 MPPT并联模式
                             helper.setText(R.id.tv_value, Frame.getMPPTShunt(deviceData.getIntValue()));
                         }  else if (deviceData.getRegisterAddress().equals("6310") && LocalUserManager.getPn() == Frame.三相协议) {

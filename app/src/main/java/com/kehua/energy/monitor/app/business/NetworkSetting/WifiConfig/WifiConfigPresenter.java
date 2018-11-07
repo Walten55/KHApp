@@ -72,10 +72,10 @@ public class WifiConfigPresenter extends WifiConfigContract.Presenter implements
     @Override
     public void apset(String ssid, String pwd) {
         if(StringUtils.isEmpty(ssid)){
-            XToast.warning(Fastgo.getContext().getString(R.string.SSID不能为空));
+            XToast.error(Fastgo.getContext().getString(R.string.SSID不能为空));
             return;
         }else if(StringUtils.isEmpty(pwd)){
-            XToast.warning(Fastgo.getContext().getString(R.string.密码不能为空));
+            XToast.error(Fastgo.getContext().getString(R.string.密码不能为空));
             return;
         }
 

@@ -40,6 +40,7 @@ public class RouterMgr {
     public static final String LOCAL_LOGIN = "/business/local/login";
     public static final String LOCAL_SCAN = "/business/local/scan";
     public static final String LOCAL_ABOUT_SN= "/business/local/aboutSN";
+    public static final String LOCAL_UPGRADE= "/business/local/upgrade";
     public static final String LOCAL_DATA = "/business/local/data";
 
     public static final String LOCAL_SETTING_BASIC = "/business/local/setting/basic";
@@ -132,10 +133,9 @@ public class RouterMgr {
     /**
      * 本地模式角色页面(登录)
      */
-    public void localLogin(int devAddress) {
+    public void localLogin() {
         ARouter.getInstance()
                 .build(LOCAL_LOGIN)
-                .withInt("devAddress",devAddress)
                 .navigation(ActivityUtils.getTopActivity());
     }
 
@@ -147,6 +147,17 @@ public class RouterMgr {
                 .build(LOCAL_ABOUT_SN)
                 .navigation(ActivityUtils.getTopActivity());
     }
+
+    /**
+     * 设备升级
+     */
+    public void localUpgrade() {
+        ARouter.getInstance()
+                .build(LOCAL_UPGRADE)
+                .navigation(ActivityUtils.getTopActivity());
+    }
+
+
 
     /**
      * 本地模式角色页面(登录)

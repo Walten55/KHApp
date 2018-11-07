@@ -112,7 +112,7 @@ public class WifiConfigActivity extends XMVPActivity<WifiConfigPresenter> implem
             XToast.success(getString(R.string.设置成功));
             finish();
         }else {
-            XToast.warning(getString(R.string.设置失败请稍后重试));
+            XToast.error(getString(R.string.设置失败请稍后重试));
         }
     }
 }

@@ -176,7 +176,62 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
             });
         } else if (item.getData().getAddress().equals(Frame.标准类型地址() + "")) {
             RouterMgr.get().localSettingStandard();
-        } else if (item.getData().getAddress().equals("6303") && LocalUserManager.getPn() == Frame.三相协议) {
+        } else if (item.getData().getAddress().equals("6320") && LocalUserManager.getPn() == Frame.单相协议) {
+            //单相 外接传感器
+            final String[] stringItems = {
+                    Fastgo.getContext().getString(R.string.无),
+                    Fastgo.getContext().getString(R.string.CT),
+                    Fastgo.getContext().getString(R.string.智能电表)};
+            final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
+            dialog.isTitleShow(false).show();
+
+            dialog.setOnOperItemClickL(new OnOperItemClickL() {
+                @Override
+                public void onOperItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    mPresenter.save(Integer.valueOf(item.getData().getAddress()), position, new Consumer<Boolean>() {
+                        @Override
+                        public void accept(Boolean success) throws Exception {
+                            DeviceData deviceData = CacheManager.getInstance().get(Integer.valueOf(item.getData().getAddress()));
+                            if (success && deviceData != null) {
+                                deviceData.setIntValue(position);
+                                mAdapter.notifyDataSetChanged();
+                            }
+
+                        }
+                    });
+                    dialog.dismiss();
+                }
+            });
+        }else if (item.getData().getAddress().equals("6321") && LocalUserManager.getPn() == Frame.单相协议) {
+            //单相 CT变化
+            final String[] stringItems = {
+                    "0-75/5",
+                    "1-50/5",
+                    "2-40/5",
+                    "3-30/5",
+                    "4-25/5",
+                    "5-20/5"};
+            final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
+            dialog.isTitleShow(false).show();
+
+            dialog.setOnOperItemClickL(new OnOperItemClickL() {
+                @Override
+                public void onOperItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    mPresenter.save(Integer.valueOf(item.getData().getAddress()), position, new Consumer<Boolean>() {
+                        @Override
+                        public void accept(Boolean success) throws Exception {
+                            DeviceData deviceData = CacheManager.getInstance().get(Integer.valueOf(item.getData().getAddress()));
+                            if (success && deviceData != null) {
+                                deviceData.setIntValue(position);
+                                mAdapter.notifyDataSetChanged();
+                            }
+
+                        }
+                    });
+                    dialog.dismiss();
+                }
+            });
+        }else if (item.getData().getAddress().equals("6303") && LocalUserManager.getPn() == Frame.三相协议) {
             //仅三相协议有 MPPT并联模式
             final String[] stringItems = {
                     Fastgo.getContext().getString(R.string.独立),
@@ -293,14 +348,14 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
                         int password = Integer.valueOf(msg.trim());
                         if (password > 999999 || password < 100000) {
-                            XToast.warning(getString(R.string.非法密码));
+                            XToast.error(getString(R.string.非法密码));
                         } else
                             mPresenter.save(Integer.valueOf(item.getData().getAddress()), Frame.开机密码地址[1], Integer.valueOf(msg.trim()), null);
 
                     } else if (item.getData().getAddress().equals(Frame.试用期密码地址[0] + "")) {
                         int password = Integer.valueOf(msg.trim());
                         if (password > 999999 || password < 100000) {
-                            XToast.warning(getString(R.string.非法密码));
+                            XToast.error(getString(R.string.非法密码));
                         } else
                             mPresenter.save(Integer.valueOf(item.getData().getAddress()), Frame.试用期密码地址[1], Integer.valueOf(msg.trim()), null);
 
@@ -399,7 +454,7 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
             final TextView powerOnPwdTv = mFooterViewPassword.findViewById(R.id.tv_power_on_password);
             final TextView probationPeriodPwdTv = mFooterViewPassword.findViewById(R.id.tv_probation_period_password);
             if (TextUtils.isEmpty(powerOnPwdTv.getText()) || TextUtils.isEmpty(probationPeriodPwdTv.getText())) {
-                XToast.warning(getString(R.string.开机密码与试用期密码需同时设置));
+                XToast.error(getString(R.string.开机密码与试用期密码需同时设置));
                 return;
             }
             mPresenter.save(Frame.开机密码地址[0], Frame.试用期密码地址[1],

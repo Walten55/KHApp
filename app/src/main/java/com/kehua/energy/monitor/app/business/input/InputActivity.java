@@ -117,7 +117,7 @@ public class InputActivity extends XSimpleActivity {
                             finish();
                         }
                     } else {
-                        XToast.warning(mConfig.check(mMsgEt.getText().toString()));
+                        XToast.error(mConfig.check(mMsgEt.getText().toString()));
                     }
                 } else if (action == XTitleBar.ACTION_LEFT_BUTTON) {
                     finish();

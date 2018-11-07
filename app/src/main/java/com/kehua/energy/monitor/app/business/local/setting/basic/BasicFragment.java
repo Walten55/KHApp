@@ -228,7 +228,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
                     TextView endTimeTv = (TextView) view.getTag();
                     try {
                         if (format.parse(endTimeTv.getText().toString()).getTime() < format.parse(format.format(date)).getTime()) {
-                            XToast.warning(getString(R.string.结束时间必须大于开始时间));
+                            XToast.error(getString(R.string.结束时间必须大于开始时间));
                             return;
                         }
                     } catch (ParseException e) {
@@ -238,7 +238,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
                     TextView startTimeTv = (TextView) view.getTag();
                     try {
                         if (format.parse(startTimeTv.getText().toString()).getTime() > format.parse(format.format(date)).getTime()) {
-                            XToast.warning(getString(R.string.结束时间必须大于开始时间));
+                            XToast.error(getString(R.string.结束时间必须大于开始时间));
                             return;
                         }
                     } catch (ParseException e) {
@@ -294,7 +294,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
         List<String> listDischarge = getTimeFrameList(mDischargeTimeContainer,listSlot);
 
         if(TimeSlotUtils.checkOverlap(listSlot)){
-            XToast.warning(getString(R.string.时段重叠));
+            XToast.error(getString(R.string.时段重叠));
             return;
         }
         mPresenter.setTimeFrame(listCharge, listDischarge,null);
@@ -317,7 +317,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
     @Override
     public void addTimeFrame(LinearLayout container) {
         if (container.getChildCount() == 6) {
-            XToast.warning(getString(R.string.最多设置6个时段));
+            XToast.error(getString(R.string.最多设置6个时段));
         } else {
             SwipeMenuLayout child = (SwipeMenuLayout) LayoutInflater.from(Fastgo.getContext()).inflate(R.layout.time_frame, null);
             child.getChildAt(1).setOnClickListener(this);

@@ -45,6 +45,8 @@
         <item name="titleBarDrawable">@color/white</item>
         <item name="statusBarDrawable">@color/white</item>
         <item name="centerTextColor">@color/text_black</item>
+        <item name="rightType">textView</item>
+        <item name="rightTextColor">@color/colorPrimary</item>
     </style>
 
     <style name="ToolbarStyle_With_Back_Icon" parent="ToolbarStyle">

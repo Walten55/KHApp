@@ -58,7 +58,7 @@ public class Cmd {
     }
 
     public static String newTimeFrameCmd(int devAddr,List<Integer> chargeValues,List<Integer> dischargeValues){
-        Cmd cmd = new Cmd(devAddr,0x10, Frame.充电时段数地址,(chargeValues.size()+dischargeValues.size())/2+2);;
+        Cmd cmd = new Cmd(devAddr,0x10, Frame.充电时段数地址,6051+1-Frame.充电时段数地址);
 
         return cmd.toTimeFrameCmdHexString(chargeValues,dischargeValues);
     }
@@ -222,18 +222,33 @@ public class Cmd {
         append2ByteIntHex(sb,chargeValues.size()/4);
         sb.append(" ");
 
-        for(int i : chargeValues){
-            appendIntHexSingleByte(sb,i);
-            sb.append(" ");
+        for(int i = 0;i<24;i++){
+
+            if(i<chargeValues.size()){
+                appendIntHexSingleByte(sb,chargeValues.get(i));
+                sb.append(" ");
+            }else {
+                appendIntHexSingleByte(sb,0);
+                sb.append(" ");
+            }
+
         }
+
 
         //放电时段数
         append2ByteIntHex(sb,dischargeValues.size()/4);
         sb.append(" ");
 
-        for(int i : dischargeValues){
-            appendIntHexSingleByte(sb,i);
-            sb.append(" ");
+        for(int i = 0;i<24;i++){
+
+            if(i<dischargeValues.size()){
+                appendIntHexSingleByte(sb,dischargeValues.get(i));
+                sb.append(" ");
+            }else {
+                appendIntHexSingleByte(sb,0);
+                sb.append(" ");
+            }
+
         }
 
         appendCrcHex(sb);

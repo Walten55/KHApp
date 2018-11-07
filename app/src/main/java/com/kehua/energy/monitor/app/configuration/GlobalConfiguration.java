@@ -6,13 +6,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-import com.blankj.utilcode.util.NetworkUtils;
 import com.kehua.energy.monitor.app.application.AppDelegateImpl;
 import com.kehua.energy.monitor.app.business.local.LocalMain.LocalMainActivity;
 import com.kehua.energy.monitor.app.cache.CacheManager;
 import com.orhanobut.logger.PrettyFormatStrategy;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -21,12 +19,7 @@ import me.walten.fastgo.delegate.IAppDelegate;
 import me.walten.fastgo.di.module.GlobalConfigModule;
 import me.walten.fastgo.di.module.ThirdPartyModule;
 import me.walten.fastgo.integration.ConfigModule;
-import okhttp3.Cache;
-import okhttp3.CacheControl;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public class GlobalConfiguration implements ConfigModule {

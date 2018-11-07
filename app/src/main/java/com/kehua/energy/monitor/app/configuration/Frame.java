@@ -472,6 +472,47 @@ public class Frame {
         return "";
     }
 
+    public static String getCXNT(int value){
+        switch (value){
+            case 0:
+
+                return Fastgo.getContext().getString(R.string.无);
+            case 1:
+
+                return Fastgo.getContext().getString(R.string.CT);
+            case 2:
+
+                return Fastgo.getContext().getString(R.string.智能电表);
+
+        }
+        return "";
+    }
+
+    public static String getCT(int value){
+        switch (value){
+            case 0:
+
+                return "0-75/5";
+            case 1:
+
+                return "1-50/5";
+            case 2:
+
+                return "2-40/5";
+            case 3:
+
+                return "3-30/5";
+            case 4:
+
+                return "4-25/5";
+            case 5:
+
+                return "5-20/5";
+
+        }
+        return "";
+    }
+
 
     public static List<Standard> getStandardList(){
         List<Standard> data = new ArrayList<>();
@@ -496,6 +537,11 @@ public class Frame {
             data.add(new Standard(16, Fastgo.getContext().getString(R.string.法国VFR), R.mipmap.img_country_france));
             data.add(new Standard(17, Fastgo.getContext().getString(R.string.法国SEI), R.mipmap.img_country_france));
             data.add(new Standard(18, Fastgo.getContext().getString(R.string.法国CRAE), R.mipmap.img_country_france));
+            data.add(new Standard(19, Fastgo.getContext().getString(R.string.定制1), R.mipmap.img_standard_customized));
+            data.add(new Standard(20, Fastgo.getContext().getString(R.string.定制2), R.mipmap.img_standard_customized));
+            data.add(new Standard(21, Fastgo.getContext().getString(R.string.定制3), R.mipmap.img_standard_customized));
+            data.add(new Standard(22, Fastgo.getContext().getString(R.string.定制4), R.mipmap.img_standard_customized));
+            data.add(new Standard(23, Fastgo.getContext().getString(R.string.定制5), R.mipmap.img_standard_customized));
         } else {
             data.add(new Standard(0, Fastgo.getContext().getString(R.string.中国), R.mipmap.img_country_china));
             data.add(new Standard(1, Fastgo.getContext().getString(R.string.美国), R.mipmap.img_country_america));

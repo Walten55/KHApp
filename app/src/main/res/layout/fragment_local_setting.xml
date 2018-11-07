@@ -10,7 +10,8 @@
     <me.walten.fastgo.widget.titlebar.XTitleBar
         android:id="@+id/title_bar"
         style="@style/ToolbarStyle_White"
-        app:centerText="@string/设置" />
+        app:centerText="@string/设置"
+        />
 
     <TextView
         android:id="@+id/tv_top_message"

@@ -13,7 +13,7 @@
         android:layout_height="@dimen/grid_35"
         app:rv_backgroundColor="@color/colorPrimary"
         app:rv_cornerRadius="@dimen/grid_35"
-        android:text="-/~"
+        android:text="~/-"
         android:textColor="@color/white"
         android:gravity="center"
         android:textStyle="bold"

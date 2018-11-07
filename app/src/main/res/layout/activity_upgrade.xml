@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_gray"
+    >
+
+    <me.walten.fastgo.widget.titlebar.XTitleBar
+        android:id="@+id/title_bar"
+        style="@style/ToolbarStyle_White_With_Back_Icon"
+        app:centerText="@string/设备升级"
+        app:showBottomLine="true"
+        />
+    <RelativeLayout
+        android:layout_below="@id/title_bar"
+        android:layout_marginTop="@dimen/grid_10"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_55"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/tv_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingRight="@dimen/grid_10"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_sub_title"
+            android:gravity="center"
+            android:text="@string/选择文件"
+            />
+
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/tv_path"
+            android:layout_toLeftOf="@id/tv_choose"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/grid_10"
+            android:paddingLeft="@dimen/grid_5"
+            android:paddingRight="@dimen/grid_5"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_sub_title"
+            android:gravity="center_vertical"
+            app:rv_cornerRadius="@dimen/grid_2"
+            app:rv_strokeWidth="1px"
+            app:rv_strokeColor="@color/line"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_below="@id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_60"
+        android:background="@drawable/bg_white_with_bottom_line"
+        android:paddingLeft="@dimen/grid_10"
+        android:paddingRight="@dimen/grid_10"
+        android:paddingBottom="@dimen/grid_8"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_size_main"
+        />
+
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_45"
+        android:layout_alignParentRight="true"
+        android:background="@color/text_blue"
+        android:gravity="center"
+        android:text="@string/上传"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_sub_title" />
+</RelativeLayout>

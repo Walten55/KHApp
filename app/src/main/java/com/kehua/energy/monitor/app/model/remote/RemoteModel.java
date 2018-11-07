@@ -14,12 +14,14 @@ import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.model.entity.InvInfoList;
 import com.kehua.energy.monitor.app.model.entity.ModbusResponse;
 import com.kehua.energy.monitor.app.model.entity.RecordData;
+import com.kehua.energy.monitor.app.model.entity.Upgrade;
 import com.kehua.energy.monitor.app.model.local.LocalModel;
 import com.kehua.energy.monitor.app.utils.ByteUtils;
 import com.kehua.energy.monitor.app.utils.PasswordUtils;
 
 import org.reactivestreams.Publisher;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -38,6 +40,10 @@ import me.walten.fastgo.base.mvp.BaseModel;
 import me.walten.fastgo.base.mvp.IModel;
 import me.walten.fastgo.integration.IRepositoryManager;
 import me.walten.fastgo.utils.XRxUtil;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public class RemoteModel extends BaseModel implements IModel {
 
@@ -126,6 +132,19 @@ public class RemoteModel extends BaseModel implements IModel {
         addSubscribe(mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
                 .invinfo()
                 .compose(XRxUtil.<InvInfoList>getHttpDefaultScheduler())
+                .subscribe(subscriber, throwable));
+    }
+
+    /**
+     * 升级状态
+     *
+     * @param subscriber
+     * @param throwable
+     */
+    public void upgrade(Consumer<Upgrade> subscriber, Consumer<Throwable> throwable) {
+        addSubscribe(mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
+                .upgrade()
+                .compose(XRxUtil.<Upgrade>getHttpDefaultScheduler())
                 .subscribe(subscriber, throwable));
     }
 
@@ -1818,6 +1837,48 @@ public class RemoteModel extends BaseModel implements IModel {
                         if(consumer!=null){
                             consumer.accept(null);
                         }
+                    }
+                }));
+    }
+
+    /**
+     * 上传
+     */
+    public void upload(String filePath, final Consumer<ResponseBody> consumer) {
+        File file = new File(filePath);
+        // 创建 RequestBody，用于封装 请求RequestBody
+        final RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        // MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+        // 添加描述
+        String descriptionString = "upgrade file";
+        RequestBody description =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), descriptionString);
+
+        addSubscribe(mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
+                .upload(description,body)
+                .compose(new FlowableTransformer<ResponseBody, ResponseBody>() {
+                    @Override
+                    public Publisher<ResponseBody> apply(Flowable<ResponseBody> upstream) {
+                        return upstream.subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread());
+                    }
+                })
+                .subscribe(new Consumer<ResponseBody>() {
+                    @Override
+                    public void accept(ResponseBody responseBody) throws Exception {
+                        consumer.accept(responseBody);
+
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        consumer.accept(null);
                     }
                 }));
     }

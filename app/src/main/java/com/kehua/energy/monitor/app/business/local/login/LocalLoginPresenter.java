@@ -17,7 +17,6 @@ import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.model.APPModel;
 import com.kehua.energy.monitor.app.model.entity.Collector;
 import com.kehua.energy.monitor.app.model.entity.InvInfoList;
-import com.kehua.energy.monitor.app.model.local.LocalModel;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.kehua.energy.monitor.app.utils.LanguageUtils;
 import com.kehua.energy.monitor.app.utils.PasswordUtils;
@@ -93,7 +92,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
     @Override
     public void login(final int role, final String password) {
         if(role!=ROLE_NORMAL&&StringUtils.isEmpty(password)){
-            XToast.warning(Fastgo.getContext().getString(R.string.密码不能为空));
+            XToast.error(Fastgo.getContext().getString(R.string.密码不能为空));
             return;
         }
 
@@ -115,6 +114,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                                                 @Override
                                                 public void accept(Boolean granted) throws Exception {
                                                     if (granted) {
+                                                        XToast.normal(Fastgo.getContext().getString(R.string.首次连接采集棒需验证采集棒));
                                                         RouterMgr.get().scan();
                                                     } else {
                                                         XToast.error(Fastgo.getContext().getString(R.string.缺少相关权限));
@@ -182,37 +182,49 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
     }
 
     @Override
-    public void gatherDeviceInfo(final int devAddress) {
+    public void gatherDeviceInfo() {
         mView.startWaiting(Fastgo.getContext().getString(R.string.加载中));
-        mModel.getRemoteModel().snAndDeviceType(devAddress,new Consumer<ArrayMap<String, Object>>() {
-            @Override
-            public void accept(ArrayMap<String, Object> result) throws Exception {
-                mView.stopWaiting();
-                if(result.containsKey("sn")&&result.containsKey("deviceType")&&result.containsKey("pn")){
-                    mView.showDeviceInfo(mSN = String.valueOf(result.get("sn")),Frame.getDeviceTypeName((int)result.get("deviceType")));
 
-                    LocalUserManager.setPn((int)result.get("pn"));
-                    LocalUserManager.setDeviceAddress(devAddress);
-                    LocalUserManager.setDeviceType((int)result.get("deviceType"));
-//                    if (StringUtils.isEmpty(mSN)){
-//                        RouterMgr.get().localAboutSn();
-//                    }else {
-//                        LocalUserManager.setPn((int)result.get("pn"));
-//                        LocalUserManager.setDeviceAddress(devAddress);
-//                        LocalUserManager.setDeviceType((int)result.get("deviceType"));
-//                    }
-                }
+        mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
+            @Override
+            public void accept(final InvInfoList data) throws Exception {
+                if(data.getInv()!=null&&data.getInv().size()>0)
+                    LocalUserManager.setDeviceAddress(data.getInv().get(0).getAddr());
+
+                mView.canLogin(true);
+
+                mModel.getRemoteModel().snAndDeviceType(LocalUserManager.getDeviceAddress(),new Consumer<ArrayMap<String, Object>>() {
+                    @Override
+                    public void accept(ArrayMap<String, Object> result) throws Exception {
+                        mView.stopWaiting();
+                        if(result.containsKey("sn")&&result.containsKey("deviceType")&&result.containsKey("pn")){
+                            mView.showDeviceInfo(mSN = String.valueOf(result.get("sn")), Frame.getDeviceTypeName((int)result.get("deviceType")));
+
+                            LocalUserManager.setPn((int)result.get("pn"));
+                            LocalUserManager.setDeviceType((int)result.get("deviceType"));
+
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        mView.stopWaiting();
+                        Logger.e(throwable.getMessage());
+                        XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
+                        RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);
+                        mView.finishView();
+                    }
+                });
+
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
-                Logger.e(throwable.getMessage());
-                XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
-                RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);
-                mView.finishView();
+                mView.canLogin(false);
             }
         });
+
     }
 
     @Override
