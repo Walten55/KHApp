@@ -26,6 +26,14 @@ public abstract class XSimpleActivity extends SimpleActivity {
         super.onCreate(savedInstanceState);
     }
 
+    public void startWaiting(String msg){
+        try{
+            super.startWaiting(msg);
+        }catch (Exception e){
+
+        }
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {

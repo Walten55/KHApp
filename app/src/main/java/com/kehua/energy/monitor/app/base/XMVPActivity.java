@@ -28,6 +28,14 @@ public abstract class XMVPActivity<T extends IPresenter> extends MVPActivity<T> 
         super.onCreate(savedInstanceState);
     }
 
+    public void startWaiting(String msg){
+        try{
+            super.startWaiting(msg);
+        }catch (Exception e){
+
+        }
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
