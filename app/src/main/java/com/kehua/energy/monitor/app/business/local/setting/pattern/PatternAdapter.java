@@ -14,6 +14,7 @@ import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.model.entity.PatternEntity;
 import com.kehua.energy.monitor.app.model.entity.PatternHead;
+import com.kehua.energy.monitor.app.model.entity.PointInfo;
 import com.kehua.energy.monitor.app.utils.LineChartHelper;
 import com.kyleduo.switchbutton.SwitchButton;
 
@@ -160,7 +161,7 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                 targetDeviceData = CacheManager.getInstance().get(Integer.valueOf(peTextItem.getPointInfo().getAddress().trim()));
 
                 if (targetDeviceData != null) {
-                    helper.setText(R.id.tv_value, targetDeviceData.getParseValue() +" "+ targetDeviceData.getUnit());
+                    helper.setText(R.id.tv_value, targetDeviceData.getParseValue() + " " + targetDeviceData.getUnit());
                     helper.setGone(R.id.tv_reading, false);
                     helper.setGone(R.id.tv_value, true);
                 } else {
@@ -175,6 +176,7 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
 
             case TYPE_CONTENT_LINECHART:
                 PatternEntity peLineChartItem = (PatternEntity) item;
+                List<PointInfo>[] data = peLineChartItem.getData();
 
                 //已经对应点表对象正常且读取成功才进行数据转化与展示
                 if (CacheManager.getInstance().get(Integer.valueOf(peLineChartItem.getData()[0].get(0).getAddress().trim())) != null) {

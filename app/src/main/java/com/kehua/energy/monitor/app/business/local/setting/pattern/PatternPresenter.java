@@ -141,7 +141,16 @@ public class PatternPresenter extends PatternContract.Presenter {
             }
             //数据处理(折线图的特殊处理，文字的就直接田间)
             if (patternHead.isForLineChart()) {
-                patternHead.addSubItem(dealLineForSingleOrMul(patternHead, patternHead.getSubItemData()));
+                List<PointInfo> dealPointInfos = patternHead.getSubItemData();
+                PatternEntity patternEntity = dealLineForSingleOrMul(patternHead, dealPointInfos);
+                if (patternEntity != null) {
+                    patternHead.addSubItem(patternEntity);
+                }
+                //QV模式还有一个尾巴 Q-V模式Hysteresis,用文字展示
+                if (patternHead.getPointInfo().getAddress().equals(String.valueOf(Frame.Q_V模式地址))
+                        && dealPointInfos != null && dealPointInfos.size() > 0) {
+                    patternHead.addSubItem(new PatternEntity(dealPointInfos.get(dealPointInfos.size() - 1)));
+                }
             } else {
                 for (PointInfo pointInfo : patternHead.getSubItemData()) {
                     patternHead.addSubItem(new PatternEntity(pointInfo));
@@ -153,7 +162,11 @@ public class PatternPresenter extends PatternContract.Presenter {
     }
 
     private PatternEntity dealLineForSingleOrMul(PatternHead patternHead, List<PointInfo> dealPointInfos) {
-        PatternEntity patternEntity;
+        //因为图表对应的x,y均存放在里面，所以至少2个才是一组
+        if (dealPointInfos == null || dealPointInfos.size() < 2) {
+            return null;
+        }
+        PatternEntity patternEntity = null;
         boolean isPVModle = false;
         boolean isPFModle = false;
 
@@ -185,7 +198,20 @@ public class PatternPresenter extends PatternContract.Presenter {
                     pointInfoList2.add(dealPointInfos.get(i));
                 }
             }
-            patternEntity = new PatternEntity(lables, colors, pointInfoList1, pointInfoList2);
+            List<List<PointInfo>> listArray = new ArrayList<>();
+            if (pointInfoList1.size() > 1) {
+                listArray.add(pointInfoList1);
+            }
+            if (pointInfoList2.size() > 1) {
+                listArray.add(pointInfoList2);
+            }
+
+            if (listArray.size() > 0) {
+                List<PointInfo>[] array = new ArrayList[listArray.size()];
+                listArray.toArray(array);
+                patternEntity = new PatternEntity(lables, colors, array);
+            }
+
         }
         return patternEntity;
     }
