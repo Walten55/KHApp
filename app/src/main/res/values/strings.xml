@@ -301,4 +301,5 @@
     <string name="升级失败">升级失败</string>
     <string name="首次连接采集棒需验证采集棒">首次连接采集棒需验证采集棒</string>
     <string name="对准采集器二维码">对准采集器二维码</string>
+    <string name="设备已锁定">设备已锁定</string>
 </resources>

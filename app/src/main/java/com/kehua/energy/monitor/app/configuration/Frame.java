@@ -189,6 +189,12 @@ public class Frame {
                 2531,2532
         };
     }
+    public static int 机器锁定状态地址(){
+        return 单相协议 == LocalUserManager.getPn()?2597:2821;
+    }
+    public static int 试用状态地址(){
+        return 单相协议 == LocalUserManager.getPn()?2598:2822;
+    }
 
     public static int[] 总负载耗电量地址(){
         return 单相协议 == LocalUserManager.getPn()?new int[]{

@@ -22,6 +22,7 @@ import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.base.XMVPFragment;
 import com.kehua.energy.monitor.app.cache.CacheManager;
 import com.kehua.energy.monitor.app.configuration.Config;
+import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.di.component.DaggerFragmentComponent;
 import com.kehua.energy.monitor.app.di.module.FragmentModule;
 import com.kehua.energy.monitor.app.model.entity.DeviceData;
@@ -281,15 +282,28 @@ public class LocalMonitorFragment extends XMVPFragment<LocalMonitorPresenter> im
     )
     @Override
     public void probationNear(Object o) {
+        if(CacheManager.getInstance().get(Frame.试用状态地址())!=null
+                &&CacheManager.getInstance().get(Frame.试用状态地址()).getIntValue()==1){
+            //试用期状态内
 
-        String message = getString(R.string.试用期临近);
-        DeviceData deviceData = CacheManager.getInstance().get(4874);
-        if(deviceData!=null){
-            message+=(","+getString(R.string.试用期剩余时间)+":"+deviceData.getParseValue()+getString(R.string.小时));
+            String message = getString(R.string.试用期临近);
+            DeviceData deviceData = CacheManager.getInstance().get(4874);
+            if(deviceData!=null){
+                message+=(","+getString(R.string.试用期剩余时间)+":"+deviceData.getParseValue()+getString(R.string.小时));
+            }
+
+            mTopMessageView.setText(message);
+            mTopMessageView.setVisibility(View.VISIBLE);
+        }else if(CacheManager.getInstance().get(Frame.机器锁定状态地址())!=null
+                &&CacheManager.getInstance().get(Frame.机器锁定状态地址()).getIntValue() == 1){
+            //机器锁定
+
+            mTopMessageView.setText(R.string.设备已锁定);
+            mTopMessageView.setVisibility(View.VISIBLE);
+        }else {
+            mTopMessageView.setVisibility(View.GONE);
         }
 
-        mTopMessageView.setText(message);
-        mTopMessageView.setVisibility(View.VISIBLE);
     }
     @Subscribe(
             thread = EventThread.MAIN_THREAD,
