@@ -70,7 +70,7 @@ public class LocalPatternChildActivity extends XMVPActivity<LocalPatternChildPre
         mTitleBar.setListener(new XTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {
-                if(action == XTitleBar.ACTION_LEFT_BUTTON){
+                if (action == XTitleBar.ACTION_LEFT_BUTTON) {
                     finish();
                 }
             }
@@ -256,7 +256,8 @@ public class LocalPatternChildActivity extends XMVPActivity<LocalPatternChildPre
 
                 try {
                     if (!"string".equals(pointInfo.getDataType())) {
-                        mAdvancedPresenter.save(Integer.valueOf(pointInfo.getAddress()), Integer.valueOf(msg.replace(".", "").trim()), new Consumer<Boolean>() {
+                        String saveValue = msg.replace(".", "").trim();
+                        mAdvancedPresenter.save(Integer.valueOf(pointInfo.getAddress()), Integer.valueOf(saveValue), new Consumer<Boolean>() {
                             @Override
                             public void accept(Boolean success) throws Exception {
                                 if (deviceData != null && success) {
