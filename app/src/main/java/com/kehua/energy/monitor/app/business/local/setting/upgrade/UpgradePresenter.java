@@ -16,7 +16,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.scope.ActivityScope;
-import me.walten.fastgo.utils.XToast;
 import okhttp3.ResponseBody;
 
 @ActivityScope
@@ -53,7 +52,6 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
         mModel.getRemoteModel().upload(path, new Consumer<ResponseBody>() {
             @Override
             public void accept(ResponseBody responseBody) throws Exception {
-                XToast.success(Fastgo.getContext().getString(R.string.上传成功));
                 mView.stopWaiting();
                 if(consumer!=null)
                     consumer.accept(responseBody);

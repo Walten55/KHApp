@@ -1873,7 +1873,6 @@ public class RemoteModel extends BaseModel implements IModel {
                     @Override
                     public void accept(ResponseBody responseBody) throws Exception {
                         consumer.accept(responseBody);
-
                     }
                 }, new Consumer<Throwable>() {
                     @Override

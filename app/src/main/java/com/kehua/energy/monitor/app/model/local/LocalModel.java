@@ -83,11 +83,14 @@ public class LocalModel extends BaseModel implements IModel {
     public List<DeviceData> parse(String sn, byte[] data, int start, int end, int protocol, Date updateTime, boolean popCache) {
         //int end = start + len;
         List<DeviceData> resultList = new ArrayList<>();
+
         while (start <= end) {
             long count = ObjectBox.get().getBoxStore().boxFor(PointInfo.class).query()
                     .equal(PointInfo_.pn, String.valueOf(protocol))
                     .equal(PointInfo_.address, String.valueOf(start)).build().count();
-            if (count == 0) {
+
+            if (count == 0 && !(2501 <= start && start <= 3527)) {
+
                 start += 1;
 
                 if (start <= end) {
@@ -97,10 +100,20 @@ public class LocalModel extends BaseModel implements IModel {
 
                 continue;
             }
+
             //寄存器映射信息
-            PointInfo info = ObjectBox.get().getBoxStore().boxFor(PointInfo.class).query()
-                    .equal(PointInfo_.pn, String.valueOf(protocol))
-                    .equal(PointInfo_.address, String.valueOf(start)).build().findFirst();
+            PointInfo info = null;
+
+            if (count == 0 && 2501 <= start && start <= 3527) {
+                //状态量解析
+                info = new PointInfo();
+                info.setByteCount(1);
+                info.setDataType("boolean");
+            } else {
+                info = ObjectBox.get().getBoxStore().boxFor(PointInfo.class).query()
+                        .equal(PointInfo_.pn, String.valueOf(protocol))
+                        .equal(PointInfo_.address, String.valueOf(start)).build().findFirst();
+            }
 
             //
             byte[] temp = new byte[info.getByteCount()];
@@ -121,8 +134,10 @@ public class LocalModel extends BaseModel implements IModel {
                                 .equal(PointInfo_.pn, String.valueOf(protocol))
                                 .equal(PointInfo_.address, String.valueOf(start + i)).build().findFirst();
 
+
                         if (tempInfo == null)
                             continue;
+
 
                         DeviceData deviceData = new DeviceData(sn,
                                 String.valueOf(start + i),
@@ -406,11 +421,11 @@ public class LocalModel extends BaseModel implements IModel {
                 //解析0 跟 1
                 if (value == 0) {
                     parseValue = pointInfo.getV0();
-                } else if(value == 1){
+                } else if (value == 1) {
                     parseValue = pointInfo.getV1();
-                } else if(value == 2){
+                } else if (value == 2) {
                     parseValue = pointInfo.getV2();
-                }else if(value == 3){
+                } else if (value == 3) {
                     parseValue = pointInfo.getV3();
                 }
             } else {
@@ -548,19 +563,19 @@ public class LocalModel extends BaseModel implements IModel {
                 break;
             }
             list.add(new PointInfo(
-                    PN.getContents(),
-                    ADDRESS.getContents(),
-                    DESCRIPTION_CN.getContents(),
-                    DESCRIPTION_EN.getContents(),
-                    DESCRIPTION_FRENCH.getContents(),
-                    Integer.valueOf(BYTE_COUNT.getContents()),
-                    DATA_TYPE.getContents(),
-                    Integer.valueOf(ACCURACY.getContents()),
+                    PN.getContents().trim(),
+                    ADDRESS.getContents().trim(),
+                    DESCRIPTION_CN.getContents().trim(),
+                    DESCRIPTION_EN.getContents().trim(),
+                    DESCRIPTION_FRENCH.getContents().trim(),
+                    Integer.valueOf(BYTE_COUNT.getContents().trim()),
+                    DATA_TYPE.getContents().trim(),
+                    Integer.valueOf(ACCURACY.getContents().trim()),
                     UNIT.getContents().trim(),
-                    Integer.valueOf(DEVICE_TYPE.getContents()),
-                    GROUP.getContents(),
-                    SORT.getContents(),
-                    AUTHORITY.getContents()
+                    Integer.valueOf(DEVICE_TYPE.getContents().trim()),
+                    GROUP.getContents().trim(),
+                    SORT.getContents().trim(),
+                    AUTHORITY.getContents().trim()
             ));
 
         }
@@ -795,25 +810,25 @@ public class LocalModel extends BaseModel implements IModel {
         return localAlarmListList;
     }
 
-    public void saveCollectorKey(String key){
-        String keysStr = SPUtils.getInstance().getString("COLLECTOR_KEYS","");
-        if(!keysStr.contains(key)){
-            keysStr = keysStr+"&&"+key;
-            SPUtils.getInstance().put("COLLECTOR_KEYS",keysStr);
+    public void saveCollectorKey(String key) {
+        String keysStr = SPUtils.getInstance().getString("COLLECTOR_KEYS", "");
+        if (!keysStr.contains(key)) {
+            keysStr = keysStr + "&&" + key;
+            SPUtils.getInstance().put("COLLECTOR_KEYS", keysStr);
         }
     }
 
-    public boolean hasCollectorKey(String key){
-        String keysStr = SPUtils.getInstance().getString("COLLECTOR_KEYS","");
+    public boolean hasCollectorKey(String key) {
+        String keysStr = SPUtils.getInstance().getString("COLLECTOR_KEYS", "");
         return keysStr.contains(key);
     }
 
-    public void saveLanguageSelect(String language){
-        SPUtils.getInstance().put("LANGUAGE",language);
+    public void saveLanguageSelect(String language) {
+        SPUtils.getInstance().put("LANGUAGE", language);
     }
 
-    public String getLanguageSelect(){
-        return SPUtils.getInstance().getString("LANGUAGE","");
+    public String getLanguageSelect() {
+        return SPUtils.getInstance().getString("LANGUAGE", "");
     }
 
 }
