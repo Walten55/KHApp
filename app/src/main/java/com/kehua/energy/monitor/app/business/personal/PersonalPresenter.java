@@ -51,7 +51,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
             public void accept(InvInfoList invInfoList) throws Exception {
                 mView.stopWaiting();
 
-                if(invInfoList.getNum()>0){
+                /*if(invInfoList.getNum()>0){
                     //目前采集器与设备关系为1 对 1 所以直接取 index = 0
                     //int devAddr = invInfoList.getInv().get(0).getAddr();
                     //跳转角色选择页面
@@ -60,7 +60,9 @@ public class PersonalPresenter extends PersonalContract.Presenter {
                     //采集器未连接设备
                     XToast.error(Fastgo.getContext().getString(R.string.采集器未连接设备));
                     return;
-                }
+                }*/
+
+                RouterMgr.get().localLogin();
                 //
                 if(consumer!=null)
                     consumer.accept(invInfoList);
