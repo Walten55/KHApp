@@ -168,7 +168,6 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                 RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);
                 if(mView!=null){
                     mView.stopWaiting();
-                    mView.finishView();
                 }
             }
         });
@@ -215,8 +214,6 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                         mView.stopWaiting();
                         Logger.e(throwable.getMessage());
                         XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
-                        RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);
-                        mView.finishView();
                     }
                 });
 
@@ -226,6 +223,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 mView.canLogin(false);
+                XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
             }
         });
 

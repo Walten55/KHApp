@@ -154,6 +154,7 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
             mPresenter.login(role, mPasswordView.getText().toString());
           else {
             XToast.error(getString(R.string.无法获取设备信息));
+            RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);
         }
     }
 

@@ -47,7 +47,6 @@ import jxl.read.biff.BiffException;
 import me.walten.fastgo.base.mvp.BaseModel;
 import me.walten.fastgo.base.mvp.IModel;
 import me.walten.fastgo.common.Fastgo;
-import me.walten.fastgo.utils.XToast;
 
 public class LocalModel extends BaseModel implements IModel {
 
@@ -404,52 +403,51 @@ public class LocalModel extends BaseModel implements IModel {
             long size = ObjectBox.get().getBoxStore().boxFor(RecordPoint.class).query()
                     .equal(RecordPoint_.code, code)
                     .equal(RecordPoint_.template, template).build().count();
-            if (size == 0) {
-                XToast.error(Fastgo.getContext().getString(R.string.映射模板错误));
-                return result;
-            }
 
-            RecordPoint pointInfo = ObjectBox.get().getBoxStore().boxFor(RecordPoint.class).query()
-                    .equal(RecordPoint_.code, code)
-                    .equal(RecordPoint_.template, template).build().findFirst();
+            if (size != 0) {
 
-            int value;
+                RecordPoint pointInfo = ObjectBox.get().getBoxStore().boxFor(RecordPoint.class).query()
+                        .equal(RecordPoint_.code, code)
+                        .equal(RecordPoint_.template, template).build().findFirst();
 
-            String parseValue = null;
-            if (!StringUtils.isEmpty(pointInfo.getV0())) {
-                value = ByteUtils.bytes2Int(new byte[]{tempByte[8], tempByte[9], tempByte[10], tempByte[11]});
-                //解析0 跟 1
-                if (value == 0) {
-                    parseValue = pointInfo.getV0();
-                } else if (value == 1) {
-                    parseValue = pointInfo.getV1();
-                } else if (value == 2) {
-                    parseValue = pointInfo.getV2();
-                } else if (value == 3) {
-                    parseValue = pointInfo.getV3();
-                }
-            } else {
-                if (pointInfo.getSign() == 1) {
-                    //有符号
-                    value = ByteUtils.bytes2SignedInt(new byte[]{tempByte[8], tempByte[9], tempByte[10], tempByte[11]});
-                } else {
-                    //无符号
+                int value;
+
+                String parseValue = null;
+                if (!StringUtils.isEmpty(pointInfo.getV0())) {
                     value = ByteUtils.bytes2Int(new byte[]{tempByte[8], tempByte[9], tempByte[10], tempByte[11]});
-                }
-
-                if (pointInfo.getAccuracy() == 0) {
-                    parseValue = String.valueOf(value) + " " + pointInfo.getUnit();
-                } else {
-                    String pattern = "#0.";
-                    for (int i = 0; i < pointInfo.getAccuracy(); i++) {
-                        pattern += "0";
+                    //解析0 跟 1
+                    if (value == 0) {
+                        parseValue = pointInfo.getV0();
+                    } else if (value == 1) {
+                        parseValue = pointInfo.getV1();
+                    } else if (value == 2) {
+                        parseValue = pointInfo.getV2();
+                    } else if (value == 3) {
+                        parseValue = pointInfo.getV3();
                     }
-                    DecimalFormat format = new DecimalFormat(pattern);
-                    parseValue = format.format(value / Math.pow(10, pointInfo.getAccuracy())) + " " + pointInfo.getUnit();
-                }
-            }
+                } else {
+                    if (pointInfo.getSign() == 1) {
+                        //有符号
+                        value = ByteUtils.bytes2SignedInt(new byte[]{tempByte[8], tempByte[9], tempByte[10], tempByte[11]});
+                    } else {
+                        //无符号
+                        value = ByteUtils.bytes2Int(new byte[]{tempByte[8], tempByte[9], tempByte[10], tempByte[11]});
+                    }
 
-            result.add(new RecordData(deviceAddress, pointInfo.getMeansCN(), code, value, parseValue, time, !StringUtils.isEmpty(pointInfo.getV0())));
+                    if (pointInfo.getAccuracy() == 0) {
+                        parseValue = String.valueOf(value) + " " + pointInfo.getUnit();
+                    } else {
+                        String pattern = "#0.";
+                        for (int i = 0; i < pointInfo.getAccuracy(); i++) {
+                            pattern += "0";
+                        }
+                        DecimalFormat format = new DecimalFormat(pattern);
+                        parseValue = format.format(value / Math.pow(10, pointInfo.getAccuracy())) + " " + pointInfo.getUnit();
+                    }
+                }
+                result.add(new RecordData(deviceAddress, pointInfo.getMeansCN(), code, value, parseValue, time, !StringUtils.isEmpty(pointInfo.getV0())));
+            }
+            result.add(new RecordData(deviceAddress, Fastgo.getContext().getString(R.string.映射失败)+" CODE:"+code, code, 0, "", time, false));
         }
 
         return result;
