@@ -1872,7 +1872,11 @@ public class RemoteModel extends BaseModel implements IModel {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         com.orhanobut.logger.Logger.e(throwable.getMessage());
-                        consumer.accept(false);
+
+                        if("Software caused connection abort".equals(throwable.getMessage())){
+                            consumer.accept(true);
+                        }else
+                            consumer.accept(false);
                     }
                 }));
     }
