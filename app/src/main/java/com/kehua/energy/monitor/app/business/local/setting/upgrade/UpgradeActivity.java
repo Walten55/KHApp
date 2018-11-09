@@ -27,7 +27,6 @@ import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.component.AppComponent;
 import me.walten.fastgo.utils.XToast;
 import me.walten.fastgo.widget.titlebar.XTitleBar;
-import okhttp3.ResponseBody;
 
 @Route(path = RouterMgr.LOCAL_UPGRADE)
 public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements UpgradeContract.View {
@@ -62,7 +61,7 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        mPresenter.startUpgrade();
+
     }
 
     @Override
@@ -126,10 +125,13 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
     @OnClick(R.id.tv_submit)
     public void submit(View view) {
         if (!StringUtils.isEmpty(mPathTv.getText().toString())) {
-            mPresenter.upload(mPathTv.getText().toString(), new Consumer<ResponseBody>() {
+            mPresenter.upload(mPathTv.getText().toString(), new Consumer<Boolean>() {
                 @Override
-                public void accept(ResponseBody responseBody) throws Exception {
-                    mPathTv.setText("");
+                public void accept(Boolean success) throws Exception {
+                    if(success){
+                        mPathTv.setText("");
+                        mPresenter.startUpgrade();
+                    }
                 }
             });
         } else {
@@ -141,6 +143,7 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
     @Override
     public void onUpgrade(String status) {
+        mStatusTv.setVisibility(View.VISIBLE);
         mStatusTv.setText(status);
     }
 }

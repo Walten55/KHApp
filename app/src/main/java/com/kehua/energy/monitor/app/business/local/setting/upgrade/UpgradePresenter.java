@@ -16,7 +16,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.scope.ActivityScope;
-import okhttp3.ResponseBody;
+import me.walten.fastgo.utils.XToast;
 
 @ActivityScope
 public class UpgradePresenter extends UpgradeContract.Presenter {
@@ -47,14 +47,17 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
     }
 
     @Override
-    public void upload(String path, final Consumer<ResponseBody> consumer) {
+    public void upload(String path, final Consumer<Boolean> consumer) {
         mView.startWaiting(Fastgo.getContext().getString(R.string.上传中));
-        mModel.getRemoteModel().upload(path, new Consumer<ResponseBody>() {
+        mModel.getRemoteModel().upload(path, new Consumer<Boolean>() {
             @Override
-            public void accept(ResponseBody responseBody) throws Exception {
+            public void accept(Boolean success) throws Exception {
                 mView.stopWaiting();
+                if(!success){
+                    XToast.error(Fastgo.getContext().getString(R.string.上传失败));
+                }
                 if(consumer!=null)
-                    consumer.accept(responseBody);
+                    consumer.accept(success);
             }
         });
     }
@@ -65,7 +68,8 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
             @Override
             public void accept(Upgrade upgrade) throws Exception {
                 String status = "";
-                String progress = "";
+                String upProgress = "";
+                String dnProgress = "";
                 switch (upgrade.getStatus()){
                     case 0:
                         status = Fastgo.getContext().getString(R.string.未升级);
@@ -83,9 +87,10 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
                         status = Fastgo.getContext().getString(R.string.升级失败);
                         break;
                 }
-                progress = upgrade.getProgress()+"%";
+                upProgress = upgrade.getUpprogress()+"%";
+                dnProgress = upgrade.getDnprogress()+"%";
 
-                mView.onUpgrade(String.format(Fastgo.getContext().getString(R.string.升级状态),status,progress));
+                mView.onUpgrade(String.format(Fastgo.getContext().getString(R.string.升级状态),status,dnProgress));
             }
         }, new Consumer<Throwable>() {
             @Override

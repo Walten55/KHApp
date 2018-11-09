@@ -12,7 +12,9 @@ package com.kehua.energy.monitor.app.model.entity;
 public class Upgrade {
     private int num;
 
-    private int progress;
+    private int upprogress;
+
+    private int dnprogress;
 
     private int status;
 
@@ -24,12 +26,20 @@ public class Upgrade {
         this.num = num;
     }
 
-    public int getProgress() {
-        return progress;
+    public int getUpprogress() {
+        return upprogress;
     }
 
-    public void setProgress(int progress) {
-        this.progress = progress;
+    public void setUpprogress(int upprogress) {
+        this.upprogress = upprogress;
+    }
+
+    public int getDnprogress() {
+        return dnprogress;
+    }
+
+    public void setDnprogress(int dnprogress) {
+        this.dnprogress = dnprogress;
     }
 
     public int getStatus() {

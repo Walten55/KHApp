@@ -1844,7 +1844,7 @@ public class RemoteModel extends BaseModel implements IModel {
     /**
      * 上传
      */
-    public void upload(String filePath, final Consumer<ResponseBody> consumer) {
+    public void upload(String filePath, final Consumer<Boolean> consumer) {
         File file = new File(filePath);
         // 创建 RequestBody，用于封装 请求RequestBody
         final RequestBody requestFile =
@@ -1854,14 +1854,8 @@ public class RemoteModel extends BaseModel implements IModel {
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        // 添加描述
-        String descriptionString = "upgrade file";
-        RequestBody description =
-                RequestBody.create(
-                        MediaType.parse("multipart/form-data"), descriptionString);
-
         addSubscribe(mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
-                .upload(description,body)
+                .upload(body)
                 .compose(new FlowableTransformer<ResponseBody, ResponseBody>() {
                     @Override
                     public Publisher<ResponseBody> apply(Flowable<ResponseBody> upstream) {
@@ -1872,12 +1866,16 @@ public class RemoteModel extends BaseModel implements IModel {
                 .subscribe(new Consumer<ResponseBody>() {
                     @Override
                     public void accept(ResponseBody responseBody) throws Exception {
-                        consumer.accept(responseBody);
+                        if(responseBody.string().contains("ok")){
+                            consumer.accept(true);
+                        }else {
+                            consumer.accept(false);
+                        }
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        consumer.accept(null);
+                        consumer.accept(false);
                     }
                 }));
     }

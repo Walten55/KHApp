@@ -262,7 +262,6 @@
     <string name="三相无屏并脱网历史故障记录映射模板">三相无屏并脱网、历史故障记录映射模板</string>
     <string name="三相有屏并脱网历史故障记录映射模板">三相有屏并脱网、历史故障记录映射模板</string>
     <string name="三相用户日志功率调度日志映射模板">三相用户日志、功率调度日志映射模板</string>
-    <string name="映射模板错误">映射模板错误</string>
     <string name="选择映射模板">选择映射模板</string>
     <string name="记录条数读取失败">记录条数读取失败</string>
     <string name="再按一次退出本地模式">再按一次退出本地模式</string>
@@ -293,7 +292,7 @@
     <string name="智能电表">智能电表</string>
     <string name="CT">CT</string>
     <string name="无">无</string>
-    <string name="升级状态">升级状态：%s\t\t\t\t升级进度：%s</string>
+    <string name="升级状态">升级状态：%s\t\t\t\t下发进度：%s</string>
     <string name="未升级">未升级</string>
     <string name="升级包下载中">升级包下载中</string>
     <string name="下载完成">下载完成，正在升级</string>
@@ -301,4 +300,7 @@
     <string name="升级失败">升级失败</string>
     <string name="首次连接采集棒需验证采集棒">首次连接采集棒需验证采集棒</string>
     <string name="对准采集器二维码">对准采集器二维码</string>
+    <string name="设备已锁定">设备已锁定</string>
+    <string name="映射失败">映射失败</string>
+    <string name="上传失败">上传失败</string>
 </resources>

@@ -10,7 +10,6 @@ import java.util.Map;
 
 import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -34,7 +33,7 @@ public interface CollectorAPIService {
 
     @Multipart
     @POST("http://10.10.10.1/upload.cgi")
-    Flowable<ResponseBody> upload(@Part("description") RequestBody description, @Part MultipartBody.Part file);
+    Flowable<ResponseBody> upload( @Part() MultipartBody.Part file);
 
     @GET("http://10.10.10.1/upgrade.cgi")
     Flowable<Upgrade> upgrade();

@@ -292,7 +292,7 @@
     <string name="智能电表">智能电表</string>
     <string name="CT">CT</string>
     <string name="无">无</string>
-    <string name="升级状态">升级状态：%s\t\t\t\t升级进度：%s</string>
+    <string name="升级状态">升级状态：%s\t\t\t\t下发进度：%s</string>
     <string name="未升级">未升级</string>
     <string name="升级包下载中">升级包下载中</string>
     <string name="下载完成">下载完成，正在升级</string>
@@ -302,4 +302,5 @@
     <string name="对准采集器二维码">对准采集器二维码</string>
     <string name="设备已锁定">设备已锁定</string>
     <string name="映射失败">映射失败</string>
+    <string name="上传失败">上传失败</string>
 </resources>
