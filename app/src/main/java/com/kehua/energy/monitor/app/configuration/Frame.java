@@ -60,6 +60,12 @@ public class Frame {
     public static final int 恢复出厂设置地址(){
         return 单相协议 == LocalUserManager.getPn()?5017:5006;
     }
+    public static final int 清除故障录波地址(){
+        return 单相协议 == LocalUserManager.getPn()?5077:5073;
+    }
+    public static final int 清除拉弧故障地址(){
+        return 单相协议 == LocalUserManager.getPn()?9999:5008;
+    }
     public static final int 清除所有发电量地址 = 5064;
     public static final int 清除历史记录地址 = 5065;
     public static final int[] 开机密码地址 = {6602,6603};

@@ -154,6 +154,8 @@ public class CommonSettingAdapter extends BaseMultiItemQuickAdapter<SettingEntit
                         if(item.getData().getAddress().equals(Frame.恢复出厂设置地址()+"")
                                 ||item.getData().getAddress().equals(Frame.清除所有发电量地址+"")
                                 ||item.getData().getAddress().equals(Frame.清除历史记录地址+"")
+                                ||item.getData().getAddress().equals(Frame.清除故障录波地址()+"")
+                                ||item.getData().getAddress().equals(Frame.清除拉弧故障地址()+"")
                                 ||item.getData().getAddress().equals(Frame.开机密码地址[0]+"")
                                 ||item.getData().getAddress().equals(Frame.试用期密码地址[0]+"")
                                 ){
@@ -165,6 +167,8 @@ public class CommonSettingAdapter extends BaseMultiItemQuickAdapter<SettingEntit
                     if(item.getData().getAddress().equals(Frame.恢复出厂设置地址()+"")
                             ||item.getData().getAddress().equals(Frame.清除所有发电量地址+"")
                             ||item.getData().getAddress().equals(Frame.清除历史记录地址+"")
+                            ||item.getData().getAddress().equals(Frame.清除故障录波地址()+"")
+                            ||item.getData().getAddress().equals(Frame.清除拉弧故障地址()+"")
                             ||item.getData().getAddress().equals(Frame.开机密码地址[0]+"")
                             ||item.getData().getAddress().equals(Frame.试用期密码地址[0]+"")
                             ){

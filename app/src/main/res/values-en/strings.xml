@@ -303,4 +303,6 @@
     <string name="设备已锁定">设备已锁定</string>
     <string name="映射失败">映射失败</string>
     <string name="上传失败">上传失败</string>
+    <string name="确认清除故障录波">确认清除故障录波</string>
+    <string name="确认清除拉弧故障">确认清除拉弧故障</string>
 </resources>

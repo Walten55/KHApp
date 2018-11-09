@@ -1866,15 +1866,12 @@ public class RemoteModel extends BaseModel implements IModel {
                 .subscribe(new Consumer<ResponseBody>() {
                     @Override
                     public void accept(ResponseBody responseBody) throws Exception {
-                        if(responseBody.string().contains("ok")){
-                            consumer.accept(true);
-                        }else {
-                            consumer.accept(false);
-                        }
+                        consumer.accept(true);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        com.orhanobut.logger.Logger.e(throwable.getMessage());
                         consumer.accept(false);
                     }
                 }));

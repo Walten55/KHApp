@@ -174,6 +174,20 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
                     mPresenter.toggle(Frame.清除历史记录地址, true, null);
                 }
             });
+        }else if (item.getData().getAddress().equals(Frame.清除故障录波地址() + "")) {
+            showTipDialog(getString(R.string.温馨提示), getString(R.string.确认清除故障录波), new OnBtnClickL() {
+                @Override
+                public void onBtnClick() {
+                    mPresenter.toggle(Frame.清除故障录波地址(), true, null);
+                }
+            });
+        }else if (item.getData().getAddress().equals(Frame.清除拉弧故障地址() + "")) {
+            showTipDialog(getString(R.string.温馨提示), getString(R.string.确认清除拉弧故障), new OnBtnClickL() {
+                @Override
+                public void onBtnClick() {
+                    mPresenter.toggle(Frame.清除拉弧故障地址(), true, null);
+                }
+            });
         } else if (item.getData().getAddress().equals(Frame.标准类型地址() + "")) {
             RouterMgr.get().localSettingStandard();
         } else if (item.getData().getAddress().equals("6320") && LocalUserManager.getPn() == Frame.单相协议) {
