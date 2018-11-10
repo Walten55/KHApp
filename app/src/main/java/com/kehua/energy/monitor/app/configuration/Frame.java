@@ -156,6 +156,7 @@ public class Frame {
     public static final int P_F模式充电结束地址 = 6471;
 
     public static final int Q_V模式地址 = 6472;
+    public static final int Q_V模式V1地址 = 6473;
     public static final int SPF模式 = 6480;
 
     /**

@@ -49,7 +49,7 @@ public class LocalMainPresenter extends LocalMainContract.Presenter {
         if(mCollDisposable==null||mCollDisposable.isDisposed()){
             collecting();
             //15s
-            mCollDisposable = Flowable.interval(60*4, TimeUnit.SECONDS)
+            mCollDisposable = Flowable.interval(15, TimeUnit.SECONDS)
                     .observeOn(Schedulers.io())
                     .subscribe(new Consumer<Long>() {
                         @Override

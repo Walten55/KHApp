@@ -1,5 +1,8 @@
 package com.kehua.energy.monitor.app.model.entity;
 
+import com.kehua.energy.monitor.app.model.local.LocalModel;
+import com.kehua.energy.monitor.app.utils.LanguageUtils;
+
 import java.util.Date;
 
 import io.objectbox.annotation.Entity;
@@ -17,7 +20,10 @@ public class DeviceData {
     public static final int TYPE_HOLD = 2;
     public static final int TYPE_SETTING = 3;
 
-    public DeviceData(){};
+    public DeviceData() {
+    }
+
+    ;
 
     @Id
     private long id;
@@ -111,7 +117,7 @@ public class DeviceData {
     @NameInDb("BYTE_COUNT")
     private int byteCount;
 
-    public DeviceData(String sn, String registerAddress, int type, String descriptionCN, String descriptionEN, String descriptionFrench, int intValue, String parseValue, String unit, Date updateTime, String group, String sgroup, String authority, String dataType, int accuracy,int byteCount) {
+    public DeviceData(String sn, String registerAddress, int type, String descriptionCN, String descriptionEN, String descriptionFrench, int intValue, String parseValue, String unit, Date updateTime, String group, String sgroup, String authority, String dataType, int accuracy, int byteCount) {
         this.sn = sn;
         this.registerAddress = registerAddress;
         this.type = type;
@@ -163,8 +169,22 @@ public class DeviceData {
     }
 
     public String getDescription() {
-        // TODO: 2018/9/25 国际化
-        return descriptionCN;
+        LocalModel localModel = new LocalModel();
+        String language = localModel.getLanguageSelect();
+
+        String result = "";
+        switch (language) {
+            case LanguageUtils.Chinese:
+                result = descriptionCN;
+                break;
+            case LanguageUtils.English:
+                result = descriptionEN;
+                break;
+            default:
+                result = descriptionCN;
+                break;
+        }
+        return result;
     }
 
     public String getDescriptionCN() {

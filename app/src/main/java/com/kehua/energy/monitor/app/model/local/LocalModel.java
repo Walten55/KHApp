@@ -556,6 +556,8 @@ public class LocalModel extends BaseModel implements IModel {
             Cell GROUP = sheet.getCell(10, i);
             Cell SORT = sheet.getCell(11, i);
             Cell AUTHORITY = sheet.getCell(12, i);
+            Cell UNIT_EN = sheet.getCell(13, i);
+            Cell UNIT_FR = sheet.getCell(14, i);
 
             if ("".equals(PN.getContents())) {//如果读取的数据为空
                 break;
@@ -573,7 +575,9 @@ public class LocalModel extends BaseModel implements IModel {
                     Integer.valueOf(DEVICE_TYPE.getContents().trim()),
                     GROUP.getContents().trim(),
                     SORT.getContents().trim(),
-                    AUTHORITY.getContents().trim()
+                    AUTHORITY.getContents().trim(),
+                    UNIT_EN.getContents().trim(),
+                    UNIT_FR.getContents().trim()
             ));
 
         }

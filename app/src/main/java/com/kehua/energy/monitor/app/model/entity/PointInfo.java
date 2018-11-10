@@ -1,6 +1,9 @@
 package com.kehua.energy.monitor.app.model.entity;
 
 
+import com.kehua.energy.monitor.app.model.local.LocalModel;
+import com.kehua.energy.monitor.app.utils.LanguageUtils;
+
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 import io.objectbox.annotation.NameInDb;
@@ -9,7 +12,7 @@ import io.objectbox.annotation.NameInDb;
 @NameInDb("POINT_INFO")
 public class PointInfo {
 
-    public PointInfo(){
+    public PointInfo() {
 
     }
 
@@ -61,8 +64,14 @@ public class PointInfo {
     @NameInDb("AUTHORITY")
     private String authority;
 
+    @NameInDb("UNIT_EN")
+    private String unitEN;
 
-    public PointInfo(String pn, String address, String descriptionCN, String descriptionEN, String descriptionFrench, int byteCount, String dataType, int accuracy, String unit, int deviceType, String group, String sgroup, String authority) {
+    @NameInDb("UNIT_FR")
+    private String unitFR;
+
+
+    public PointInfo(String pn, String address, String descriptionCN, String descriptionEN, String descriptionFrench, int byteCount, String dataType, int accuracy, String unit, int deviceType, String group, String sgroup, String authority, String unitEN, String unitFR) {
         this.pn = pn;
         this.address = address;
         this.descriptionCN = descriptionCN;
@@ -76,6 +85,8 @@ public class PointInfo {
         this.group = group;
         this.sgroup = sgroup;
         this.authority = authority;
+        this.unitEN = unitEN;
+        this.unitFR = unitFR;
     }
 
     public long getId() {
@@ -107,7 +118,22 @@ public class PointInfo {
     }
 
     public String getDescription() {
-        return descriptionCN;
+        LocalModel localModel = new LocalModel();
+        String language = localModel.getLanguageSelect();
+
+        String result = "";
+        switch (language) {
+            case LanguageUtils.Chinese:
+                result = descriptionCN;
+                break;
+            case LanguageUtils.English:
+                result = descriptionEN;
+                break;
+            default:
+                result = descriptionCN;
+                break;
+        }
+        return result;
     }
 
     public void setDescriptionCN(String descriptionCN) {
@@ -155,7 +181,22 @@ public class PointInfo {
     }
 
     public String getUnit() {
-        return unit;
+        LocalModel localModel = new LocalModel();
+        String language = localModel.getLanguageSelect();
+
+        String result = "";
+        switch (language) {
+            case LanguageUtils.Chinese:
+                result = unit;
+                break;
+            case LanguageUtils.English:
+                result = unitEN;
+                break;
+            default:
+                result = unit;
+                break;
+        }
+        return result;
     }
 
     public void setUnit(String unit) {
@@ -192,5 +233,21 @@ public class PointInfo {
 
     public void setAuthority(String authority) {
         this.authority = authority;
+    }
+
+    public String getUnitEN() {
+        return unitEN;
+    }
+
+    public void setUnitEN(String unitEN) {
+        this.unitEN = unitEN;
+    }
+
+    public String getUnitFR() {
+        return unitFR;
+    }
+
+    public void setUnitFR(String unitFR) {
+        this.unitFR = unitFR;
     }
 }
