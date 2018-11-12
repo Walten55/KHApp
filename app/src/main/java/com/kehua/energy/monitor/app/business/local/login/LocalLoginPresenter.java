@@ -25,6 +25,7 @@ import com.orhanobut.logger.Logger;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.lang.ref.WeakReference;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -60,6 +61,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
     public void attachView(LocalLoginContract.View view) {
         mView = view;
         mModel.getLocalModel().setupDatabase();
+        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
         RxBus.get().register(this);
         localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     }
@@ -81,15 +83,15 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
             }
     )
     public void scanResult(String result) {
-        if(result.contains("KEY:")&&result.split("KEY:").length==2){
-            String newKey = result.split("KEY:")[1].trim().replace(" ","");
-            if(newKey.equals(mLastKey)){
+        if (result.contains("KEY:") && result.split("KEY:").length == 2) {
+            String newKey = result.split("KEY:")[1].trim().replace(" ", "");
+            if (newKey.equals(mLastKey)) {
                 mModel.getLocalModel().saveCollectorKey(newKey);
-                login(ROLE_NORMAL,"");
-            }else {
+                login(ROLE_NORMAL, "");
+            } else {
                 XToast.error(localContext.get().getString(R.string.扫描的采集器与连接采集器不匹配));
             }
-        }else {
+        } else {
             XToast.error(localContext.get().getString(R.string.扫描的采集器与连接采集器不匹配));
         }
 
@@ -97,25 +99,25 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     @Override
     public void login(final int role, final String password) {
-        if(role!=ROLE_NORMAL&&StringUtils.isEmpty(password)){
+        if (role != ROLE_NORMAL && StringUtils.isEmpty(password)) {
             XToast.error(localContext.get().getString(R.string.密码不能为空));
             return;
         }
 
-        if(mView!=null)
+        if (mView != null)
             mView.startWaiting(localContext.get().getString(R.string.登录中));
         mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
             @Override
             public void accept(final InvInfoList invInfoList) throws Exception {
-                if(mView!=null)
+                if (mView != null)
                     mView.stopWaiting();
-                switch (role){
+                switch (role) {
                     case ROLE_NORMAL:
 
                         mModel.getRemoteModel().getdev(new Consumer<Collector>() {
                             @Override
                             public void accept(Collector collector) throws Exception {
-                                if(!mModel.getLocalModel().hasCollectorKey(mLastKey = collector.getKey())){
+                                if (!mModel.getLocalModel().hasCollectorKey(mLastKey = collector.getKey())) {
 
                                     new RxPermissions(ActivityUtils.getTopActivity()).request(Manifest.permission.CAMERA)
                                             .subscribe(new Consumer<Boolean>() {
@@ -131,8 +133,8 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                                             });
 
                                     return;
-                                }else {
-                                    loginHandler(role,invInfoList);
+                                } else {
+                                    loginHandler(role, invInfoList);
                                 }
                             }
                         }, new Consumer<Throwable>() {
@@ -145,22 +147,22 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
                         break;
                     case ROLE_OPS:
-                        if(!LocalUserManager.OPS_PASSWORD.equals(EncryptUtils.encryptMD5ToString(password))){
+                        if (!LocalUserManager.OPS_PASSWORD.equals(EncryptUtils.encryptMD5ToString(password))) {
                             XToast.error(localContext.get().getString(R.string.密码错误));
                             return;
                         }
 
-                        loginHandler(role,invInfoList);
+                        loginHandler(role, invInfoList);
                         break;
                     case ROLE_FACTORY:
 
-                        if((!StringUtils.isEmpty(mSN)&&!String.valueOf(PasswordUtils.createPassword(31, mSN)).equals(password))
-                                ||(StringUtils.isEmpty(mSN)&& !password.equals("333"))){
+                        if ((!StringUtils.isEmpty(mSN) && !String.valueOf(PasswordUtils.createPassword(31, mSN)).equals(password))
+                                || (StringUtils.isEmpty(mSN) && !password.equals("333"))) {
                             XToast.error(localContext.get().getString(R.string.密码错误));
                             return;
                         }
 
-                        loginHandler(role,invInfoList);
+                        loginHandler(role, invInfoList);
                         break;
                 }
 
@@ -172,7 +174,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                 Logger.e(throwable.getMessage());
                 XToast.error(localContext.get().getString(R.string.无法获取设备信息));
                 RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);
-                if(mView!=null){
+                if (mView != null) {
                     mView.stopWaiting();
                 }
             }
@@ -181,10 +183,10 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     }
 
-    private void loginHandler(int role,InvInfoList data){
+    private void loginHandler(int role, InvInfoList data) {
         LocalUserManager.setRole(role);
         //目前默认采集 设备 1v1
-        if(data.getInv()!=null&&data.getInv().size()>0)
+        if (data.getInv() != null && data.getInv().size() > 0)
             LocalUserManager.setDeviceAddress(data.getInv().get(0).getAddr());
         RouterMgr.get().localMain();
         mView.finishView();
@@ -192,25 +194,26 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     @Override
     public void gatherDeviceInfo() {
+        Locale locale = Locale.getDefault();
         mView.startWaiting(localContext.get().getString(R.string.加载中));
 
         mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
             @Override
             public void accept(final InvInfoList data) throws Exception {
-                if(data.getInv()!=null&&data.getInv().size()>0)
+                if (data.getInv() != null && data.getInv().size() > 0)
                     LocalUserManager.setDeviceAddress(data.getInv().get(0).getAddr());
 
                 mView.canLogin(true);
 
-                mModel.getRemoteModel().snAndDeviceType(LocalUserManager.getDeviceAddress(),new Consumer<ArrayMap<String, Object>>() {
+                mModel.getRemoteModel().snAndDeviceType(LocalUserManager.getDeviceAddress(), new Consumer<ArrayMap<String, Object>>() {
                     @Override
                     public void accept(ArrayMap<String, Object> result) throws Exception {
                         mView.stopWaiting();
-                        if(result.containsKey("sn")&&result.containsKey("deviceType")&&result.containsKey("pn")){
-                            mView.showDeviceInfo(mSN = String.valueOf(result.get("sn")), Frame.getDeviceTypeName((int)result.get("deviceType")));
+                        if (result.containsKey("sn") && result.containsKey("deviceType") && result.containsKey("pn")) {
+                            mView.showDeviceInfo(mSN = String.valueOf(result.get("sn")), Frame.getDeviceTypeName((int) result.get("deviceType")));
 
-                            LocalUserManager.setPn((int)result.get("pn"));
-                            LocalUserManager.setDeviceType((int)result.get("deviceType"));
+                            LocalUserManager.setPn((int) result.get("pn"));
+                            LocalUserManager.setDeviceType((int) result.get("deviceType"));
 
                         }
                     }
@@ -236,12 +239,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
     }
 
     @Override
-    public void initLanguage() {
-        LanguageUtils.init(mModel.getLocalModel());
-    }
-
-    @Override
     public void selectLanguage(String languageName) {
-        LanguageUtils.languageSelect(LanguageUtils.getLangeValueByName(languageName),mModel.getLocalModel(),false);
+        LanguageUtils.languageSelect(localContext.get(), LanguageUtils.getLangeValueByName(localContext.get(), languageName), false);
     }
 }
