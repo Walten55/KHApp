@@ -32,7 +32,7 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
     @Inject
     APPModel mModel;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+    WeakReference<Context> localContext = null;
 
     @Inject
     public UpgradePresenter() {
@@ -41,6 +41,7 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
     @Override
     public void attachView(UpgradeContract.View view) {
         mView = view;
+        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     }
 
     @Override

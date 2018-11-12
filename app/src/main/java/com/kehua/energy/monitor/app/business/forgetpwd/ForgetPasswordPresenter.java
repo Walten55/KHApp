@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.flyco.roundview.RoundTextView;
+import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.configuration.Config;
 import com.kehua.energy.monitor.app.model.APPModel;
 
@@ -13,19 +13,14 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import io.objectbox.android.AndroidScheduler;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.scope.ActivityScope;
 import me.walten.fastgo.utils.XToast;
-
-import com.kehua.energy.monitor.app.R;
 
 @ActivityScope
 public class ForgetPasswordPresenter extends ForgetPasswordContract.Presenter {
@@ -39,8 +34,7 @@ public class ForgetPasswordPresenter extends ForgetPasswordContract.Presenter {
 
     boolean mVerCodeInWaitting = false;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+    WeakReference<Context> localContext = null;
 
     @Inject
     public ForgetPasswordPresenter() {
@@ -49,6 +43,7 @@ public class ForgetPasswordPresenter extends ForgetPasswordContract.Presenter {
     @Override
     public void attachView(ForgetPasswordContract.View view) {
         mView = view;
+        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     }
 
     @Override

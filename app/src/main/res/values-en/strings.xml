@@ -5,7 +5,7 @@
     <string name="关注">Subscription</string>
     <string name="我的">Me</string>
     <string name="点击">Click</string>
-    <string name="找不到想要的WiFi采集器">Can't find the WiFi collector</string>
+    <string name="找不到想要的WiFi采集器">Can\'t find the WiFi collector</string>
     <string name="联网设置">Network settings</string>
     <string name="采集器热点">Collector hotspot</string>
     <string name="热点列表">Hot list</string>
@@ -79,7 +79,7 @@
     <string name="电站列表">Power station list</string>
     <string name="发电功率">Power generation</string>
     <string name="今日发电">Power generation today</string>
-    <string name="今日收益">Today's income</string>
+    <string name="今日收益">Today\'s income</string>
     <string name="串号">Serial No</string>
     <string name="取消关注">Unsubscribe</string>
     <string name="关注设备">Subscription Equipment</string>
@@ -259,8 +259,10 @@
     <string name="是否更改设置">Do you want to change the settings?</string>
     <string name="单相并脱网历史故障记录映射模板">Single-phase and off-network, historical fault record mapping template</string>
     <string name="单相用户日志功率调度日志映射模板">Single-phase user log and power scheduling log mapping template</string>
-    <string name="三相无屏并脱网历史故障记录映射模板">Three-phase screenless and off-network, historical fault record mapping template</string>
-    <string name="三相有屏并脱网历史故障记录映射模板">Three-phase screen and off-network, historical fault record mapping template</string>
+    <!--<string name="三相无屏并脱网历史故障记录映射模板">Three-phase screen less and off-network, historical fault record mapping template</string>-->
+    <!--<string name="三相有屏并脱网历史故障记录映射模板">Three-phase screen and off-network, historical fault record mapping template</string>-->
+    <string name="三相无屏并脱网历史故障记录映射模板">Screen less mapping template</string>
+    <string name="三相有屏并脱网历史故障记录映射模板">Screen mapping template</string>
     <string name="三相用户日志功率调度日志映射模板">Three-phase user log and power scheduling log mapping template</string>
     <string name="选择映射模板">Select a mapping template</string>
     <string name="记录条数读取失败">Number of records failed to read</string>
@@ -282,7 +284,7 @@
     <string name="上传">Upload</string>
     <string name="选择文件">Select a file</string>
     <string name="上传中">Uploading</string>
-    <string name="上传成功">Upload successed</string>
+    <string name="上传成功">Upload succeeded</string>
     <string name="请选择升级文件">Please select an upgrade file</string>
     <string name="定制1">Custom made 1</string>
     <string name="定制2">Custom made 2</string>
@@ -296,7 +298,7 @@
     <string name="未升级">Not upgraded</string>
     <string name="升级包下载中">Upgrade package download</string>
     <string name="下载完成">Download completed, upgrading</string>
-    <string name="升级成功">Upgrade successed</string>
+    <string name="升级成功">Upgrade succeeded</string>
     <string name="升级失败">Upgrade unsuccessful</string>
     <string name="首次连接采集棒需验证采集棒">The first time you connect the collection rod, you need to verify the collection rod.</string>
     <string name="对准采集器二维码">Align the collector QR code</string>

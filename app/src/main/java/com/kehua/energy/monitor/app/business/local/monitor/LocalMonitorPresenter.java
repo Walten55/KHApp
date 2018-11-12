@@ -37,7 +37,7 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
     @Inject
     APPModel mModel;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+    WeakReference<Context> localContext = null;
 
     @Inject
     public LocalMonitorPresenter() {
@@ -47,6 +47,7 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
     @Override
     public void attachView(LocalMonitorContract.View view) {
         mView = view;
+        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     }
 
     @Override

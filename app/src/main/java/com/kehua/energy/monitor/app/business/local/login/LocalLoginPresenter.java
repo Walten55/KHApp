@@ -50,7 +50,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     private String mSN;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+    WeakReference<Context> localContext = null;
 
     @Inject
     public LocalLoginPresenter() {
@@ -61,6 +61,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
         mView = view;
         mModel.getLocalModel().setupDatabase();
         RxBus.get().register(this);
+        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.kehua.energy.monitor.app.business.register;
 
 import android.content.Context;
-import android.widget.CheckBox;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -13,11 +12,9 @@ import java.lang.ref.WeakReference;
 
 import javax.inject.Inject;
 
-import io.reactivex.functions.Consumer;
 import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.scope.ActivityScope;
 import me.walten.fastgo.utils.XToast;
-import me.walten.fastgo.widget.XEditText;
 
 @ActivityScope
 public class RegisterPresenter extends RegisterContract.Presenter {
@@ -27,7 +24,7 @@ public class RegisterPresenter extends RegisterContract.Presenter {
     @Inject
     APPModel mModel;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+    WeakReference<Context> localContext = null;
 
     @Inject
     public RegisterPresenter() {
@@ -36,6 +33,7 @@ public class RegisterPresenter extends RegisterContract.Presenter {
     @Override
     public void attachView(RegisterContract.View view) {
         mView = view;
+        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     }
 
     @Override

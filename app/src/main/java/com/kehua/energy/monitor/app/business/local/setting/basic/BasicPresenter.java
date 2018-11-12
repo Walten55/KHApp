@@ -36,7 +36,7 @@ public class BasicPresenter extends BasicContract.Presenter {
     @Inject
     APPModel mModel;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+    WeakReference<Context> localContext = null;
 
     @Inject
     public BasicPresenter() {
@@ -45,6 +45,7 @@ public class BasicPresenter extends BasicContract.Presenter {
     @Override
     public void attachView(BasicContract.View view) {
         mView = view;
+        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     }
 
     @Override

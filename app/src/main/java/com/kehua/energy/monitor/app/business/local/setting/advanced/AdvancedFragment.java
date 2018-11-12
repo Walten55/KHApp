@@ -1,6 +1,5 @@
 package com.kehua.energy.monitor.app.business.local.setting.advanced;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.blankj.utilcode.util.ActivityUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
@@ -44,12 +42,10 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 import butterknife.BindView;
 import io.reactivex.functions.Consumer;
-import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.component.AppComponent;
 import me.walten.fastgo.utils.XToast;
 import me.walten.fastgo.widget.XEditText;
@@ -67,8 +63,6 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
     private View mFooterViewPassword;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
-    
     public AdvancedFragment() {
         // Required empty public constructor
     }
@@ -198,9 +192,9 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
         } else if (item.getData().getAddress().equals("6320") && LocalUserManager.getPn() == Frame.单相协议) {
             //单相 外接传感器
             final String[] stringItems = {
-                    localContext.get().getString(R.string.无),
-                    localContext.get().getString(R.string.CT),
-                    localContext.get().getString(R.string.智能电表)};
+                    getActivity().getString(R.string.无),
+                    getActivity().getString(R.string.CT),
+                    getActivity().getString(R.string.智能电表)};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
             dialog.isTitleShow(false).show();
 
@@ -253,9 +247,9 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
         }else if (item.getData().getAddress().equals("6303") && LocalUserManager.getPn() == Frame.三相协议) {
             //仅三相协议有 MPPT并联模式
             final String[] stringItems = {
-                    localContext.get().getString(R.string.独立),
-                    localContext.get().getString(R.string.四路并联),
-                    localContext.get().getString(R.string.两路并联)};
+                    getActivity().getString(R.string.独立),
+                    getActivity().getString(R.string.四路并联),
+                    getActivity().getString(R.string.两路并联)};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
             dialog.isTitleShow(false).show();
 

@@ -1,7 +1,6 @@
 package com.kehua.energy.monitor.app.business.local.setting.upgrade;
 
 import android.Manifest;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.codekidlabs.storagechooser.Content;
 import com.codekidlabs.storagechooser.StorageChooser;
@@ -22,12 +20,9 @@ import com.kehua.energy.monitor.app.di.module.ActivityModule;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import java.lang.ref.WeakReference;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
-import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.component.AppComponent;
 import me.walten.fastgo.utils.XToast;
 import me.walten.fastgo.widget.titlebar.XTitleBar;
@@ -42,8 +37,6 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
     @BindView(R.id.tv_status)
     TextView mStatusTv;
-
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     @Override
     public int getLayoutResId() {
@@ -119,7 +112,7 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
                             mStorageChooser.show();
                         } else {
-                            XToast.error(localContext.get().getString(R.string.缺少相关权限));
+                            XToast.error(UpgradeActivity.this.getString(R.string.缺少相关权限));
                         }
                     }
                 });

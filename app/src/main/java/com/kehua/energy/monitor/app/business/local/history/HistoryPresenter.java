@@ -24,7 +24,7 @@ public class HistoryPresenter extends HistoryContract.Presenter {
     @Inject
     APPModel mModel;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+    WeakReference<Context> localContext = null;
 
     @Inject
     public HistoryPresenter() {
@@ -33,6 +33,7 @@ public class HistoryPresenter extends HistoryContract.Presenter {
     @Override
     public void attachView(HistoryContract.View view) {
         mView = view;
+        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     }
 
     @Override

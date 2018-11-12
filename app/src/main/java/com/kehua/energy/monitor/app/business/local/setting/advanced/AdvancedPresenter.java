@@ -33,7 +33,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
     @Inject
     APPModel mModel;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+    WeakReference<Context> localContext = null;
 
     @Inject
     public AdvancedPresenter() {
@@ -42,6 +42,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
     @Override
     public void attachView(AdvancedContract.View view) {
         mView = view;
+        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     }
 
     @Override

@@ -8,15 +8,11 @@ import com.blankj.utilcode.util.StringUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.internal.LinkedTreeMap;
 import com.kehua.energy.monitor.app.R;
-import com.kehua.energy.monitor.app.business.NetworkSetting.hotspot.HotspotContract;
 import com.kehua.energy.monitor.app.business.NetworkSetting.hotspot.HotspotListAdapter;
 import com.kehua.energy.monitor.app.business.NetworkSetting.hotspot.HotspotPresenter;
 import com.kehua.energy.monitor.app.business.NetworkSetting.hotspot.HotspotView;
 import com.kehua.energy.monitor.app.model.APPModel;
 import com.kehua.energy.monitor.app.model.entity.HotspotInfo;
-import com.orhanobut.logger.Logger;
-
-import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 
@@ -26,7 +22,6 @@ import io.reactivex.functions.Consumer;
 import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.scope.ActivityScope;
 import me.walten.fastgo.utils.XToast;
-import retrofit2.Response;
 
 @ActivityScope
 public class WifiConfigPresenter extends WifiConfigContract.Presenter implements BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
@@ -41,7 +36,7 @@ public class WifiConfigPresenter extends WifiConfigContract.Presenter implements
 
     HotspotListAdapter adapter;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+    WeakReference<Context> localContext = null;
 
     @Inject
     public WifiConfigPresenter() {
@@ -61,6 +56,7 @@ public class WifiConfigPresenter extends WifiConfigContract.Presenter implements
                 }
             }
         });
+        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     }
 
     @Override
