@@ -16,5 +16,7 @@ public interface PatternContract {
 
     abstract class Presenter extends BasePresenter<View> {
         public abstract void setupData();
+
+        public abstract void expandList(PatternAdapter patternAdapter);
     }
 }

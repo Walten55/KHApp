@@ -4,8 +4,10 @@ import com.blankj.utilcode.util.StringUtils;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.application.LocalUserManager;
+import com.kehua.energy.monitor.app.cache.CacheManager;
 import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.model.APPModel;
+import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.model.entity.ModbusResponse;
 import com.kehua.energy.monitor.app.model.entity.PatternEntity;
 import com.kehua.energy.monitor.app.model.entity.PatternHead;
@@ -214,6 +216,36 @@ public class PatternPresenter extends PatternContract.Presenter {
 
         }
         return patternEntity;
+    }
+
+    @Override
+    public void expandList(PatternAdapter patternAdapter) {
+        if (data != null && data.size() > 0) {
+            PatternHead firstPatternHead = (PatternHead) data.get(0);
+            int adress = Integer.valueOf(firstPatternHead.getPointInfo().getAddress().trim());
+            DeviceData firstDevData = CacheManager.getInstance().get(adress);
+            if (firstDevData != null) {
+                PatternHead patternHead;
+                DeviceData deviceData;
+                for (int i = 0; i < data.size(); i++) {
+                    if (data.get(i) instanceof PatternHead) {
+                        patternHead = (PatternHead) data.get(i);
+                        deviceData = CacheManager.getInstance().get(Integer.valueOf(patternHead.getPointInfo().getAddress().trim()));
+                        switch (patternHead.getItemType()) {
+                            case PatternAdapter.TYPE_HEAD_TEXT:
+                            case PatternAdapter.TYPE_HEAD_SWITCH:
+                                if (deviceData.getIntValue() == Frame.OFF) {
+                                    patternAdapter.collapse(i, true);
+                                } else {
+                                    patternAdapter.expand(i, true);
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+            patternAdapter.notifyDataSetChanged();
+        }
     }
 
 }

@@ -99,7 +99,8 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
         }
 
         mAdapter.setNewData(data);
-        mAdapter.expandAll();
+        mPresenter.expandList(mAdapter);
+//        mAdapter.expandAll();
     }
 
     @Override
