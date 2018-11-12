@@ -118,8 +118,7 @@ public class PointInfo {
     }
 
     public String getDescription() {
-        LocalModel localModel = new LocalModel();
-        String language = localModel.getLanguageSelect();
+        String language = LocalModel.getLanguageSelect();
 
         String result = "";
         switch (language) {

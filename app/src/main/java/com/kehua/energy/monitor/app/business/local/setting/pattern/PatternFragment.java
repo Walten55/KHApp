@@ -101,7 +101,7 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
                     mAdapter.notifyDataSetChanged();
                 }
             }, 3000);
-        }else{
+        } else {
             mAdapter.setNewData(data);
             mPresenter.expandList(mAdapter);
             mAdapter.notifyDataSetChanged();
@@ -206,10 +206,10 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
                     return InputType.TYPE_CLASS_TEXT;
                 } else if (deviceData != null && ("double".equals(pointInfo.getDataType()))) {
                     return InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
-                }else if(deviceData != null && "double_signed".equals(pointInfo.getDataType())){
-                    return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_NUMBER_FLAG_DECIMAL ;
-                }else if(deviceData != null && "int_signed".equals(pointInfo.getDataType())){
-                    return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER ;
+                } else if (deviceData != null && "double_signed".equals(pointInfo.getDataType())) {
+                    return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_NUMBER_FLAG_DECIMAL;
+                } else if (deviceData != null && "int_signed".equals(pointInfo.getDataType())) {
+                    return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER;
                 } else {
                     return InputType.TYPE_CLASS_NUMBER;
                 }
@@ -276,7 +276,7 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
         }
 
         final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
-        dialog.isTitleShow(false).show();
+        dialog.cancelText(Fastgo.getContext().getResources().getString(R.string.取消)).isTitleShow(false).show();
 
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override

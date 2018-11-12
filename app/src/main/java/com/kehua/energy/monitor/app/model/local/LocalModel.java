@@ -446,9 +446,9 @@ public class LocalModel extends BaseModel implements IModel {
                         parseValue = format.format(value / Math.pow(10, pointInfo.getAccuracy())) + " " + pointInfo.getUnit();
                     }
                 }
-                result.add(new RecordData(deviceAddress, pointInfo.getMeansCN(), code, value, parseValue, time, !StringUtils.isEmpty(pointInfo.getV0())));
+                result.add(new RecordData(deviceAddress, pointInfo.getMeans(), code, value, parseValue, time, !StringUtils.isEmpty(pointInfo.getV0())));
             }
-            result.add(new RecordData(deviceAddress, Fastgo.getContext().getString(R.string.映射失败)+" CODE:"+code, code, 0, "", time, false));
+            result.add(new RecordData(deviceAddress, Fastgo.getContext().getString(R.string.映射失败) + " CODE:" + code, code, 0, "", time, false));
         }
 
         return result;
@@ -662,6 +662,7 @@ public class LocalModel extends BaseModel implements IModel {
             Cell accuracyCell = sheet.getCell(8, i);
             Cell v2Cell = sheet.getCell(9, i);
             Cell v3Cell = sheet.getCell(10, i);
+            Cell meansENCell = sheet.getCell(11, i);
 
             if ("".equals(templateCell.getContents().trim())) {//如果读取的数据为空
                 break;
@@ -678,7 +679,8 @@ public class LocalModel extends BaseModel implements IModel {
                     unitCell.getContents(),
                     StringUtils.isEmpty(accuracyCell.getContents()) ? 0 : Integer.valueOf(accuracyCell.getContents().trim()),
                     v2Cell.getContents().trim(),
-                    v3Cell.getContents().trim()));
+                    v3Cell.getContents().trim(),
+                    meansENCell.getContents().trim()));
         }
         ObjectBox.get().getBoxStore().boxFor(RecordPoint.class).put(rows);
         workbook.close();

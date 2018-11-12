@@ -100,8 +100,7 @@ public class GroupInfo {
     }
 
     public String getGroupName() {
-        LocalModel localModel = new LocalModel();
-        String language = localModel.getLanguageSelect();
+        String language = LocalModel.getLanguageSelect();
 
         String result = "";
         switch (language) {

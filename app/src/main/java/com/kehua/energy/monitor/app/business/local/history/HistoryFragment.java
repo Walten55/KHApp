@@ -140,6 +140,7 @@ public class HistoryFragment extends XMVPFragment<HistoryPresenter> implements H
                                 };
                                 final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
                                 dialog.isTitleShow(true)
+                                        .cancelText(Fastgo.getContext().getString(R.string.取消))
                                         .title(getString(R.string.选择映射模板))
                                         .show();
 

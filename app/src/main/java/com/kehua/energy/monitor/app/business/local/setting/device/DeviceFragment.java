@@ -211,7 +211,7 @@ public class DeviceFragment extends XMVPFragment<DevicePresenter> implements Dev
                     Fastgo.getContext().getString(R.string.关闭),
                     Fastgo.getContext().getString(R.string.开启)};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
-            dialog.isTitleShow(false).show();
+            dialog.cancelText(Fastgo.getContext().getString(R.string.取消)).isTitleShow(false).show();
 
             dialog.setOnOperItemClickL(new OnOperItemClickL() {
                 @Override

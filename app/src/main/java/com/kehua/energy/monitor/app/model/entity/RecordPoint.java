@@ -1,6 +1,9 @@
 package com.kehua.energy.monitor.app.model.entity;
 
 
+import com.kehua.energy.monitor.app.model.local.LocalModel;
+import com.kehua.energy.monitor.app.utils.LanguageUtils;
+
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 import io.objectbox.annotation.NameInDb;
@@ -9,7 +12,7 @@ import io.objectbox.annotation.NameInDb;
 @NameInDb("RECORD_POINT")
 public class RecordPoint {
 
-    public RecordPoint(){
+    public RecordPoint() {
 
     }
 
@@ -58,7 +61,10 @@ public class RecordPoint {
     @NameInDb("V3")
     private String v3;
 
-    public RecordPoint(int template, String templateName, int code, String meansCN, String v0, String v1, int sign, String unit, int accuracy, String v2, String v3) {
+    @NameInDb("MEANS_EN")
+    private String meansEN;
+
+    public RecordPoint(int template, String templateName, int code, String meansCN, String v0, String v1, int sign, String unit, int accuracy, String v2, String v3, String meansEn) {
         this.template = template;
         this.templateName = templateName;
         this.code = code;
@@ -70,6 +76,7 @@ public class RecordPoint {
         this.accuracy = accuracy;
         this.v2 = v2;
         this.v3 = v3;
+        this.meansEN = meansEn;
     }
 
     public long getId() {
@@ -166,5 +173,31 @@ public class RecordPoint {
 
     public void setV3(String v3) {
         this.v3 = v3;
+    }
+
+    public String getMeansEN() {
+        return meansEN;
+    }
+
+    public void setMeansEN(String meansEN) {
+        this.meansEN = meansEN;
+    }
+
+    public String getMeans(){
+        String language = LocalModel.getLanguageSelect();
+
+        String result = "";
+        switch (language) {
+            case LanguageUtils.Chinese:
+                result = meansCN;
+                break;
+            case LanguageUtils.English:
+                result = meansEN;
+                break;
+            default:
+                result = meansCN;
+                break;
+        }
+        return result;
     }
 }

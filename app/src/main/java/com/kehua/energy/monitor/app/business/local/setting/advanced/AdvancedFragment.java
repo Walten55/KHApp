@@ -46,6 +46,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import io.reactivex.functions.Consumer;
+import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.component.AppComponent;
 import me.walten.fastgo.utils.XToast;
 import me.walten.fastgo.widget.XEditText;
@@ -196,7 +197,7 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
                     getActivity().getString(R.string.CT),
                     getActivity().getString(R.string.智能电表)};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
-            dialog.isTitleShow(false).show();
+            dialog.cancelText(Fastgo.getContext().getString(R.string.取消)).isTitleShow(false).show();
 
             dialog.setOnOperItemClickL(new OnOperItemClickL() {
                 @Override
@@ -225,7 +226,7 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
                     "4-25/5",
                     "5-20/5"};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
-            dialog.isTitleShow(false).show();
+            dialog.cancelText(Fastgo.getContext().getString(R.string.取消)).isTitleShow(false).show();
 
             dialog.setOnOperItemClickL(new OnOperItemClickL() {
                 @Override
@@ -251,7 +252,7 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
                     getActivity().getString(R.string.四路并联),
                     getActivity().getString(R.string.两路并联)};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
-            dialog.isTitleShow(false).show();
+            dialog.cancelText(Fastgo.getContext().getString(R.string.取消)).isTitleShow(false).show();
 
             dialog.setOnOperItemClickL(new OnOperItemClickL() {
                 @Override
@@ -281,7 +282,7 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
                     "SPI80K-BHV"
             };
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
-            dialog.isTitleShow(false).show();
+            dialog.cancelText(Fastgo.getContext().getString(R.string.取消)).isTitleShow(false).show();
 
             dialog.setOnOperItemClickL(new OnOperItemClickL() {
                 @Override

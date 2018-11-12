@@ -1,5 +1,9 @@
 package com.kehua.energy.monitor.app.model.entity;
 
+import com.blankj.utilcode.util.StringUtils;
+import com.kehua.energy.monitor.app.model.local.LocalModel;
+import com.kehua.energy.monitor.app.utils.LanguageUtils;
+
 /*
  * -----------------------------------------------------------------
  * Copyright by 2018 Walten, All rights reserved.
@@ -67,7 +71,26 @@ public class RecordData {
     }
 
     public String getParseValue() {
-        return parseValue;
+        if (!StringUtils.isTrimEmpty(parseValue) && parseValue.contains("##")) {
+            String[] values = parseValue.split("##");
+            String language = LocalModel.getLanguageSelect();
+
+            String result = "";
+            switch (language) {
+                case LanguageUtils.Chinese:
+                    result = values[0];
+                    break;
+                case LanguageUtils.English:
+                    result = values[1];
+                    break;
+                default:
+                    result = values[0];
+                    break;
+            }
+            return result;
+        } else {
+            return parseValue;
+        }
     }
 
     public void setParseValue(String parseValue) {

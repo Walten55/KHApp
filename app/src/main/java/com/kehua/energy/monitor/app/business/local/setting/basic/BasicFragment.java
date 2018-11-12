@@ -133,7 +133,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
                 Fastgo.getContext().getString(R.string.削峰填谷),
                 Fastgo.getContext().getString(R.string.能量调度)};
         final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
-        dialog.isTitleShow(false).show();
+        dialog.cancelText(Fastgo.getContext().getString(R.string.取消)).isTitleShow(false).show();
 
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override
