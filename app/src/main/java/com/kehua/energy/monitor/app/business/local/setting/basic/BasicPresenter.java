@@ -36,7 +36,7 @@ public class BasicPresenter extends BasicContract.Presenter {
     @Inject
     APPModel mModel;
 
-    WeakReference<Context> localContext = null;
+
 
     @Inject
     public BasicPresenter() {
@@ -45,7 +45,7 @@ public class BasicPresenter extends BasicContract.Presenter {
     @Override
     public void attachView(BasicContract.View view) {
         mView = view;
-        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+
     }
 
     @Override
@@ -84,7 +84,7 @@ public class BasicPresenter extends BasicContract.Presenter {
 
     @Override
     public void power(boolean open, final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.get().getString(R.string.设置中));
+        mView.startWaiting(Fastgo.getContext().getString(R.string.设置中));
         mModel.getRemoteModel().fdbgMainThread(Cmd.newWriteCmd(LocalUserManager.getDeviceAddress(), Frame.开关机地址, open), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {
@@ -95,7 +95,7 @@ public class BasicPresenter extends BasicContract.Presenter {
                         consumer.accept(true);
                     }
                 }else {
-                    XToast.error(localContext.get().getString(R.string.设置失败));
+                    XToast.error(Fastgo.getContext().getString(R.string.设置失败));
                     if(consumer!=null){
                         consumer.accept(false);
                     }
@@ -106,7 +106,7 @@ public class BasicPresenter extends BasicContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.get().getString(R.string.设置失败));
+                XToast.error(Fastgo.getContext().getString(R.string.设置失败));
                 if(consumer!=null){
                     consumer.accept(false);
                 }
@@ -116,19 +116,19 @@ public class BasicPresenter extends BasicContract.Presenter {
 
     @Override
     public void setWorkPattern(int mode, final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.get().getString(R.string.设置中));
+        mView.startWaiting(Fastgo.getContext().getString(R.string.设置中));
         mModel.getRemoteModel().fdbgMainThread(Cmd.newWriteCmd(LocalUserManager.getDeviceAddress(), Frame.工作模式地址, mode), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {
                 mView.stopWaiting();
                 if( modbusResponse.isSuccess()){
                     //setupData();
-                    XToast.success(localContext.get().getString(R.string.设置成功));
+                    XToast.success(Fastgo.getContext().getString(R.string.设置成功));
                     if(consumer!=null){
                         consumer.accept(true);
                     }
                 }else {
-                    XToast.error(localContext.get().getString(R.string.设置失败));
+                    XToast.error(Fastgo.getContext().getString(R.string.设置失败));
                     if(consumer!=null){
                         consumer.accept(false);
                     }
@@ -139,7 +139,7 @@ public class BasicPresenter extends BasicContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.get().getString(R.string.设置失败));
+                XToast.error(Fastgo.getContext().getString(R.string.设置失败));
                 if(consumer!=null){
                     consumer.accept(false);
                 }
@@ -164,7 +164,7 @@ public class BasicPresenter extends BasicContract.Presenter {
 
         int second=cal.get(Calendar.SECOND);//秒
 
-        mView.startWaiting(localContext.get().getString(R.string.设置中));
+        mView.startWaiting(Fastgo.getContext().getString(R.string.设置中));
         mModel.getRemoteModel().fdbgMainThread(Cmd.newWriteCmd(LocalUserManager.getDeviceAddress(),6020,6025,new int[]{
                 year,month,day,hour,minute,second
         }), new Consumer<ModbusResponse>() {
@@ -172,12 +172,12 @@ public class BasicPresenter extends BasicContract.Presenter {
             public void accept(ModbusResponse modbusResponse) throws Exception {
                 mView.stopWaiting();
                 if( modbusResponse.isSuccess()){
-                    XToast.success(localContext.get().getString(R.string.设置成功));
+                    XToast.success(Fastgo.getContext().getString(R.string.设置成功));
                     if(consumer!=null){
                         consumer.accept(true);
                     }
                 }else {
-                    XToast.error(localContext.get().getString(R.string.设置失败));
+                    XToast.error(Fastgo.getContext().getString(R.string.设置失败));
                     if(consumer!=null){
                         consumer.accept(false);
                     }
@@ -188,7 +188,7 @@ public class BasicPresenter extends BasicContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.get().getString(R.string.设置失败));
+                XToast.error(Fastgo.getContext().getString(R.string.设置失败));
                 if(consumer!=null){
                     consumer.accept(false);
                 }
@@ -217,19 +217,19 @@ public class BasicPresenter extends BasicContract.Presenter {
             dischargeTimeFramesInt.add(Integer.valueOf(hourAndMinute[1]));
         }
 
-        mView.startWaiting(localContext.get().getString(R.string.设置中));
+        mView.startWaiting(Fastgo.getContext().getString(R.string.设置中));
         mModel.getRemoteModel().fdbgMainThread(Cmd.newTimeFrameCmd(LocalUserManager.getDeviceAddress(),chargeTimeFramesInt,dischargeTimeFramesInt), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {
                 mView.stopWaiting();
                 if( modbusResponse.isSuccess()){
                     setupData();
-                    XToast.success(localContext.get().getString(R.string.设置成功));
+                    XToast.success(Fastgo.getContext().getString(R.string.设置成功));
                     if(consumer!=null){
                         consumer.accept(true);
                     }
                 }else {
-                    XToast.error(localContext.get().getString(R.string.设置失败));
+                    XToast.error(Fastgo.getContext().getString(R.string.设置失败));
                     if(consumer!=null){
                         consumer.accept(false);
                     }
@@ -240,7 +240,7 @@ public class BasicPresenter extends BasicContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.get().getString(R.string.设置失败));
+                XToast.error(Fastgo.getContext().getString(R.string.设置失败));
                 if(consumer!=null){
                     consumer.accept(false);
                 }

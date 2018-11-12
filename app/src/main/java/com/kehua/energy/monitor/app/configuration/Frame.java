@@ -1,15 +1,12 @@
 package com.kehua.energy.monitor.app.configuration;
 
-import android.content.Context;
-
-import com.blankj.utilcode.util.ActivityUtils;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.application.LocalUserManager;
 import com.kehua.energy.monitor.app.model.entity.Standard;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import me.walten.fastgo.common.Fastgo;
 
@@ -285,97 +282,96 @@ public class Frame {
     }
 
     public static String getBatStatusName(int type){
-        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
         switch (type){
             case 0:
 
-                return localContext.get().getString(R.string.空闲);
+                return Fastgo.getContext().getString(R.string.空闲);
             case 1:
 
-                return localContext.get().getString(R.string.充电);
+                return Fastgo.getContext().getString(R.string.充电);
             case 2:
 
-                return localContext.get().getString(R.string.放电);
+                return Fastgo.getContext().getString(R.string.放电);
             case 3:
 
-                return localContext.get().getString(R.string.异常);
+                return Fastgo.getContext().getString(R.string.异常);
         }
         return "--";
     }
 
     public static String getDeviceTypeName(int type){
-        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+        Locale locale=Locale.getDefault();
         switch (type){
             case 三相光伏逆变器:
 
-                return localContext.get().getString(R.string.三相光伏逆变器);
+                return Fastgo.getContext().getString(R.string.三相光伏逆变器);
             case 三相光伏储能逆变器:
 
-                return localContext.get().getString(R.string.三相光伏储能逆变器);
+                return Fastgo.getContext().getString(R.string.三相光伏储能逆变器);
             case 单相光伏并网逆变器:
 
-                return localContext.get().getString(R.string.单相光伏并网逆变器);
+                return Fastgo.getContext().getString(R.string.单相光伏并网逆变器);
             case 单相光伏储能变流器:
 
-                return localContext.get().getString(R.string.单相光伏储能变流器);
+                return Fastgo.getContext().getString(R.string.单相光伏储能变流器);
         }
         return "--";
     }
 
     public static String getProtocolTypeName(int type){
-        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+        
         switch (type){
             case 单相协议:
 
-                return localContext.get().getString(R.string.单相协议);
+                return Fastgo.getContext().getString(R.string.单相协议);
             case 三相协议:
 
-                return localContext.get().getString(R.string.三相协议);
+                return Fastgo.getContext().getString(R.string.三相协议);
         }
         return "--";
     }
 
     public static String getDeviceRunningState(int state){
-        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+        
         //0-关机；1-待机；2-并网；3-离网；4-故障 单相
         //0-待机1-并网 2-故障 3-关机 4-离网 三相
         if(LocalUserManager.getPn() == Frame.单相协议){
             switch (state){
                 case 1:
 
-                    return localContext.get().getString(R.string.待机);
+                    return Fastgo.getContext().getString(R.string.待机);
                 case 2:
 
-                    return localContext.get().getString(R.string.并网);
+                    return Fastgo.getContext().getString(R.string.并网);
                 case 4:
 
-                    return localContext.get().getString(R.string.故障);
+                    return Fastgo.getContext().getString(R.string.故障);
                 case 0:
 
-                    return localContext.get().getString(R.string.关机);
+                    return Fastgo.getContext().getString(R.string.关机);
 
                 case 3:
 
-                    return localContext.get().getString(R.string.离网);
+                    return Fastgo.getContext().getString(R.string.离网);
             }
         }else {
             switch (state){
                 case 0:
 
-                    return localContext.get().getString(R.string.待机);
+                    return Fastgo.getContext().getString(R.string.待机);
                 case 1:
 
-                    return localContext.get().getString(R.string.并网);
+                    return Fastgo.getContext().getString(R.string.并网);
                 case 2:
 
-                    return localContext.get().getString(R.string.故障);
+                    return Fastgo.getContext().getString(R.string.故障);
                 case 3:
 
-                    return localContext.get().getString(R.string.关机);
+                    return Fastgo.getContext().getString(R.string.关机);
 
                 case 4:
 
-                    return localContext.get().getString(R.string.离网);
+                    return Fastgo.getContext().getString(R.string.离网);
             }
         }
 
@@ -383,37 +379,35 @@ public class Frame {
     }
 
     public static String getWorkPatternName(int value){
-        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
         switch (value){
             case 自用优先:
 
-                return localContext.get().getString(R.string.自用优先);
+                return Fastgo.getContext().getString(R.string.自用优先);
             case 储能优先:
 
-                return localContext.get().getString(R.string.储能优先);
+                return Fastgo.getContext().getString(R.string.储能优先);
             case 削峰填谷:
 
-                return localContext.get().getString(R.string.削峰填谷);
+                return Fastgo.getContext().getString(R.string.削峰填谷);
             case 能量调度:
 
-                return localContext.get().getString(R.string.能量调度);
+                return Fastgo.getContext().getString(R.string.能量调度);
 
         }
         return "";
     }
 
     public static String getMPPTShunt(int value){
-        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
         switch (value){
             case 独立:
 
-                return localContext.get().getString(R.string.独立);
+                return Fastgo.getContext().getString(R.string.独立);
             case 四路并联:
 
-                return localContext.get().getString(R.string.四路并联);
+                return Fastgo.getContext().getString(R.string.四路并联);
             case 两路并联:
 
-                return localContext.get().getString(R.string.两路并联);
+                return Fastgo.getContext().getString(R.string.两路并联);
 
         }
         return "";
@@ -447,21 +441,20 @@ public class Frame {
     }
 
     public static String getBatteryType(int value){
-        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
         switch (value){
             case 0:
 
-                return localContext.get().getString(R.string.铅酸电池);
+                return Fastgo.getContext().getString(R.string.铅酸电池);
             case 1:
 
-                return localContext.get().getString(R.string.磷酸铁锂电池);
+                return Fastgo.getContext().getString(R.string.磷酸铁锂电池);
             case 2:
 
-                return localContext.get().getString(R.string.三元电池);
+                return Fastgo.getContext().getString(R.string.三元电池);
 
             case 3:
 
-                return localContext.get().getString(R.string.铅碳电池);
+                return Fastgo.getContext().getString(R.string.铅碳电池);
         }
         return "";
     }
@@ -486,30 +479,28 @@ public class Frame {
     }
 
     public static String getToggleName(int value){
-        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
         switch (value){
             case 0:
 
-                return localContext.get().getString(R.string.关闭);
+                return Fastgo.getContext().getString(R.string.关闭);
             case 1:
 
-                return localContext.get().getString(R.string.开启);
+                return Fastgo.getContext().getString(R.string.开启);
         }
         return "";
     }
 
     public static String getCXNT(int value){
-        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
         switch (value){
             case 0:
 
-                return localContext.get().getString(R.string.无);
+                return Fastgo.getContext().getString(R.string.无);
             case 1:
 
-                return localContext.get().getString(R.string.CT);
+                return Fastgo.getContext().getString(R.string.CT);
             case 2:
 
-                return localContext.get().getString(R.string.智能电表);
+                return Fastgo.getContext().getString(R.string.智能电表);
 
         }
         return "";
@@ -542,48 +533,47 @@ public class Frame {
 
 
     public static List<Standard> getStandardList(){
-        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
         List<Standard> data = new ArrayList<>();
 
         if (LocalUserManager.getPn() == Frame.单相协议) {
-            data.add(new Standard(0, localContext.get().getString(R.string.德国), R.mipmap.img_country_germany));
-            data.add(new Standard(1, localContext.get().getString(R.string.英国), R.mipmap.img_country_britain));
-            data.add(new Standard(2, localContext.get().getString(R.string.中国), R.mipmap.img_country_china));
-            data.add(new Standard(3, localContext.get().getString(R.string.澳洲), R.mipmap.img_country_australia));
-            data.add(new Standard(4, localContext.get().getString(R.string.新西兰), R.mipmap.img_country_new_zealand));
-            data.add(new Standard(5, localContext.get().getString(R.string.法国VDE), R.mipmap.img_country_france));
-            data.add(new Standard(6, localContext.get().getString(R.string.意大利), R.mipmap.img_country_italy));
-            data.add(new Standard(7, localContext.get().getString(R.string.荷兰), R.mipmap.img_country_holland));
-            data.add(new Standard(8, localContext.get().getString(R.string.西班牙), R.mipmap.img_country_spain));
-            data.add(new Standard(9, localContext.get().getString(R.string.泰国PEA), R.mipmap.img_country_thailand));
-            data.add(new Standard(10, localContext.get().getString(R.string.泰国MEA), R.mipmap.img_country_thailand));
-            data.add(new Standard(11, localContext.get().getString(R.string.美国), R.mipmap.img_country_america));
-            data.add(new Standard(12, localContext.get().getString(R.string.美国加州), R.mipmap.img_country_america));
-            data.add(new Standard(13, localContext.get().getString(R.string.加拿大), R.mipmap.img_country_canada));
-            data.add(new Standard(14, localContext.get().getString(R.string.农村电网), R.mipmap.img_standard_rural));
+            data.add(new Standard(0, Fastgo.getContext().getString(R.string.德国), R.mipmap.img_country_germany));
+            data.add(new Standard(1, Fastgo.getContext().getString(R.string.英国), R.mipmap.img_country_britain));
+            data.add(new Standard(2, Fastgo.getContext().getString(R.string.中国), R.mipmap.img_country_china));
+            data.add(new Standard(3, Fastgo.getContext().getString(R.string.澳洲), R.mipmap.img_country_australia));
+            data.add(new Standard(4, Fastgo.getContext().getString(R.string.新西兰), R.mipmap.img_country_new_zealand));
+            data.add(new Standard(5, Fastgo.getContext().getString(R.string.法国VDE), R.mipmap.img_country_france));
+            data.add(new Standard(6, Fastgo.getContext().getString(R.string.意大利), R.mipmap.img_country_italy));
+            data.add(new Standard(7, Fastgo.getContext().getString(R.string.荷兰), R.mipmap.img_country_holland));
+            data.add(new Standard(8, Fastgo.getContext().getString(R.string.西班牙), R.mipmap.img_country_spain));
+            data.add(new Standard(9, Fastgo.getContext().getString(R.string.泰国PEA), R.mipmap.img_country_thailand));
+            data.add(new Standard(10, Fastgo.getContext().getString(R.string.泰国MEA), R.mipmap.img_country_thailand));
+            data.add(new Standard(11, Fastgo.getContext().getString(R.string.美国), R.mipmap.img_country_america));
+            data.add(new Standard(12, Fastgo.getContext().getString(R.string.美国加州), R.mipmap.img_country_america));
+            data.add(new Standard(13, Fastgo.getContext().getString(R.string.加拿大), R.mipmap.img_country_canada));
+            data.add(new Standard(14, Fastgo.getContext().getString(R.string.农村电网), R.mipmap.img_standard_rural));
             data.add(new Standard(15,Fastgo.getContext() .getString(R.string.城镇电网), R.mipmap.img_standard_town));
-            data.add(new Standard(16, localContext.get().getString(R.string.法国VFR), R.mipmap.img_country_france));
-            data.add(new Standard(17, localContext.get().getString(R.string.法国SEI), R.mipmap.img_country_france));
-            data.add(new Standard(18, localContext.get().getString(R.string.法国CRAE), R.mipmap.img_country_france));
-            data.add(new Standard(19, localContext.get().getString(R.string.定制1), R.mipmap.img_standard_customized));
-            data.add(new Standard(20, localContext.get().getString(R.string.定制2), R.mipmap.img_standard_customized));
-            data.add(new Standard(21, localContext.get().getString(R.string.定制3), R.mipmap.img_standard_customized));
-            data.add(new Standard(22, localContext.get().getString(R.string.定制4), R.mipmap.img_standard_customized));
-            data.add(new Standard(23, localContext.get().getString(R.string.定制5), R.mipmap.img_standard_customized));
+            data.add(new Standard(16, Fastgo.getContext().getString(R.string.法国VFR), R.mipmap.img_country_france));
+            data.add(new Standard(17, Fastgo.getContext().getString(R.string.法国SEI), R.mipmap.img_country_france));
+            data.add(new Standard(18, Fastgo.getContext().getString(R.string.法国CRAE), R.mipmap.img_country_france));
+            data.add(new Standard(19, Fastgo.getContext().getString(R.string.定制1), R.mipmap.img_standard_customized));
+            data.add(new Standard(20, Fastgo.getContext().getString(R.string.定制2), R.mipmap.img_standard_customized));
+            data.add(new Standard(21, Fastgo.getContext().getString(R.string.定制3), R.mipmap.img_standard_customized));
+            data.add(new Standard(22, Fastgo.getContext().getString(R.string.定制4), R.mipmap.img_standard_customized));
+            data.add(new Standard(23, Fastgo.getContext().getString(R.string.定制5), R.mipmap.img_standard_customized));
         } else {
-            data.add(new Standard(0, localContext.get().getString(R.string.中国), R.mipmap.img_country_china));
-            data.add(new Standard(1, localContext.get().getString(R.string.美国), R.mipmap.img_country_america));
-            data.add(new Standard(2, localContext.get().getString(R.string.美国加州), R.mipmap.img_country_america));
-            data.add(new Standard(3, localContext.get().getString(R.string.德国), R.mipmap.img_country_germany));
-            data.add(new Standard(4, localContext.get().getString(R.string.澳洲), R.mipmap.img_country_australia));
-            data.add(new Standard(5, localContext.get().getString(R.string.新西兰), R.mipmap.img_country_new_zealand));
-            data.add(new Standard(6, localContext.get().getString(R.string.英国), R.mipmap.img_country_britain));
-            data.add(new Standard(7, localContext.get().getString(R.string.泰国PEA), R.mipmap.img_country_thailand));
-            data.add(new Standard(8, localContext.get().getString(R.string.泰国MEA), R.mipmap.img_country_thailand));
-            data.add(new Standard(9, localContext.get().getString(R.string.意大利), R.mipmap.img_country_italy));
-            data.add(new Standard(10, localContext.get().getString(R.string.法国), R.mipmap.img_country_france));
-            data.add(new Standard(11, localContext.get().getString(R.string.加拿大), R.mipmap.img_country_canada));
-            data.add(new Standard(12, localContext.get().getString(R.string.其他), R.mipmap.img_standard_other));
+            data.add(new Standard(0, Fastgo.getContext().getString(R.string.中国), R.mipmap.img_country_china));
+            data.add(new Standard(1, Fastgo.getContext().getString(R.string.美国), R.mipmap.img_country_america));
+            data.add(new Standard(2, Fastgo.getContext().getString(R.string.美国加州), R.mipmap.img_country_america));
+            data.add(new Standard(3, Fastgo.getContext().getString(R.string.德国), R.mipmap.img_country_germany));
+            data.add(new Standard(4, Fastgo.getContext().getString(R.string.澳洲), R.mipmap.img_country_australia));
+            data.add(new Standard(5, Fastgo.getContext().getString(R.string.新西兰), R.mipmap.img_country_new_zealand));
+            data.add(new Standard(6, Fastgo.getContext().getString(R.string.英国), R.mipmap.img_country_britain));
+            data.add(new Standard(7, Fastgo.getContext().getString(R.string.泰国PEA), R.mipmap.img_country_thailand));
+            data.add(new Standard(8, Fastgo.getContext().getString(R.string.泰国MEA), R.mipmap.img_country_thailand));
+            data.add(new Standard(9, Fastgo.getContext().getString(R.string.意大利), R.mipmap.img_country_italy));
+            data.add(new Standard(10, Fastgo.getContext().getString(R.string.法国), R.mipmap.img_country_france));
+            data.add(new Standard(11, Fastgo.getContext().getString(R.string.加拿大), R.mipmap.img_country_canada));
+            data.add(new Standard(12, Fastgo.getContext().getString(R.string.其他), R.mipmap.img_standard_other));
         }
 
         return data;

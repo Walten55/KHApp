@@ -24,7 +24,7 @@ public class HistoryPresenter extends HistoryContract.Presenter {
     @Inject
     APPModel mModel;
 
-    WeakReference<Context> localContext = null;
+
 
     @Inject
     public HistoryPresenter() {
@@ -33,7 +33,7 @@ public class HistoryPresenter extends HistoryContract.Presenter {
     @Override
     public void attachView(HistoryContract.View view) {
         mView = view;
-        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+
     }
 
     @Override
@@ -44,7 +44,7 @@ public class HistoryPresenter extends HistoryContract.Presenter {
 
     @Override
     public void recordCount(final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.get().getString(R.string.加载中));
+        mView.startWaiting(Fastgo.getContext().getString(R.string.加载中));
         mModel.getRemoteModel().recordCount(LocalUserManager.getDeviceAddress(), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {

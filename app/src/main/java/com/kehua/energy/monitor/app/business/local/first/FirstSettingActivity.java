@@ -1,6 +1,5 @@
 package com.kehua.energy.monitor.app.business.local.first;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +10,6 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.blankj.utilcode.util.ActivityUtils;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.gyf.barlibrary.ImmersionBar;
 import com.kehua.energy.monitor.app.R;
@@ -26,7 +24,6 @@ import com.kehua.energy.monitor.app.model.entity.Standard;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.kyleduo.switchbutton.SwitchButton;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -64,7 +61,6 @@ public class FirstSettingActivity extends XMVPActivity<FirstSettingPresenter> im
     @BindView(R.id.et_password)
     XEditText mPasswordView;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     @Override
     public int getLayoutResId() {
@@ -180,9 +176,9 @@ public class FirstSettingActivity extends XMVPActivity<FirstSettingPresenter> im
     @OnClick(R.id.tv_sn_submit)
     public void onClickSubmitSN(View v) {
         if(TextUtils.isEmpty(mPasswordView.getText())){
-            XToast.error(localContext.get().getString(R.string.密码不能为空));
+            XToast.error(Fastgo.getContext().getString(R.string.密码不能为空));
         }else if(!"333".equals(mPasswordView.getText().toString())){
-            XToast.error(localContext.get().getString(R.string.密码错误));
+            XToast.error(Fastgo.getContext().getString(R.string.密码错误));
         } else if(TextUtils.isEmpty(mSNTv.getText())){
             XToast.error(getString(R.string.请设置串号相关串号));
         }else if(mProbationPeriodSwitchButton.isChecked()&&TextUtils.isEmpty(mProbationPeriodDayTv.getText())){

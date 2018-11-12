@@ -1,16 +1,13 @@
 package com.kehua.energy.monitor.app.business.login;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.google.gson.Gson;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.configuration.Config;
 import com.kehua.energy.monitor.app.model.APPModel;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,8 +21,6 @@ import cn.sharesdk.framework.ShareSDK;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -44,7 +39,6 @@ public class LoginPresenter extends LoginContract.Presenter {
 
     List<Platform> mPlatforms = new ArrayList<>();
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     @Inject
     public LoginPresenter() {
@@ -66,16 +60,16 @@ public class LoginPresenter extends LoginContract.Presenter {
         boolean result = true;
 
         if (StringUtils.isTrimEmpty(account)) {
-            XToast.error(localContext.get().getString(R.string.账号不能为空));
+            XToast.error(Fastgo.getContext().getString(R.string.账号不能为空));
             result = false;
         } else if (StringUtils.isTrimEmpty(password)) {
-            XToast.error(localContext.get().getString(R.string.密码不能为空));
+            XToast.error(Fastgo.getContext().getString(R.string.密码不能为空));
             result = false;
         } else if (!((account.matches(Config.REGEX_MOBILE) && account.length() == 11) || account.matches(Config.REGEX_EMAIL))) {
-            XToast.error(localContext.get().getString(R.string.手机号或者邮箱格式错误));
+            XToast.error(Fastgo.getContext().getString(R.string.手机号或者邮箱格式错误));
             result = false;
         } else if (password.length() < Config.PASSWORD_LENGTH_MIN) {
-            XToast.error(localContext.get().getString(R.string.密码长度必须大于6位字符));
+            XToast.error(Fastgo.getContext().getString(R.string.密码长度必须大于6位字符));
             result = false;
         }
         return result;

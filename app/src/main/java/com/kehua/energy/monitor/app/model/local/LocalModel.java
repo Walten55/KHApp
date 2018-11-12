@@ -1,9 +1,7 @@
 package com.kehua.energy.monitor.app.model.local;
 
-import android.content.Context;
 import android.util.ArrayMap;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -28,7 +26,6 @@ import com.kehua.energy.monitor.app.utils.Utils;
 import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -368,8 +365,6 @@ public class LocalModel extends BaseModel implements IModel {
      * 解析数据
      */
     public List<RecordData> parse(int deviceAddress, int template, byte[] data) {
-        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
-
 
         List<RecordData> result = new ArrayList<>();
         if (data.length % 12 != 0) {
@@ -453,7 +448,7 @@ public class LocalModel extends BaseModel implements IModel {
                 }
                 result.add(new RecordData(deviceAddress, pointInfo.getMeansCN(), code, value, parseValue, time, !StringUtils.isEmpty(pointInfo.getV0())));
             }
-            result.add(new RecordData(deviceAddress, localContext.get().getString(R.string.映射失败)+" CODE:"+code, code, 0, "", time, false));
+            result.add(new RecordData(deviceAddress, Fastgo.getContext().getString(R.string.映射失败)+" CODE:"+code, code, 0, "", time, false));
         }
 
         return result;

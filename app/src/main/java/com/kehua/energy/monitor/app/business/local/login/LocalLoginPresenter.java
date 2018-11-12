@@ -1,7 +1,6 @@
 package com.kehua.energy.monitor.app.business.local.login;
 
 import android.Manifest;
-import android.content.Context;
 import android.util.ArrayMap;
 
 import com.blankj.utilcode.util.ActivityUtils;
@@ -24,9 +23,6 @@ import com.kehua.energy.monitor.app.utils.PasswordUtils;
 import com.orhanobut.logger.Logger;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import java.lang.ref.WeakReference;
-import java.util.Locale;
-
 import javax.inject.Inject;
 
 import io.reactivex.functions.Consumer;
@@ -43,15 +39,12 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     LocalLoginContract.View mView;
 
-
     private String mLastKey;
 
     @Inject
     APPModel mModel;
 
     private String mSN;
-
-    WeakReference<Context> localContext = null;
 
     @Inject
     public LocalLoginPresenter() {
@@ -61,9 +54,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
     public void attachView(LocalLoginContract.View view) {
         mView = view;
         mModel.getLocalModel().setupDatabase();
-        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
         RxBus.get().register(this);
-        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     }
 
     @Override
@@ -89,10 +80,10 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                 mModel.getLocalModel().saveCollectorKey(newKey);
                 login(ROLE_NORMAL, "");
             } else {
-                XToast.error(localContext.get().getString(R.string.扫描的采集器与连接采集器不匹配));
+                XToast.error(Fastgo.getContext().getString(R.string.扫描的采集器与连接采集器不匹配));
             }
         } else {
-            XToast.error(localContext.get().getString(R.string.扫描的采集器与连接采集器不匹配));
+            XToast.error(Fastgo.getContext().getString(R.string.扫描的采集器与连接采集器不匹配));
         }
 
     }
@@ -100,12 +91,12 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
     @Override
     public void login(final int role, final String password) {
         if (role != ROLE_NORMAL && StringUtils.isEmpty(password)) {
-            XToast.error(localContext.get().getString(R.string.密码不能为空));
+            XToast.error(Fastgo.getContext().getString(R.string.密码不能为空));
             return;
         }
 
         if (mView != null)
-            mView.startWaiting(localContext.get().getString(R.string.登录中));
+            mView.startWaiting(Fastgo.getContext().getString(R.string.登录中));
         mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
             @Override
             public void accept(final InvInfoList invInfoList) throws Exception {
@@ -124,10 +115,10 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                                                 @Override
                                                 public void accept(Boolean granted) throws Exception {
                                                     if (granted) {
-                                                        XToast.normal(localContext.get().getString(R.string.首次连接采集棒需验证采集棒));
+                                                        XToast.normal(Fastgo.getContext().getString(R.string.首次连接采集棒需验证采集棒));
                                                         RouterMgr.get().scan();
                                                     } else {
-                                                        XToast.error(localContext.get().getString(R.string.缺少相关权限));
+                                                        XToast.error(Fastgo.getContext().getString(R.string.缺少相关权限));
                                                     }
                                                 }
                                             });
@@ -140,7 +131,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                         }, new Consumer<Throwable>() {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
-                                XToast.error(localContext.get().getString(R.string.无法获取设备信息));
+                                XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
                                 return;
                             }
                         });
@@ -148,7 +139,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                         break;
                     case ROLE_OPS:
                         if (!LocalUserManager.OPS_PASSWORD.equals(EncryptUtils.encryptMD5ToString(password))) {
-                            XToast.error(localContext.get().getString(R.string.密码错误));
+                            XToast.error(Fastgo.getContext().getString(R.string.密码错误));
                             return;
                         }
 
@@ -158,7 +149,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
                         if ((!StringUtils.isEmpty(mSN) && !String.valueOf(PasswordUtils.createPassword(31, mSN)).equals(password))
                                 || (StringUtils.isEmpty(mSN) && !password.equals("333"))) {
-                            XToast.error(localContext.get().getString(R.string.密码错误));
+                            XToast.error(Fastgo.getContext().getString(R.string.密码错误));
                             return;
                         }
 
@@ -172,7 +163,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.get().getString(R.string.无法获取设备信息));
+                XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
                 RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);
                 if (mView != null) {
                     mView.stopWaiting();
@@ -194,8 +185,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     @Override
     public void gatherDeviceInfo() {
-        Locale locale = Locale.getDefault();
-        mView.startWaiting(localContext.get().getString(R.string.加载中));
+        mView.startWaiting(Fastgo.getContext().getString(R.string.加载中));
 
         mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
             @Override
@@ -222,7 +212,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                     public void accept(Throwable throwable) throws Exception {
                         mView.stopWaiting();
                         Logger.e(throwable.getMessage());
-                        XToast.error(localContext.get().getString(R.string.无法获取设备信息));
+                        XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
                     }
                 });
 
@@ -232,7 +222,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 mView.canLogin(false);
-                XToast.error(localContext.get().getString(R.string.无法获取设备信息));
+                XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
             }
         });
 
@@ -240,6 +230,6 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     @Override
     public void selectLanguage(String languageName) {
-        LanguageUtils.languageSelect(localContext.get(), LanguageUtils.getLangeValueByName(localContext.get(), languageName), false);
+        LanguageUtils.languageSelect(Fastgo.getContext(), LanguageUtils.getLangeValueByName(Fastgo.getContext(), languageName), false);
     }
 }

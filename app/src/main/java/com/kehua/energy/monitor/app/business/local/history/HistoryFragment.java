@@ -1,6 +1,5 @@
 package com.kehua.energy.monitor.app.business.local.history;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.blankj.utilcode.util.ActivityUtils;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.kehua.energy.monitor.app.R;
@@ -19,8 +17,6 @@ import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.di.component.DaggerFragmentComponent;
 import com.kehua.energy.monitor.app.di.module.FragmentModule;
 import com.kehua.energy.monitor.app.route.RouterMgr;
-
-import java.lang.ref.WeakReference;
 
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
@@ -34,8 +30,6 @@ public class HistoryFragment extends XMVPFragment<HistoryPresenter> implements H
     private int template = -1;
     private int recordType = Frame.并脱网记录;
     private int registerAdr = 0;
-
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -138,11 +132,11 @@ public class HistoryFragment extends XMVPFragment<HistoryPresenter> implements H
                             }else {
 
                                 final String[] stringItems = {
-//                                    localContext.get().getString(R.string.单相并脱网历史故障记录映射模板),
-//                                    localContext.get().getString(R.string.单相用户日志功率调度日志映射模板),
-                                        localContext.get().getString(R.string.三相无屏并脱网历史故障记录映射模板),
-                                        localContext.get().getString(R.string.三相有屏并脱网历史故障记录映射模板)
-//                                    , localContext.get().getString(R.string.三相用户日志功率调度日志映射模板)
+//                                    Fastgo.getContext().getString(R.string.单相并脱网历史故障记录映射模板),
+//                                    Fastgo.getContext().getString(R.string.单相用户日志功率调度日志映射模板),
+                                        Fastgo.getContext().getString(R.string.三相无屏并脱网历史故障记录映射模板),
+                                        Fastgo.getContext().getString(R.string.三相有屏并脱网历史故障记录映射模板)
+//                                    , Fastgo.getContext().getString(R.string.三相用户日志功率调度日志映射模板)
                                 };
                                 final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
                                 dialog.isTitleShow(true)

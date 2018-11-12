@@ -1,6 +1,5 @@
 package com.kehua.energy.monitor.app.business.local.setting.pattern;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.blankj.utilcode.util.ActivityUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.flyco.dialog.listener.OnBtnClickL;
@@ -42,7 +40,6 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -68,7 +65,6 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
     @Inject
     AdvancedPresenter mAdvancedPresenter;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     public PatternFragment() {
         // Required empty public constructor
@@ -262,15 +258,15 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
         final String[] stringItems;
         if (adapterPos == 0) {
             stringItems = new String[]{
-                    localContext.get().getString(R.string.关闭),
-                    localContext.get().getString(R.string.无功支撑模式),
-                    localContext.get().getString(R.string.零无功模式),
+                    Fastgo.getContext().getString(R.string.关闭),
+                    Fastgo.getContext().getString(R.string.无功支撑模式),
+                    Fastgo.getContext().getString(R.string.零无功模式),
             };
         } else {
             stringItems = new String[]{
-                    localContext.get().getString(R.string.关闭),
-                    localContext.get().getString(R.string.线性),
-                    localContext.get().getString(R.string.滞回),
+                    Fastgo.getContext().getString(R.string.关闭),
+                    Fastgo.getContext().getString(R.string.线性),
+                    Fastgo.getContext().getString(R.string.滞回),
             };
         }
 

@@ -1,14 +1,10 @@
 package com.kehua.energy.monitor.app.business.local.setting.upgrade;
 
-import android.content.Context;
-
-import com.blankj.utilcode.util.ActivityUtils;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.model.APPModel;
 import com.kehua.energy.monitor.app.model.entity.Upgrade;
 import com.orhanobut.logger.Logger;
 
-import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -32,7 +28,7 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
     @Inject
     APPModel mModel;
 
-    WeakReference<Context> localContext = null;
+
 
     @Inject
     public UpgradePresenter() {
@@ -41,7 +37,7 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
     @Override
     public void attachView(UpgradeContract.View view) {
         mView = view;
-        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+
     }
 
     @Override
@@ -55,13 +51,13 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
 
     @Override
     public void upload(String path, final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.get().getString(R.string.上传中));
+        mView.startWaiting(Fastgo.getContext().getString(R.string.上传中));
         mModel.getRemoteModel().upload(path, new Consumer<Boolean>() {
             @Override
             public void accept(Boolean success) throws Exception {
                 mView.stopWaiting();
                 if(!success){
-                    XToast.error(localContext.get().getString(R.string.上传失败));
+                    XToast.error(Fastgo.getContext().getString(R.string.上传失败));
                 }
                 if(consumer!=null)
                     consumer.accept(success);
@@ -79,25 +75,25 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
                 String dnProgress = "";
                 switch (upgrade.getStatus()){
                     case 0:
-                        status = localContext.get().getString(R.string.未升级);
+                        status = Fastgo.getContext().getString(R.string.未升级);
                         break;
                     case 1:
-                        status = localContext.get().getString(R.string.升级包下载中);
+                        status = Fastgo.getContext().getString(R.string.升级包下载中);
                         break;
                     case 2:
-                        status = localContext.get().getString(R.string.下载完成);
+                        status = Fastgo.getContext().getString(R.string.下载完成);
                         break;
                     case 3:
-                        status = localContext.get().getString(R.string.升级成功);
+                        status = Fastgo.getContext().getString(R.string.升级成功);
                         break;
                     case 4:
-                        status = localContext.get().getString(R.string.升级失败);
+                        status = Fastgo.getContext().getString(R.string.升级失败);
                         break;
                 }
                 upProgress = upgrade.getUpprogress()+"%";
                 dnProgress = upgrade.getDnprogress()+"%";
 
-                mView.onUpgrade(String.format(localContext.get().getString(R.string.升级状态),status,dnProgress));
+                mView.onUpgrade(String.format(Fastgo.getContext().getString(R.string.升级状态),status,dnProgress));
             }
         }, new Consumer<Throwable>() {
             @Override

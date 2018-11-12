@@ -99,7 +99,7 @@ public class LanguageUtils {
 
             //设置，根据sdk 版本进行设置（7.0以上设置方式不同）
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                //...
+                LanguageUtils.wrap(Fastgo.getContext(), targetLable);
             } else {
                 configuration.locale = targetLable;
                 configuration.setLayoutDirection(targetLable);
@@ -130,24 +130,20 @@ public class LanguageUtils {
 
 
     public static ContextWrapper wrap(Context context, Locale newLocale) {
-
         Resources res = context.getResources();
         Configuration configuration = res.getConfiguration();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-
             configuration.setLocale(newLocale);
             LocaleList localeList = new LocaleList(newLocale);
             LocaleList.setDefault(localeList);
             configuration.setLocales(localeList);
             context = context.createConfigurationContext(configuration);
-
         } else {
-
             configuration.setLocale(newLocale);
             context = context.createConfigurationContext(configuration);
-
         }
+        res.updateConfiguration(configuration,res.getDisplayMetrics());
 
         return new ContextWrapper(context);
     }

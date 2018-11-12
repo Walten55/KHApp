@@ -23,7 +23,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
     @Inject
     APPModel mModel;
 
-    WeakReference<Context> localContext = null;
+
     
     @Inject
     public PersonalPresenter() {
@@ -32,7 +32,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
     @Override
     public void attachView(PersonalContract.View view) {
         mView = view;
-        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+
     }
 
     @Override
@@ -53,7 +53,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
 
     @Override
     public void invinfo(final Consumer<InvInfoList> consumer) {
-        mView.startWaiting(localContext.get().getString(R.string.检测中));
+        mView.startWaiting(Fastgo.getContext().getString(R.string.检测中));
         mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
             @Override
             public void accept(InvInfoList invInfoList) throws Exception {
@@ -66,7 +66,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
                     RouterMgr.get().localLogin();
                 }else {
                     //采集器未连接设备
-                    XToast.error(localContext.get().getString(R.string.采集器未连接设备));
+                    XToast.error(Fastgo.getContext().getString(R.string.采集器未连接设备));
                     return;
                 }*/
 
@@ -79,7 +79,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
-                XToast.error(localContext.get().getString(R.string.无法获取设备信息));
+                XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
 
                 //跳转采集器连接界面
                 RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);

@@ -36,7 +36,7 @@ public class WifiConfigPresenter extends WifiConfigContract.Presenter implements
 
     HotspotListAdapter adapter;
 
-    WeakReference<Context> localContext = null;
+
 
     @Inject
     public WifiConfigPresenter() {
@@ -56,7 +56,7 @@ public class WifiConfigPresenter extends WifiConfigContract.Presenter implements
                 }
             }
         });
-        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+
     }
 
     @Override
@@ -74,14 +74,14 @@ public class WifiConfigPresenter extends WifiConfigContract.Presenter implements
     @Override
     public void apset(String ssid, String pwd) {
         if(StringUtils.isEmpty(ssid)){
-            XToast.error(localContext.get().getString(R.string.SSID不能为空));
+            XToast.error(Fastgo.getContext().getString(R.string.SSID不能为空));
             return;
         }else if(StringUtils.isEmpty(pwd)){
-            XToast.error(localContext.get().getString(R.string.密码不能为空));
+            XToast.error(Fastgo.getContext().getString(R.string.密码不能为空));
             return;
         }
 
-        mView.startWaiting(localContext.get().getString(R.string.设置中));
+        mView.startWaiting(Fastgo.getContext().getString(R.string.设置中));
         mModel.getRemoteModel().apset(ssid, pwd, new Consumer<LinkedTreeMap<String,String>>() {
             @Override
             public void accept(LinkedTreeMap<String,String> response) throws Exception {

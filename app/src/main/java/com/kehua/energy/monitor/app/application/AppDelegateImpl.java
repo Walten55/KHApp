@@ -32,6 +32,8 @@ public class AppDelegateImpl implements IAppDelegate {
         MobSDK.init(application);
 
         LanguageUtils.init(application);
+
+        LanguageUtils.wrap(application, LanguageUtils.getTargetLable());
     }
 
     @Override

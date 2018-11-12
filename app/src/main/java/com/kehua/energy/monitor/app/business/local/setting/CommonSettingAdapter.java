@@ -1,11 +1,9 @@
 package com.kehua.energy.monitor.app.business.local.setting;
 
-import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.flyco.dialog.listener.OnBtnClickL;
@@ -21,7 +19,6 @@ import com.kehua.energy.monitor.app.model.entity.SettingEntity;
 import com.kehua.energy.monitor.app.model.entity.Standard;
 import com.kyleduo.switchbutton.SwitchButton;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 import io.reactivex.functions.Consumer;
@@ -35,7 +32,6 @@ public class CommonSettingAdapter extends BaseMultiItemQuickAdapter<SettingEntit
 
     private List<Standard> standardList;
 
-    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     public CommonSettingAdapter(List data, AdvancedPresenter presenter) {
         super(data);
@@ -65,8 +61,8 @@ public class CommonSettingAdapter extends BaseMultiItemQuickAdapter<SettingEntit
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView,final boolean isChecked) {
                             final NormalDialog dialog = new NormalDialog(mContext);
-                            dialog.content(localContext.get().getString(R.string.是否更改设置))
-                                    .title(localContext.get().getString(R.string.温馨提示))
+                            dialog.content(Fastgo.getContext().getString(R.string.是否更改设置))
+                                    .title(Fastgo.getContext().getString(R.string.温馨提示))
                                     .style(NormalDialog.STYLE_TWO)//
                                     .titleTextSize(23);
                             dialog.btnText(mContext.getString(R.string.取消), mContext.getString(R.string.确定));
@@ -150,7 +146,7 @@ public class CommonSettingAdapter extends BaseMultiItemQuickAdapter<SettingEntit
                         }else if (deviceData.getRegisterAddress().equals(Frame.开机密码地址[0]+"") ||deviceData.getRegisterAddress().equals(Frame.试用期密码地址[0]+"") ) {
                             //开机密码 试用期密码
                             helper.setText(R.id.tv_value, "");
-                            ((TextView)helper.getView(R.id.tv_value)).setHint(localContext.get().getString(R.string.点击设置));
+                            ((TextView)helper.getView(R.id.tv_value)).setHint(Fastgo.getContext().getString(R.string.点击设置));
                         }else {
                             //默认
                             helper.setText(R.id.tv_value, deviceData.getParseValue() + " " + deviceData.getUnit());

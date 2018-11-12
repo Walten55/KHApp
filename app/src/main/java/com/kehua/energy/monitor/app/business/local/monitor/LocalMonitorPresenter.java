@@ -37,7 +37,7 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
     @Inject
     APPModel mModel;
 
-    WeakReference<Context> localContext = null;
+
 
     @Inject
     public LocalMonitorPresenter() {
@@ -47,7 +47,7 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
     @Override
     public void attachView(LocalMonitorContract.View view) {
         mView = view;
-        localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+
     }
 
     @Override
@@ -75,7 +75,7 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
 
         result.clear();
         result.add(new MonitorEntity(MonitorEntity.OVERVIEW, ""));
-        result.add(new MonitorEntity(MonitorEntity.CENTER_TITLE, localContext.get().getString(R.string.运行数据)));
+        result.add(new MonitorEntity(MonitorEntity.CENTER_TITLE, Fastgo.getContext().getString(R.string.运行数据)));
         runningInfoPosition = result.size() - 1;
 
         List<GroupInfo> groupInfos = initGroups();
@@ -95,9 +95,9 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
 
                         result.add(new MonitorEntity(MonitorEntity.TABLE_HEAD, new String[]{
                                 "",
-                                localContext.get().getString(R.string.电压_单位),
-                                localContext.get().getString(R.string.电流_单位),
-                                localContext.get().getString(R.string.功率_W)}));
+                                Fastgo.getContext().getString(R.string.电压_单位),
+                                Fastgo.getContext().getString(R.string.电流_单位),
+                                Fastgo.getContext().getString(R.string.功率_W)}));
                         result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
                                 "PV1",
                                 "4520",
@@ -135,8 +135,8 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
 
                     result.add(new MonitorEntity(MonitorEntity.TABLE_HEAD, new String[]{
                             "",
-                            localContext.get().getString(R.string.电网电压_单位),
-                            localContext.get().getString(R.string.电网电流_单位),
+                            Fastgo.getContext().getString(R.string.电网电压_单位),
+                            Fastgo.getContext().getString(R.string.电网电流_单位),
                             ""}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
                             "U",
@@ -158,8 +158,8 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
 
                     result.add(new MonitorEntity(MonitorEntity.TABLE_HEAD, new String[]{
                             "",
-                            localContext.get().getString(R.string.负载电压_单位),
-                            localContext.get().getString(R.string.负载电流_单位),
+                            Fastgo.getContext().getString(R.string.负载电压_单位),
+                            Fastgo.getContext().getString(R.string.负载电流_单位),
                             ""}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
                             "U",
@@ -180,9 +180,9 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
 
                     result.add(new MonitorEntity(MonitorEntity.TABLE_HEAD, new String[]{
                             "",
-                            localContext.get().getString(R.string.有功功率_单位),
-                            localContext.get().getString(R.string.无功功率_单位),
-                            localContext.get().getString(R.string.视在功率_单位)}));
+                            Fastgo.getContext().getString(R.string.有功功率_单位),
+                            Fastgo.getContext().getString(R.string.无功功率_单位),
+                            Fastgo.getContext().getString(R.string.视在功率_单位)}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
                             "U",
                             "4610",
@@ -214,8 +214,8 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
 
                         result.add(new MonitorEntity(MonitorEntity.TABLE_HEAD, new String[]{
                                 "",
-                                localContext.get().getString(R.string.电压_单位),
-                                localContext.get().getString(R.string.电流_单位),
+                                Fastgo.getContext().getString(R.string.电压_单位),
+                                Fastgo.getContext().getString(R.string.电流_单位),
                                 ""}));
 
                         for (int i = 0; i < mpptData.getIntValue(); i++) {
@@ -232,9 +232,9 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
 
                         result.add(new MonitorEntity(MonitorEntity.TABLE_HEAD, new String[]{
                                 "",
-                                localContext.get().getString(R.string.电压_单位),
-                                localContext.get().getString(R.string.电流_单位),
-                                localContext.get().getString(R.string.功率_Kw)}));
+                                Fastgo.getContext().getString(R.string.电压_单位),
+                                Fastgo.getContext().getString(R.string.电流_单位),
+                                Fastgo.getContext().getString(R.string.功率_Kw)}));
 
                         for (int i = 0; i < pvBranchData.getIntValue(); i++) {
                             result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
@@ -250,8 +250,8 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
                     result.add(new MonitorEntity(MonitorEntity.MARGIN, ""));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_HEAD, new String[]{
                             "",
-                            localContext.get().getString(R.string.逆变电压_单位),
-                            localContext.get().getString(R.string.逆变电流_单位),
+                            Fastgo.getContext().getString(R.string.逆变电压_单位),
+                            Fastgo.getContext().getString(R.string.逆变电流_单位),
                             ""}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
                             "U",
@@ -276,7 +276,7 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
         }
 
         result.remove(result.size() - 1);
-        result.add(new MonitorEntity(MonitorEntity.CENTER_TITLE, localContext.get().getString(R.string.设备信息)));
+        result.add(new MonitorEntity(MonitorEntity.CENTER_TITLE, Fastgo.getContext().getString(R.string.设备信息)));
         deviceInfoPosition = result.size() - 1;
 
         List<PointInfo> pointInfos = getPointInfoListWith(Frame.设备信息);
