@@ -41,9 +41,9 @@
     <string name="角色选择">Role selection</string>
     <string name="机器编号_冒号">Machinary code：</string>
     <string name="设备类型_冒号">Equipment type：</string>
-    <string name="运维">Operation and maintenance personnel</string>
-    <string name="用户">General user</string>
-    <string name="厂家">Manufacturer staff</string>
+    <string name="运维">Operation</string>
+    <string name="用户">General</string>
+    <string name="厂家">Manufacturer</string>
     <string name="登录">Login</string>
     <string name="权限密码">Permission password</string>
     <string name="账号不能为空">Account cannot be empty</string>

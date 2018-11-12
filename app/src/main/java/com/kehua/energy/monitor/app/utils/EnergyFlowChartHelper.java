@@ -23,10 +23,10 @@ public class EnergyFlowChartHelper {
             return;
 
         mChart.stopAll();
-        mChart.getBLTextView().setText("--");
-        mChart.getBRTextView().setText("--");
-        mChart.getTLTextView().setText("--");
-        mChart.getTRTextView().setText("--");
+        mChart.getBLTextView().setText("0.0");
+        mChart.getBRTextView().setText("0.0");
+        mChart.getTLTextView().setText("0.0");
+        mChart.getTRTextView().setText("0.0");
 
         double pvPower = 0;
         double gridPower = 0;
@@ -72,13 +72,13 @@ public class EnergyFlowChartHelper {
             case 5:
                 //GRID->INV、INV->LOAD
                 //电网功率绝对值≥负载功率，否则将电网功率赋值为负载功率*(-1)
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(Math.abs(gridPower)<loadPower){
                     gridPower = loadPower*-1;
                 }
-                mChart.getTLTextView().setText(gridPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
                 break;
             case 6:
 
@@ -86,40 +86,40 @@ public class EnergyFlowChartHelper {
             case 7:
                 //BAT->INV、INV->LOAD
                 //BAT功率≥负载功率，否则将BAT功率赋值为负载功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(batPower<loadPower){
                     batPower = loadPower;
                 }
 
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
                 break;
             case 8:
                 //BAT->INV、INV->GRID
                 //BAT功率≥电网功率，否则将电池功率赋值为电网功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_OUT);
 
                 if(batPower<gridPower){
                     batPower = gridPower;
                 }
 
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
                 break;
             case 9:
                 //BAT->INV、INV->GRID、INV->LOAD
                 //BAT功率≥电网功率+负载功率，否则将电池功率赋值为电网功率+负载功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_OUT);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(batPower<(gridPower+loadPower)){
                     batPower = gridPower+loadPower;
                 }
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
                 break;
             case 10:
 
@@ -127,15 +127,15 @@ public class EnergyFlowChartHelper {
             case 11:
                 //BAT->INV、GRID->INV、INV->LOAD
                 //BAT功率+电网功率绝对值≥负载功率，否则将电网功率赋值为(负载功率-BAT功率)*(-1)
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if((batPower+Math.abs(gridPower))<loadPower){
                     gridPower = (loadPower-batPower)*-1;
                 }
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
                 break;
             case 12:
             case 13:
@@ -146,26 +146,26 @@ public class EnergyFlowChartHelper {
             case 16:
                 //INV->BAT、GRID->INV
                 //电网功率绝对值≥BAT功率绝对值，否则将电网功率赋值为BAT功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
                 if(Math.abs(gridPower)<Math.abs(batPower)){
                     gridPower = batPower;
                 }
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
                 break;
             case 17:
                 //INV->BAT、GRID->INV、INV->LOAD
                 //电网功率绝对值≥BAT功率绝对值+负载功率，否则将电网功率赋值为（BAT功率绝对值+负载功率）*（-1）
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
                 mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(Math.abs(gridPower)<(Math.abs(batPower)+loadPower)){
                     gridPower = (Math.abs(batPower)+loadPower)*-1;
                 }
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
-                mChart.getTLTextView().setText(loadPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
+                mChart.getTRTextView().setText(loadPower+"");
 
                 break;
             case 18:
@@ -174,37 +174,37 @@ public class EnergyFlowChartHelper {
             case 19:
                 //PV->INV、INV->LOAD
                 //PV功率≥负载功率，否则将PV功率赋值为负载功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(pvPower<loadPower){
                     pvPower = loadPower;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
                 break;
             case 20:
                 //PV->INV、INV->GRID
                 //PV功率≥电网功率，否则将PV功率赋值为电网功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_OUT);
                 if(pvPower>gridPower){
                     pvPower = gridPower;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
                 break;
             case 21:
                 //PV->INV、INV->GRID、INV->LOAD
                 //PV功率≥电网功率+负载功率，否则将PV功率赋值为电网功率+负载功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_OUT);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(pvPower<(gridPower+loadPower)){
                     pvPower = gridPower+loadPower;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
 
                 break;
             case 22:
@@ -213,16 +213,16 @@ public class EnergyFlowChartHelper {
             case 23:
                 //PV->INV、GRID->INV、INV->LOAD
                 //PV功率+电网功率绝对值≥负载功率，否则将电网功率赋值为（负载功率-PV功率）*（-1）
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
                 mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
 
                 if (pvPower+Math.abs(gridPower)>loadPower){
                     gridPower = (loadPower-pvPower)*-1;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
                 break;
             case 24:
 
@@ -230,47 +230,47 @@ public class EnergyFlowChartHelper {
             case 25:
                 //PV->INV、BAT->INV、INV->LOAD
                 //PV功率+BAT功率≥负载功率，否则将BAT功率赋值为负载功率-PV功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(pvPower+batPower<loadPower){
                     batPower = loadPower-pvPower;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
                 break;
             case 26:
                 //PV->INV、BAT->INV、INV->GRID
                 //PV功率+BAT功率≥电网功率，否则将电网功率赋值为BAT功率+PV功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_OUT);
                 if(pvPower+batPower<gridPower){
                     gridPower = batPower+pvPower;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
                 break;
             case 27:
                 //PV->INV、BAT->INV、INV->GRID、INV->LOAD
                 //"PV功率+BAT功率≥电网功率+负载功率，否则如果BAT功率+PV功率-负载功率≥0，则电网功率=BAT功率+PV功率-负载功率
                 //如果BAT功率+PV功率-负载功率<0，则电网功率=0,负载功率=PV功率+BAT功率"
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_OUT);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(pvPower+batPower<gridPower+loadPower&&batPower+pvPower-loadPower>=0){
                     gridPower = batPower+pvPower-loadPower;
                 }else if(pvPower+batPower<gridPower+loadPower&&batPower+pvPower-loadPower<0){
                     gridPower = 0;
                     loadPower = pvPower+batPower;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
                 break;
             case 28:
 
@@ -278,91 +278,91 @@ public class EnergyFlowChartHelper {
             case 29:
                 //PV->INV、BAT->INV、GRID->INV、INV->LOAD
                 //PV功率+BAT功率+电网功率绝对值≥负载功率，否则负载功率 = PV功率+BAT功率+电网功率绝对值
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_IN);
                 mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(pvPower+batPower+Math.abs(gridPower)<loadPower){
                     loadPower = pvPower+batPower+Math.abs(gridPower);
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
                 break;
             case 30:
                 //PV->INV、INV->BAT
                 //PV功率≥BAT功率，否则PV功率=BAT功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
                 if(pvPower<batPower){
                     pvPower = batPower;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getBRTextView().setText(batPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getBLTextView().setText(batPower+"");
                 break;
             case 31:
                 //PV->INV、INV->BAT、INV->LOAD
                 //PV功率≥BAT功率绝对值+负载功率，否则PV功率=BAT功率绝对值+负载功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
                 mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(pvPower<Math.abs(batPower)+loadPower){
                     pvPower = Math.abs(batPower)+loadPower;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
                 break;
             case 32:
                 //PV->INV、INV->BAT、INV->GRID
                 //PV功率≥BAT功率绝对值+电网功率，否则PV功率=BAT功率绝对值+电网功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_OUT);
                 if(pvPower<Math.abs(batPower)+gridPower){
                     pvPower = Math.abs(batPower)+gridPower;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
                 break;
             case 33:
                 //PV->INV、INV->BAT、INV->GRID、INV->LOAD
                 //PV功率≥BAT功率绝对值+负载功率+电网功率，否则PV功率=BAT功率绝对值+负载功率+电网功率
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
                 mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(pvPower<Math.abs(batPower)+loadPower+gridPower){
                     pvPower = Math.abs(batPower)+loadPower+gridPower;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
                 break;
             case 34:
                 //PV->INV、INV->BAT、GRID->INV
                 //PV功率+电网功率绝对值≥BAT功率绝对值，否则BAT功率=(PV功率+电网功率)*(-1)
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
                 if(pvPower+Math.abs(gridPower)<Math.abs(batPower)){
                     batPower = (pvPower+gridPower)*-1;
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
                 break;
             case 35:
                 //PV->INV、INV->BAT、GRID->INV、INV->LOAD
                 //"PV功率+电网功率绝对值≥电池功率绝对值+负载功率，否则如果PV功率+电网功率绝对值-负载功率≥0，则电池功率=(PV功率+电网功率绝对值-负载功率)*(-1)
                 //如果PV功率+电网功率绝对值-负载功率<0，则电池功率=0,负载功率=PV功率+电网功率绝对值"
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
-                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
                 mChart.start(EnergyFlowChart.FLOW_DIRECTION_BL_OUT);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_IN);
+                mChart.start(EnergyFlowChart.FLOW_DIRECTION_BR_OUT);
                 if(pvPower+Math.abs(gridPower)<Math.abs(batPower)+loadPower){
                     if(pvPower+Math.abs(gridPower)-loadPower>=0){
                         batPower = (pvPower+Math.abs(gridPower)-loadPower)*-1;
@@ -371,10 +371,10 @@ public class EnergyFlowChartHelper {
                         loadPower = pvPower+Math.abs(gridPower);
                     }
                 }
-                mChart.getTRTextView().setText(pvPower+"");
-                mChart.getBRTextView().setText(batPower+"");
-                mChart.getTLTextView().setText(gridPower+"");
-                mChart.getBLTextView().setText(loadPower+"");
+                mChart.getTLTextView().setText(pvPower+"");
+                mChart.getBLTextView().setText(batPower+"");
+                mChart.getTRTextView().setText(gridPower+"");
+                mChart.getBRTextView().setText(loadPower+"");
 
                 break;
         }

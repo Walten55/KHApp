@@ -6,19 +6,13 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.LocaleList;
-import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.kehua.energy.monitor.app.R;
-import com.kehua.energy.monitor.app.application.AppDelegateImpl;
 import com.kehua.energy.monitor.app.model.local.LocalModel;
 
-import org.apache.log4j.lf5.util.Resource;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import me.walten.fastgo.common.Fastgo;
@@ -64,7 +58,7 @@ public class LanguageUtils {
      * 获取系统默认的语言类型
      *
      * */
-    private static String getSysDefaultLanguage() {
+    public static String getSysDefaultLanguage() {
         Configuration configuration = Fastgo.getContext().getResources().getConfiguration();
         Locale locale = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
                 ? configuration.getLocales().get(0)

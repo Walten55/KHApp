@@ -142,15 +142,15 @@ public class EnergyFlowChart extends RelativeLayout {
         mBLTextView = (TextView) mBLChild.findViewById(R.id.tv_value);
         mBRTextView = (TextView) mBRChild.findViewById(R.id.tv_value);
 
-        ((TextView) mTLChild.findViewById(R.id.tv_name)).setText(LocalUserManager.getPn()== Frame.单相协议?R.string.电网功率_W:R.string.电网功率_Kw);
-        ((TextView) mTRChild.findViewById(R.id.tv_name)).setText(LocalUserManager.getPn()== Frame.单相协议?R.string.发电功率_W:R.string.发电功率_Kw);
-        ((TextView) mBLChild.findViewById(R.id.tv_name)).setText(LocalUserManager.getPn()== Frame.单相协议?R.string.主次负载_W:R.string.主次负载_Kw);
-        ((TextView) mBRChild.findViewById(R.id.tv_name)).setText(LocalUserManager.getPn()== Frame.单相协议?R.string.电池功率_W:R.string.电池功率_Kw);
+        ((TextView) mTRChild.findViewById(R.id.tv_name)).setText(LocalUserManager.getPn()== Frame.单相协议?R.string.电网功率_W:R.string.电网功率_Kw);
+        ((TextView) mTLChild.findViewById(R.id.tv_name)).setText(LocalUserManager.getPn()== Frame.单相协议?R.string.发电功率_W:R.string.发电功率_Kw);
+        ((TextView) mBRChild.findViewById(R.id.tv_name)).setText(LocalUserManager.getPn()== Frame.单相协议?R.string.主次负载_W:R.string.主次负载_Kw);
+        ((TextView) mBLChild.findViewById(R.id.tv_name)).setText(LocalUserManager.getPn()== Frame.单相协议?R.string.电池功率_W:R.string.电池功率_Kw);
 
-        ((ImageView) mTLChild.findViewById(R.id.iv_img)).setImageResource(R.mipmap.icon_station_grid);
-        ((ImageView) mTRChild.findViewById(R.id.iv_img)).setImageResource(R.mipmap.icon_station_electricity);
-        ((ImageView) mBLChild.findViewById(R.id.iv_img)).setImageResource(R.mipmap.icon_station_use);
-        ((ImageView) mBRChild.findViewById(R.id.iv_img)).setImageResource(R.mipmap.icon_station_battery);
+        ((ImageView) mTRChild.findViewById(R.id.iv_img)).setImageResource(R.mipmap.icon_station_grid);
+        ((ImageView) mTLChild.findViewById(R.id.iv_img)).setImageResource(R.mipmap.icon_station_electricity);
+        ((ImageView) mBRChild.findViewById(R.id.iv_img)).setImageResource(R.mipmap.icon_station_use);
+        ((ImageView) mBLChild.findViewById(R.id.iv_img)).setImageResource(R.mipmap.icon_station_battery);
     }
 
     private Path setupPath(Path mPath) {

@@ -35,7 +35,7 @@
             style="@style/Line"
             android:layout_alignParentBottom="true" />
 
-        <TextView
+        <me.codeboy.android.aligntextview.AlignTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -43,9 +43,12 @@
             android:layout_marginRight="@dimen/margin"
             android:text="@string/系统运行状态"
             android:textColor="@color/text_black"
-            android:textSize="@dimen/text_size_sub_title" />
+            android:textSize="@dimen/text_size_sub_title"
+            android:paddingLeft="@dimen/grid_5"
+            android:paddingRight="@dimen/grid_5"
+            />
 
-        <TextView
+        <me.codeboy.android.aligntextview.AlignTextView
             android:id="@+id/tv_running_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +58,10 @@
             android:layout_marginRight="@dimen/margin"
             android:text="--"
             android:textColor="@color/text_gray"
-            android:textSize="@dimen/text_size_sub_title" />
+            android:textSize="@dimen/text_size_sub_title"
+            android:paddingLeft="@dimen/grid_5"
+            android:paddingRight="@dimen/grid_5"
+            />
     </RelativeLayout>
 
     <View style="@style/Line" />
@@ -73,21 +79,27 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
+            <me.codeboy.android.aligntextview.AlignTextView
                 android:id="@+id/tv_daily_grid_generation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
                 android:textColor="@color/text_blue"
-                android:textSize="@dimen/text_size_title" />
+                android:textSize="@dimen/text_size_title"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                />
 
-            <TextView
+            <me.codeboy.android.aligntextview.AlignTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/grid_5"
                 android:text="@string/日并网发电量_单位"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/text_size_main" />
+                android:textSize="@dimen/text_size_main"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                />
         </LinearLayout>
 
         <View
@@ -102,21 +114,27 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
+            <me.codeboy.android.aligntextview.AlignTextView
                 android:id="@+id/tv_total_grid_generation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
                 android:textColor="@color/text_blue"
-                android:textSize="@dimen/text_size_title" />
+                android:textSize="@dimen/text_size_title"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                />
 
-            <TextView
+            <me.codeboy.android.aligntextview.AlignTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/grid_5"
                 android:text="@string/总并网发电量_单位"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/text_size_main" />
+                android:textSize="@dimen/text_size_main"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                />
         </LinearLayout>
 
     </LinearLayout>
@@ -136,21 +154,25 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
+            <me.codeboy.android.aligntextview.AlignTextView
                 android:id="@+id/tv_daily_pv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
                 android:textColor="@color/text_blue"
-                android:textSize="@dimen/text_size_title" />
+                android:textSize="@dimen/text_size_title"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"/>
 
-            <TextView
+            <me.codeboy.android.aligntextview.AlignTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/grid_5"
                 android:text="@string/PV日发电量_单位"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/text_size_main" />
+                android:textSize="@dimen/text_size_main"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"/>
         </LinearLayout>
 
         <View
@@ -165,21 +187,25 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
+            <me.codeboy.android.aligntextview.AlignTextView
                 android:id="@+id/tv_total_pv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
                 android:textColor="@color/text_blue"
-                android:textSize="@dimen/text_size_title" />
+                android:textSize="@dimen/text_size_title"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"/>
 
-            <TextView
+            <me.codeboy.android.aligntextview.AlignTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/grid_5"
                 android:text="@string/PV总发电量_单位"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/text_size_main" />
+                android:textSize="@dimen/text_size_main"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -205,21 +231,25 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
+                <me.codeboy.android.aligntextview.AlignTextView
                     android:id="@+id/tv_daily_load"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
                     android:textColor="@color/text_blue"
-                    android:textSize="@dimen/text_size_title" />
+                    android:textSize="@dimen/text_size_title"
+                    android:paddingLeft="@dimen/grid_5"
+                    android:paddingRight="@dimen/grid_5"/>
 
-                <TextView
+                <me.codeboy.android.aligntextview.AlignTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/grid_5"
                     android:text="@string/日负载耗电量_单位"
                     android:textColor="@color/text_black"
-                    android:textSize="@dimen/text_size_main" />
+                    android:textSize="@dimen/text_size_main"
+                    android:paddingLeft="@dimen/grid_5"
+                    android:paddingRight="@dimen/grid_5"/>
             </LinearLayout>
 
             <View
@@ -234,21 +264,25 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
+                <me.codeboy.android.aligntextview.AlignTextView
                     android:id="@+id/tv_total_load"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
                     android:textColor="@color/text_blue"
-                    android:textSize="@dimen/text_size_title" />
+                    android:textSize="@dimen/text_size_title"
+                    android:paddingLeft="@dimen/grid_5"
+                    android:paddingRight="@dimen/grid_5"/>
 
-                <TextView
+                <me.codeboy.android.aligntextview.AlignTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/grid_5"
                     android:text="@string/总负载耗电量_单位"
                     android:textColor="@color/text_black"
-                    android:textSize="@dimen/text_size_main" />
+                    android:textSize="@dimen/text_size_main"
+                    android:paddingLeft="@dimen/grid_5"
+                    android:paddingRight="@dimen/grid_5"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -269,21 +303,25 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
+                <me.codeboy.android.aligntextview.AlignTextView
                     android:id="@+id/tv_daily_charge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
                     android:textColor="@color/text_blue"
-                    android:textSize="@dimen/text_size_title" />
+                    android:textSize="@dimen/text_size_title"
+                    android:paddingLeft="@dimen/grid_5"
+                    android:paddingRight="@dimen/grid_5"/>
 
-                <TextView
+                <me.codeboy.android.aligntextview.AlignTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/grid_5"
                     android:text="@string/电池日充电量_单位"
                     android:textColor="@color/text_black"
-                    android:textSize="@dimen/text_size_main" />
+                    android:textSize="@dimen/text_size_main"
+                    android:paddingLeft="@dimen/grid_5"
+                    android:paddingRight="@dimen/grid_5"/>
             </LinearLayout>
 
 
@@ -299,21 +337,25 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
+                <me.codeboy.android.aligntextview.AlignTextView
                     android:id="@+id/tv_daily_discharge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
                     android:textColor="@color/text_blue"
-                    android:textSize="@dimen/text_size_title" />
+                    android:textSize="@dimen/text_size_title"
+                    android:paddingLeft="@dimen/grid_5"
+                    android:paddingRight="@dimen/grid_5"/>
 
-                <TextView
+                <me.codeboy.android.aligntextview.AlignTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/grid_5"
                     android:text="@string/电池日放电量_单位"
                     android:textColor="@color/text_black"
-                    android:textSize="@dimen/text_size_main" />
+                    android:textSize="@dimen/text_size_main"
+                    android:paddingLeft="@dimen/grid_5"
+                    android:paddingRight="@dimen/grid_5"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -143,8 +143,11 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
 
     @Override
     public void showDeviceInfo(String sn, String deviceType) {
-        mSnView.setText(getString(R.string.机器编号_冒号) + (sn == null ? "" : sn));
-        mDeviceTypeView.setText(getString(R.string.设备类型_冒号) + deviceType);
+
+        String _n = LanguageUtils.getSysDefaultLanguage().equals(LanguageUtils.Chinese)?"":"\n";
+
+        mSnView.setText(getString(R.string.机器编号_冒号) +_n+ (sn == null ? "" : sn));
+        mDeviceTypeView.setText(getString(R.string.设备类型_冒号) +_n+ deviceType);
     }
 
     @OnClick(R.id.tv_login)
