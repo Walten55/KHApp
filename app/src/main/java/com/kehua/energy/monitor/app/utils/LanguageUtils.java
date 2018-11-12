@@ -29,26 +29,22 @@ public class LanguageUtils {
 
     private static boolean forceUpdate = true;
 
-    private final static String[] LangeuageNames = new String[]{
-            Fastgo.getContext().getResources().getString(R.string.中文),
-            Fastgo.getContext().getResources().getString(R.string.英文)
-    };
     private static Locale targetLable;
 
     /**
      * @des:App初始化时候进行语言设置
      */
-    public static void init(LocalModel localModel) {
-        String defaultLanguage = getSysDefaultLanguage();
-        String spSelectedLanguage = localModel.getLanguageSelect();
+    public static void init(Context context) {
+        String defaultLanguage = getSysDefaultLanguage(context);
+        String spSelectedLanguage = LocalModel.getLanguageSelect();
         //如果没有设置,设置即可
         if (StringUtils.isTrimEmpty(spSelectedLanguage)) {
-            localModel.saveLanguageSelect(defaultLanguage);
+            LocalModel.saveLanguageSelect(defaultLanguage);
         } else {
             //查看默认的与设置的
             if (!defaultLanguage.equals(spSelectedLanguage) && forceUpdate) {
                 forceUpdate = false;
-                languageSelect(spSelectedLanguage, localModel, true);
+                languageSelect(context, spSelectedLanguage, true);
             }
         }
 
@@ -58,8 +54,8 @@ public class LanguageUtils {
      * 获取系统默认的语言类型
      *
      * */
-    public static String getSysDefaultLanguage() {
-        Configuration configuration = Fastgo.getContext().getResources().getConfiguration();
+    public static String getSysDefaultLanguage(Context context) {
+        Configuration configuration = context.getResources().getConfiguration();
         Locale locale = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
                 ? configuration.getLocales().get(0)
                 : configuration.locale;
@@ -74,19 +70,22 @@ public class LanguageUtils {
     /**
      * @des:获取sharedPreferences 获取语言
      */
-    public static String[] getLanguageNames() {
-        return LangeuageNames;
+    public static String[] getLanguageNames(Context context) {
+        return new String[]{
+                context.getString(R.string.中文),
+                context.getString(R.string.英文)
+        };
     }
 
     /**
      * @des:进行语言切换
      */
-    public static void languageSelect(String language, LocalModel localModel, boolean forceUpdate) {
+    public static void languageSelect(Context context, String language, boolean forceUpdate) {
         //强制转换就直接切换，否则若与本地存储的不一致就进行切换
-        if (forceUpdate || !language.equals(localModel.getLanguageSelect())) {
-            localModel.saveLanguageSelect(language);
+        if (forceUpdate || !language.equals(LocalModel.getLanguageSelect())) {
+            LocalModel.saveLanguageSelect(language);
 
-            Resources resources = ActivityUtils.getTopActivity().getResources();
+            Resources resources = context.getResources();
             DisplayMetrics dm = resources.getDisplayMetrics();
             Configuration configuration = resources.getConfiguration();
             targetLable = Locale.getDefault();
@@ -100,13 +99,15 @@ public class LanguageUtils {
 
             //设置，根据sdk 版本进行设置（7.0以上设置方式不同）
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                //todo
+                //...
             } else {
                 configuration.locale = targetLable;
                 configuration.setLayoutDirection(targetLable);
                 resources.updateConfiguration(configuration, dm);
             }
-            ActivityUtils.getTopActivity().recreate();
+            if (!forceUpdate) {
+                ActivityUtils.getTopActivity().recreate();
+            }
         }
     }
 
@@ -114,14 +115,14 @@ public class LanguageUtils {
     /**
      * @des:根据名称获取对应键值
      */
-    public static String getLangeValueByName(String name) {
+    public static String getLangeValueByName(Context context, String name) {
         if (StringUtils.isTrimEmpty(name)) {
             return "";
         }
         //中文
-        if (LangeuageNames[0].equals(name)) {
+        if (context.getResources().getString(R.string.中文).equals(name)) {
             return Chinese;
-        } else if (LangeuageNames[1].equals(name)) {
+        } else if (context.getResources().getString(R.string.英文).equals(name)) {
             return English;
         }
         return "";

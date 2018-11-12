@@ -8,6 +8,7 @@ import android.support.multidex.MultiDex;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.kehua.energy.monitor.app.BuildConfig;
 import com.kehua.energy.monitor.app.model.local.db.ObjectBox;
+import com.kehua.energy.monitor.app.utils.LanguageUtils;
 import com.mob.MobSDK;
 
 import io.objectbox.android.AndroidObjectBrowser;
@@ -29,6 +30,8 @@ public class AppDelegateImpl implements IAppDelegate {
         ARouter.init(application);
 
         MobSDK.init(application);
+
+        LanguageUtils.init(application);
     }
 
     @Override

@@ -831,11 +831,11 @@ public class LocalModel extends BaseModel implements IModel {
         return keysStr.contains(key);
     }
 
-    public void saveLanguageSelect(String language) {
+    public static void saveLanguageSelect(String language) {
         SPUtils.getInstance().put("LANGUAGE", language);
     }
 
-    public String getLanguageSelect() {
+    public static String getLanguageSelect() {
         return SPUtils.getInstance().getString("LANGUAGE", "");
     }
 

@@ -63,7 +63,7 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
 
     private int role = ROLE_NORMAL;
 
-    private String[] languageNames = LanguageUtils.getLanguageNames();
+    private String[] languageNames;
 
     @Override
     public int getLayoutResId() {
@@ -75,13 +75,12 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
         setFullScreen();
         cancelFullScreen();
 
-        mPresenter.initLanguage();
         mTitleBar.setListener(new XTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {
                 if (action == XTitleBar.ACTION_RIGHT_TEXT) {
                     final ActionSheetDialog dialog = new ActionSheetDialog(mContext, languageNames, null);
-                    dialog.isTitleShow(false).show();
+                    dialog.cancelText(mContext.getResources().getString(R.string.取消)).isTitleShow(false).show();
 
                     dialog.setOnOperItemClickL(new OnOperItemClickL() {
                         @Override
@@ -114,7 +113,7 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-
+        languageNames = LanguageUtils.getLanguageNames(this);
     }
 
     @Override
@@ -144,18 +143,18 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
     @Override
     public void showDeviceInfo(String sn, String deviceType) {
 
-        String _n = LanguageUtils.getSysDefaultLanguage().equals(LanguageUtils.Chinese)?"":"\n";
+        String _n = LanguageUtils.getSysDefaultLanguage(this).equals(LanguageUtils.Chinese) ? "" : "\n";
 
-        mSnView.setText(getString(R.string.机器编号_冒号) +_n+ (sn == null ? "" : sn));
-        mDeviceTypeView.setText(getString(R.string.设备类型_冒号) +_n+ deviceType);
+        mSnView.setText(getString(R.string.机器编号_冒号) + _n + (sn == null ? "" : sn));
+        mDeviceTypeView.setText(getString(R.string.设备类型_冒号) + _n + deviceType);
     }
 
     @OnClick(R.id.tv_login)
     @Override
     public void login(View view) {
-        if(canLogin)
+        if (canLogin)
             mPresenter.login(role, mPasswordView.getText().toString());
-          else {
+        else {
             XToast.error(getString(R.string.无法获取设备信息));
             RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);
         }
