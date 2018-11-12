@@ -10,6 +10,7 @@ import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.model.APPModel;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -28,8 +29,7 @@ public class LocalSettingPresenter extends LocalSettingContract.Presenter {
     @Inject
     APPModel mModel;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     @Inject
     public LocalSettingPresenter() {
@@ -55,30 +55,30 @@ public class LocalSettingPresenter extends LocalSettingContract.Presenter {
         if (LocalUserManager.getRole() == LocalUserManager.ROLE_NORMAL) {
             //普通权限
             if (LocalUserManager.getPn() == Frame.单相协议) {
-                titleDatas.add(localContext.getString(R.string.基本设置));
+                titleDatas.add(localContext.get().getString(R.string.基本设置));
                 if (isStorageDevice(LocalUserManager.getDeviceType()))
-                    titleDatas.add(localContext.getString(R.string.电池设置));
-                titleDatas.add(localContext.getString(R.string.电网设置));
+                    titleDatas.add(localContext.get().getString(R.string.电池设置));
+                titleDatas.add(localContext.get().getString(R.string.电网设置));
 
                 fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.LOCAL_SETTING_BASIC).navigation());
                 if (isStorageDevice(LocalUserManager.getDeviceType()))
                     fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.LOCAL_SETTING_BATTERY).navigation());
                 fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.LOCAL_SETTING_GRID).navigation());
             } else {
-                titleDatas.add(localContext.getString(R.string.基本设置));
-                titleDatas.add(localContext.getString(R.string.电网设置));
+                titleDatas.add(localContext.get().getString(R.string.基本设置));
+                titleDatas.add(localContext.get().getString(R.string.电网设置));
 
                 fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.LOCAL_SETTING_BASIC).navigation());
                 fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.LOCAL_SETTING_GRID).navigation());
             }
         } else if (LocalUserManager.getRole() == LocalUserManager.ROLE_OPS) {
             //运维权限
-            titleDatas.add(localContext.getString(R.string.基本设置));
-            titleDatas.add(localContext.getString(R.string.高级设置));
-            titleDatas.add(localContext.getString(R.string.电网设置));
+            titleDatas.add(localContext.get().getString(R.string.基本设置));
+            titleDatas.add(localContext.get().getString(R.string.高级设置));
+            titleDatas.add(localContext.get().getString(R.string.电网设置));
             if (isStorageDevice(LocalUserManager.getDeviceType()))
-                titleDatas.add(localContext.getString(R.string.电池设置));
-            titleDatas.add(localContext.getString(R.string.模式设置));
+                titleDatas.add(localContext.get().getString(R.string.电池设置));
+            titleDatas.add(localContext.get().getString(R.string.模式设置));
 
             fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.LOCAL_SETTING_BASIC).navigation());
             fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.LOCAL_SETTING_ADVANCED).navigation());
@@ -88,14 +88,14 @@ public class LocalSettingPresenter extends LocalSettingContract.Presenter {
             fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.LOCAL_SETTING_PATTERN).navigation());
         } else {
             //厂家权限
-            titleDatas.add(localContext.getString(R.string.基本设置));
-            titleDatas.add(localContext.getString(R.string.高级设置));
-            titleDatas.add(localContext.getString(R.string.电网设置));
+            titleDatas.add(localContext.get().getString(R.string.基本设置));
+            titleDatas.add(localContext.get().getString(R.string.高级设置));
+            titleDatas.add(localContext.get().getString(R.string.电网设置));
             if (isStorageDevice(LocalUserManager.getDeviceType()))
-                titleDatas.add(localContext.getString(R.string.电池设置));
-            titleDatas.add(localContext.getString(R.string.模式设置));
-            titleDatas.add(localContext.getString(R.string.校准设置));
-            titleDatas.add(localContext.getString(R.string.设备设置));
+                titleDatas.add(localContext.get().getString(R.string.电池设置));
+            titleDatas.add(localContext.get().getString(R.string.模式设置));
+            titleDatas.add(localContext.get().getString(R.string.校准设置));
+            titleDatas.add(localContext.get().getString(R.string.设备设置));
 
             fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.LOCAL_SETTING_BASIC).navigation());
             fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.LOCAL_SETTING_ADVANCED).navigation());

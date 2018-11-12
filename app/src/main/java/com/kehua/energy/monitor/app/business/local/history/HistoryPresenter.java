@@ -9,6 +9,7 @@ import com.kehua.energy.monitor.app.model.APPModel;
 import com.kehua.energy.monitor.app.model.entity.ModbusResponse;
 import com.kehua.energy.monitor.app.model.entity.RecordData;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,8 +24,7 @@ public class HistoryPresenter extends HistoryContract.Presenter {
     @Inject
     APPModel mModel;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     @Inject
     public HistoryPresenter() {
@@ -43,7 +43,7 @@ public class HistoryPresenter extends HistoryContract.Presenter {
 
     @Override
     public void recordCount(final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.getString(R.string.加载中));
+        mView.startWaiting(localContext.get().getString(R.string.加载中));
         mModel.getRemoteModel().recordCount(LocalUserManager.getDeviceAddress(), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {

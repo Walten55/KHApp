@@ -8,6 +8,8 @@ import com.kehua.energy.monitor.app.model.APPModel;
 import com.kehua.energy.monitor.app.model.entity.InvInfoList;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 
+import java.lang.ref.WeakReference;
+
 import javax.inject.Inject;
 
 import io.reactivex.functions.Consumer;
@@ -21,8 +23,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
     @Inject
     APPModel mModel;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     
     @Inject
     public PersonalPresenter() {
@@ -51,7 +52,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
 
     @Override
     public void invinfo(final Consumer<InvInfoList> consumer) {
-        mView.startWaiting(localContext.getString(R.string.检测中));
+        mView.startWaiting(localContext.get().getString(R.string.检测中));
         mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
             @Override
             public void accept(InvInfoList invInfoList) throws Exception {
@@ -64,7 +65,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
                     RouterMgr.get().localLogin();
                 }else {
                     //采集器未连接设备
-                    XToast.error(localContext.getString(R.string.采集器未连接设备));
+                    XToast.error(localContext.get().getString(R.string.采集器未连接设备));
                     return;
                 }*/
 
@@ -77,7 +78,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
-                XToast.error(localContext.getString(R.string.无法获取设备信息));
+                XToast.error(localContext.get().getString(R.string.无法获取设备信息));
 
                 //跳转采集器连接界面
                 RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);

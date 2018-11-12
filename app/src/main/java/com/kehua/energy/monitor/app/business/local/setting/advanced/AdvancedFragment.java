@@ -44,6 +44,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import butterknife.BindView;
@@ -66,8 +67,7 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
     private View mFooterViewPassword;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
     
     public AdvancedFragment() {
         // Required empty public constructor
@@ -198,9 +198,9 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
         } else if (item.getData().getAddress().equals("6320") && LocalUserManager.getPn() == Frame.单相协议) {
             //单相 外接传感器
             final String[] stringItems = {
-                    localContext.getString(R.string.无),
-                    localContext.getString(R.string.CT),
-                    localContext.getString(R.string.智能电表)};
+                    localContext.get().getString(R.string.无),
+                    localContext.get().getString(R.string.CT),
+                    localContext.get().getString(R.string.智能电表)};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
             dialog.isTitleShow(false).show();
 
@@ -253,9 +253,9 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
         }else if (item.getData().getAddress().equals("6303") && LocalUserManager.getPn() == Frame.三相协议) {
             //仅三相协议有 MPPT并联模式
             final String[] stringItems = {
-                    localContext.getString(R.string.独立),
-                    localContext.getString(R.string.四路并联),
-                    localContext.getString(R.string.两路并联)};
+                    localContext.get().getString(R.string.独立),
+                    localContext.get().getString(R.string.四路并联),
+                    localContext.get().getString(R.string.两路并联)};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
             dialog.isTitleShow(false).show();
 

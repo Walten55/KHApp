@@ -37,6 +37,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -62,8 +63,7 @@ public class DeviceFragment extends XMVPFragment<DevicePresenter> implements Dev
     @Inject
     AdvancedPresenter mAdvancedPresenter;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     public DeviceFragment() {
         // Required empty public constructor
@@ -212,8 +212,8 @@ public class DeviceFragment extends XMVPFragment<DevicePresenter> implements Dev
         if (item.getData().getAddress().equals(Frame.开机密码功能地址 + "") || item.getData().getAddress().equals(Frame.试用期功能地址 + "")){
             //仅三相协议有 MPPT并联模式
             final String[] stringItems = {
-                    localContext.getString(R.string.关闭),
-                    localContext.getString(R.string.开启)};
+                    localContext.get().getString(R.string.关闭),
+                    localContext.get().getString(R.string.开启)};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
             dialog.isTitleShow(false).show();
 

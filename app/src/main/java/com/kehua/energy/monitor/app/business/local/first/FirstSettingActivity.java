@@ -26,6 +26,7 @@ import com.kehua.energy.monitor.app.model.entity.Standard;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.kyleduo.switchbutton.SwitchButton;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -63,8 +64,7 @@ public class FirstSettingActivity extends XMVPActivity<FirstSettingPresenter> im
     @BindView(R.id.et_password)
     XEditText mPasswordView;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     @Override
     public int getLayoutResId() {
@@ -180,9 +180,9 @@ public class FirstSettingActivity extends XMVPActivity<FirstSettingPresenter> im
     @OnClick(R.id.tv_sn_submit)
     public void onClickSubmitSN(View v) {
         if(TextUtils.isEmpty(mPasswordView.getText())){
-            XToast.error(localContext.getString(R.string.密码不能为空));
+            XToast.error(localContext.get().getString(R.string.密码不能为空));
         }else if(!"333".equals(mPasswordView.getText().toString())){
-            XToast.error(localContext.getString(R.string.密码错误));
+            XToast.error(localContext.get().getString(R.string.密码错误));
         } else if(TextUtils.isEmpty(mSNTv.getText())){
             XToast.error(getString(R.string.请设置串号相关串号));
         }else if(mProbationPeriodSwitchButton.isChecked()&&TextUtils.isEmpty(mProbationPeriodDayTv.getText())){

@@ -22,6 +22,8 @@ import com.kehua.energy.monitor.app.di.module.ActivityModule;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.lang.ref.WeakReference;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
@@ -41,8 +43,7 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
     @BindView(R.id.tv_status)
     TextView mStatusTv;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     @Override
     public int getLayoutResId() {
@@ -118,7 +119,7 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
                             mStorageChooser.show();
                         } else {
-                            XToast.error(localContext.getString(R.string.缺少相关权限));
+                            XToast.error(localContext.get().getString(R.string.缺少相关权限));
                         }
                     }
                 });

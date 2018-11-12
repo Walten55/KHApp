@@ -42,6 +42,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -67,9 +68,8 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
     @Inject
     AdvancedPresenter mAdvancedPresenter;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
-    
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+
     public PatternFragment() {
         // Required empty public constructor
     }
@@ -96,11 +96,19 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
             mAdapter = new PatternAdapter(data, mAdvancedPresenter);
             mAdapter.setOnItemClickListener(this);
             mRecyclerView.setAdapter(mAdapter);
-        }
 
-        mAdapter.setNewData(data);
-        mPresenter.expandList(mAdapter);
-//        mAdapter.expandAll();
+            mRecyclerView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mPresenter.expandList(mAdapter);
+                    mAdapter.notifyDataSetChanged();
+                }
+            }, 3000);
+        }else{
+            mAdapter.setNewData(data);
+            mPresenter.expandList(mAdapter);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -254,15 +262,15 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
         final String[] stringItems;
         if (adapterPos == 0) {
             stringItems = new String[]{
-                    localContext.getString(R.string.关闭),
-                    localContext.getString(R.string.无功支撑模式),
-                    localContext.getString(R.string.零无功模式),
+                    localContext.get().getString(R.string.关闭),
+                    localContext.get().getString(R.string.无功支撑模式),
+                    localContext.get().getString(R.string.零无功模式),
             };
         } else {
             stringItems = new String[]{
-                    localContext.getString(R.string.关闭),
-                    localContext.getString(R.string.线性),
-                    localContext.getString(R.string.滞回),
+                    localContext.get().getString(R.string.关闭),
+                    localContext.get().getString(R.string.线性),
+                    localContext.get().getString(R.string.滞回),
             };
         }
 

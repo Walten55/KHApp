@@ -18,6 +18,8 @@ import com.orhanobut.logger.Logger;
 
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
+
 import javax.inject.Inject;
 
 import io.reactivex.functions.Consumer;
@@ -39,8 +41,7 @@ public class WifiConfigPresenter extends WifiConfigContract.Presenter implements
 
     HotspotListAdapter adapter;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     @Inject
     public WifiConfigPresenter() {
@@ -77,14 +78,14 @@ public class WifiConfigPresenter extends WifiConfigContract.Presenter implements
     @Override
     public void apset(String ssid, String pwd) {
         if(StringUtils.isEmpty(ssid)){
-            XToast.error(localContext.getString(R.string.SSID不能为空));
+            XToast.error(localContext.get().getString(R.string.SSID不能为空));
             return;
         }else if(StringUtils.isEmpty(pwd)){
-            XToast.error(localContext.getString(R.string.密码不能为空));
+            XToast.error(localContext.get().getString(R.string.密码不能为空));
             return;
         }
 
-        mView.startWaiting(localContext.getString(R.string.设置中));
+        mView.startWaiting(localContext.get().getString(R.string.设置中));
         mModel.getRemoteModel().apset(ssid, pwd, new Consumer<LinkedTreeMap<String,String>>() {
             @Override
             public void accept(LinkedTreeMap<String,String> response) throws Exception {

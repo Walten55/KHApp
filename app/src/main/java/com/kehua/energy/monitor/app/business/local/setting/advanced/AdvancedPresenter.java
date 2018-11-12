@@ -13,6 +13,7 @@ import com.kehua.energy.monitor.app.model.entity.PointInfo;
 import com.kehua.energy.monitor.app.model.entity.SettingEntity;
 import com.orhanobut.logger.Logger;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +33,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
     @Inject
     APPModel mModel;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     @Inject
     public AdvancedPresenter() {
@@ -88,7 +88,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
 
     @Override
     public void toggle(final int address, final boolean open, final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.getString(R.string.设置中));
+        mView.startWaiting(localContext.get().getString(R.string.设置中));
 
         mModel.getRemoteModel().fdbgMainThread(Cmd.newWriteCmd(LocalUserManager.getDeviceAddress(), address, open), new Consumer<ModbusResponse>() {
             @Override
@@ -99,7 +99,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
                         consumer.accept(true);
                 } else {
                     mView.stopWaiting();
-                    XToast.error(localContext.getString(R.string.设置失败));
+                    XToast.error(localContext.get().getString(R.string.设置失败));
                     if (consumer != null)
                         consumer.accept(false);
                 }
@@ -109,7 +109,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.getString(R.string.设置失败));
+                XToast.error(localContext.get().getString(R.string.设置失败));
                 if (consumer != null)
                     consumer.accept(false);
             }
@@ -123,7 +123,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
                 @Override
                 public void accept(ModbusResponse modbusResponse) throws Exception {
                     mView.stopWaiting();
-                    XToast.success(localContext.getString(R.string.设置成功));
+                    XToast.success(localContext.get().getString(R.string.设置成功));
                 }
             }, new Consumer<Throwable>() {
                 @Override
@@ -137,7 +137,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
                 @Override
                 public void accept(ModbusResponse modbusResponse) throws Exception {
                     mView.stopWaiting();
-                    XToast.success(localContext.getString(R.string.设置成功));
+                    XToast.success(localContext.get().getString(R.string.设置成功));
                 }
             }, new Consumer<Throwable>() {
                 @Override
@@ -150,18 +150,18 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
 
     @Override
     public void save(int address, int value, final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.getString(R.string.设置中));
+        mView.startWaiting(localContext.get().getString(R.string.设置中));
         mModel.getRemoteModel().fdbgMainThread(Cmd.newWriteCmd(LocalUserManager.getDeviceAddress(), address, value), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {
                 mView.stopWaiting();
                 if (modbusResponse.isSuccess()) {
-                    XToast.success(localContext.getString(R.string.设置成功));
+                    XToast.success(localContext.get().getString(R.string.设置成功));
                     if (consumer != null) {
                         consumer.accept(true);
                     }
                 } else {
-                    XToast.error(localContext.getString(R.string.设置失败));
+                    XToast.error(localContext.get().getString(R.string.设置失败));
                     if (consumer != null) {
                         consumer.accept(false);
                     }
@@ -172,7 +172,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.getString(R.string.设置失败));
+                XToast.error(localContext.get().getString(R.string.设置失败));
                 if (consumer != null) {
                     consumer.accept(false);
                 }
@@ -182,18 +182,18 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
 
     @Override
     public void save(int address, int end, int value, final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.getString(R.string.设置中));
+        mView.startWaiting(localContext.get().getString(R.string.设置中));
         mModel.getRemoteModel().fdbgMainThread(Cmd.newWriteCmd(LocalUserManager.getDeviceAddress(), address, end, value), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {
                 mView.stopWaiting();
                 if (modbusResponse.isSuccess()) {
-                    XToast.success(localContext.getString(R.string.设置成功));
+                    XToast.success(localContext.get().getString(R.string.设置成功));
                     if (consumer != null) {
                         consumer.accept(true);
                     }
                 } else {
-                    XToast.error(localContext.getString(R.string.设置失败));
+                    XToast.error(localContext.get().getString(R.string.设置失败));
                     if (consumer != null) {
                         consumer.accept(false);
                     }
@@ -204,7 +204,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.getString(R.string.设置失败));
+                XToast.error(localContext.get().getString(R.string.设置失败));
                 if (consumer != null) {
                     consumer.accept(false);
                 }
@@ -214,18 +214,18 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
 
     @Override
     public void save(int address, int end, int[] values, final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.getString(R.string.设置中));
+        mView.startWaiting(localContext.get().getString(R.string.设置中));
         mModel.getRemoteModel().fdbgMainThread(Cmd.newPowerOnAndProbationPeriodPwdCmd(LocalUserManager.getDeviceAddress(), values[0], values[1]), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {
                 mView.stopWaiting();
                 if (modbusResponse.isSuccess()) {
-                    XToast.success(localContext.getString(R.string.设置成功));
+                    XToast.success(localContext.get().getString(R.string.设置成功));
                     if (consumer != null) {
                         consumer.accept(true);
                     }
                 } else {
-                    XToast.error(localContext.getString(R.string.设置失败));
+                    XToast.error(localContext.get().getString(R.string.设置失败));
                     if (consumer != null) {
                         consumer.accept(false);
                     }
@@ -236,7 +236,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.getString(R.string.设置失败));
+                XToast.error(localContext.get().getString(R.string.设置失败));
                 if (consumer != null) {
                     consumer.accept(false);
                 }
@@ -246,18 +246,18 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
 
     @Override
     public void save(int address, int end, String value, final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.getString(R.string.设置中));
+        mView.startWaiting(localContext.get().getString(R.string.设置中));
         mModel.getRemoteModel().fdbgMainThread(Cmd.newWriteCmd(LocalUserManager.getDeviceAddress(), address, end, value), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {
                 mView.stopWaiting();
                 if (modbusResponse.isSuccess()) {
-                    XToast.success(localContext.getString(R.string.设置成功));
+                    XToast.success(localContext.get().getString(R.string.设置成功));
                     if (consumer != null) {
                         consumer.accept(true);
                     }
                 } else {
-                    XToast.error(localContext.getString(R.string.设置失败));
+                    XToast.error(localContext.get().getString(R.string.设置失败));
                     if (consumer != null) {
                         consumer.accept(false);
                     }
@@ -268,7 +268,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.getString(R.string.设置失败));
+                XToast.error(localContext.get().getString(R.string.设置失败));
                 if (consumer != null) {
                     consumer.accept(false);
                 }
@@ -278,18 +278,18 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
 
     @Override
     public void save(String ssn, int sno, final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.getString(R.string.设置中));
+        mView.startWaiting(localContext.get().getString(R.string.设置中));
         mModel.getRemoteModel().fdbgMainThread(Cmd.newStationSNAndStationNoCmd(LocalUserManager.getDeviceAddress(), ssn, sno), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {
                 mView.stopWaiting();
                 if (modbusResponse.isSuccess()) {
-                    XToast.success(localContext.getString(R.string.设置成功));
+                    XToast.success(localContext.get().getString(R.string.设置成功));
                     if (consumer != null) {
                         consumer.accept(true);
                     }
                 } else {
-                    XToast.error(localContext.getString(R.string.设置失败));
+                    XToast.error(localContext.get().getString(R.string.设置失败));
                     if (consumer != null) {
                         consumer.accept(false);
                     }
@@ -300,7 +300,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.getString(R.string.设置失败));
+                XToast.error(localContext.get().getString(R.string.设置失败));
                 if (consumer != null) {
                     consumer.accept(false);
                 }
@@ -310,23 +310,23 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
 
     @Override
     public void save(String sn, int powerOnF, int probationPeriodF, int day, final Consumer<Boolean> consumer) {
-        mView.startWaiting(localContext.getString(R.string.设置中));
+        mView.startWaiting(localContext.get().getString(R.string.设置中));
         mModel.getRemoteModel().fdbgMainThread(Cmd.newAboutSNCmd(LocalUserManager.getDeviceAddress(), sn, powerOnF, probationPeriodF, day), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {
                 mView.stopWaiting();
 //                if( modbusResponse.isSuccess()){
-//                    XToast.success(localContext.getString(R.string.设置成功));
+//                    XToast.success(localContext.get().getString(R.string.设置成功));
 //                    if(consumer!=null){
 //                        consumer.accept(true);
 //                    }
 //                }else {
-//                    XToast.error(localContext.getString(R.string.设置失败));
+//                    XToast.error(localContext.get().getString(R.string.设置失败));
 //                    if(consumer!=null){
 //                        consumer.accept(false);
 //                    }
 //                }
-                XToast.success(localContext.getString(R.string.设置成功));
+                XToast.success(localContext.get().getString(R.string.设置成功));
                 if (consumer != null) {
                     consumer.accept(true);
                 }
@@ -336,7 +336,7 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
                 Logger.e(throwable.getMessage());
-                XToast.error(localContext.getString(R.string.设置失败));
+                XToast.error(localContext.get().getString(R.string.设置失败));
                 if (consumer != null) {
                     consumer.accept(false);
                 }

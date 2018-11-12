@@ -43,6 +43,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.lang.ref.WeakReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -91,8 +92,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
 
     private TimePickerView mCommonTimePicker;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     public BasicFragment() {
         // Required empty public constructor
@@ -132,10 +132,10 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
     @Override
     public void onClickWorkPattern(View view) {
         final String[] stringItems = {
-                localContext.getString(R.string.自用优先),
-                localContext.getString(R.string.储能优先),
-                localContext.getString(R.string.削峰填谷),
-                localContext.getString(R.string.能量调度)};
+                localContext.get().getString(R.string.自用优先),
+                localContext.get().getString(R.string.储能优先),
+                localContext.get().getString(R.string.削峰填谷),
+                localContext.get().getString(R.string.能量调度)};
         final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
         dialog.isTitleShow(false).show();
 
@@ -491,7 +491,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
     public void onCheckedChanged(CompoundButton buttonView,final boolean isChecked) {
 
         final NormalDialog dialog = new NormalDialog(getActivity());
-        dialog.content(localContext.getString(R.string.是否更改设置)).title(localContext.getString(R.string.温馨提示))
+        dialog.content(localContext.get().getString(R.string.是否更改设置)).title(localContext.get().getString(R.string.温馨提示))
                 .style(NormalDialog.STYLE_TWO)//
                 .btnNum(2)
                 .titleTextSize(23);

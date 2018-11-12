@@ -28,6 +28,7 @@ import com.kehua.energy.monitor.app.utils.Utils;
 import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -367,9 +368,9 @@ public class LocalModel extends BaseModel implements IModel {
      * 解析数据
      */
     public List<RecordData> parse(int deviceAddress, int template, byte[] data) {
-        Context localContext = ActivityUtils.getTopActivity() == null
-                ? Fastgo.getContext() : ActivityUtils.getTopActivity();
-        
+        WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
+
+
         List<RecordData> result = new ArrayList<>();
         if (data.length % 12 != 0) {
             return result;
@@ -452,7 +453,7 @@ public class LocalModel extends BaseModel implements IModel {
                 }
                 result.add(new RecordData(deviceAddress, pointInfo.getMeansCN(), code, value, parseValue, time, !StringUtils.isEmpty(pointInfo.getV0())));
             }
-            result.add(new RecordData(deviceAddress, localContext.getString(R.string.映射失败)+" CODE:"+code, code, 0, "", time, false));
+            result.add(new RecordData(deviceAddress, localContext.get().getString(R.string.映射失败)+" CODE:"+code, code, 0, "", time, false));
         }
 
         return result;

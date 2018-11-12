@@ -244,7 +244,6 @@ public class PatternPresenter extends PatternContract.Presenter {
                     }
                 }
             }
-            patternAdapter.notifyDataSetChanged();
         }
     }
 

@@ -9,6 +9,8 @@ import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.configuration.Config;
 import com.kehua.energy.monitor.app.model.APPModel;
 
+import java.lang.ref.WeakReference;
+
 import javax.inject.Inject;
 
 import io.reactivex.functions.Consumer;
@@ -25,8 +27,7 @@ public class RegisterPresenter extends RegisterContract.Presenter {
     @Inject
     APPModel mModel;
 
-    Context localContext = ActivityUtils.getTopActivity() == null
-            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    WeakReference<Context> localContext = new WeakReference<Context>(ActivityUtils.getTopActivity() == null ? Fastgo.getContext() : ActivityUtils.getTopActivity());
 
     @Inject
     public RegisterPresenter() {
@@ -48,22 +49,22 @@ public class RegisterPresenter extends RegisterContract.Presenter {
     boolean checkRegistParam(String nickName, String account, String password, boolean agree) {
         boolean result = true;
         if (StringUtils.isTrimEmpty(nickName)) {
-            XToast.error(localContext.getString(R.string.昵称不能为空));
+            XToast.error(localContext.get().getString(R.string.昵称不能为空));
             result = false;
         } else if (StringUtils.isTrimEmpty(account)) {
-            XToast.error(localContext.getString(R.string.账号不能为空));
+            XToast.error(localContext.get().getString(R.string.账号不能为空));
             result = false;
         } else if (StringUtils.isTrimEmpty(password)) {
-            XToast.error(localContext.getString(R.string.密码不能为空));
+            XToast.error(localContext.get().getString(R.string.密码不能为空));
             result = false;
         } else if (!agree) {
-            XToast.error(localContext.getString(R.string.请先同意用户服务协议));
+            XToast.error(localContext.get().getString(R.string.请先同意用户服务协议));
             result = false;
         } else if (!((account.matches(Config.REGEX_MOBILE) && account.length() == 11) || account.matches(Config.REGEX_EMAIL))) {
-            XToast.error(localContext.getString(R.string.手机号或者邮箱格式错误));
+            XToast.error(localContext.get().getString(R.string.手机号或者邮箱格式错误));
             result = false;
         } else if (password.length() < Config.PASSWORD_LENGTH_MIN) {
-            XToast.error(localContext.getString(R.string.密码长度必须大于6位字符));
+            XToast.error(localContext.get().getString(R.string.密码长度必须大于6位字符));
             result = false;
         }
         return result;
