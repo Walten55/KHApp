@@ -1,5 +1,8 @@
 package com.kehua.energy.monitor.app.model.entity;
 
+import com.kehua.energy.monitor.app.model.local.LocalModel;
+import com.kehua.energy.monitor.app.utils.LanguageUtils;
+
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 import io.objectbox.annotation.NameInDb;
@@ -97,7 +100,21 @@ public class GroupInfo {
     }
 
     public String getGroupName() {
-        // TODO: 2018/8/31 动态返回
-        return groupNameCN;
+        LocalModel localModel = new LocalModel();
+        String language = localModel.getLanguageSelect();
+
+        String result = "";
+        switch (language) {
+            case LanguageUtils.Chinese:
+                result = groupNameCN;
+                break;
+            case LanguageUtils.English:
+                result = groupNameEN;
+                break;
+            default:
+                result = groupNameCN;
+                break;
+        }
+        return result;
     }
 }

@@ -1,6 +1,7 @@
 package com.kehua.energy.monitor.app.business.NetworkSetting.hotspot;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.SupplicantState;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
@@ -64,6 +66,9 @@ public class HotspotActivity extends XMVPActivity<HotspotPresenter> implements H
     private boolean isConnected;
 
     private EditPwdDialogFragment mPwdDialog;
+
+    Context localContext = ActivityUtils.getTopActivity() == null
+            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
 
     @Override
     public int getLayoutResId() {
@@ -187,7 +192,7 @@ public class HotspotActivity extends XMVPActivity<HotspotPresenter> implements H
     public void showHotspotInfo(HotspotInfo info) {
         SupplicantState supplicantState = info.getSupplicantState();
         if(supplicantState == SupplicantState.SCANNING||supplicantState == SupplicantState.FOUR_WAY_HANDSHAKE){
-            mCurSSIDView.setText(Fastgo.getContext().getString(R.string.采集器未连接));
+            mCurSSIDView.setText(localContext.getString(R.string.采集器未连接));
             mStateView.setVisibility(View.INVISIBLE);
             isConnected = false;
         }else if(supplicantState == SupplicantState.COMPLETED){
@@ -197,7 +202,7 @@ public class HotspotActivity extends XMVPActivity<HotspotPresenter> implements H
             isConnected = true;
         }else{
             mCurSSIDView.setText(info.getSsid().replace("\"",""));
-            if(Fastgo.getContext().getString(R.string.采集器未连接).equals(info.getSsid().replace("\"",""))){
+            if(localContext.getString(R.string.采集器未连接).equals(info.getSsid().replace("\"",""))){
                 mStateView.setVisibility(View.INVISIBLE);
             }else {
                 mStateView.setVisibility(View.VISIBLE);

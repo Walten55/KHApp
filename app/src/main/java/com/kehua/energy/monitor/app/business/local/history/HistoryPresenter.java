@@ -1,5 +1,8 @@
 package com.kehua.energy.monitor.app.business.local.history;
 
+import android.content.Context;
+
+import com.blankj.utilcode.util.ActivityUtils;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.application.LocalUserManager;
 import com.kehua.energy.monitor.app.model.APPModel;
@@ -20,6 +23,9 @@ public class HistoryPresenter extends HistoryContract.Presenter {
     @Inject
     APPModel mModel;
 
+    Context localContext = ActivityUtils.getTopActivity() == null
+            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+
     @Inject
     public HistoryPresenter() {
     }
@@ -37,7 +43,7 @@ public class HistoryPresenter extends HistoryContract.Presenter {
 
     @Override
     public void recordCount(final Consumer<Boolean> consumer) {
-        mView.startWaiting(Fastgo.getContext().getString(R.string.加载中));
+        mView.startWaiting(localContext.getString(R.string.加载中));
         mModel.getRemoteModel().recordCount(LocalUserManager.getDeviceAddress(), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {

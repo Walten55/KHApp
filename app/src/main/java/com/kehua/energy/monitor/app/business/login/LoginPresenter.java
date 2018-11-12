@@ -1,7 +1,9 @@
 package com.kehua.energy.monitor.app.business.login;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.google.gson.Gson;
 import com.kehua.energy.monitor.app.R;
@@ -41,6 +43,9 @@ public class LoginPresenter extends LoginContract.Presenter {
 
     List<Platform> mPlatforms = new ArrayList<>();
 
+    Context localContext = ActivityUtils.getTopActivity() == null
+            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+
     @Inject
     public LoginPresenter() {
     }
@@ -59,17 +64,18 @@ public class LoginPresenter extends LoginContract.Presenter {
     @Override
     boolean checkLoginParam(String account, String password) {
         boolean result = true;
+
         if (StringUtils.isTrimEmpty(account)) {
-            XToast.error(Fastgo.getContext().getString(R.string.账号不能为空));
+            XToast.error(localContext.getString(R.string.账号不能为空));
             result = false;
         } else if (StringUtils.isTrimEmpty(password)) {
-            XToast.error(Fastgo.getContext().getString(R.string.密码不能为空));
+            XToast.error(localContext.getString(R.string.密码不能为空));
             result = false;
         } else if (!((account.matches(Config.REGEX_MOBILE) && account.length() == 11) || account.matches(Config.REGEX_EMAIL))) {
-            XToast.error(Fastgo.getContext().getString(R.string.手机号或者邮箱格式错误));
+            XToast.error(localContext.getString(R.string.手机号或者邮箱格式错误));
             result = false;
         } else if (password.length() < Config.PASSWORD_LENGTH_MIN) {
-            XToast.error(Fastgo.getContext().getString(R.string.密码长度必须大于6位字符));
+            XToast.error(localContext.getString(R.string.密码长度必须大于6位字符));
             result = false;
         }
         return result;

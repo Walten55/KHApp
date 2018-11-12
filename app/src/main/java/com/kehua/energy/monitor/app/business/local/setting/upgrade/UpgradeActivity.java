@@ -1,6 +1,7 @@
 package com.kehua.energy.monitor.app.business.local.setting.upgrade;
 
 import android.Manifest;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.codekidlabs.storagechooser.Content;
 import com.codekidlabs.storagechooser.StorageChooser;
@@ -38,6 +40,9 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
     @BindView(R.id.tv_status)
     TextView mStatusTv;
+
+    Context localContext = ActivityUtils.getTopActivity() == null
+            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
 
     @Override
     public int getLayoutResId() {
@@ -113,7 +118,7 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
                             mStorageChooser.show();
                         } else {
-                            XToast.error(Fastgo.getContext().getString(R.string.缺少相关权限));
+                            XToast.error(localContext.getString(R.string.缺少相关权限));
                         }
                     }
                 });

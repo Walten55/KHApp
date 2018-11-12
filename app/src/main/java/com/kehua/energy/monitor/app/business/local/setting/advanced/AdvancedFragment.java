@@ -1,5 +1,6 @@
 package com.kehua.energy.monitor.app.business.local.setting.advanced;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
@@ -64,6 +66,9 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
     private View mFooterViewPassword;
 
+    Context localContext = ActivityUtils.getTopActivity() == null
+            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    
     public AdvancedFragment() {
         // Required empty public constructor
     }
@@ -193,9 +198,9 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
         } else if (item.getData().getAddress().equals("6320") && LocalUserManager.getPn() == Frame.单相协议) {
             //单相 外接传感器
             final String[] stringItems = {
-                    Fastgo.getContext().getString(R.string.无),
-                    Fastgo.getContext().getString(R.string.CT),
-                    Fastgo.getContext().getString(R.string.智能电表)};
+                    localContext.getString(R.string.无),
+                    localContext.getString(R.string.CT),
+                    localContext.getString(R.string.智能电表)};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
             dialog.isTitleShow(false).show();
 
@@ -248,9 +253,9 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
         }else if (item.getData().getAddress().equals("6303") && LocalUserManager.getPn() == Frame.三相协议) {
             //仅三相协议有 MPPT并联模式
             final String[] stringItems = {
-                    Fastgo.getContext().getString(R.string.独立),
-                    Fastgo.getContext().getString(R.string.四路并联),
-                    Fastgo.getContext().getString(R.string.两路并联)};
+                    localContext.getString(R.string.独立),
+                    localContext.getString(R.string.四路并联),
+                    localContext.getString(R.string.两路并联)};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
             dialog.isTitleShow(false).show();
 

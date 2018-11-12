@@ -1,7 +1,9 @@
 package com.kehua.energy.monitor.app.business.local.alarm;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.flyco.roundview.RoundTextView;
@@ -14,6 +16,9 @@ import me.walten.fastgo.common.Fastgo;
 
 public class LocalAlarmAdapter extends BaseQuickAdapter<DeviceData, BaseViewHolder> {
 
+    Context localContext = ActivityUtils.getTopActivity() == null
+            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    
     public LocalAlarmAdapter(@Nullable List<DeviceData> data) {
         super(R.layout.item_local_alarm, data);
     }
@@ -22,7 +27,7 @@ public class LocalAlarmAdapter extends BaseQuickAdapter<DeviceData, BaseViewHold
     protected void convert(BaseViewHolder helper, DeviceData item) {
         helper.setText(R.id.tv_local_alarm_name, item.getDescriptionCN());
 
-        int colorId = Fastgo.getContext().getString(R.string.告警).equals(item.getSgroup()) ? R.color.yellow: R.color.red ;
+        int colorId = localContext.getString(R.string.告警).equals(item.getSgroup()) ? R.color.yellow: R.color.red ;
 
         RoundTextView rtvAlarmValue = helper.getView(R.id.tv_local_alarm_value);
         rtvAlarmValue.getDelegate().setBackgroundColor(Fastgo.getContext().getResources().getColor(colorId));

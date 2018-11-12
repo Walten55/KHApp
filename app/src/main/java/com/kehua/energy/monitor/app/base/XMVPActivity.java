@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.kehua.energy.monitor.app.R;
+import com.kehua.energy.monitor.app.utils.LanguageUtils;
 
 import butterknife.BindView;
 import me.walten.fastgo.base.activitiy.MVPActivity;
@@ -28,10 +29,10 @@ public abstract class XMVPActivity<T extends IPresenter> extends MVPActivity<T> 
         super.onCreate(savedInstanceState);
     }
 
-    public void startWaiting(String msg){
-        try{
+    public void startWaiting(String msg) {
+        try {
             super.startWaiting(msg);
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -64,5 +65,11 @@ public abstract class XMVPActivity<T extends IPresenter> extends MVPActivity<T> 
                     && event.getY() > top && event.getY() < bottom);
         }
         return false;
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Context context = LanguageUtils.wrap(newBase, LanguageUtils.getTargetLable());
+        super.attachBaseContext(context);
     }
 }

@@ -5,6 +5,7 @@ import android.location.LocationManager;
 import android.net.wifi.WifiConfiguration;
 import android.view.View;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.kehua.energy.monitor.app.R;
@@ -54,6 +55,9 @@ public class HotspotPresenter extends HotspotContract.Presenter {
 
     PersonalView mPersonView;
 
+    Context localContext = ActivityUtils.getTopActivity() == null
+            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    
     @Inject
     public HotspotPresenter() {
     }
@@ -113,7 +117,7 @@ public class HotspotPresenter extends HotspotContract.Presenter {
                             return;
 
                         if(curHotspotInfo.getSsid().contains("<unknown ssid>")){
-                            curHotspotInfo.setSsid(Fastgo.getContext().getString(R.string.采集器未连接));
+                            curHotspotInfo.setSsid(localContext.getString(R.string.采集器未连接));
                         }
                         mView.showHotspotInfo(curHotspotInfo);
                     }
@@ -163,7 +167,7 @@ public class HotspotPresenter extends HotspotContract.Presenter {
                 }
 
                 if(curHotspotInfo.getSsid().contains("<unknown ssid>")){
-                    curHotspotInfo.setSsid(Fastgo.getContext().getString(R.string.采集器未连接));
+                    curHotspotInfo.setSsid(localContext.getString(R.string.采集器未连接));
                 }
 
                 Collections.sort(hotspotInfoList,new Comparator<HotspotInfo>(){

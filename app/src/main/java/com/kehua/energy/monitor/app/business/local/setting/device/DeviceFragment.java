@@ -1,5 +1,6 @@
 package com.kehua.energy.monitor.app.business.local.setting.device;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
@@ -59,6 +61,9 @@ public class DeviceFragment extends XMVPFragment<DevicePresenter> implements Dev
 
     @Inject
     AdvancedPresenter mAdvancedPresenter;
+
+    Context localContext = ActivityUtils.getTopActivity() == null
+            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
 
     public DeviceFragment() {
         // Required empty public constructor
@@ -207,8 +212,8 @@ public class DeviceFragment extends XMVPFragment<DevicePresenter> implements Dev
         if (item.getData().getAddress().equals(Frame.开机密码功能地址 + "") || item.getData().getAddress().equals(Frame.试用期功能地址 + "")){
             //仅三相协议有 MPPT并联模式
             final String[] stringItems = {
-                    Fastgo.getContext().getString(R.string.关闭),
-                    Fastgo.getContext().getString(R.string.开启)};
+                    localContext.getString(R.string.关闭),
+                    localContext.getString(R.string.开启)};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
             dialog.isTitleShow(false).show();
 

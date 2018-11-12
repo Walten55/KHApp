@@ -1,5 +1,6 @@
 package com.kehua.energy.monitor.app.business.local.setting.battery;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
@@ -62,6 +64,9 @@ public class BatteryFragment extends XMVPFragment<BatteryPresenter> implements B
 
     @Inject
     AdvancedPresenter mAdvancedPresenter;
+
+    Context localContext = ActivityUtils.getTopActivity() == null
+            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
 
     public BatteryFragment() {
         // Required empty public constructor
@@ -208,9 +213,9 @@ public class BatteryFragment extends XMVPFragment<BatteryPresenter> implements B
         final SettingEntity item = (SettingEntity) adapter.getItem(position);
         if (item.getData().getAddress().equals(Frame.电池类型地址() + "")) {
             final String[] stringItems = {
-                    Fastgo.getContext().getString(R.string.铅酸电池),
-                    Fastgo.getContext().getString(R.string.磷酸铁锂电池),
-                    Fastgo.getContext().getString(R.string.三元电池),
+                    localContext.getString(R.string.铅酸电池),
+                    localContext.getString(R.string.磷酸铁锂电池),
+                    localContext.getString(R.string.三元电池),
             };
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
             dialog.isTitleShow(false).show();

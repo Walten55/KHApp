@@ -1,5 +1,8 @@
 package com.kehua.energy.monitor.app.business.personal;
 
+import android.content.Context;
+
+import com.blankj.utilcode.util.ActivityUtils;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.model.APPModel;
 import com.kehua.energy.monitor.app.model.entity.InvInfoList;
@@ -18,6 +21,9 @@ public class PersonalPresenter extends PersonalContract.Presenter {
     @Inject
     APPModel mModel;
 
+    Context localContext = ActivityUtils.getTopActivity() == null
+            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
+    
     @Inject
     public PersonalPresenter() {
     }
@@ -45,7 +51,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
 
     @Override
     public void invinfo(final Consumer<InvInfoList> consumer) {
-        mView.startWaiting(Fastgo.getContext().getString(R.string.检测中));
+        mView.startWaiting(localContext.getString(R.string.检测中));
         mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
             @Override
             public void accept(InvInfoList invInfoList) throws Exception {
@@ -58,7 +64,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
                     RouterMgr.get().localLogin();
                 }else {
                     //采集器未连接设备
-                    XToast.error(Fastgo.getContext().getString(R.string.采集器未连接设备));
+                    XToast.error(localContext.getString(R.string.采集器未连接设备));
                     return;
                 }*/
 
@@ -71,7 +77,7 @@ public class PersonalPresenter extends PersonalContract.Presenter {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 mView.stopWaiting();
-                XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
+                XToast.error(localContext.getString(R.string.无法获取设备信息));
 
                 //跳转采集器连接界面
                 RouterMgr.get().hotspot(RouterMgr.TYPE_OFF_NETWORK);

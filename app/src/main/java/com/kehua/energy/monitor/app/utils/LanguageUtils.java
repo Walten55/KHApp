@@ -1,9 +1,11 @@
 package com.kehua.energy.monitor.app.utils;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.os.LocaleList;
 import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 
@@ -37,6 +39,7 @@ public class LanguageUtils {
             Fastgo.getContext().getResources().getString(R.string.中文),
             Fastgo.getContext().getResources().getString(R.string.英文)
     };
+    private static Locale targetLable;
 
     /**
      * @des:App初始化时候进行语言设置
@@ -92,23 +95,23 @@ public class LanguageUtils {
             Resources resources = ActivityUtils.getTopActivity().getResources();
             DisplayMetrics dm = resources.getDisplayMetrics();
             Configuration configuration = resources.getConfiguration();
-            Locale locale = Locale.getDefault();
+            targetLable = Locale.getDefault();
 
             //切换成中文
             if (Chinese.equals(language)) {
-                locale = Locale.CHINESE;
+                targetLable = Locale.CHINESE;
             } else if (English.equals(language)) {
-                locale = Locale.ENGLISH;
+                targetLable = Locale.ENGLISH;
             }
 
             //设置，根据sdk 版本进行设置（7.0以上设置方式不同）
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                configuration.setLocale(locale);
+                //todo
             } else {
-                configuration.locale = locale;
+                configuration.locale = targetLable;
+                configuration.setLayoutDirection(targetLable);
+                resources.updateConfiguration(configuration, dm);
             }
-            configuration.setLayoutDirection(locale);
-            resources.updateConfiguration(configuration, dm);
             ActivityUtils.getTopActivity().recreate();
         }
     }
@@ -131,4 +134,31 @@ public class LanguageUtils {
     }
 
 
+    public static ContextWrapper wrap(Context context, Locale newLocale) {
+
+        Resources res = context.getResources();
+        Configuration configuration = res.getConfiguration();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+
+            configuration.setLocale(newLocale);
+            LocaleList localeList = new LocaleList(newLocale);
+            LocaleList.setDefault(localeList);
+            configuration.setLocales(localeList);
+            context = context.createConfigurationContext(configuration);
+
+        } else {
+
+            configuration.setLocale(newLocale);
+            context = context.createConfigurationContext(configuration);
+
+        }
+
+        return new ContextWrapper(context);
+    }
+
+    public static Locale getTargetLable() {
+        targetLable = targetLable == null ? Locale.getDefault() : targetLable;
+        return targetLable;
+    }
 }

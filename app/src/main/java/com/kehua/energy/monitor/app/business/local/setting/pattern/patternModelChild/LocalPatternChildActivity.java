@@ -254,14 +254,15 @@ public class LocalPatternChildActivity extends XMVPActivity<LocalPatternChildPre
             @Override
             public void onResult(final String msg) {
 
+                final String showValue = msg;
+                String saveValue = msg.replace(".", "").trim();
                 try {
                     if (!"string".equals(pointInfo.getDataType())) {
-                        String saveValue = msg.replace(".", "").trim();
                         mAdvancedPresenter.save(Integer.valueOf(pointInfo.getAddress()), Integer.valueOf(saveValue), new Consumer<Boolean>() {
                             @Override
                             public void accept(Boolean success) throws Exception {
                                 if (deviceData != null && success) {
-                                    deviceData.setParseValue(msg);
+                                    deviceData.setParseValue(showValue);
                                     mAdapter.notifyDataSetChanged();
                                 }
                             }
@@ -271,7 +272,7 @@ public class LocalPatternChildActivity extends XMVPActivity<LocalPatternChildPre
                             @Override
                             public void accept(Boolean success) throws Exception {
                                 if (deviceData != null && success) {
-                                    deviceData.setParseValue(msg);
+                                    deviceData.setParseValue(showValue);
                                     mAdapter.notifyDataSetChanged();
                                 }
 

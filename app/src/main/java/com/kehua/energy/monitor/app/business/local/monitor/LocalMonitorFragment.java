@@ -101,6 +101,7 @@ public class LocalMonitorFragment extends XMVPFragment<LocalMonitorPresenter> im
                 LinearLayout mTabStrip = (LinearLayout) mTabLayout.getChildAt(0);
 
                 int dp40 = ConvertUtils.dp2px(40);
+                int dp32 = ConvertUtils.dp2px(32);
 
                 for (int i = 0; i < mTabStrip.getChildCount(); i++) {
                     View tabView = mTabStrip.getChildAt(i);
@@ -124,8 +125,8 @@ public class LocalMonitorFragment extends XMVPFragment<LocalMonitorPresenter> im
                     //设置tab左右间距为10dp  注意这里不能使用Padding 因为源码中线的宽度是根据 tabView的宽度来设置的
                     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tabView.getLayoutParams();
                     params.width = width;
-                    params.leftMargin = dp40;
-                    params.rightMargin = dp40;
+                    params.leftMargin = dp32;
+                    params.rightMargin = dp32;
                     tabView.setLayoutParams(params);
 
                     tabView.invalidate();

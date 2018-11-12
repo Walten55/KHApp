@@ -1,7 +1,9 @@
 package com.kehua.energy.monitor.app.business.NetworkSetting.WifiConfig;
 
+import android.content.Context;
 import android.view.View;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.internal.LinkedTreeMap;
@@ -36,6 +38,9 @@ public class WifiConfigPresenter extends WifiConfigContract.Presenter implements
     HotspotPresenter mHotspotPresenter;
 
     HotspotListAdapter adapter;
+
+    Context localContext = ActivityUtils.getTopActivity() == null
+            ? Fastgo.getContext() : ActivityUtils.getTopActivity();
 
     @Inject
     public WifiConfigPresenter() {
@@ -72,14 +77,14 @@ public class WifiConfigPresenter extends WifiConfigContract.Presenter implements
     @Override
     public void apset(String ssid, String pwd) {
         if(StringUtils.isEmpty(ssid)){
-            XToast.error(Fastgo.getContext().getString(R.string.SSID不能为空));
+            XToast.error(localContext.getString(R.string.SSID不能为空));
             return;
         }else if(StringUtils.isEmpty(pwd)){
-            XToast.error(Fastgo.getContext().getString(R.string.密码不能为空));
+            XToast.error(localContext.getString(R.string.密码不能为空));
             return;
         }
 
-        mView.startWaiting(Fastgo.getContext().getString(R.string.设置中));
+        mView.startWaiting(localContext.getString(R.string.设置中));
         mModel.getRemoteModel().apset(ssid, pwd, new Consumer<LinkedTreeMap<String,String>>() {
             @Override
             public void accept(LinkedTreeMap<String,String> response) throws Exception {
