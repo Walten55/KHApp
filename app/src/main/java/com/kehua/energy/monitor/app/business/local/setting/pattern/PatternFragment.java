@@ -208,6 +208,8 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
                     return InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
                 }else if(deviceData != null && "double_signed".equals(pointInfo.getDataType())){
                     return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_NUMBER_FLAG_DECIMAL ;
+                }else if(deviceData != null && "int_signed".equals(pointInfo.getDataType())){
+                    return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER ;
                 } else {
                     return InputType.TYPE_CLASS_NUMBER;
                 }
