@@ -36,6 +36,7 @@ import com.kehua.energy.monitor.app.model.entity.PointInfo;
 import com.kehua.energy.monitor.app.model.entity.SettingEntity;
 import com.kehua.energy.monitor.app.model.entity.Standard;
 import com.kehua.energy.monitor.app.route.RouterMgr;
+import com.kehua.energy.monitor.app.utils.Utils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -220,11 +221,11 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
 
                 try {
                     if (!"string".equals(pointInfo.getDataType())) {
-                        mAdvancedPresenter.save(Integer.valueOf(pointInfo.getAddress()), Integer.valueOf(msg.replace(".", "").trim()), new Consumer<Boolean>() {
+                        mAdvancedPresenter.save(Integer.valueOf(pointInfo.getAddress()), Integer.valueOf(msg.trim()), new Consumer<Boolean>() {
                             @Override
                             public void accept(Boolean success) throws Exception {
                                 if (deviceData != null && success) {
-                                    deviceData.setParseValue(msg);
+                                    deviceData.setParseValue(Utils.parseAccuracy(Integer.valueOf(msg), deviceData.getAccuracy()));
                                     mAdapter.notifyDataSetChanged();
                                 }
                             }

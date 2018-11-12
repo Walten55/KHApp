@@ -31,6 +31,7 @@ import com.kehua.energy.monitor.app.model.entity.PointInfo;
 import com.kehua.energy.monitor.app.model.entity.SettingEntity;
 import com.kehua.energy.monitor.app.model.entity.Standard;
 import com.kehua.energy.monitor.app.route.RouterMgr;
+import com.kehua.energy.monitor.app.utils.Utils;
 
 import java.util.List;
 
@@ -254,25 +255,23 @@ public class LocalPatternChildActivity extends XMVPActivity<LocalPatternChildPre
             @Override
             public void onResult(final String msg) {
 
-                final String showValue = new String(msg);
-                String saveValue = new String(msg.replace(".", "").trim());
                 try {
                     if (!"string".equals(pointInfo.getDataType())) {
-                        mAdvancedPresenter.save(Integer.valueOf(pointInfo.getAddress()), Integer.valueOf(saveValue), new Consumer<Boolean>() {
+                        mAdvancedPresenter.save(Integer.valueOf(pointInfo.getAddress()), Integer.valueOf(msg.trim()), new Consumer<Boolean>() {
                             @Override
                             public void accept(Boolean success) throws Exception {
                                 if (deviceData != null && success) {
-                                    deviceData.setParseValue(showValue);
+                                    deviceData.setParseValue(Utils.parseAccuracy(Integer.valueOf(msg), deviceData.getAccuracy()));
                                     mAdapter.notifyDataSetChanged();
                                 }
                             }
                         });
                     } else {
-                        mAdvancedPresenter.save(Integer.valueOf(pointInfo.getAddress()), Integer.valueOf(pointInfo.getAddress()) + pointInfo.getByteCount() / 2 - 1, saveValue, new Consumer<Boolean>() {
+                        mAdvancedPresenter.save(Integer.valueOf(pointInfo.getAddress()), Integer.valueOf(pointInfo.getAddress()) + pointInfo.getByteCount() / 2 - 1, msg, new Consumer<Boolean>() {
                             @Override
                             public void accept(Boolean success) throws Exception {
                                 if (deviceData != null && success) {
-                                    deviceData.setParseValue(showValue);
+                                    deviceData.setParseValue(msg);
                                     mAdapter.notifyDataSetChanged();
                                 }
 
