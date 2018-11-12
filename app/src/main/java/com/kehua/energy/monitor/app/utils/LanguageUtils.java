@@ -15,8 +15,6 @@ import com.kehua.energy.monitor.app.model.local.LocalModel;
 
 import java.util.Locale;
 
-import me.walten.fastgo.common.Fastgo;
-
 /**
  * 用于本机语言切换所需的常服你操作封装
  */
@@ -99,7 +97,7 @@ public class LanguageUtils {
 
             //设置，根据sdk 版本进行设置（7.0以上设置方式不同）
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                LanguageUtils.wrap(Fastgo.getContext(), targetLable);
+                LanguageUtils.wrap(context, targetLable);
             } else {
                 configuration.locale = targetLable;
                 configuration.setLayoutDirection(targetLable);
