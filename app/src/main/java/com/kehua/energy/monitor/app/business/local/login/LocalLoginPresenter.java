@@ -180,6 +180,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
         if (data.getInv() != null && data.getInv().size() > 0)
             LocalUserManager.setDeviceAddress(data.getInv().get(0).getAddr());
         RouterMgr.get().localMain();
+
         mView.finishView();
     }
 

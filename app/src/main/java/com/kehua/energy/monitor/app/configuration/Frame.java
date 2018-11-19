@@ -134,7 +134,10 @@ public class Frame {
     public static final int 串号相关试用期功能地址 = 6811;
     public static final int 串号相关试用期天数地址 = 6812;
     public static final int MAC地址 = 6813;
-    public static final int 机器型号地址 = 6816;
+    public static final int 机器型号设置地址 = 6816;
+    public static int 机器型号地址(){
+        return 单相协议 == LocalUserManager.getPn()?4571:4800;
+    }
     public static final int 站号配置串号地址 = 7000;
     public static final int 站号配置站号地址 = 7010;
 

@@ -1,8 +1,5 @@
 package com.kehua.energy.monitor.app.business.local.monitor;
 
-import android.content.Context;
-
-import com.blankj.utilcode.util.ActivityUtils;
 import com.hwangjr.rxbus.RxBus;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.application.LocalUserManager;
@@ -15,7 +12,6 @@ import com.kehua.energy.monitor.app.model.entity.GroupInfo;
 import com.kehua.energy.monitor.app.model.entity.MonitorEntity;
 import com.kehua.energy.monitor.app.model.entity.PointInfo;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -162,15 +158,15 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
                             Fastgo.getContext().getString(R.string.负载电流_单位),
                             ""}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "U",
+                            Fastgo.getContext().getString(R.string.U相),
                             "4601",
                             "4604"}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "V",
+                            Fastgo.getContext().getString(R.string.V相),
                             "4602",
                             "4605"}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "W",
+                            Fastgo.getContext().getString(R.string.W相),
                             "4603",
                             "4606"}));
 
