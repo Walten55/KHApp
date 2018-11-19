@@ -171,8 +171,8 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
             Calendar endDate = Calendar.getInstance();
 
             //正确设置方式 原因：注意事项有说明
-            startDate.set(selectedDate.get(Calendar.YEAR) - 1, 0, 1);
-            endDate.set(selectedDate.get(Calendar.YEAR) + 1, 11, 31);
+            startDate.set(selectedDate.get(Calendar.YEAR) - 5, 0, 1);
+            endDate.set(selectedDate.get(Calendar.YEAR) + 5, 11, 31);
 
             pvTime = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
                 @Override

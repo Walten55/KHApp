@@ -21,7 +21,7 @@
         android:layout_marginTop="@dimen/grid_10"
         android:lines="1"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/text_size_title"
+        android:textSize="@dimen/grid_10"
         />
 
 </LinearLayout>

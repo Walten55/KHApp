@@ -95,7 +95,7 @@ public class InputActivity extends XSimpleActivity {
                                 for (int i = 0; i < digits; i++) {
                                     newResult += 0;
                                 }
-                                mConfig.onResult(Integer.valueOf(newResult) + "");
+                                mConfig.onResult(newResult);
                                 finish();
                             } else {
                                 String[] split = mMsgEt.getText().toString().split("\\.");

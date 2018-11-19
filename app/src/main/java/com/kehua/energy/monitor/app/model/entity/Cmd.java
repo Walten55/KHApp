@@ -410,7 +410,7 @@ public class Cmd {
         else if(intToHexString(value).length() == 4)
             sb.append(intToHexString(value).substring(0,2)+" "+intToHexString(value).substring(2,4));
         else{
-            sb.append("FF"+" "+intToHexString(value).substring(6));
+            sb.append(ByteUtils.bytesToHexStringSplitBySpace(ByteUtils.hexStringToBytes(intToHexString(value).substring(4))));
         }
         return sb.toString();
     }

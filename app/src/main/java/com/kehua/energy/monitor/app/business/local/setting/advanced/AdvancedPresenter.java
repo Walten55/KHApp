@@ -1,8 +1,5 @@
 package com.kehua.energy.monitor.app.business.local.setting.advanced;
 
-import android.content.Context;
-
-import com.blankj.utilcode.util.ActivityUtils;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.application.LocalUserManager;
 import com.kehua.energy.monitor.app.configuration.Frame;
@@ -13,7 +10,6 @@ import com.kehua.energy.monitor.app.model.entity.PointInfo;
 import com.kehua.energy.monitor.app.model.entity.SettingEntity;
 import com.orhanobut.logger.Logger;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -152,6 +148,11 @@ public class AdvancedPresenter extends AdvancedContract.Presenter {
     @Override
     public void save(int address, int value, final Consumer<Boolean> consumer) {
         mView.startWaiting(Fastgo.getContext().getString(R.string.设置中));
+        if(value>65535){
+            mView.stopWaiting();
+            XToast.error(Fastgo.getContext().getString(R.string.设置失败));
+            return;
+        }
         mModel.getRemoteModel().fdbgMainThread(Cmd.newWriteCmd(LocalUserManager.getDeviceAddress(), address, value), new Consumer<ModbusResponse>() {
             @Override
             public void accept(ModbusResponse modbusResponse) throws Exception {

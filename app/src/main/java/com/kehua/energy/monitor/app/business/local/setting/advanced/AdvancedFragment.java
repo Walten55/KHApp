@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.StringUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
@@ -339,7 +340,11 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
                 @Override
                 public int getInputType() {
-                    if (deviceData != null && "string".equals(item.getData().getDataType())) {
+                    if (deviceData != null&&item.getData().getAddress().equals(Frame.开机密码地址[0] + "")) {
+                        return InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD;
+                    } else if (deviceData != null&&item.getData().getAddress().equals(Frame.试用期密码地址[0] + "")) {
+                        return InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD;
+                    }else if (deviceData != null && "string".equals(item.getData().getDataType())) {
                         return InputType.TYPE_CLASS_TEXT;
                     } else if (deviceData != null && ("double".equals(item.getData().getDataType()))) {
                         return InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
@@ -359,6 +364,8 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
                 @Override
                 public void onResult(final String msg) {
+                    if(StringUtils.isEmpty(msg))
+                        return;
 
                     if (item.getData().getAddress().equals(Frame.开机密码地址[0] + "")) {
 

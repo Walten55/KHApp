@@ -447,8 +447,10 @@ public class LocalModel extends BaseModel implements IModel {
                     }
                 }
                 result.add(new RecordData(deviceAddress, pointInfo.getMeans(), code, value, parseValue, time, !StringUtils.isEmpty(pointInfo.getV0())));
+            }else{
+                result.add(new RecordData(deviceAddress, "Code:" + code + " " +Fastgo.getContext().getString(R.string.映射失败) , code, 0, "", time, false));
             }
-            result.add(new RecordData(deviceAddress, Fastgo.getContext().getString(R.string.映射失败) + " CODE:" + code, code, 0, "", time, false));
+
         }
 
         return result;

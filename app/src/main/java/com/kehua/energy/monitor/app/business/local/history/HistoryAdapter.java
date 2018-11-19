@@ -26,7 +26,12 @@ public class HistoryAdapter extends BaseQuickAdapter<RecordData,BaseViewHolder> 
 
     @Override
     protected void convert(BaseViewHolder helper, RecordData item) {
-        helper.setText(R.id.tv_name,item.getName().replace("HH_HH","\n").trim());
+        if(item.getName().contains("HH_HH")){
+            helper.setText(R.id.tv_name,item.getName().split("HH_HH")[0].trim());
+        }else {
+            helper.setText(R.id.tv_name,item.getName().trim());
+        }
+
         helper.setText(R.id.tv_time,item.getTime().trim());
         helper.setText(R.id.tv_device_address,mContext.getString(R.string.设备编号)+":"+item.getDeviceAddress());
         helper.setText(R.id.tv_value,item.getParseValue().trim());

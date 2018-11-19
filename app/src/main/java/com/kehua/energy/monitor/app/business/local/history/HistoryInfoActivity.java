@@ -90,9 +90,7 @@ public class HistoryInfoActivity extends XMVPActivity<HistoryPresenter> implemen
         //初始化index、size
         size = count<10?count:10;
         if(size==10){
-            index = count-11;
-            if(index == -1)
-                index = 0;
+            index = count-10;
         }else {
             index = 0;
         }
@@ -140,7 +138,7 @@ public class HistoryInfoActivity extends XMVPActivity<HistoryPresenter> implemen
 
                                     size = count-mData.size()<10?count-mData.size():10;
                                     if(size==10){
-                                        index-=11;
+                                        index-=10;
                                     }else {
                                         index = 0;
                                     }

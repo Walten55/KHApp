@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:7429315746771958023",
-      "lastPropertyId": "14:7725924311237747347",
+      "lastPropertyId": "16:7392726313764167594",
       "name": "POINT_INFO",
       "properties": [
         {
@@ -63,6 +63,14 @@
         {
           "id": "14:7725924311237747347",
           "name": "AUTHORITY"
+        },
+        {
+          "id": "15:3421291257763738342",
+          "name": "UNIT_EN"
+        },
+        {
+          "id": "16:7392726313764167594",
+          "name": "UNIT_FR"
         }
       ],
       "relations": []

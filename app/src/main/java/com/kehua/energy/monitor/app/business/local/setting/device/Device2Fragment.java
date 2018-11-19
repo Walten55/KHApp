@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.StringUtils;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
@@ -420,6 +421,8 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
 
             @Override
             public void onResult(final String msg) {
+                if(StringUtils.isEmpty(msg))
+                    return;
 
                 if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.MAC地址||Integer.valueOf(deviceData.getRegisterAddress()) == Frame.机器型号地址) {
                     try {
