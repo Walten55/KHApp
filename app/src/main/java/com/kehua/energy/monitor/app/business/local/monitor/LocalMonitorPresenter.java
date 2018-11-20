@@ -135,15 +135,15 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
                             Fastgo.getContext().getString(R.string.电网电流_单位),
                             ""}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "U",
+                            Fastgo.getContext().getString(R.string.U相),
                             "4512",
                             "4515"}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "V",
+                            Fastgo.getContext().getString(R.string.V相),
                             "4513",
                             "4516"}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "W",
+                            Fastgo.getContext().getString(R.string.W相),
                             "4514",
                             "4517"}));
 
@@ -180,17 +180,17 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
                             Fastgo.getContext().getString(R.string.无功功率_单位),
                             Fastgo.getContext().getString(R.string.视在功率_单位)}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "U",
+                            Fastgo.getContext().getString(R.string.U相),
                             "4610",
                             "4613",
                             "4616"}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "V",
+                            Fastgo.getContext().getString(R.string.V相),
                             "4611",
                             "4614",
                             "4617"}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "W",
+                            Fastgo.getContext().getString(R.string.W相),
                             "4612",
                             "4615",
                             "4618"}));
@@ -250,15 +250,15 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
                             Fastgo.getContext().getString(R.string.逆变电流_单位),
                             ""}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "U",
+                            Fastgo.getContext().getString(R.string.U相),
                             "5500",
                             "5503"}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "V",
+                            Fastgo.getContext().getString(R.string.V相),
                             "5501",
                             "5504"}));
                     result.add(new MonitorEntity(MonitorEntity.TABLE_CONTENT, new String[]{
-                            "W",
+                            Fastgo.getContext().getString(R.string.W相),
                             "5502",
                             "5505"}));
                     result.add(new MonitorEntity(MonitorEntity.MARGIN, ""));
