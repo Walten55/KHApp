@@ -84,8 +84,11 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
                 //单相协议特殊排版
                 if(Frame.电网信息.equals(groupInfo.getGroup())){
                     PointInfo info = getPointInfoWith(Frame.总并网用电量地址()[0]);
-                    if(info!=null)
+                    if(info!=null){
                         result.add(new MonitorEntity(MonitorEntity.SIMPLE_DATA_WITH_ADDRESS, info));
+                        result.add(new MonitorEntity(MonitorEntity.MARGIN, ""));
+                    }
+
                 }else if (Frame.光伏信息.equals(groupInfo.getGroup())) {
                     DeviceData deviceData = CacheManager.getInstance().get(Frame.MPPT路数地址);
                     if (deviceData != null) {

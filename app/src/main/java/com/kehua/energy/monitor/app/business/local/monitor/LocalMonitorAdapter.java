@@ -42,12 +42,15 @@ public class LocalMonitorAdapter extends BaseMultiItemQuickAdapter<MonitorEntity
     protected void convert(BaseViewHolder helper, MonitorEntity item) {
         switch (helper.getItemViewType()) {
             case MonitorEntity.SIMPLE_DATA_WITH_ADDRESS:
-                if(Integer.valueOf(((MonitorEntity<PointInfo>)item).getData().getAddress()) == Frame.总并网用电量地址()[0]){
+
+                helper.setText(R.id.tv_name, ((MonitorEntity<PointInfo>)item).getData().getDescription());
+
+                if(Integer.valueOf(((MonitorEntity<PointInfo>)item).getData().getAddress()) == Frame.总并网用电量地址()[0]
+                        &&CacheManager.getInstance().get(Frame.总并网用电量地址()[0])!=null){
                     int highValue = CacheManager.getInstance().get(Frame.总并网用电量地址()[0]).getIntValue();
                     int lowValue = CacheManager.getInstance().get(Frame.总并网用电量地址()[1]).getIntValue();
                     long resultValue = highValue * 65536 + lowValue;
 
-                    helper.setText(R.id.tv_name, ((MonitorEntity<PointInfo>)item).getData().getDescription());
                     helper.setText(R.id.tv_value, decimalFormat.format(resultValue / Math.pow(10, 1)));
                 }
                 break;
