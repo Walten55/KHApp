@@ -1544,7 +1544,6 @@ public class RemoteModel extends BaseModel implements IModel {
                             frame.addAll(frame.size(), data);
                         }
 
-                        //=======以下为模拟量采集=======
                         req.put("data", Cmd.newReadCmd(deviceAddress, 0x02, Frame.三相_状态量_采集3[0], Frame.三相_状态量_采集3[1]));
                         return mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
                                 .fdbg(req);

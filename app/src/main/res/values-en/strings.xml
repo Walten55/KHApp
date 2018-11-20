@@ -307,7 +307,7 @@
     <string name="上传失败">Upload failed</string>
     <string name="确认清除故障录波">Confirm clear fault recording</string>
     <string name="确认清除拉弧故障">Confirm clear arcing fault</string>
-    <string name="U相">U are</string>
-    <string name="V相">V are</string>
-    <string name="W相">W are</string>
+    <string name="U相">U-phase</string>
+    <string name="V相">V-phase</string>
+    <string name="W相">W-phase</string>
 </resources>
