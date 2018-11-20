@@ -50,6 +50,7 @@ public class LocalMonitorAdapter extends BaseMultiItemQuickAdapter<MonitorEntity
                     helper.setText(R.id.tv_name, ((MonitorEntity<PointInfo>)item).getData().getDescription());
                     helper.setText(R.id.tv_value, decimalFormat.format(resultValue / Math.pow(10, 1)));
                 }
+                break;
             case MonitorEntity.OVERVIEW:
                 mEnergyFlowChart = helper.getView(R.id.energy_flow_chart);
 
