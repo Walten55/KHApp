@@ -744,7 +744,7 @@ public class LocalModel extends BaseModel implements IModel {
 
         QueryBuilder<PointInfo> builder = ObjectBox.get().getBoxStore().boxFor(PointInfo.class).query()
                 .equal(PointInfo_.pn, String.valueOf(pn))
-                .and().equal(PointInfo_.address, address);
+                .and().equal(PointInfo_.address, address+"");
 
         if (LocalUserManager.getDeviceType() != 0x02 && LocalUserManager.getDeviceType() != 0x0B) {
             //光伏设备
