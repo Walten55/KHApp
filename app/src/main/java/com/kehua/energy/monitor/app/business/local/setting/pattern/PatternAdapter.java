@@ -109,7 +109,7 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                 final PatternHead pdSwitchItem = (PatternHead) item;
                 helper.setText(R.id.tv_name, pdSwitchItem.getPointInfo().getDescription());
 
-                SwitchButton switchButton = helper.getView(R.id.sb_value);
+                final SwitchButton switchButton = helper.getView(R.id.sb_value);
 
                 targetDeviceData = CacheManager.getInstance().get(Integer.valueOf(pdSwitchItem.getPointInfo().getAddress().trim()));
 
@@ -140,6 +140,11 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                                                 //传递点击事件
                                                 helper.itemView.callOnClick();
                                             }
+                                            //如果没有设置成功，将结果复原成就有状态
+                                            if (!success){
+                                                boolean result=switchButton.isChecked();
+                                                switchButton.setCheckedImmediatelyNoEvent(!result);
+                                            }
                                         }
                                     });
 //                            CacheManager.getInstance().remove(Integer.valueOf(pdSwitchItem.getPointInfo().getAddress().trim()));
@@ -161,7 +166,7 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                 targetDeviceData = CacheManager.getInstance().get(Integer.valueOf(peTextItem.getPointInfo().getAddress().trim()));
 
                 if (targetDeviceData != null) {
-                    helper.setText(R.id.tv_value, targetDeviceData.getParseValue() + " " + targetDeviceData.getUnit());
+                    helper.setText(R.id.tv_value, targetDeviceData.getParseValue() + " " + peTextItem.getPointInfo().getUnit());
                     helper.setGone(R.id.tv_reading, false);
                     helper.setGone(R.id.tv_value, true);
                 } else {
