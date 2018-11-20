@@ -737,6 +737,30 @@ public class LocalModel extends BaseModel implements IModel {
         return builder.build().find();
     }
 
+    public PointInfo getPointInfoWith(int pn, int address, String authority) {
+
+        final String normalRoleName = "normal";
+        final String opsRoleName = "ops";
+
+        QueryBuilder<PointInfo> builder = ObjectBox.get().getBoxStore().boxFor(PointInfo.class).query()
+                .equal(PointInfo_.pn, String.valueOf(pn))
+                .and().equal(PointInfo_.address, address);
+
+        if (LocalUserManager.getDeviceType() != 0x02 && LocalUserManager.getDeviceType() != 0x0B) {
+            //光伏设备
+            builder.and().equal(PointInfo_.deviceType, Frame.光伏光储);
+        }
+
+        if (normalRoleName.equals(authority)) {
+            builder.and().equal(PointInfo_.authority, normalRoleName);
+        } else if (opsRoleName.equals(authority)) {
+            builder.equal(PointInfo_.authority, normalRoleName)
+                    .or().equal(PointInfo_.authority, opsRoleName);
+        }
+
+        return builder.build().findFirst();
+    }
+
     /**
      * 查询本地模式告警数据
      *

@@ -35,11 +35,21 @@ public class LocalMonitorAdapter extends BaseMultiItemQuickAdapter<MonitorEntity
         addItemType(MonitorEntity.SIMPLE_DATA, R.layout.item_local_monitor_simple_data);
         addItemType(MonitorEntity.TABLE_HEAD, R.layout.item_local_monitor_table_head);
         addItemType(MonitorEntity.TABLE_CONTENT, R.layout.item_local_monitor_table_content);
+        addItemType(MonitorEntity.SIMPLE_DATA_WITH_ADDRESS, R.layout.item_local_monitor_simple_data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, MonitorEntity item) {
         switch (helper.getItemViewType()) {
+            case MonitorEntity.SIMPLE_DATA_WITH_ADDRESS:
+                if(Integer.valueOf(((MonitorEntity<PointInfo>)item).getData().getAddress()) == Frame.总并网用电量地址()[0]){
+                    int highValue = CacheManager.getInstance().get(Frame.总并网用电量地址()[0]).getIntValue();
+                    int lowValue = CacheManager.getInstance().get(Frame.总并网用电量地址()[1]).getIntValue();
+                    long resultValue = highValue * 65536 + lowValue;
+
+                    helper.setText(R.id.tv_name, ((MonitorEntity<PointInfo>)item).getData().getDescription());
+                    helper.setText(R.id.tv_value, decimalFormat.format(resultValue / Math.pow(10, 1)));
+                }
             case MonitorEntity.OVERVIEW:
                 mEnergyFlowChart = helper.getView(R.id.energy_flow_chart);
 

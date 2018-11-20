@@ -33,8 +33,6 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
     @Inject
     APPModel mModel;
 
-
-
     @Inject
     public LocalMonitorPresenter() {
 
@@ -84,7 +82,11 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
 
             if (Frame.单相协议 == LocalUserManager.getPn()) {
                 //单相协议特殊排版
-                if (Frame.光伏信息.equals(groupInfo.getGroup())) {
+                if(Frame.电网信息.equals(groupInfo.getGroup())){
+                    PointInfo info = getPointInfoWith(Frame.总并网用电量地址()[0]);
+                    if(info!=null)
+                        result.add(new MonitorEntity(MonitorEntity.SIMPLE_DATA_WITH_ADDRESS, info));
+                }else if (Frame.光伏信息.equals(groupInfo.getGroup())) {
                     DeviceData deviceData = CacheManager.getInstance().get(Frame.MPPT路数地址);
                     if (deviceData != null) {
                         result.add(new MonitorEntity(MonitorEntity.MARGIN, ""));
@@ -304,6 +306,11 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
     @Override
     public List<PointInfo> getPointInfoListWith(String group) {
         return mModel.getLocalModel().getPointInfosWith(LocalUserManager.getPn(), group, LocalUserManager.getRoleAuthority());
+    }
+
+    @Override
+    public PointInfo getPointInfoWith(int address) {
+        return mModel.getLocalModel().getPointInfoWith(LocalUserManager.getPn(), address, LocalUserManager.getRoleAuthority());
     }
 
 }

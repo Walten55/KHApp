@@ -1,6 +1,5 @@
 package com.kehua.energy.monitor.app.business.local.monitor;
 
-import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.model.entity.GroupInfo;
 import com.kehua.energy.monitor.app.model.entity.MonitorEntity;
 import com.kehua.energy.monitor.app.model.entity.PointInfo;
@@ -28,5 +27,6 @@ public interface LocalMonitorContract {
         public abstract void setupData();
         public abstract List<GroupInfo> initGroups();
         public abstract List<PointInfo> getPointInfoListWith(String group);
+        public abstract PointInfo getPointInfoWith(int address);
     }
 }

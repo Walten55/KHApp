@@ -11,6 +11,7 @@ public class MonitorEntity<T> implements MultiItemEntity {
     public static final int SIMPLE_DATA = 5;
     public static final int TABLE_HEAD = 6;
     public static final int TABLE_CONTENT = 7;
+    public static final int SIMPLE_DATA_WITH_ADDRESS = 8;
 
     private int itemType = 0;
 

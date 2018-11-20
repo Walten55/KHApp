@@ -215,6 +215,13 @@ public class Frame {
                 4624,4625
         };
     }
+    public static int[] 总并网用电量地址(){
+        return 单相协议 == LocalUserManager.getPn()?new int[]{
+                4553,4554
+        }:new int[]{
+                4530,4531
+        };
+    }
 
     public static int 日并网发电量地址 = 4506;
     public static int[] 总并网发电量地址(){
