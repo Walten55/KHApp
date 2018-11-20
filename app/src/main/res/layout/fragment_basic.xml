@@ -194,7 +194,7 @@
                             android:layout_marginLeft="@dimen/grid_90"
                             android:layout_marginRight="@dimen/grid_60"
                             android:gravity="center"
-                            android:text="开始时间"
+                            android:text="@string/开始时间"
                             android:textColor="@color/text_black"
                             android:textSize="@dimen/text_size_sub_title" />
 
@@ -203,7 +203,7 @@
                             android:layout_height="match_parent"
                             android:layout_centerVertical="true"
                             android:gravity="center"
-                            android:text="结束时间"
+                            android:text="@string/结束时间"
                             android:textColor="@color/text_black"
                             android:textSize="@dimen/text_size_sub_title" />
 
@@ -257,7 +257,7 @@
                             android:layout_marginLeft="@dimen/grid_90"
                             android:layout_marginRight="@dimen/grid_60"
                             android:gravity="center"
-                            android:text="开始时间"
+                            android:text="@string/开始时间"
                             android:textColor="@color/text_black"
                             android:textSize="@dimen/text_size_sub_title" />
 
@@ -266,7 +266,7 @@
                             android:layout_height="match_parent"
                             android:layout_centerVertical="true"
                             android:gravity="center"
-                            android:text="结束时间"
+                            android:text="@string/结束时间"
                             android:textColor="@color/text_black"
                             android:textSize="@dimen/text_size_sub_title" />
 

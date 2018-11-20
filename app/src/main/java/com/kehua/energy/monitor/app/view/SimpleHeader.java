@@ -11,7 +11,6 @@ import android.view.View;
 import com.kehua.energy.monitor.app.R;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
-import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import me.walten.fastgo.common.Fastgo;
 

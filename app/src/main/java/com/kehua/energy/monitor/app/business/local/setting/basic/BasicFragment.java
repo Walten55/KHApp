@@ -184,7 +184,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
                     .setCancelText(getString(R.string.取消))//取消按钮文字
                     .setSubmitText(getString(R.string.确定))//确认按钮文字
                     .setTitleSize(20)//标题文字大小
-                    .setTitleText(getString(R.string.时间))//标题文字
+                    .setTitleText(getString(R.string.时间_标题))//标题文字
                     .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
                     .isCyclic(true)//是否循环滚动
                     .setTitleColor(ContextCompat.getColor(getContext(), R.color.text_black))//标题文字颜色
@@ -194,7 +194,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
                     .setBgColor(0XFFFFFFFF)//滚轮背景颜色 Night mode
                     .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
                     .setRangDate(startDate, endDate)//起始终止年月日设定
-                    .setLabel(getString(R.string.年), getString(R.string.月), getString(R.string.日), getString(R.string.时), getString(R.string.分), getString(R.string.秒))//默认设置为年月日时分秒
+//                    .setLabel(getString(R.string.年), getString(R.string.月), getString(R.string.日), getString(R.string.时), getString(R.string.分), getString(R.string.秒))//默认设置为年月日时分秒
                     .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
                     .isDialog(true)//是否显示为对话框样式
                     .build();
@@ -265,7 +265,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
                 .setBgColor(0XFFFFFFFF)//滚轮背景颜色 Night mode
                 .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
                 .setRangDate(startDate, endDate)//起始终止年月日设定
-                .setLabel(getString(R.string.年), getString(R.string.月), getString(R.string.日), getString(R.string.时), getString(R.string.分), getString(R.string.秒))//默认设置为年月日时分秒
+//                .setLabel(getString(R.string.年), getString(R.string.月), getString(R.string.日), getString(R.string.时), getString(R.string.分), getString(R.string.秒))//默认设置为年月日时分秒
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
                 .isDialog(true)//是否显示为对话框样式
                 .build();

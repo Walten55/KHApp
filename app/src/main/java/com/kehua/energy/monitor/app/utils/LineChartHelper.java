@@ -63,6 +63,7 @@ public class LineChartHelper {
     private Drawable fillDrawable;
     private int fillColor = Color.TRANSPARENT;
 
+    private boolean dataDrawValue = false;
     private boolean dataCircleHoleEnable = true;
     private float dataTextSize = 10f;
     private boolean dataDrawFillEnable = false;
@@ -282,6 +283,7 @@ public class LineChartHelper {
 
 
     private void defaultDataSet(LineDataSet set) {
+        set.setDrawValues(dataDrawValue);
         set.setDrawIcons(dataIconEnable);
         set.setDrawCircles(dataCirclesEnable);
         set.setCircleColor(dataCircleColor);
@@ -368,6 +370,11 @@ public class LineChartHelper {
 
     public LineChartHelper setDataIconEnable(boolean dataIconEnable) {
         this.dataIconEnable = dataIconEnable;
+        return this;
+    }
+
+    public LineChartHelper setDataDrawValue(boolean dataDrawValue) {
+        this.dataDrawValue = dataDrawValue;
         return this;
     }
 
