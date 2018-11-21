@@ -110,7 +110,7 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
             }
 
             @Override
-            public void showTipDialog(String title, String content,final OnBtnClickL onBtnClickL) {
+            public void showTipDialog(String title, String content, final OnBtnClickL onBtnClickL) {
                 //do nothing
             }
 
@@ -283,39 +283,39 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
 
     @OnClick(R.id.tv_sn_submit)
     public void onClickSubmitSN(View v) {
-        if(TextUtils.isEmpty(mSNTv.getText())){
+        if (TextUtils.isEmpty(mSNTv.getText())) {
             XToast.error(getString(R.string.请设置串号相关串号));
-        }else if(mProbationPeriodSwitchButton.isChecked()&&TextUtils.isEmpty(mProbationPeriodDayTv.getText())){
+        } else if (mProbationPeriodSwitchButton.isChecked() && TextUtils.isEmpty(mProbationPeriodDayTv.getText())) {
             XToast.error(getString(R.string.请设置串号相关试用期天数));
-        }else {
+        } else {
             mAdvancedPresenter.save(mSNTv.getText().toString(),
-                    mPowerOnPwdSwitchButton.isChecked()?1:0,
-                    mProbationPeriodSwitchButton.isChecked()?1:0,
-                    mProbationPeriodSwitchButton.isChecked()?Integer.valueOf(mProbationPeriodDayTv.getText().toString()):0, new Consumer<Boolean>() {
-                @Override
-                public void accept(Boolean success) throws Exception {
-                    if(success){
-                        mSNTv.setText("");
-                        mProbationPeriodDayTv.setText("");
-                        mPowerOnPwdSwitchButton.setCheckedImmediatelyNoEvent(false);
-                        mProbationPeriodSwitchButton.setCheckedImmediatelyNoEvent(false);
-                    }
-                }
-            });
+                    mPowerOnPwdSwitchButton.isChecked() ? 1 : 0,
+                    mProbationPeriodSwitchButton.isChecked() ? 1 : 0,
+                    mProbationPeriodSwitchButton.isChecked() ? Integer.valueOf(mProbationPeriodDayTv.getText().toString()) : 0, new Consumer<Boolean>() {
+                        @Override
+                        public void accept(Boolean success) throws Exception {
+                            if (success) {
+                                mSNTv.setText("");
+                                mProbationPeriodDayTv.setText("");
+                                mPowerOnPwdSwitchButton.setCheckedImmediatelyNoEvent(false);
+                                mProbationPeriodSwitchButton.setCheckedImmediatelyNoEvent(false);
+                            }
+                        }
+                    });
         }
     }
 
     @OnClick(R.id.tv_station_submit)
     public void onClickSubmitStation(View v) {
-        if(TextUtils.isEmpty(mStationSnTv.getText())){
-            XToast.error("请设置\"站号配置-串号\"");
-        }else if(TextUtils.isEmpty(mStationSnTv.getText())){
-            XToast.error("请设置\"站号配置-站号\"");
-        }else {
+        if (TextUtils.isEmpty(mStationSnTv.getText())) {
+            XToast.error(getString(R.string.站号配置串号不能为空));
+        } else if (TextUtils.isEmpty(mStationSnTv.getText())) {
+            XToast.error(getString(R.string.站号配置站号不能为空));
+        } else {
             mAdvancedPresenter.save(mStationSnTv.getText().toString(), Integer.valueOf(mStationNoTv.getText().toString()), new Consumer<Boolean>() {
                 @Override
                 public void accept(Boolean success) throws Exception {
-                    if(success){
+                    if (success) {
                         mStationSnTv.setText("");
                         mStationNoTv.setText("");
                     }
@@ -365,7 +365,7 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
         final DeviceData deviceData = temp;
         final TextView textView = tempTv;
 
-        if(deviceData==null)
+        if (deviceData == null)
             return;
 
         InputActivity.openInput(getActivity(), new InputActivity.InputConfig() {
@@ -375,9 +375,9 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
 //                        (deviceData!=null&&Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置串号地址)){
 //                    editText.setPattern(new int[]{4,4,4,4,4},"-");
 //                }
-                if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.串号相关串号地址||
-                        Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置串号地址||
-                        Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置站号地址||
+                if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.串号相关串号地址 ||
+                        Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置串号地址 ||
+                        Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置站号地址 ||
                         Integer.valueOf(deviceData.getRegisterAddress()) == Frame.MAC地址) {
                     editText.addTextChangedListener(new TextWatcher() {
                         @Override
@@ -421,12 +421,12 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
 
             @Override
             public String getHintMsg() {
-                return  deviceData != null ? deviceData.getUnit() : null;
+                return deviceData != null ? deviceData.getUnit() : null;
             }
 
             @Override
             public int getDigits() {
-                if (deviceData!=null&&deviceData.getAccuracy() > -1) {
+                if (deviceData != null && deviceData.getAccuracy() > -1) {
                     return deviceData.getAccuracy();
                 } else
                     return 0;
@@ -436,7 +436,7 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
             public int getInputType() {
                 if (deviceData != null && "string".equals(deviceData.getDataType())) {
                     return InputType.TYPE_CLASS_TEXT;
-                } else if (deviceData != null && ("double".equals(deviceData.getDataType())||"double_signed".equals(deviceData.getDataType()))) {
+                } else if (deviceData != null && ("double".equals(deviceData.getDataType()) || "double_signed".equals(deviceData.getDataType()))) {
                     return InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
                 } else {
                     return InputType.TYPE_CLASS_NUMBER;
@@ -445,7 +445,7 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
 
             @Override
             public String check(String msg) {
-                if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.串号相关串号地址||
+                if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.串号相关串号地址 ||
                         Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置串号地址) {
                     return msg.length() != 20 ? getString(R.string.串号长度为20位字符) : null;
                 } else if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置站号地址) {
@@ -456,12 +456,12 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
 
             @Override
             public void onResult(final String msg) {
-                if(StringUtils.isEmpty(msg))
+                if (StringUtils.isEmpty(msg))
                     return;
 
-                if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.MAC地址||Integer.valueOf(deviceData.getRegisterAddress()) == Frame.机器型号设置地址) {
+                if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.MAC地址 || Integer.valueOf(deviceData.getRegisterAddress()) == Frame.机器型号设置地址) {
                     try {
-                        if ( !"string".equals(deviceData.getDataType())) {
+                        if (!"string".equals(deviceData.getDataType())) {
                             mAdvancedPresenter.save(Integer.valueOf(deviceData.getRegisterAddress()), Integer.valueOf(msg.replace(".", "").trim()), new Consumer<Boolean>() {
                                 @Override
                                 public void accept(Boolean success) throws Exception {
@@ -470,9 +470,9 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
                                     }
                                 }
                             });
-                        }else {
+                        } else {
 
-                            mAdvancedPresenter.save(Integer.valueOf(deviceData.getRegisterAddress()),Integer.valueOf(deviceData.getRegisterAddress())+deviceData.getByteCount()/2-1, msg, new Consumer<Boolean>() {
+                            mAdvancedPresenter.save(Integer.valueOf(deviceData.getRegisterAddress()), Integer.valueOf(deviceData.getRegisterAddress()) + deviceData.getByteCount() / 2 - 1, msg, new Consumer<Boolean>() {
                                 @Override
                                 public void accept(Boolean success) throws Exception {
                                     if (deviceData != null && success) {
@@ -485,7 +485,7 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
                     } catch (Exception e) {
                         XToast.error(getString(R.string.设置失败));
                     }
-                }else {
+                } else {
                     textView.setText(msg);
                 }
 

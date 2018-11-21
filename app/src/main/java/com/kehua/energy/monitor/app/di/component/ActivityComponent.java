@@ -68,4 +68,5 @@ public interface ActivityComponent {
     void inject(ScannerActivity scannerActivity);
 
     void inject(UpgradeActivity upgradeActivity);
+
 }

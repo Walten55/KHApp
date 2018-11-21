@@ -328,4 +328,6 @@
     <string name="srl_header_update">上次更新 M-d HH:mm</string>
     <string name="开始时间">开始时间</string>
     <string name="结束时间">结束时间</string>
+    <string name="站号配置串号不能为空">串号不能为空</string>
+    <string name="站号配置站号不能为空">站号不能为空</string>
 </resources>

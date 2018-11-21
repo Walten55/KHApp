@@ -87,37 +87,37 @@ public class InputActivity extends XSimpleActivity {
             public void onClicked(View v, int action, String extra) {
 
                 if (action == XTitleBar.ACTION_RIGHT_TEXT) {
-                    if (StringUtils.isEmpty(mConfig.check(mMsgEt.getText().toString()))) {
+                    if (StringUtils.isEmpty(mConfig.check(mMsgEt.getTrimmedString().toString()))) {
                         if (digits > 0) {
-                            if (!mMsgEt.getText().toString().contains(".")) {
+                            if (!mMsgEt.getTrimmedString().toString().contains(".")) {
                                 //输入不包含.  例如 输入1 精度为2 则结果是100
-                                String newResult = mMsgEt.getText().toString();
+                                String newResult = mMsgEt.getTrimmedString();
                                 for (int i = 0; i < digits; i++) {
                                     newResult += 0;
                                 }
                                 mConfig.onResult(newResult);
                                 finish();
                             } else {
-                                String[] split = mMsgEt.getText().toString().split("\\.");
+                                String[] split = mMsgEt.getTrimmedString().toString().split("\\.");
                                 if (split != null && split.length > 1 && split[1].length() < digits) {
-                                    String newResult = mMsgEt.getText().toString().replace(".", "");
+                                    String newResult = mMsgEt.getTrimmedString().toString().replace(".", "");
                                     for (int i = 0; i < digits - split[1].length(); i++) {
                                         newResult += 0;
                                     }
                                     mConfig.onResult(Integer.valueOf(newResult) + "");
                                     finish();
                                 } else {
-                                    mConfig.onResult(mMsgEt.getText().toString().replace(".", ""));
+                                    mConfig.onResult(mMsgEt.getTrimmedString().toString().replace(".", ""));
                                     finish();
                                 }
                             }
 
                         } else {
-                            mConfig.onResult(mMsgEt.getText().toString());
+                            mConfig.onResult(mMsgEt.getTrimmedString().toString());
                             finish();
                         }
                     } else {
-                        XToast.error(mConfig.check(mMsgEt.getText().toString()));
+                        XToast.error(mConfig.check(mMsgEt.getTrimmedString().toString()));
                     }
                 } else if (action == XTitleBar.ACTION_LEFT_BUTTON) {
                     finish();
@@ -134,7 +134,7 @@ public class InputActivity extends XSimpleActivity {
         mUnitTv.setText(mConfig.getHintMsg());
         mMsgEt.setInputType(mConfig.getInputType());
         mMsgEt.setText(mConfig.getOldMsg());
-        mMsgEt.setSelection(mMsgEt.getText().toString().length());
+        mMsgEt.setSelection(mMsgEt.getTrimmedString().toString().length());
         mMsgEt.setFocusable(true);
         digits = mConfig.getDigits();
         if (digits != 0)
