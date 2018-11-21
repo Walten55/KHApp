@@ -190,8 +190,8 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                     //单条折线
                     if (peLineChartItem.isSingleLine()) {
                         List<DeviceData> deviceDatas = new ArrayList<>();
-                        for (int i = 0; i < peLineChartItem.getData()[0].size(); i++) {
-                            targetDeviceData = CacheManager.getInstance().get(Integer.valueOf(peLineChartItem.getData()[0].get(i).getAddress().trim()));
+                        for (int i = 0; i < data[0].size(); i++) {
+                            targetDeviceData = CacheManager.getInstance().get(Integer.valueOf(data[0].get(i).getAddress().trim()));
                             deviceDatas.add(targetDeviceData);
                         }
 
