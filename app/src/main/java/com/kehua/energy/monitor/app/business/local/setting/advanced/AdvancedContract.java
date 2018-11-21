@@ -17,6 +17,7 @@ public interface AdvancedContract {
         void onUpdateData(Object o);
         void showTipDialog(String title,String content,final OnBtnClickL onBtnClickL);
         void onStandardChoose(Standard standard);
+//        void onBranchSet( ArrayMap<String,Integer> map);
     }
 
     abstract class Presenter extends BasePresenter<View> {

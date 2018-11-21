@@ -51,6 +51,7 @@ public class RouterMgr {
     public static final String LOCAL_SETTING_CALIBRATION = "/business/local/setting/calibration";
     public static final String LOCAL_SETTING_DEVICE = "/business/local/setting/device";
     public static final String LOCAL_SETTING_STANDARD = "/business/local/setting/standard";
+    public static final String LOCAL_BRANCH_SETTING = "/business/local/setting/branch";
 
     public static final String LOCAL_SETTING_PATTERN_CHILD = "/business/local/setting/pattern/child";
 
@@ -212,6 +213,17 @@ public class RouterMgr {
                 .withInt("template",template)
                 .navigation(ActivityUtils.getTopActivity());
     }
+
+
+    public void localBranchSetting(int address,String hexValue) {
+        ARouter.getInstance()
+                .build(LOCAL_BRANCH_SETTING)
+                .withInt("address",address)
+                .withString("hexValue",hexValue)
+                .navigation(ActivityUtils.getTopActivity());
+    }
+
+
 
     /**
      * 扫描

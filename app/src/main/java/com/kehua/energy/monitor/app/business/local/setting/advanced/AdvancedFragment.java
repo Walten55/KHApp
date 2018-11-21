@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -175,14 +176,14 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
                     mPresenter.toggle(Frame.清除历史记录地址, true, null);
                 }
             });
-        }else if (item.getData().getAddress().equals(Frame.清除故障录波地址() + "")) {
+        } else if (item.getData().getAddress().equals(Frame.清除故障录波地址() + "")) {
             showTipDialog(getString(R.string.温馨提示), getString(R.string.确认清除故障录波), new OnBtnClickL() {
                 @Override
                 public void onBtnClick() {
                     mPresenter.toggle(Frame.清除故障录波地址(), true, null);
                 }
             });
-        }else if (item.getData().getAddress().equals(Frame.清除拉弧故障地址() + "")) {
+        } else if (item.getData().getAddress().equals(Frame.清除拉弧故障地址() + "")) {
             showTipDialog(getString(R.string.温馨提示), getString(R.string.确认清除拉弧故障), new OnBtnClickL() {
                 @Override
                 public void onBtnClick() {
@@ -217,7 +218,7 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
                     dialog.dismiss();
                 }
             });
-        }else if (item.getData().getAddress().equals("6321") && LocalUserManager.getPn() == Frame.单相协议) {
+        } else if (item.getData().getAddress().equals("6321") && LocalUserManager.getPn() == Frame.单相协议) {
             //单相 CT变化
             final String[] stringItems = {
                     "0-75/5",
@@ -246,7 +247,7 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
                     dialog.dismiss();
                 }
             });
-        }else if (item.getData().getAddress().equals("6303") && LocalUserManager.getPn() == Frame.三相协议) {
+        } else if (item.getData().getAddress().equals("6303") && LocalUserManager.getPn() == Frame.三相协议) {
             //仅三相协议有 MPPT并联模式
             final String[] stringItems = {
                     getActivity().getString(R.string.独立),
@@ -302,6 +303,14 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
                     dialog.dismiss();
                 }
             });
+        } else if (LocalUserManager.getPn() == Frame.三相协议 && item.getData().getAddress().equals(Frame.支路告警屏蔽地址 + "")) {
+            final DeviceData deviceData = CacheManager.getInstance().get(Integer.valueOf(item.getData().getAddress()));
+            RouterMgr.get().localBranchSetting(Frame.支路告警屏蔽地址, deviceData != null ? deviceData.getParseValue() : "0000");
+
+        } else if (LocalUserManager.getPn() == Frame.三相协议 && item.getData().getAddress().equals(Frame.PV支路使能字地址 + "")) {
+            final DeviceData deviceData = CacheManager.getInstance().get(Integer.valueOf(item.getData().getAddress()));
+            RouterMgr.get().localBranchSetting(Frame.PV支路使能字地址, deviceData != null ? deviceData.getParseValue() : "0000");
+
         } else if (!item.getData().getDataType().contains("boolean")) {
             final DeviceData deviceData = CacheManager.getInstance().get(Integer.valueOf(item.getData().getAddress()));
 
@@ -340,18 +349,18 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
                 @Override
                 public int getInputType() {
-                    if (deviceData != null&&item.getData().getAddress().equals(Frame.开机密码地址[0] + "")) {
-                        return InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD;
-                    } else if (deviceData != null&&item.getData().getAddress().equals(Frame.试用期密码地址[0] + "")) {
-                        return InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD;
-                    }else if (deviceData != null && "string".equals(item.getData().getDataType())) {
+                    if (deviceData != null && item.getData().getAddress().equals(Frame.开机密码地址[0] + "")) {
+                        return InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD;
+                    } else if (deviceData != null && item.getData().getAddress().equals(Frame.试用期密码地址[0] + "")) {
+                        return InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD;
+                    } else if (deviceData != null && "string".equals(item.getData().getDataType())) {
                         return InputType.TYPE_CLASS_TEXT;
                     } else if (deviceData != null && ("double".equals(item.getData().getDataType()))) {
                         return InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
-                    }else if(deviceData != null && "double_signed".equals(item.getData().getDataType())){
-                        return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_NUMBER_FLAG_DECIMAL ;
-                    }else if(deviceData != null && "int_signed".equals(item.getData().getDataType())){
-                        return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER ;
+                    } else if (deviceData != null && "double_signed".equals(item.getData().getDataType())) {
+                        return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_NUMBER_FLAG_DECIMAL;
+                    } else if (deviceData != null && "int_signed".equals(item.getData().getDataType())) {
+                        return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER;
                     } else {
                         return InputType.TYPE_CLASS_NUMBER;
                     }
@@ -364,26 +373,26 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
                 @Override
                 public void onResult(final String msg) {
-                    if(StringUtils.isEmpty(msg))
+                    if (StringUtils.isEmpty(msg))
                         return;
+                    try {
+                        if (item.getData().getAddress().equals(Frame.开机密码地址[0] + "")) {
 
-                    if (item.getData().getAddress().equals(Frame.开机密码地址[0] + "")) {
+                            long password = Long.valueOf(msg.trim());
+                            if (password > 999999 || password < 100000) {
+                                XToast.error(getString(R.string.非法密码));
+                            } else
+                                mPresenter.save(Integer.valueOf(item.getData().getAddress()), Frame.开机密码地址[1], Integer.valueOf(msg.trim()), null);
 
-                        long password = Long.valueOf(msg.trim());
-                        if (password > 999999 || password < 100000) {
-                            XToast.error(getString(R.string.非法密码));
-                        } else
-                            mPresenter.save(Integer.valueOf(item.getData().getAddress()), Frame.开机密码地址[1], Integer.valueOf(msg.trim()), null);
+                        } else if (item.getData().getAddress().equals(Frame.试用期密码地址[0] + "")) {
+                            long password = Long.valueOf(msg.trim());
+                            if (password > 999999 || password < 100000) {
+                                XToast.error(getString(R.string.非法密码));
+                            } else
+                                mPresenter.save(Integer.valueOf(item.getData().getAddress()), Frame.试用期密码地址[1], Integer.valueOf(msg.trim()), null);
 
-                    } else if (item.getData().getAddress().equals(Frame.试用期密码地址[0] + "")) {
-                        long password = Long.valueOf(msg.trim());
-                        if (password > 999999 || password < 100000) {
-                            XToast.error(getString(R.string.非法密码));
-                        } else
-                            mPresenter.save(Integer.valueOf(item.getData().getAddress()), Frame.试用期密码地址[1], Integer.valueOf(msg.trim()), null);
+                        } else {
 
-                    } else {
-                        try {
                             if (deviceData != null && !"string".equals(item.getData().getDataType())) {
                                 mPresenter.save(Integer.valueOf(item.getData().getAddress()), Integer.valueOf(msg.trim()), new Consumer<Boolean>() {
                                     @Override
@@ -396,9 +405,9 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
                                     }
                                 });
                             }
-                        } catch (Exception e) {
-                            XToast.error(getString(R.string.设置失败));
                         }
+                    } catch (Exception e) {
+                        XToast.error(getString(R.string.设置失败));
                     }
 
                 }
@@ -455,6 +464,35 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
             }
         });
+    }
+
+    //    @Override
+    @Subscribe(
+            thread = EventThread.MAIN_THREAD,
+            tags = {
+                    @Tag(Config.EVENT_CODE_BRANCH_SET)
+            }
+    )
+    public void onBranchSet(ArrayMap<String, Integer> map) {
+        final int address = map.get("address");
+        final int value = map.get("value");
+        final DeviceData deviceData = CacheManager.getInstance().get(address);
+
+        try {
+            mPresenter.save(address, value, new Consumer<Boolean>() {
+                @Override
+                public void accept(Boolean success) throws Exception {
+                    if (success) {
+                        deviceData.setParseValue(Integer.toHexString(value).toUpperCase());
+                        mAdapter.notifyDataSetChanged();
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            XToast.error(getString(R.string.设置失败));
+        }
+
     }
 
     private View getFooterViewPassword() {

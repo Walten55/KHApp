@@ -39,6 +39,7 @@ public class Config {
     public static final String EVENT_CODE_COLLECT_SETTING_COMPLETE = "event_code_collect_setting_complete";
     public static final String EVENT_CODE_COLLECT_HISTORY_COMPLETE = "event_code_collect_history_complete";
     public static final String EVENT_CODE_STANDARD_CHOOSED = "event_code_standard_choosed";
+    public static final String EVENT_CODE_BRANCH_SET = "event_code_branch_set";
     public static final String EVENT_CODE_SCAN_RESULT = "event_code_scan_result";
     public static final int REFRESH_DELAY = 1000;
 }

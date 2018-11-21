@@ -331,4 +331,9 @@
     <string name="告警_标识">告警</string>
     <string name="站号配置串号不能为空">串号不能为空</string>
     <string name="站号配置站号不能为空">站号不能为空</string>
+    <string name="支路">支路</string>
+    <string name="PV支路">PV支路</string>
+    <string name="使能">使能</string>
+    <string name="支路告警屏蔽">支路告警屏蔽</string>
+    <string name="PV支路使能字">PV支路使能字</string>
 </resources>

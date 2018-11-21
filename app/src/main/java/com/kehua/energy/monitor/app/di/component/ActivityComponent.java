@@ -10,6 +10,7 @@ import com.kehua.energy.monitor.app.business.local.LocalMain.LocalMainActivity;
 import com.kehua.energy.monitor.app.business.local.first.FirstSettingActivity;
 import com.kehua.energy.monitor.app.business.local.history.HistoryInfoActivity;
 import com.kehua.energy.monitor.app.business.local.login.LocalLoginActivity;
+import com.kehua.energy.monitor.app.business.local.setting.branch.BranchSettingActivity;
 import com.kehua.energy.monitor.app.business.local.setting.pattern.patternModelChild.LocalPatternChildActivity;
 import com.kehua.energy.monitor.app.business.local.setting.standard.StandardActivity;
 import com.kehua.energy.monitor.app.business.local.setting.upgrade.UpgradeActivity;
@@ -69,4 +70,5 @@ public interface ActivityComponent {
 
     void inject(UpgradeActivity upgradeActivity);
 
+    void inject(BranchSettingActivity branchSettingActivity);
 }

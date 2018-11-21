@@ -43,7 +43,7 @@ public class GlobalConfiguration implements ConfigModule {
                     builder.addInterceptor(loggingInterceptor);
                 }
                 //设置超时
-                builder.connectTimeout(60, TimeUnit.SECONDS);
+                builder.connectTimeout(10, TimeUnit.SECONDS);
                 builder.readTimeout(60, TimeUnit.SECONDS);
                 builder.writeTimeout(60, TimeUnit.SECONDS);
                 //错误重连

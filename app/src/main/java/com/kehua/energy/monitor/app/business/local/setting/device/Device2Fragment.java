@@ -288,20 +288,24 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
         } else if (mProbationPeriodSwitchButton.isChecked() && TextUtils.isEmpty(mProbationPeriodDayTv.getText())) {
             XToast.error(getString(R.string.请设置串号相关试用期天数));
         } else {
-            mAdvancedPresenter.save(mSNTv.getText().toString(),
-                    mPowerOnPwdSwitchButton.isChecked() ? 1 : 0,
-                    mProbationPeriodSwitchButton.isChecked() ? 1 : 0,
-                    mProbationPeriodSwitchButton.isChecked() ? Integer.valueOf(mProbationPeriodDayTv.getText().toString()) : 0, new Consumer<Boolean>() {
-                        @Override
-                        public void accept(Boolean success) throws Exception {
-                            if (success) {
-                                mSNTv.setText("");
-                                mProbationPeriodDayTv.setText("");
-                                mPowerOnPwdSwitchButton.setCheckedImmediatelyNoEvent(false);
-                                mProbationPeriodSwitchButton.setCheckedImmediatelyNoEvent(false);
+            try {
+                mAdvancedPresenter.save(mSNTv.getText().toString(),
+                        mPowerOnPwdSwitchButton.isChecked() ? 1 : 0,
+                        mProbationPeriodSwitchButton.isChecked() ? 1 : 0,
+                        mProbationPeriodSwitchButton.isChecked() ? Integer.valueOf(mProbationPeriodDayTv.getText().toString()) : 0, new Consumer<Boolean>() {
+                            @Override
+                            public void accept(Boolean success) throws Exception {
+                                if (success) {
+                                    mSNTv.setText("");
+                                    mProbationPeriodDayTv.setText("");
+                                    mPowerOnPwdSwitchButton.setCheckedImmediatelyNoEvent(false);
+                                    mProbationPeriodSwitchButton.setCheckedImmediatelyNoEvent(false);
+                                }
                             }
-                        }
-                    });
+                        });
+            } catch (Exception e) {
+                XToast.error(getString(R.string.设置失败));
+            }
         }
     }
 
@@ -312,15 +316,20 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
         } else if (TextUtils.isEmpty(mStationSnTv.getText())) {
             XToast.error(getString(R.string.站号配置站号不能为空));
         } else {
-            mAdvancedPresenter.save(mStationSnTv.getText().toString(), Integer.valueOf(mStationNoTv.getText().toString()), new Consumer<Boolean>() {
-                @Override
-                public void accept(Boolean success) throws Exception {
-                    if (success) {
-                        mStationSnTv.setText("");
-                        mStationNoTv.setText("");
+            try {
+                mAdvancedPresenter.save(mStationSnTv.getText().toString(), Integer.valueOf(mStationNoTv.getText().toString()), new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean success) throws Exception {
+                        if (success) {
+                            mStationSnTv.setText("");
+                            mStationNoTv.setText("");
+                        }
                     }
-                }
-            });
+                });
+            } catch (Exception e) {
+                XToast.error(getString(R.string.设置失败));
+            }
+
         }
     }
 
@@ -436,22 +445,31 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
             public int getInputType() {
                 if (deviceData != null && "string".equals(deviceData.getDataType())) {
                     return InputType.TYPE_CLASS_TEXT;
-                } else if (deviceData != null && ("double".equals(deviceData.getDataType()) || "double_signed".equals(deviceData.getDataType()))) {
+                } else if (deviceData != null && ("double".equals(deviceData.getDataType()) )) {
                     return InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
-                } else {
-                    return InputType.TYPE_CLASS_NUMBER;
+                } else if (deviceData != null && "double_signed".equals(deviceData.getDataType())) {
+                    return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_NUMBER_FLAG_DECIMAL;
+                }else {
+                    //为了让站号与试用期天数输入有限制
+                    return InputType.TYPE_CLASS_NUMBER| InputType.TYPE_NUMBER_FLAG_DECIMAL;
                 }
             }
 
             @Override
             public String check(String msg) {
-                if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.串号相关串号地址 ||
-                        Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置串号地址) {
-                    return msg.length() != 20 ? getString(R.string.串号长度为20位字符) : null;
-                } else if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置站号地址) {
-                    return Integer.valueOf(msg) < 1 || Integer.valueOf(msg) > 247 ? getString(R.string.站号范围) : null;
+                try {
+                    if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.串号相关串号地址 ||
+                            Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置串号地址) {
+                        return msg.length() != 20 ? getString(R.string.串号长度为20位字符) : null;
+                    } else if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置站号地址) {
+
+                        return Long.valueOf(msg) < 1 || Long.valueOf(msg) > 247 ? getString(R.string.站号范围) : null;
+                    }
+                    return null;
+                } catch (Exception e) {
+                    return null;
                 }
-                return null;
+
             }
 
             @Override

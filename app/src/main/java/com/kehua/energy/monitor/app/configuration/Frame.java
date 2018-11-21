@@ -180,6 +180,9 @@ public class Frame {
 
     public static final int 运行状态地址 = 4501;
 
+    public static final int 支路告警屏蔽地址 = 6305;
+    public static final int PV支路使能字地址 = 6309;
+
     public static final int MPPT路数地址 = 4851;
     public static final int PV支路数地址 = 4873;
 

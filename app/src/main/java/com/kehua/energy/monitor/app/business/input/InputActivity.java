@@ -131,14 +131,26 @@ public class InputActivity extends XSimpleActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         //mMsgEt.setHint(mConfig.getHintMsg());
+
         mUnitTv.setText(mConfig.getHintMsg());
         mMsgEt.setInputType(mConfig.getInputType());
         mMsgEt.setText(mConfig.getOldMsg());
         mMsgEt.setSelection(mMsgEt.getTrimmedString().toString().length());
         mMsgEt.setFocusable(true);
         digits = mConfig.getDigits();
-        if (digits != 0)
+        if (digits != 0&&(mConfig.getInputType() == (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL)
+                ||mConfig.getInputType() == (InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_NUMBER_FLAG_DECIMAL)
+                ||mConfig.getInputType() == (InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER))){
+
+            mMsgEt.setFilters(new InputFilter[]{new CashierInputFilter(digits),new InputFilterMinMax(-65535,65535)});
+        } else if(digits != 0){
             mMsgEt.setFilters(new InputFilter[]{new CashierInputFilter(digits)});
+        } else if((mConfig.getInputType() == (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL)
+                ||mConfig.getInputType() == (InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_NUMBER_FLAG_DECIMAL)
+                ||mConfig.getInputType() == (InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER))){
+
+            mMsgEt.setFilters(new InputFilter[]{new InputFilterMinMax(-65535,65535)});
+        }
         mConfig.customSetting(mMsgEt);
     }
 
@@ -291,6 +303,34 @@ public class InputActivity extends XSimpleActivity {
 //            }
 
             return dest.subSequence(dstart, dend) + sourceText;
+        }
+    }
+
+    class InputFilterMinMax implements InputFilter{
+        private int min, max;
+
+        public InputFilterMinMax(int min, int max) {
+            this.min = min;
+            this.max = max;
+        }
+
+        public InputFilterMinMax(String min, String max) {
+            this.min = Integer.parseInt(min);
+            this.max = Integer.parseInt(max);
+        }
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            try {
+                int input = Integer.parseInt(dest.toString() + source.toString());
+                if (isInRange(min, max, input))
+                    return null;
+            } catch (NumberFormatException nfe) { }
+            return "";
+        }
+
+        private boolean isInRange(int a, int b, int c) {
+            return b > a ? c >= a && c <= b : c >= b && c <= a;
         }
     }
 }
