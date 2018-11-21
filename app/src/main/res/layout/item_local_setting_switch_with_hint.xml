@@ -29,7 +29,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
+            android:layout_marginRight="@dimen/grid_25"
             android:text="@string/读取中"
             android:textColor="@color/text_gray"
             android:textSize="@dimen/grid_8"

@@ -17,10 +17,11 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "https://jitpack.io" }
         maven {
             url 'https://dl.bintray.com/walten1023/Fastgo-MVP-Integration-Master'
         }
+        maven { url "https://jitpack.io" }
+
         google()
         jcenter()
     }
