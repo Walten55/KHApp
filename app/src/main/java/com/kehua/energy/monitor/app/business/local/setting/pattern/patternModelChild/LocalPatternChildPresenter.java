@@ -42,7 +42,7 @@ public class LocalPatternChildPresenter extends LocalPatternChildContract.Presen
     public boolean dealData(String sGroup) {
         boolean result = false;
 
-        List<PointInfo> oriPointInfos = mModel.getLocalModel().getPointInfosWith(LocalUserManager.getPn(), Frame.模式设置, LocalUserManager.getRoleAuthority());
+        List<PointInfo> oriPointInfos = mModel.getLocalModel().getPointInfosWith(LocalUserManager.getPn(), Frame.模式设置, LocalUserManager.getRoleAuthority(), true);
         List<PointInfo> pointInfos = new ArrayList<>();
 
         //如果是光储，则展示全部，否则只展示光伏（1）

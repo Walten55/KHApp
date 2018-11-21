@@ -141,8 +141,8 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                                                 helper.itemView.callOnClick();
                                             }
                                             //如果没有设置成功，将结果复原成就有状态
-                                            if (!success){
-                                                boolean result=switchButton.isChecked();
+                                            if (!success) {
+                                                boolean result = switchButton.isChecked();
                                                 switchButton.setCheckedImmediatelyNoEvent(!result);
                                             }
                                         }
@@ -183,7 +183,7 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                 PatternEntity peLineChartItem = (PatternEntity) item;
                 List<PointInfo>[] data = peLineChartItem.getData();
 
-
+                helper.addOnClickListener(R.id.tv_linechart_setting);
                 //已经对应点表对象正常且读取成功才进行数据转化与展示
                 DeviceData deviceInfo = CacheManager.getInstance().get(Integer.valueOf(peLineChartItem.getData()[0].get(0).getAddress().trim()));
                 if (deviceInfo != null) {

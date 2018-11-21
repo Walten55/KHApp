@@ -92,6 +92,20 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
         if (mAdapter == null) {
             mAdapter = new PatternAdapter(data, mAdvancedPresenter);
             mAdapter.setOnItemClickListener(this);
+            mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                @Override
+                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                    if (view.getId() == R.id.tv_linechart_setting) {
+                        PatternEntity patternEntityLineChart = (PatternEntity) mAdapter.getItem(position);
+                        int adress = Integer.parseInt(patternEntityLineChart.getData()[0].get(0).getAddress());
+
+                        if (CacheManager.getInstance().get(adress) == null) {
+                            return;
+                        }
+                        RouterMgr.get().localSettingPatternChild(patternEntityLineChart.getData()[0].get(0).getSgroup());
+                    }
+                }
+            });
             mRecyclerView.setAdapter(mAdapter);
 
             mRecyclerView.postDelayed(new Runnable() {
@@ -153,13 +167,7 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
                 dealContentTextOnClick((PatternEntity) multiItemEntity, position);
                 break;
             case PatternAdapter.TYPE_CONTENT_LINECHART:
-                PatternEntity patternEntityLineChart = (PatternEntity) multiItemEntity;
-                adress = Integer.parseInt(patternEntityLineChart.getData()[0].get(0).getAddress());
-
-                if (CacheManager.getInstance().get(adress) == null) {
-                    return;
-                }
-                RouterMgr.get().localSettingPatternChild(patternEntityLineChart.getData()[0].get(0).getSgroup());
+                //...
                 break;
         }
     }

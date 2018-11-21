@@ -1,5 +1,6 @@
 package com.kehua.energy.monitor.app.model.local;
 
+import android.support.annotation.NonNull;
 import android.util.ArrayMap;
 
 import com.blankj.utilcode.util.AppUtils;
@@ -28,8 +29,10 @@ import com.orhanobut.logger.Logger;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -447,8 +450,8 @@ public class LocalModel extends BaseModel implements IModel {
                     }
                 }
                 result.add(new RecordData(deviceAddress, pointInfo.getMeans(), code, value, parseValue, time, !StringUtils.isEmpty(pointInfo.getV0())));
-            }else{
-                result.add(new RecordData(deviceAddress, "Code:" + code + " " +Fastgo.getContext().getString(R.string.映射失败) , code, 0, "", time, false));
+            } else {
+                result.add(new RecordData(deviceAddress, "Code:" + code + " " + Fastgo.getContext().getString(R.string.映射失败), code, 0, "", time, false));
             }
 
         }
@@ -557,10 +560,11 @@ public class LocalModel extends BaseModel implements IModel {
             Cell UNIT = sheet.getCell(8, i);
             Cell DEVICE_TYPE = sheet.getCell(9, i);
             Cell GROUP = sheet.getCell(10, i);
-            Cell SORT = sheet.getCell(11, i);
+            Cell SROUP = sheet.getCell(11, i);
             Cell AUTHORITY = sheet.getCell(12, i);
             Cell UNIT_EN = sheet.getCell(13, i);
             Cell UNIT_FR = sheet.getCell(14, i);
+            Cell SORT = sheet.getCell(15, i);
 
             if ("".equals(PN.getContents())) {//如果读取的数据为空
                 break;
@@ -577,10 +581,11 @@ public class LocalModel extends BaseModel implements IModel {
                     UNIT.getContents().trim(),
                     Integer.valueOf(DEVICE_TYPE.getContents().trim()),
                     GROUP.getContents().trim(),
-                    SORT.getContents().trim(),
+                    SROUP.getContents().trim(),
                     AUTHORITY.getContents().trim(),
                     UNIT_EN.getContents().trim(),
-                    UNIT_FR.getContents().trim()
+                    UNIT_FR.getContents().trim(),
+                    SORT.getContents().trim()
             ));
 
         }
@@ -714,6 +719,10 @@ public class LocalModel extends BaseModel implements IModel {
      * @return
      */
     public List<PointInfo> getPointInfosWith(int pn, String group, String authority) {
+        return getPointInfosWith(pn, group, authority, false);
+    }
+
+    public List<PointInfo> getPointInfosWith(int pn, String group, String authority, boolean sort) {
 
         final String normalRoleName = "normal";
         final String opsRoleName = "ops";
@@ -734,6 +743,29 @@ public class LocalModel extends BaseModel implements IModel {
                     .or().equal(PointInfo_.authority, opsRoleName);
         }
 
+        if (sort) {
+
+            builder.sort(new Comparator<PointInfo>() {
+                @Override
+                public int compare(PointInfo p1, PointInfo p2) {
+                    if (p1 == null || StringUtils.isTrimEmpty(p1.getSort())) {
+                        return -1;
+                    }
+                    if (p2 == null || StringUtils.isTrimEmpty(p2.getSort())) {
+                        return 1;
+                    } else {
+                        if (Utils.isNum(p1.getSort()) && Utils.isNum(p2.getSort())) {
+                            double sort1 = Double.parseDouble(p1.getSort());
+                            double sort2 = Double.parseDouble(p2.getSort());
+                            return sort1 < sort2 ? -1 : 1;
+                        } else {
+                            return p1.getSort().compareTo(p2.getSort());
+                        }
+                    }
+                }
+            });
+        }
+
         return builder.build().find();
     }
 
@@ -744,7 +776,7 @@ public class LocalModel extends BaseModel implements IModel {
 
         QueryBuilder<PointInfo> builder = ObjectBox.get().getBoxStore().boxFor(PointInfo.class).query()
                 .equal(PointInfo_.pn, String.valueOf(pn))
-                .and().equal(PointInfo_.address, address+"");
+                .and().equal(PointInfo_.address, address + "");
 
         if (LocalUserManager.getDeviceType() != 0x02 && LocalUserManager.getDeviceType() != 0x0B) {
             //光伏设备

@@ -70,8 +70,11 @@ public class PointInfo {
     @NameInDb("UNIT_FR")
     private String unitFR;
 
+    @NameInDb("SORT")
+    private String sort;
 
-    public PointInfo(String pn, String address, String descriptionCN, String descriptionEN, String descriptionFrench, int byteCount, String dataType, int accuracy, String unit, int deviceType, String group, String sgroup, String authority, String unitEN, String unitFR) {
+
+    public PointInfo(String pn, String address, String descriptionCN, String descriptionEN, String descriptionFrench, int byteCount, String dataType, int accuracy, String unit, int deviceType, String group, String sgroup, String authority, String unitEN, String unitFR,String sort) {
         this.pn = pn;
         this.address = address;
         this.descriptionCN = descriptionCN;
@@ -87,6 +90,7 @@ public class PointInfo {
         this.authority = authority;
         this.unitEN = unitEN;
         this.unitFR = unitFR;
+        this.sort=sort;
     }
 
     public long getId() {
@@ -248,5 +252,13 @@ public class PointInfo {
 
     public void setUnitFR(String unitFR) {
         this.unitFR = unitFR;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
     }
 }
