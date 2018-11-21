@@ -5,16 +5,19 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
 import com.kehua.energy.monitor.app.R;
@@ -22,6 +25,7 @@ import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.model.entity.LineChartEntity;
 import com.kehua.energy.monitor.app.model.entity.LineChartEntityList;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +33,7 @@ public class LineChartHelper {
 
     static LineChartHelper _Instance;
 
-    private boolean touchEnabl = false;
+    private boolean touchEnabl = true;
     private boolean dragEnable = false;
     private boolean scaleEnable = false;
     private boolean pinchZoom = false;
@@ -104,7 +108,7 @@ public class LineChartHelper {
         // if disabled, scaling can be done on x- and y-axis separately
         lineChart.setPinchZoom(pinchZoom);
 //        lineChart.setBackground(ContextCompat.getDrawable(context, R.drawable.fade_blue));
-
+        lineChart.setMarker(new CustomMarkerView(context));
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setDrawGridLines(xAxisGridLineEnable);
@@ -114,6 +118,8 @@ public class LineChartHelper {
         xAxis.enableGridDashedLine(10f, 0f, 0f);
         xAxis.setTextSize(xAxisTextSize);
         xAxis.setTextColor(xAxisTextColor);
+        xAxis.setYOffset(24f);
+
         if (xAxisMinimumEnable) {
             xAxis.setAxisMinimum(xAxisMinimum);
         }
@@ -500,6 +506,31 @@ public class LineChartHelper {
             entryList.add(lineChartEntity.getEntry());
         }
         return entryList;
+    }
+
+
+    /*
+    * * 自定义标注样式
+    * */
+    class CustomMarkerView extends MarkerView {
+
+        TextView tvContentX, tvContentY;
+
+        private DecimalFormat format;
+
+        public CustomMarkerView(Context context) {
+            super(context, R.layout.layout_linechar_marker);
+            tvContentX = findViewById(R.id.tv_content_x);
+            tvContentY = findViewById(R.id.tv_content_y);
+            format = new DecimalFormat("###.00");
+        }
+
+        @Override
+        public void refreshContent(Entry e, Highlight highlight) {
+            tvContentX.setText(e.getX() == 0 ? "0" : format.format(e.getX()));
+            tvContentY.setText(e.getY() == 0 ? "0" : format.format(e.getY()));
+            super.refreshContent(e, highlight);
+        }
     }
 
 }
