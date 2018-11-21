@@ -2,14 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:clipChildren="false">
 
     <TextView
         android:id="@+id/tv_linechart_setting"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/grid_200"
         android:gravity="center"
-        android:padding="@dimen/margin"
+        android:layout_margin="@dimen/margin"
         android:text="@string/设置"
         android:textColor="@color/text_blue"
         android:textSize="@dimen/text_size_main"

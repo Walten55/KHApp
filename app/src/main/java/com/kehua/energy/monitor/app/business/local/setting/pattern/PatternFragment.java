@@ -300,7 +300,12 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
                                 mAdapter.notifyDataSetChanged();
                             } else {
                                 mAdapter.expand(adapterPos, true);
-                                mAdapter.notifyDataSetChanged();
+                                mRecyclerView.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mAdapter.notifyDataSetChanged();
+                                    }
+                                }, 1500);
 
                                 int adress = Integer.parseInt(patternHead.getPointInfo().getAddress());
                                 //如果不是L_HVRT模式地址,跳转
