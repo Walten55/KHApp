@@ -51,7 +51,7 @@
                     android:paddingTop="@dimen/grid_30"
                     android:text="@string/并脱网记录"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/grid_18"
+                    android:textSize="@dimen/grid_12"
                     app:rv_backgroundColor="@color/colorPrimary"
                     app:rv_cornerRadius="@dimen/grid_5" />
 
@@ -67,7 +67,7 @@
                     android:paddingTop="@dimen/grid_30"
                     android:text="@string/历史故障"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/grid_18"
+                    android:textSize="@dimen/grid_12"
                     app:rv_backgroundColor="@color/colorPrimary"
                     app:rv_cornerRadius="@dimen/grid_5" />
             </LinearLayout>
@@ -93,7 +93,7 @@
                     android:paddingTop="@dimen/grid_30"
                     android:text="@string/用户日志"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/grid_18"
+                    android:textSize="@dimen/grid_12"
                     app:rv_backgroundColor="@color/colorPrimary"
                     app:rv_cornerRadius="@dimen/grid_5" />
 
@@ -109,7 +109,7 @@
                     android:paddingTop="@dimen/grid_30"
                     android:text="@string/功率调度日志"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/grid_18"
+                    android:textSize="@dimen/grid_12"
                     app:rv_backgroundColor="@color/colorPrimary"
                     app:rv_cornerRadius="@dimen/grid_5" />
             </LinearLayout>
@@ -136,7 +136,7 @@
                     android:paddingTop="@dimen/grid_30"
                     android:text="@string/本地操作日志"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/grid_18"
+                    android:textSize="@dimen/grid_12"
                     app:rv_backgroundColor="@color/colorPrimary"
                     app:rv_cornerRadius="@dimen/grid_5" />
 

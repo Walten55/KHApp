@@ -369,14 +369,14 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
                     if (item.getData().getAddress().equals(Frame.开机密码地址[0] + "")) {
 
-                        int password = Integer.valueOf(msg.trim());
+                        long password = Long.valueOf(msg.trim());
                         if (password > 999999 || password < 100000) {
                             XToast.error(getString(R.string.非法密码));
                         } else
                             mPresenter.save(Integer.valueOf(item.getData().getAddress()), Frame.开机密码地址[1], Integer.valueOf(msg.trim()), null);
 
                     } else if (item.getData().getAddress().equals(Frame.试用期密码地址[0] + "")) {
-                        int password = Integer.valueOf(msg.trim());
+                        long password = Long.valueOf(msg.trim());
                         if (password > 999999 || password < 100000) {
                             XToast.error(getString(R.string.非法密码));
                         } else
