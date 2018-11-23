@@ -5,6 +5,7 @@ import android.util.ArrayMap;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.EncryptUtils;
+import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
@@ -90,6 +91,11 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     @Override
     public void login(final int role, final String password) {
+        if(!NetworkUtils.isWifiConnected()){
+            XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
+            return;
+        }
+
         if (role != ROLE_NORMAL && StringUtils.isEmpty(password)) {
             XToast.error(Fastgo.getContext().getString(R.string.密码不能为空));
             return;
@@ -186,6 +192,11 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     @Override
     public void gatherDeviceInfo() {
+        if(!NetworkUtils.isWifiConnected()){
+            XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
+            return;
+        }
+
         mView.startWaiting(Fastgo.getContext().getString(R.string.加载中));
 
         mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
