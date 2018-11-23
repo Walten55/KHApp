@@ -51,7 +51,8 @@ public class LocalMonitorAdapter extends BaseMultiItemQuickAdapter<MonitorEntity
                     int lowValue = CacheManager.getInstance().get(Frame.总并网用电量地址()[1]).getIntValue();
                     long resultValue = highValue * 65536 + lowValue;
 
-                    helper.setText(R.id.tv_value, decimalFormat.format(resultValue / Math.pow(10, 1)));
+                    helper.setText(R.id.tv_value, decimalFormat.format(resultValue / Math.pow(10, 1))+
+                            CacheManager.getInstance().get(Frame.总并网用电量地址()[0]).getUnit());
                 }
                 break;
             case MonitorEntity.OVERVIEW:
