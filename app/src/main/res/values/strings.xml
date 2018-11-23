@@ -275,7 +275,7 @@
     <string name="扫描的采集器与连接采集器不匹配">扫描的采集器与连接采集器不匹配</string>
 
     <string name="中文">中文</string>
-    <string name="英文">英文</string>
+    <string name="英文">English</string>
     <string name="存储卡">存储卡</string>
     <string name="内部存储卡">内部存储卡</string>
     <string name="剩余">剩余 %s</string>
