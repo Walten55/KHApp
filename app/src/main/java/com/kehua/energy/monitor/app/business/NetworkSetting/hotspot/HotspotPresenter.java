@@ -219,7 +219,8 @@ public class HotspotPresenter extends HotspotContract.Presenter {
         int i = -1;
         for (WifiConfiguration config : configuration) {
             i++;
-            if (info != null && info.getSsid() != null && info.getSsid().equals(config.SSID.replace("\"", ""))) {
+            if (config.SSID!=null && info != null && info.getSsid() != null
+                    && info.getSsid().equals(config.SSID.replace("\"", ""))) {
                 mRecentlyNetId = WiFiUtils.getInstance().connectConfiguration(i);
                 return;
             }

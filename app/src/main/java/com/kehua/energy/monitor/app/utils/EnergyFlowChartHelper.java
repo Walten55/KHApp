@@ -187,7 +187,7 @@ public class EnergyFlowChartHelper {
                 //PV功率≥电网功率，否则将PV功率赋值为电网功率
                 mChart.start(EnergyFlowChart.FLOW_DIRECTION_TL_IN);
                 mChart.start(EnergyFlowChart.FLOW_DIRECTION_TR_OUT);
-                if(pvPower>gridPower){
+                if(pvPower<gridPower){
                     pvPower = gridPower;
                 }
                 mChart.getTLTextView().setText(pvPower+"");

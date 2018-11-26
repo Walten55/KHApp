@@ -110,7 +110,8 @@ public class Frame {
     public static final int[] 三相_状态量_采集3 = {3500,3527};
 
     public static final int[] 三相_模拟量_采集1 = {4501,4610};
-    public static final int[] 三相_模拟量_采集2 = {4611,4676};
+//    public static final int[] 三相_模拟量_采集2 = {4611,4676};
+    public static final int[] 三相_模拟量_采集2 = {4651,4676};
     public static final int[] 三相_模拟量_采集3 = {4701,4796};
     public static final int[] 三相_模拟量_采集4 = {4800,4874};
     public static final int[] 三相_模拟量_采集5 = {5500,5512};
