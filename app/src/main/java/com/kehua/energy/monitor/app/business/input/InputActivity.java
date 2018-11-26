@@ -131,7 +131,6 @@ public class InputActivity extends XSimpleActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         //mMsgEt.setHint(mConfig.getHintMsg());
-
         mUnitTv.setText(mConfig.getHintMsg());
         mMsgEt.setInputType(mConfig.getInputType());
         mMsgEt.setText(mConfig.getOldMsg());
@@ -322,6 +321,10 @@ public class InputActivity extends XSimpleActivity {
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
             try {
+                if("-".equals(dest.toString() + source.toString())){
+                    return null;
+                }
+
                 int input = Integer.parseInt(dest.toString() + source.toString());
                 if (isInRange(min, max, input))
                     return null;
