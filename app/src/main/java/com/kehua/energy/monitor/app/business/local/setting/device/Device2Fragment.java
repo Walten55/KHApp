@@ -3,8 +3,10 @@ package com.kehua.energy.monitor.app.business.local.setting.device;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -36,6 +38,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -376,43 +380,43 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
         InputActivity.openInput(getActivity(), new InputActivity.InputConfig() {
             @Override
             public void customSetting(final XEditText editText) {
-                if ((deviceData!=null&&Integer.valueOf(deviceData.getRegisterAddress()) == Frame.串号相关串号地址)||
-                        (deviceData!=null&&Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置串号地址)){
-                    editText.setInputType(InputType.TYPE_CLASS_PHONE);
-                    editText.setPattern(new int[]{4,4,4,4,4},"-");
-                }
-//                if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.串号相关串号地址 ||
-//                        Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置串号地址 ||
-//                        Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置站号地址 ||
-//                        Integer.valueOf(deviceData.getRegisterAddress()) == Frame.MAC地址) {
-//                    editText.addTextChangedListener(new TextWatcher() {
-//                        @Override
-//                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                            String text = editText.getText().toString();
-//                            //只允许汉字
-//                            String regEx = "[\u4E00-\u9FA5]";
-//                            Pattern p = Pattern.compile(regEx);
-//                            Matcher m = p.matcher(text);
-//                            String newText = m.replaceAll("").trim();
-//
-//
-//                            if (!text.equals(newText)) {
-//                                editText.setText(newText);
-//                                editText.setSelection(newText.length());
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void afterTextChanged(Editable editable) {
-//
-//                        }
-//                    });
+//                if ((deviceData!=null&&Integer.valueOf(deviceData.getRegisterAddress()) == Frame.串号相关串号地址)||
+//                        (deviceData!=null&&Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置串号地址)){
+//                    editText.setInputType(InputType.TYPE_CLASS_PHONE);
+//                    editText.setPattern(new int[]{4,4,4,4,4},"-");
 //                }
+                if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.串号相关串号地址 ||
+                        Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置串号地址 ||
+                        Integer.valueOf(deviceData.getRegisterAddress()) == Frame.站号配置站号地址 ||
+                        Integer.valueOf(deviceData.getRegisterAddress()) == Frame.MAC地址) {
+                    editText.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            String text = editText.getText().toString();
+                            //只允许汉字
+                            String regEx = "[\u4E00-\u9FA5]";
+                            Pattern p = Pattern.compile(regEx);
+                            Matcher m = p.matcher(text);
+                            String newText = m.replaceAll("").trim();
+
+
+                            if (!text.equals(newText)) {
+                                editText.setText(newText);
+                                editText.setSelection(newText.length());
+                            }
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+
+                        }
+                    });
+                }
             }
 
             @Override
