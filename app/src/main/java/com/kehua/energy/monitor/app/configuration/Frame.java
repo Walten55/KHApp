@@ -149,13 +149,13 @@ public class Frame {
     public static final int L_HVRT模式地址 = 6426;
     public static final int L_HFRT模式地址 = 6437;
 
-    public static final int P_V模式模式地址 = 6446;
+    public static final int P_V模式地址 = 6446;
     public static final int P_V模式放电起始地址 = 6447;
     public static final int P_V模式放电结束地址 = 6452;
     public static final int P_V模式充电起始地址 = 6453;
     public static final int P_V模式充电结束地址 = 6458;
 
-    public static final int P_F模式模式地址 = 6459;
+    public static final int P_F模式地址 = 6459;
     public static final int P_F模式放电起始地址 = 6460;
     public static final int P_F模式放电结束地址 = 6465;
     public static final int P_F模式充电起始地址 = 6466;
@@ -163,7 +163,7 @@ public class Frame {
 
     public static final int Q_V模式地址 = 6472;
     public static final int Q_V模式V1地址 = 6473;
-    public static final int SPF模式 = 6480;
+    public static final int SPF模式地址 = 6480;
 
     /**
      * 串号

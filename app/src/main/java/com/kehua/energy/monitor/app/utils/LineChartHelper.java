@@ -3,6 +3,7 @@ package com.kehua.energy.monitor.app.utils;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
@@ -17,15 +18,18 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.model.entity.LineChartEntity;
 import com.kehua.energy.monitor.app.model.entity.LineChartEntityList;
+import com.kehua.energy.monitor.app.view.MPChartHelp.CusLineChartValueFormat;
+import com.kehua.energy.monitor.app.view.MPChartHelp.CustomMarkerView;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +71,9 @@ public class LineChartHelper {
     private Drawable fillDrawable;
     private int fillColor = Color.TRANSPARENT;
 
-    private boolean dataDrawValue = false;
+    private boolean dataDrawValue = true;
+    private String dataValueTag = "";
+
     private boolean dataCircleHoleEnable = true;
     private float dataTextSize = 10f;
     private boolean dataDrawFillEnable = false;
@@ -80,7 +86,7 @@ public class LineChartHelper {
         return _Instance;
     }
 
-    public static LineChartHelper get(){
+    public static LineChartHelper get() {
         return _Instance;
     }
 
@@ -172,10 +178,14 @@ public class LineChartHelper {
 
         lineChart.getData().notifyDataChanged();
         lineChart.notifyDataSetChanged();
+
+        lineChart.getViewPortHandler().refresh(new Matrix(),lineChart,true);
     }
 
 
-    /** 设置数据 */
+    /**
+     * 设置数据
+     */
     public LineChartHelper setData(List<LineChartEntity> lineChartEntities) {
         List<Entry> values = new ArrayList<>();
         XAxis xAxis = lineChart.getXAxis();
@@ -322,6 +332,8 @@ public class LineChartHelper {
         } else {
             set.setFillColor(fillColor);
         }
+
+        set.setValueFormatter(new CusLineChartValueFormat(dataValueTag));
     }
 
     public LineChartHelper setTouchEnabl(boolean touchEnabl) {
@@ -331,6 +343,11 @@ public class LineChartHelper {
 
     public LineChartHelper setDragEnable(boolean dragEnable) {
         this.dragEnable = dragEnable;
+        return this;
+    }
+
+    public LineChartHelper setDataValueTag(String dataValueTag) {
+        this.dataValueTag = dataValueTag;
         return this;
     }
 
@@ -519,28 +536,5 @@ public class LineChartHelper {
         return lineChart;
     }
 
-    /*
-        * * 自定义标注样式
-        * */
-    class CustomMarkerView extends MarkerView {
-
-        TextView tvContentX, tvContentY;
-
-        private DecimalFormat format;
-
-        public CustomMarkerView(Context context) {
-            super(context, R.layout.layout_linechar_marker);
-            tvContentX = findViewById(R.id.tv_content_x);
-            tvContentY = findViewById(R.id.tv_content_y);
-            format = new DecimalFormat("###.00");
-        }
-
-        @Override
-        public void refreshContent(Entry e, Highlight highlight) {
-            tvContentX.setText(e.getX() == 0 ? "0" : format.format(e.getX()));
-            tvContentY.setText(e.getY() == 0 ? "0" : format.format(e.getY()));
-            super.refreshContent(e, highlight);
-        }
-    }
 
 }

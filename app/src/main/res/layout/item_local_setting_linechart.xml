@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/grid_250"
-    android:orientation="vertical"
     android:background="@color/white"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,28 +15,35 @@
             android:id="@+id/tv_linechart_setting"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:autoLink="all"
             android:gravity="right|center_vertical"
-            android:text="@string/设置"
             android:paddingLeft="@dimen/margin"
             android:paddingRight="@dimen/margin"
-            android:autoLink="all"
+            android:text="@string/设置"
             android:textColor="@color/text_blue"
-            android:textSize="@dimen/text_size_main"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:textSize="@dimen/text_size_main" />
 
+
+        <!--<View-->
+            <!--style="@style/Line"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_alignBottom="@id/tv_linechart_setting"-->
+            <!--android:layout_alignLeft="@id/tv_linechart_setting"-->
+            <!--android:layout_alignRight="@id/tv_linechart_setting" />-->
 
         <com.flyco.tablayout.SegmentTabLayout
             android:id="@+id/segment_tablayout"
             android:layout_width="@dimen/grid_200"
             android:layout_height="@dimen/grid_30"
             android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             app:tl_bar_color="@color/white"
             app:tl_indicator_color="@color/text_blue"
             app:tl_indicator_corner_radius="@dimen/grid_5"
             app:tl_tab_padding="@dimen/margin"
-            app:tl_textsize="@dimen/text_size_main"
-            android:layout_centerInParent="true"/>
+            app:tl_textsize="@dimen/text_size_main" />
 
     </RelativeLayout>
 
@@ -44,6 +51,8 @@
         android:id="@+id/linechart"
         android:layout_width="match_parent"
         android:layout_height="@dimen/grid_200"
+        android:layout_marginLeft="@dimen/grid_20"
+        android:layout_marginRight="@dimen/grid_20"
         android:padding="@dimen/margin" />
 
 </LinearLayout>

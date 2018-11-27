@@ -52,7 +52,7 @@ public class PatternPresenter extends PatternContract.Presenter {
     @Override
     public void setupData() {
 
-        List<PointInfo> oriPointInfos = mModel.getLocalModel().getPointInfosWith(LocalUserManager.getPn(), Frame.模式设置, LocalUserManager.getRoleAuthority(),true);
+        List<PointInfo> oriPointInfos = mModel.getLocalModel().getPointInfosWith(LocalUserManager.getPn(), Frame.模式设置, LocalUserManager.getRoleAuthority(), true);
         List<PointInfo> pointInfos = new ArrayList<>();
 
         //如果是光储，则展示全部，否则只展示光伏（1）
@@ -117,7 +117,7 @@ public class PatternPresenter extends PatternContract.Presenter {
                     PatternHead patternHead = new PatternHead(pointInfo, true);
                     //Q-V模式 和 SPF模式 地址点表里值是int类型，但是原型上是开关类型，所以需要强制指定
                     boolean isSpecialModel = pointInfo.getAddress().equals(String.valueOf(Frame.Q_V模式地址))
-                            || pointInfo.getAddress().equals(String.valueOf(Frame.SPF模式));
+                            || pointInfo.getAddress().equals(String.valueOf(Frame.SPF模式地址));
                     patternHead.setItemType(isSpecialModel ? PatternHead.HEAD_SWITCH : PatternHead.HEAD_TEXT);
                     data.add(patternHead);
                 }
@@ -149,6 +149,29 @@ public class PatternPresenter extends PatternContract.Presenter {
                 if (patternEntity != null) {
                     patternHead.addSubItem(patternEntity);
                 }
+
+                //折线标签
+                switch (Integer.parseInt(patternHead.getPointInfo().getAddress())) {
+                    case Frame.P_V模式地址:
+                        patternEntity.setValueTags("V", "V");
+                        break;
+
+                    case Frame.P_F模式地址:
+                        patternEntity.setValueTags("F", "F");
+                        break;
+
+                    case Frame.Q_V模式地址:
+                        patternEntity.setValueTags("V");
+                        if (dealPointInfos != null && dealPointInfos.size() > 0) {
+                            patternHead.addSubItem(new PatternEntity(dealPointInfos.get(dealPointInfos.size() - 1)));
+                        }
+                        break;
+
+                    case Frame.SPF模式地址:
+                        patternEntity.setValueTags("P");
+                        break;
+                }
+
                 //QV模式还有一个尾巴 Q-V模式Hysteresis,用文字展示
                 if (patternHead.getPointInfo().getAddress().equals(String.valueOf(Frame.Q_V模式地址))
                         && dealPointInfos != null && dealPointInfos.size() > 0) {
@@ -175,11 +198,11 @@ public class PatternPresenter extends PatternContract.Presenter {
 
         String[] lables = new String[2];
         int[] colors = new int[]{R.color.red, R.color.green};
-        if (patternHead.getPointInfo().getAddress().equals(String.valueOf(Frame.P_V模式模式地址))) {
+        if (patternHead.getPointInfo().getAddress().equals(String.valueOf(Frame.P_V模式地址))) {
             isPVModle = true;
             lables[0] = Fastgo.getContext().getString(R.string.放电);
             lables[1] = Fastgo.getContext().getString(R.string.充电);
-        } else if (patternHead.getPointInfo().getAddress().equals(String.valueOf(Frame.P_F模式模式地址))) {
+        } else if (patternHead.getPointInfo().getAddress().equals(String.valueOf(Frame.P_F模式地址))) {
             isPFModle = true;
             lables[0] = Fastgo.getContext().getString(R.string.放电);
             lables[1] = Fastgo.getContext().getString(R.string.充电);

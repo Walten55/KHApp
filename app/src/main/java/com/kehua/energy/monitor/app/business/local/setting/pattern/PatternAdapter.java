@@ -1,6 +1,7 @@
 package com.kehua.energy.monitor.app.business.local.setting.pattern;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -187,6 +188,8 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                 PatternEntity peLineChartItem = (PatternEntity) item;
 
                 helper.addOnClickListener(R.id.tv_linechart_setting);
+                ((TextView) helper.getView(R.id.tv_linechart_setting)).getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+
                 //已经对应点表对象正常且读取成功才进行数据转化与展示
                 DeviceData deviceInfo = CacheManager.getInstance().get(Integer.valueOf(peLineChartItem.getData()[0].get(0).getAddress().trim()));
                 if (deviceInfo != null) {
@@ -194,7 +197,9 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                     //单条折线
                     if (peLineChartItem.isSingleLine()) {
                         List<DeviceData> deviceDatas = dealLineChartData(peLineChartItem.getData()[0]);
-                        LineChartHelper.init(helper.itemView.getContext(), (LineChart) helper.getView(R.id.linechart)).setDeviceData(deviceDatas);
+                        LineChartHelper.init(helper.itemView.getContext(), (LineChart) helper.getView(R.id.linechart))
+                                .setDataValueTag(peLineChartItem.getValueTags()[0])
+                                .setDeviceData(deviceDatas);
                     }
                     //多条折线
                     else {
@@ -204,26 +209,28 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                         SegmentTabLayout segmentTabLayout = helper.getView(R.id.segment_tablayout);
                         segmentTabLayout.setTabData(peLineChartItem.getLables());
 
-                        final int[] colors = peLineChartItem.getColors();
-
-                        List<DeviceData> deviceDatas = dealLineChartData(data[0]);
+                        int selectedTab = segmentTabLayout.getCurrentTab();
+                        List<DeviceData> deviceDatas = dealLineChartData(data[selectedTab]);
                         LineChartHelper.init(helper.itemView.getContext(), (LineChart) helper.getView(R.id.linechart))
-                                .setDataColor(ContextCompat.getColor(helper.itemView.getContext(), colors[0]))
+                                .setDataColor(ContextCompat.getColor(helper.itemView.getContext(), peLineChartItem.getColors()[selectedTab]))
+                                .setDataValueTag(peLineChartItem.getValueTags()[selectedTab])
                                 .setDeviceData(deviceDatas);
 
-                        segmentTabLayout.setOnTabSelectListener(new CustomSegTouchListener(LineChartHelper.get()) {
+                        segmentTabLayout.setOnTabSelectListener(new CustomSegTouchListener(LineChartHelper.get(), peLineChartItem) {
                             @Override
-                            public void onTabSelect(int position, LineChartHelper lineChartHelper) {
+                            public void onTabSelect(int position, LineChartHelper lineChartHelper, PatternEntity patternEntity) {
                                 if (lineChartHelper != null) {
                                     List<DeviceData> deviceDatas = dealLineChartData(data[position]);
-                                    lineChartHelper.setDataColor(ContextCompat.getColor(helper.itemView.getContext(), colors[position]))
+                                    lineChartHelper.setDataColor(ContextCompat.getColor(helper.itemView.getContext(), patternEntity.getColors()[position]))
+                                            .setDataValueTag(patternEntity.getValueTags()[position])
                                             .setDeviceData(deviceDatas);
-                                    lineChartHelper.getLineChart().animateXY(3000, 3000);
+
+//                                    lineChartHelper.getLineChart().animateXY(3000, 3000);
                                 }
                             }
 
                             @Override
-                            public void onTabReselect(int position, LineChartHelper lineChartHelper) {
+                            public void onTabReselect(int position, LineChartHelper lineChartHelper, PatternEntity patternEntity) {
 
                             }
                         });

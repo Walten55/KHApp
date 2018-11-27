@@ -1,6 +1,7 @@
 package com.kehua.energy.monitor.app.business.local.setting.pattern;
 
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.kehua.energy.monitor.app.model.entity.PatternEntity;
 import com.kehua.energy.monitor.app.utils.LineChartHelper;
 
 /**
@@ -12,22 +13,25 @@ public abstract class CustomSegTouchListener implements OnTabSelectListener {
 
     LineChartHelper lineChartHelper;
 
-    public CustomSegTouchListener(LineChartHelper lineChartHelper) {
+    PatternEntity patternEntity;
+
+    public CustomSegTouchListener(LineChartHelper lineChartHelper, PatternEntity patternEntity) {
         this.lineChartHelper = lineChartHelper;
+        this.patternEntity = patternEntity;
     }
 
 
-    public abstract void onTabSelect(int position, LineChartHelper lineChartHelper);
+    public abstract void onTabSelect(int position, LineChartHelper lineChartHelper, PatternEntity patternEntity);
 
     @Override
     public void onTabSelect(int position) {
-        onTabSelect(position, lineChartHelper);
+        onTabSelect(position, lineChartHelper, patternEntity);
     }
 
-    public abstract void onTabReselect(int position, LineChartHelper lineChartHelper);
+    public abstract void onTabReselect(int position, LineChartHelper lineChartHelper, PatternEntity patternEntity);
 
     @Override
     public void onTabReselect(int position) {
-        onTabReselect(position, lineChartHelper);
+        onTabReselect(position, lineChartHelper, patternEntity);
     }
 }
