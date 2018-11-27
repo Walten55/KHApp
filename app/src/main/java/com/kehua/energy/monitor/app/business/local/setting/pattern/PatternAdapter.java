@@ -1,11 +1,15 @@
 package com.kehua.energy.monitor.app.business.local.setting.pattern;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.flyco.tablayout.SegmentTabLayout;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.github.mikephil.charting.charts.LineChart;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.business.local.setting.advanced.AdvancedPresenter;
@@ -181,54 +185,98 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
 
             case TYPE_CONTENT_LINECHART:
                 PatternEntity peLineChartItem = (PatternEntity) item;
-                List<PointInfo>[] data = peLineChartItem.getData();
 
                 helper.addOnClickListener(R.id.tv_linechart_setting);
                 //已经对应点表对象正常且读取成功才进行数据转化与展示
                 DeviceData deviceInfo = CacheManager.getInstance().get(Integer.valueOf(peLineChartItem.getData()[0].get(0).getAddress().trim()));
                 if (deviceInfo != null) {
+                    helper.setGone(R.id.segment_tablayout, false);
                     //单条折线
                     if (peLineChartItem.isSingleLine()) {
-                        List<DeviceData> deviceDatas = new ArrayList<>();
-                        for (int i = 0; i < data[0].size(); i++) {
-                            targetDeviceData = CacheManager.getInstance().get(Integer.valueOf(data[0].get(i).getAddress().trim()));
-                            deviceDatas.add(targetDeviceData);
-                        }
-
-                        //硬件开发那群傻逼漏了QV模式的Q2，Q3值，设计上面要求强制添加为0，点表上地址又是连续的无法添加，只能在客户端强制为0，但是有些角色不一定采集得到，故在此特殊设置
-                        if (deviceDatas.size() > 5 && String.valueOf(Frame.Q_V模式V1地址).equals(deviceDatas.get(0).getRegisterAddress())) {
-                            DeviceData deviceDataQ2 = new DeviceData();
-                            DeviceData deviceDataQ3 = new DeviceData();
-
-                            deviceDataQ2.setParseValue(String.valueOf(0));
-                            deviceDataQ3.setParseValue(String.valueOf(0));
-                            deviceDatas.add(3, deviceDataQ2);
-                            deviceDatas.add(5, deviceDataQ3);
-                        }
+                        List<DeviceData> deviceDatas = dealLineChartData(peLineChartItem.getData()[0]);
                         LineChartHelper.init(helper.itemView.getContext(), (LineChart) helper.getView(R.id.linechart)).setDeviceData(deviceDatas);
                     }
                     //多条折线
                     else {
-                        List<DeviceData>[] deviceDataLists = new List[peLineChartItem.getData().length];
-                        List<DeviceData> deviceDatas;
-                        //折线图多组
-                        for (int i = 0; i < peLineChartItem.getData().length; i++) {
-                            deviceDatas = new ArrayList<>();
-                            //每组
-                            for (int j = 0; j < peLineChartItem.getData()[i].size(); j++) {
-                                targetDeviceData = CacheManager.getInstance().get(Integer.valueOf(peLineChartItem.getData()[i].get(j).getAddress().trim()));
-                                deviceDatas.add(targetDeviceData);
-                            }
-                            deviceDataLists[i] = deviceDatas;
-                        }
+                        final List<PointInfo>[] data = peLineChartItem.getData();
 
+                        helper.setGone(R.id.segment_tablayout, true);
+                        SegmentTabLayout segmentTabLayout = helper.getView(R.id.segment_tablayout);
+                        segmentTabLayout.setTabData(peLineChartItem.getLables());
+
+                        final int[] colors = peLineChartItem.getColors();
+
+                        List<DeviceData> deviceDatas = dealLineChartData(data[0]);
                         LineChartHelper.init(helper.itemView.getContext(), (LineChart) helper.getView(R.id.linechart))
-                                .setDeviceData(peLineChartItem.getLables(), peLineChartItem.getColors(), deviceDataLists);
+                                .setDataColor(ContextCompat.getColor(helper.itemView.getContext(), colors[0]))
+                                .setDeviceData(deviceDatas);
+
+                        segmentTabLayout.setOnTabSelectListener(new CustomSegTouchListener(LineChartHelper.get()) {
+                            @Override
+                            public void onTabSelect(int position, LineChartHelper lineChartHelper) {
+                                if (lineChartHelper != null) {
+                                    List<DeviceData> deviceDatas = dealLineChartData(data[position]);
+                                    lineChartHelper.setDataColor(ContextCompat.getColor(helper.itemView.getContext(), colors[position]))
+                                            .setDeviceData(deviceDatas);
+                                    lineChartHelper.getLineChart().animateXY(3000, 3000);
+                                }
+                            }
+
+                            @Override
+                            public void onTabReselect(int position, LineChartHelper lineChartHelper) {
+
+                            }
+                        });
+
+//                        List<DeviceData>[] deviceDataLists = new List[peLineChartItem.getData().length];
+//                        List<DeviceData> deviceDatas;
+//                        //折线图多组
+//                        for (int i = 0; i < peLineChartItem.getData().length; i++) {
+//                            deviceDatas = new ArrayList<>();
+//                            //每组
+//                            for (int j = 0; j < peLineChartItem.getData()[i].size(); j++) {
+//                                targetDeviceData = CacheManager.getInstance().get(Integer.valueOf(peLineChartItem.getData()[i].get(j).getAddress().trim()));
+//                                deviceDatas.add(targetDeviceData);
+//                            }
+//                            deviceDataLists[i] = deviceDatas;
+//                        }
+//
+//                        LineChartHelper.init(helper.itemView.getContext(), (LineChart) helper.getView(R.id.linechart))
+//                                .setDeviceData(peLineChartItem.getLables(), peLineChartItem.getColors(), deviceDataLists);
+
+
                     }
 
                 }
                 break;
         }
+    }
+
+    /**
+     * 折线数据处理
+     */
+    private List<DeviceData> dealLineChartData(List<PointInfo> data) {
+
+        List<DeviceData> deviceDatas = new ArrayList<>();
+        DeviceData targetDeviceData;
+
+        for (int i = 0; i < data.size(); i++) {
+            targetDeviceData = CacheManager.getInstance().get(Integer.valueOf(data.get(i).getAddress().trim()));
+            deviceDatas.add(targetDeviceData);
+        }
+
+        //硬件开发那群傻逼漏了QV模式的Q2，Q3值，设计上面要求强制添加为0，点表上地址又是连续的无法添加，只能在客户端强制为0，但是有些角色不一定采集得到，故在此特殊设置
+        if (deviceDatas.size() > 5 && String.valueOf(Frame.Q_V模式V1地址).equals(deviceDatas.get(0).getRegisterAddress())) {
+            DeviceData deviceDataQ2 = new DeviceData();
+            DeviceData deviceDataQ3 = new DeviceData();
+
+            deviceDataQ2.setParseValue(String.valueOf(0));
+            deviceDataQ3.setParseValue(String.valueOf(0));
+            deviceDatas.add(3, deviceDataQ2);
+            deviceDatas.add(5, deviceDataQ3);
+        }
+
+        return deviceDatas;
     }
 
 }

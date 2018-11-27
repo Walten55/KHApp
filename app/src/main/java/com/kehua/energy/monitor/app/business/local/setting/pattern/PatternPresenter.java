@@ -20,6 +20,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.functions.Consumer;
+import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.scope.FragmentScope;
 
 @FragmentScope
@@ -176,12 +177,12 @@ public class PatternPresenter extends PatternContract.Presenter {
         int[] colors = new int[]{R.color.red, R.color.green};
         if (patternHead.getPointInfo().getAddress().equals(String.valueOf(Frame.P_V模式模式地址))) {
             isPVModle = true;
-            lables[0] = "P-V模式放电";
-            lables[1] = "P-V模式充电";
+            lables[0] = Fastgo.getContext().getString(R.string.放电);
+            lables[1] = Fastgo.getContext().getString(R.string.充电);
         } else if (patternHead.getPointInfo().getAddress().equals(String.valueOf(Frame.P_F模式模式地址))) {
             isPFModle = true;
-            lables[0] = "P-F模式放电";
-            lables[1] = "P-F模式充电";
+            lables[0] = Fastgo.getContext().getString(R.string.放电);
+            lables[1] = Fastgo.getContext().getString(R.string.充电);
         }
 
         //P-V与P-F是双折线，其余单折线

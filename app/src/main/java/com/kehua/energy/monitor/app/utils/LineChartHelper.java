@@ -80,6 +80,10 @@ public class LineChartHelper {
         return _Instance;
     }
 
+    public static LineChartHelper get(){
+        return _Instance;
+    }
+
     private Context context;
     private LineChart lineChart;
 
@@ -171,6 +175,7 @@ public class LineChartHelper {
     }
 
 
+    /** 设置数据 */
     public LineChartHelper setData(List<LineChartEntity> lineChartEntities) {
         List<Entry> values = new ArrayList<>();
         XAxis xAxis = lineChart.getXAxis();
@@ -204,6 +209,7 @@ public class LineChartHelper {
         }
 
         LineDataSet set1 = (LineDataSet) lineChart.getData().getDataSetByIndex(0);
+        set1.clear();
         set1.setValues(values);
 
         lineChartSet();
@@ -247,7 +253,7 @@ public class LineChartHelper {
                 set = (LineDataSet) lineChart.getLineData().getDataSetByIndex(i);
                 set.setValues(lineChartEntitys2Entry(lineChartEntitieLists[i].getData()));
                 set.setLabel(lineChartEntitieLists[i].getDes());
-                set.setColor(ContextCompat.getColor(context, lineChartEntitieLists[i].getColor()));
+                set.setColor(lineChartEntitieLists[i].getColor());
             }
         }
         lineChart.getData().notifyDataChanged();
@@ -284,7 +290,8 @@ public class LineChartHelper {
         if (deviceDataList == null || deviceDataList.size() < 1) {
             return;
         }
-        setData(deviceDatas2LineChartEntitys(deviceDataList));
+        List<LineChartEntity> data = deviceDatas2LineChartEntitys(deviceDataList);
+        setData(data);
     }
 
 
@@ -508,10 +515,13 @@ public class LineChartHelper {
         return entryList;
     }
 
+    public LineChart getLineChart() {
+        return lineChart;
+    }
 
     /*
-    * * 自定义标注样式
-    * */
+        * * 自定义标注样式
+        * */
     class CustomMarkerView extends MarkerView {
 
         TextView tvContentX, tvContentY;
