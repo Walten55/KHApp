@@ -15,11 +15,11 @@ public interface LoginContract {
 
         abstract void login(String account, String password);
 
-        abstract void loadPlatforms();
-
-        abstract void qqAuthor();
-
-        abstract void weChatAuthor();
+//        abstract void loadPlatforms();
+//
+//        abstract void qqAuthor();
+//
+//        abstract void weChatAuthor();
 
     }
 }

@@ -15,9 +15,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.framework.ShareSDK;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -28,6 +25,7 @@ import io.reactivex.schedulers.Schedulers;
 import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.scope.ActivityScope;
 import me.walten.fastgo.utils.XToast;
+import okhttp3.internal.platform.Platform;
 
 @ActivityScope
 public class LoginPresenter extends LoginContract.Presenter {
@@ -37,7 +35,7 @@ public class LoginPresenter extends LoginContract.Presenter {
     @Inject
     APPModel mModel;
 
-    List<Platform> mPlatforms = new ArrayList<>();
+//    List<Platform> mPlatforms = new ArrayList<>();
 
 
     @Inject
@@ -83,76 +81,76 @@ public class LoginPresenter extends LoginContract.Presenter {
         // TODO: 2018/8/27  
     }
 
-    @SuppressLint("CheckResult")
-    @Override
-    void loadPlatforms() {
-        Observable.create(new ObservableOnSubscribe<Platform[]>() {
-
-            @Override
-            public void subscribe(ObservableEmitter<Platform[]> emitter) throws Exception {
-                emitter.onNext(ShareSDK.getPlatformList());
-            }
-        }).map(new Function<Platform[], List<Platform>>() {
-
-            @Override
-            public List<Platform> apply(Platform[] platforms) throws Exception {
-                if (platforms != null && platforms.length > 0) {
-                    return Arrays.asList(platforms);
-                } else {
-                    return new ArrayList<Platform>();
-                }
-            }
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Platform>>() {
-                    @Override
-                    public void accept(List<Platform> platforms) throws Exception {
-                        mPlatforms.clear();
-                        mPlatforms.addAll(platforms);
-                    }
-                });
-    }
-
-    @Override
-    void qqAuthor() {
-        dealPlatform(Config.SHARE_QQ_ID, Config.SHARE_QQ_SORT_ID);
-    }
-
-    @Override
-    void weChatAuthor() {
-        dealPlatform(Config.SHARE_WECHAT_ID, Config.SHARE_WECHAT_SORT_ID);
-    }
-
-    private void dealPlatform(int targetPlatformId, int targetPlatformSortId) {
-        Platform platform = null;
-        for (Platform platf : mPlatforms) {
-            if (platf.getId() == targetPlatformId && platf.getSortId() == targetPlatformSortId) {
-                platform = platf;
-                break;
-            }
-        }
-
-        platform.setPlatformActionListener(new PlatformActionListener() {
-            @Override
-            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-                Gson gson = new Gson();
-            }
-
-            @Override
-            public void onError(Platform platform, int i, Throwable throwable) {
-                Gson gson = new Gson();
-            }
-
-            @Override
-            public void onCancel(Platform platform, int i) {
-                Gson gson = new Gson();
-            }
-        });
-//        if (platform.isAuthValid()) {
-//            platform.removeAccount(true);
-//            return;
+//    @SuppressLint("CheckResult")
+//    @Override
+//    void loadPlatforms() {
+//        Observable.create(new ObservableOnSubscribe<Platform[]>() {
+//
+//            @Override
+//            public void subscribe(ObservableEmitter<Platform[]> emitter) throws Exception {
+//                emitter.onNext(ShareSDK.getPlatformList());
+//            }
+//        }).map(new Function<Platform[], List<Platform>>() {
+//
+//            @Override
+//            public List<Platform> apply(Platform[] platforms) throws Exception {
+//                if (platforms != null && platforms.length > 0) {
+//                    return Arrays.asList(platforms);
+//                } else {
+//                    return new ArrayList<Platform>();
+//                }
+//            }
+//        }).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<List<Platform>>() {
+//                    @Override
+//                    public void accept(List<Platform> platforms) throws Exception {
+//                        mPlatforms.clear();
+//                        mPlatforms.addAll(platforms);
+//                    }
+//                });
+//    }
+//
+//    @Override
+//    void qqAuthor() {
+//        dealPlatform(Config.SHARE_QQ_ID, Config.SHARE_QQ_SORT_ID);
+//    }
+//
+//    @Override
+//    void weChatAuthor() {
+//        dealPlatform(Config.SHARE_WECHAT_ID, Config.SHARE_WECHAT_SORT_ID);
+//    }
+//
+//    private void dealPlatform(int targetPlatformId, int targetPlatformSortId) {
+//        Platform platform = null;
+//        for (Platform platf : mPlatforms) {
+//            if (platf.getId() == targetPlatformId && platf.getSortId() == targetPlatformSortId) {
+//                platform = platf;
+//                break;
+//            }
 //        }
-        platform.SSOSetting(true);
-        platform.showUser(null);
-    }
+//
+//        platform.setPlatformActionListener(new PlatformActionListener() {
+//            @Override
+//            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+//                Gson gson = new Gson();
+//            }
+//
+//            @Override
+//            public void onError(Platform platform, int i, Throwable throwable) {
+//                Gson gson = new Gson();
+//            }
+//
+//            @Override
+//            public void onCancel(Platform platform, int i) {
+//                Gson gson = new Gson();
+//            }
+//        });
+////        if (platform.isAuthValid()) {
+////            platform.removeAccount(true);
+////            return;
+////        }
+//        platform.SSOSetting(true);
+//        platform.showUser(null);
+//    }
 }

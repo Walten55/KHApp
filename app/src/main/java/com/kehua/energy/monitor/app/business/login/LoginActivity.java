@@ -43,7 +43,7 @@ public class LoginActivity extends XMVPActivity<LoginPresenter> implements Login
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        mPresenter.loadPlatforms();
+//        mPresenter.loadPlatforms();
     }
 
     @Override
@@ -82,18 +82,18 @@ public class LoginActivity extends XMVPActivity<LoginPresenter> implements Login
         RouterMgr.get().forgetPassword();
     }
 
-    @OnClick(R.id.iv_login_qq)
-    void qqLogin() {
-        mPresenter.qqAuthor();
-    }
-
-    @OnClick(R.id.iv_login_weixin)
-    void weChatLogin() {
-       mPresenter.weChatAuthor();
-    }
-
-    @OnClick(R.id.iv_login_facebook)
-    void facebookLogin() {
-        // TODO: 2018/8/31  
-    }
+//    @OnClick(R.id.iv_login_qq)
+//    void qqLogin() {
+//        mPresenter.qqAuthor();
+//    }
+//
+//    @OnClick(R.id.iv_login_weixin)
+//    void weChatLogin() {
+//       mPresenter.weChatAuthor();
+//    }
+//
+//    @OnClick(R.id.iv_login_facebook)
+//    void facebookLogin() {
+//        // TODO: 2018/8/31
+//    }
 }
