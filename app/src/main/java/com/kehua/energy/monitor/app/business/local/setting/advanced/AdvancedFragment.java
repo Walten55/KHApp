@@ -336,6 +336,10 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
                 @Override
                 public String getHintMsg() {
+                    if (item.getData().getAddress().equals(Frame.功率因数地址() + "")) {
+                        return "[-0.99,-0.8][0.8,1.00]";
+                    }
+
                     return item.getData().getUnit();
                 }
 

@@ -187,6 +187,10 @@ public class Frame {
     public static final int MPPT路数地址 = 4851;
     public static final int PV支路数地址 = 4873;
 
+    public static int 功率因数地址(){
+        return 单相协议 == LocalUserManager.getPn()?6000:6002;
+    }
+
     public static int 电池日充电量地址(){
         return 单相协议 == LocalUserManager.getPn()?4532:4560;
     }
