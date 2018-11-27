@@ -31,7 +31,7 @@
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/colorPrimary"
         app:tabTextColor="@color/text_black"
-        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
+        app:tabTextAppearance="@style/TabLayoutTextStyle">
 
         <android.support.design.widget.TabItem
             android:id="@+id/tab_overview"

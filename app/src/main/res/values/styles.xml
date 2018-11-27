@@ -170,4 +170,9 @@
         <item name="android:textColor">@color/text_black</item>
         <item name="textAllCaps">true</item>
     </style>
+
+    <style name="TabLayoutTextStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">@dimen/text_size_sub_title</item>
+    </style>
+
 </resources>

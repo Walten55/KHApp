@@ -90,8 +90,8 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
                         status = Fastgo.getContext().getString(R.string.升级失败);
                         break;
                 }
-                upProgress = upgrade.getUpprogress()+"%";
-                dnProgress = upgrade.getDnprogress()+"%";
+                upProgress = upgrade.getUpprogress()*1.0f/10+"%";
+                dnProgress = upgrade.getDnprogress()*1.0f/10+"%";
 
                 mView.onUpgrade(String.format(Fastgo.getContext().getString(R.string.升级状态),status,dnProgress));
             }
