@@ -282,14 +282,15 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
 
         List<PointInfo> pointInfos = getPointInfoListWith(Frame.设备信息);
         for (PointInfo pointInfo : pointInfos) {
-            if (LocalUserManager.getRole() != LocalUserManager.ROLE_NORMAL
-                    && (Integer.valueOf(pointInfo.getAddress()) == Frame.控制软件1地址()
-                    || Integer.valueOf(pointInfo.getAddress()) == Frame.控制软件2地址())) {
-                //do nothing
-            } else {
-                result.add(new MonitorEntity(MonitorEntity.SIMPLE_DATA, pointInfo));
-            }
+//            if (LocalUserManager.getRole() != LocalUserManager.ROLE_NORMAL
+//                    && (Integer.valueOf(pointInfo.getAddress()) == Frame.控制软件1地址()
+//                    || Integer.valueOf(pointInfo.getAddress()) == Frame.控制软件2地址())) {
+//                //do nothing
+//            } else {
+//                result.add(new MonitorEntity(MonitorEntity.SIMPLE_DATA, pointInfo));
+//            }
 
+            result.add(new MonitorEntity(MonitorEntity.SIMPLE_DATA, pointInfo));
         }
         for (int i = 0; i < 15; i++) {
             result.add(new MonitorEntity(MonitorEntity.MARGIN, ""));

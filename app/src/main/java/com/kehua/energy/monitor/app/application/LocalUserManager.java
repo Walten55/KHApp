@@ -22,6 +22,16 @@ public class LocalUserManager {
 
     private static int deviceType;
 
+    private static String sn;
+
+    public static String getSn() {
+        return sn;
+    }
+
+    public static void setSn(String sn) {
+        LocalUserManager.sn = sn;
+    }
+
     public static void setRole(int role) {
         LocalUserManager.role = role;
     }

@@ -1496,6 +1496,7 @@ public class RemoteModel extends BaseModel implements IModel {
 
                             if(!StringUtils.isEmpty(ByteUtils.bytes2String(modbusResponse.getBytesDat()))){
                                 sn.put("sn", ByteUtils.bytes2String(modbusResponse.getBytesDat()));
+                                LocalUserManager.setSn(ByteUtils.bytes2String(modbusResponse.getBytesDat()));
                                 password = PasswordUtils.createPassword(31, ByteUtils.bytes2String(modbusResponse.getBytesDat()));
                             }
 

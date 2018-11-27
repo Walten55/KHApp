@@ -1,6 +1,5 @@
 package com.kehua.energy.monitor.app.model.local;
 
-import android.support.annotation.NonNull;
 import android.util.ArrayMap;
 
 import com.blankj.utilcode.util.AppUtils;
@@ -32,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -507,7 +505,7 @@ public class LocalModel extends BaseModel implements IModel {
             @Override
             public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
                 if (SPUtils.getInstance().getInt("app_version") != AppUtils.getAppVersionCode()) {
-                    try {
+//                    try {
                         ObjectBox.get().getBoxStore().boxFor(SGroupInfo.class).removeAll();
                         ObjectBox.get().getBoxStore().boxFor(GroupInfo.class).removeAll();
                         ObjectBox.get().getBoxStore().boxFor(PointInfo.class).removeAll();
@@ -519,11 +517,11 @@ public class LocalModel extends BaseModel implements IModel {
                         setupRecord();
 
                         SPUtils.getInstance().put("app_version", AppUtils.getAppVersionCode());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (BiffException e) {
-                        e.printStackTrace();
-                    }
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    } catch (BiffException e) {
+//                        e.printStackTrace();
+//                    }
                 }
             }
         }).subscribeOn(Schedulers.io())

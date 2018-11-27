@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.kehua.energy.monitor.app.R;
+import com.kehua.energy.monitor.app.application.LocalUserManager;
 import com.kehua.energy.monitor.app.model.entity.RecordData;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class HistoryAdapter extends BaseQuickAdapter<RecordData,BaseViewHolder> 
         }
 
         helper.setText(R.id.tv_time,item.getTime().trim());
-        helper.setText(R.id.tv_device_address,mContext.getString(R.string.设备编号)+":"+item.getDeviceAddress());
+        helper.setText(R.id.tv_device_address,mContext.getString(R.string.设备编号)+":"+ LocalUserManager.getSn());
         helper.setText(R.id.tv_value,item.getParseValue().trim());
         if(item.isSwitch()&&item.getCode()!=6200){
             helper.setTextColor(R.id.tv_value,item.getValue()==0?
