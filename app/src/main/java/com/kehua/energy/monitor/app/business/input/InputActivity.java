@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.kehua.energy.monitor.app.R;
@@ -58,9 +59,8 @@ public class InputActivity extends XSimpleActivity {
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarDarkFont(true);
-        immersionBar.keyboardEnable(true);
-        return true;
+        //immersionBar.statusBarDarkFont(true);
+        return false;
     }
 
     @Override
@@ -126,6 +126,13 @@ public class InputActivity extends XSimpleActivity {
             }
         });
 
+        mMsgEt.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                KeyboardUtils.showSoftInput(mMsgEt);
+            }
+        },500);
+
     }
 
     @Override
@@ -134,7 +141,7 @@ public class InputActivity extends XSimpleActivity {
         mUnitTv.setText(mConfig.getHintMsg());
         mMsgEt.setInputType(mConfig.getInputType());
         mMsgEt.setText(mConfig.getOldMsg());
-        mMsgEt.setSelection(mMsgEt.getTrimmedString().toString().length());
+        mMsgEt.setSelection(mMsgEt.getTextTrimmed().length());
         mMsgEt.setFocusable(true);
         digits = mConfig.getDigits();
         if (digits != 0&&(mConfig.getInputType() == (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL)
@@ -146,7 +153,8 @@ public class InputActivity extends XSimpleActivity {
             mMsgEt.setFilters(new InputFilter[]{new CashierInputFilter(digits)});
         } else if((mConfig.getInputType() == (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL)
                 ||mConfig.getInputType() == (InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_NUMBER_FLAG_DECIMAL)
-                ||mConfig.getInputType() == (InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER))){
+                ||mConfig.getInputType() == (InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER))
+                ||mConfig.getInputType() == InputType.TYPE_CLASS_NUMBER){
 
             mMsgEt.setFilters(new InputFilter[]{new InputFilterMinMax(-65535,65535)});
         }

@@ -140,9 +140,9 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarColor(R.color.colorPrimary);
-        immersionBar.statusBarDarkFont(true);
-        return true;
+        //immersionBar.statusBarColor(R.color.black);
+        //immersionBar.statusBarDarkFont(true);
+        return false;
     }
 
     @Override

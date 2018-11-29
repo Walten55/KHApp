@@ -29,6 +29,16 @@ public abstract class XMVPActivity<T extends IPresenter> extends MVPActivity<T> 
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    protected void setFullScreen() {
+        //super.setFullScreen();
+    }
+
+    @Override
+    protected void cancelFullScreen() {
+        //super.cancelFullScreen();
+    }
+
     public void startWaiting(String msg) {
         try {
             super.startWaiting(msg);

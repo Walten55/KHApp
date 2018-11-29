@@ -7,10 +7,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import butterknife.BindView;
-import me.walten.fastgo.di.component.AppComponent;
-import me.walten.fastgo.widget.titlebar.XTitleBar;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gyf.barlibrary.ImmersionBar;
@@ -24,6 +20,10 @@ import com.kehua.energy.monitor.app.model.entity.Standard;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 
 import java.util.List;
+
+import butterknife.BindView;
+import me.walten.fastgo.di.component.AppComponent;
+import me.walten.fastgo.widget.titlebar.XTitleBar;
 
 @Route(path = RouterMgr.LOCAL_SETTING_STANDARD)
 public class StandardActivity extends XMVPActivity<StandardPresenter> implements StandardContract.View, BaseQuickAdapter.OnItemClickListener {
@@ -71,9 +71,9 @@ public class StandardActivity extends XMVPActivity<StandardPresenter> implements
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarColor(R.color.colorPrimary);
-        immersionBar.statusBarDarkFont(true);
-        return true;
+        //immersionBar.statusBarColor(R.color.colorPrimary);
+        //immersionBar.statusBarDarkFont(true);
+        return false;
     }
 
     @Override

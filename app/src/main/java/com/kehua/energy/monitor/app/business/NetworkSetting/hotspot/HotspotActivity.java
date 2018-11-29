@@ -126,8 +126,8 @@ public class HotspotActivity extends XMVPActivity<HotspotPresenter> implements H
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarColor(R.color.colorPrimary);
-        return true;
+        //immersionBar.statusBarColor(R.color.colorPrimary);
+        return false;
     }
 
     @OnClick(R.id.tv_link_setting)

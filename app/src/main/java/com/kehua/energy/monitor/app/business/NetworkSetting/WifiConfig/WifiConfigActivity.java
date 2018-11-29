@@ -7,16 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-import me.walten.fastgo.di.component.AppComponent;
-import me.walten.fastgo.utils.XToast;
-import me.walten.fastgo.widget.XEditText;
-import me.walten.fastgo.widget.titlebar.XTitleBar;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.KeyboardUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.base.XMVPActivity;
@@ -25,6 +17,13 @@ import com.kehua.energy.monitor.app.di.component.DaggerActivityComponent;
 import com.kehua.energy.monitor.app.di.module.ActivityModule;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.kehua.energy.monitor.app.utils.AndroidBug5497Workaround;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import me.walten.fastgo.di.component.AppComponent;
+import me.walten.fastgo.utils.XToast;
+import me.walten.fastgo.widget.XEditText;
+import me.walten.fastgo.widget.titlebar.XTitleBar;
 
 @Route(path = RouterMgr.WIFI_CONFIG)
 public class WifiConfigActivity extends XMVPActivity<WifiConfigPresenter> implements WifiConfigContract.View {
@@ -83,8 +82,8 @@ public class WifiConfigActivity extends XMVPActivity<WifiConfigPresenter> implem
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarColor(R.color.colorPrimary);
-        return true;
+        //immersionBar.statusBarColor(R.color.colorPrimary);
+        return false;
     }
 
     @OnClick(R.id.tv_setting)

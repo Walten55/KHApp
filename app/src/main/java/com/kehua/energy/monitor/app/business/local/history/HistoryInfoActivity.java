@@ -109,9 +109,8 @@ public class HistoryInfoActivity extends XMVPActivity<HistoryPresenter> implemen
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarColor(R.color.colorPrimary);
-        immersionBar.statusBarDarkFont(true);
-        return true;
+        //immersionBar.statusBarDarkFont(true);
+        return false;
     }
 
     @Override

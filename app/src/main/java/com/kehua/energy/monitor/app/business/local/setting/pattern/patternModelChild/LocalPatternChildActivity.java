@@ -99,8 +99,8 @@ public class LocalPatternChildActivity extends XMVPActivity<LocalPatternChildPre
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarDarkFont(true);
-        return true;
+        //immersionBar.statusBarDarkFont(true);
+        return false;
     }
 
     @Override

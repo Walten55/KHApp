@@ -22,9 +22,6 @@
         android:layout_height="@dimen/grid_55"
         android:background="@drawable/bg_white_with_bottom_line">
 
-
-
-
         <TextView
             android:id="@+id/tv_unit"
             android:layout_width="wrap_content"
@@ -48,13 +45,14 @@
             >
         <me.walten.fastgo.widget.XEditText
             android:id="@+id/edit_text"
-
             style="@style/EditText_Normal"
             android:paddingLeft="@dimen/grid_5"
             android:paddingRight="@dimen/grid_5"
             android:textColor="@color/text_black"
             android:textSize="@dimen/text_size_sub_title"
             android:gravity="center_vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             />
         </com.flyco.roundview.RoundFrameLayout>
     </RelativeLayout>

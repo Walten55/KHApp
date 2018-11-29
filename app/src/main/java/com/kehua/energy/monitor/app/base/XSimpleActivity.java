@@ -36,6 +36,16 @@ public abstract class XSimpleActivity extends SimpleActivity {
     }
 
     @Override
+    protected void setFullScreen() {
+        //super.setFullScreen();
+    }
+
+    @Override
+    protected void cancelFullScreen() {
+        //super.cancelFullScreen();
+    }
+
+    @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();

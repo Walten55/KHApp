@@ -105,8 +105,8 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarDarkFont(true);
-        return true;
+        //immersionBar.statusBarDarkFont(true);
+        return false;
     }
 
     //记录用户首次点击返回键的时间

@@ -90,9 +90,8 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarColor(R.color.colorPrimary);
-        immersionBar.statusBarDarkFont(true);
-        return true;
+        //immersionBar.statusBarDarkFont(true);
+        return false;
     }
 
 

@@ -88,8 +88,8 @@ public class BranchSettingActivity extends XMVPActivity<BranchSettingPresenter> 
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarDarkFont(true);
-        return true;
+        //immersionBar.statusBarDarkFont(true);
+        return false;
     }
 
     @Override
