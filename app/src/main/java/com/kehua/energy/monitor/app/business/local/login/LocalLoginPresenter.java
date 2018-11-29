@@ -209,11 +209,9 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
         mModel.getRemoteModel().upgrade(new Consumer<Upgrade>() {
             @Override
             public void accept(Upgrade upgrade) throws Exception {
-                if(upgrade.getInv()==null||upgrade.getInv().size()==0){
-                    XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
-                    return;
+                if(upgrade.getInv()!=null&&upgrade.getInv().size()!=0){
+                    upgradeStatusCode  = upgrade.getInv().get(0).getStatus();
                 }
-                upgradeStatusCode  = upgrade.getInv().get(0).getStatus();
 
                 if(upgradeStatusCode==1||upgradeStatusCode==2){
                     //升级中不允许登录
