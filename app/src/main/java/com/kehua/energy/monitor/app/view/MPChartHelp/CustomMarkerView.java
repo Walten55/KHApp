@@ -41,7 +41,7 @@ public class CustomMarkerView extends MarkerView {
             int index = -1;
             for (int i = 0; i < oriData.size(); i++) {
                 if (e.getX() == oriData.get(i).getEntry().getX() && e.getY() == oriData.get(i).getEntry().getY()) {
-                    index = i;
+                    index = i + 1;
                     break;
                 }
             }
