@@ -321,18 +321,18 @@ public class InputActivity extends XSimpleActivity {
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
             try {
-                if("-".equals(dest.toString() + source.toString())){
+                if("-".equals( source.toString())||".".equals( source.toString())){
                     return null;
                 }
 
-                int input = Integer.parseInt(dest.toString() + source.toString());
+                double input = Double.parseDouble(dest.toString() + source.toString());
                 if (isInRange(min, max, input))
                     return null;
             } catch (NumberFormatException nfe) { }
             return "";
         }
 
-        private boolean isInRange(int a, int b, int c) {
+        private boolean isInRange(int a, int b, double c) {
             return b > a ? c >= a && c <= b : c >= b && c <= a;
         }
     }

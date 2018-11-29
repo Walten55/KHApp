@@ -221,12 +221,12 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
         } else if (item.getData().getAddress().equals("6321") && LocalUserManager.getPn() == Frame.单相协议) {
             //单相 CT变化
             final String[] stringItems = {
-                    "0-75/5",
-                    "1-50/5",
-                    "2-40/5",
-                    "3-30/5",
-                    "4-25/5",
-                    "5-20/5"};
+                    "75/5",
+                    "50/5",
+                    "40/5",
+                    "30/5",
+                    "25/5",
+                    "20/5"};
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
             dialog.cancelText(Fastgo.getContext().getString(R.string.取消)).isTitleShow(false).show();
 

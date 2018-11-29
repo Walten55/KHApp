@@ -10,6 +10,8 @@ public class LocalUserManager {
 
     public static final String OPS_PASSWORD = "EFA35B80214574A69069DAC7E2D19DFA";
 
+    public static boolean IN_THE_UPGRADE = false;
+
     //角色权限
     private static String roleAuthority;
 

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <me.walten.fastgo.widget.titlebar.XTitleBar
         android:id="@+id/title_bar"
@@ -16,6 +17,7 @@
         app:rightTextSize="@dimen/text_size_sub_title"/>
 
     <RelativeLayout
+        android:id="@+id/dev_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/grid_110"
         android:layout_alignParentBottom="true"

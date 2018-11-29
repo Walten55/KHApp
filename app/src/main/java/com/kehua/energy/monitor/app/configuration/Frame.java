@@ -528,22 +528,22 @@ public class Frame {
         switch (value){
             case 0:
 
-                return "0-75/5";
+                return "75/5";
             case 1:
 
-                return "1-50/5";
+                return "50/5";
             case 2:
 
-                return "2-40/5";
+                return "40/5";
             case 3:
 
-                return "3-30/5";
+                return "30/5";
             case 4:
 
-                return "4-25/5";
+                return "25/5";
             case 5:
 
-                return "5-20/5";
+                return "20/5";
 
         }
         return "";

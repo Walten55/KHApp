@@ -95,6 +95,11 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
 
     }
 
+    @OnClick(R.id.dev_container)
+    public void devContainerClick(View view){
+        mPresenter.gatherDeviceInfo();
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

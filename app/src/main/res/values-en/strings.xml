@@ -39,7 +39,7 @@
     <string name="密码错误">Wrong password</string>
     <string name="请选择登录角色">Please select a login role</string>
     <string name="角色选择">Role selection</string>
-    <string name="机器编号_冒号">Machinary code：</string>
+    <string name="机器编号_冒号">S/N：</string>
     <string name="设备类型_冒号">Device type：</string>
     <string name="运维">Operation</string>
     <string name="用户">General</string>
@@ -337,4 +337,7 @@
     <string name="使能">Enable</string>
     <string name="支路告警屏蔽">Branch Alarm Mask</string>
     <string name="PV支路使能字">PV Branch Enable Word</string>
+    <string name="天">Day</string>
+    <string name="升级中请勿退出">Please do not quit in the upgrade</string>
+    <string name="设备升级中">Device upgrades, please try again later</string>
 </resources>

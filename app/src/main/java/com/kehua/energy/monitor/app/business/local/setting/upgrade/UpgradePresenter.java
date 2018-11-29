@@ -55,7 +55,7 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
         mModel.getRemoteModel().upload(path, new Consumer<Boolean>() {
             @Override
             public void accept(Boolean success) throws Exception {
-                mView.stopWaiting();
+//                mView.stopWaiting();
                 if(!success){
                     XToast.error(Fastgo.getContext().getString(R.string.上传失败));
                 }
@@ -73,7 +73,10 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
                 String status = "";
                 String upProgress = "";
                 String dnProgress = "";
-                switch (upgrade.getStatus()){
+                if(upgrade.getInv()==null||upgrade.getInv().size()==0)
+                    return;
+
+                switch (upgrade.getInv().get(0).getStatus()){
                     case 0:
                         status = Fastgo.getContext().getString(R.string.未升级);
                         break;
@@ -93,7 +96,7 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
                 upProgress = upgrade.getUpprogress()*1.0f/10+"%";
                 dnProgress = upgrade.getDnprogress()*1.0f/10+"%";
 
-                mView.onUpgrade(String.format(Fastgo.getContext().getString(R.string.升级状态),status,dnProgress));
+                mView.onUpgrade(String.format(Fastgo.getContext().getString(R.string.升级状态),status,dnProgress),upgrade.getInv().get(0).getStatus());
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -107,7 +110,7 @@ public class UpgradePresenter extends UpgradeContract.Presenter {
     public void startUpgrade() {
         if(mCollDisposable==null||mCollDisposable.isDisposed()){
             upgrade();
-            mCollDisposable = Flowable.interval(3, TimeUnit.SECONDS)
+            mCollDisposable = Flowable.interval(1500, TimeUnit.MILLISECONDS)
                     .observeOn(Schedulers.io())
                     .subscribe(new Consumer<Long>() {
                         @Override

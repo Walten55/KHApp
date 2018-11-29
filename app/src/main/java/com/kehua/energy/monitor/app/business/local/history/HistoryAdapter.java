@@ -34,7 +34,7 @@ public class HistoryAdapter extends BaseQuickAdapter<RecordData,BaseViewHolder> 
         }
 
         helper.setText(R.id.tv_time,item.getTime().trim());
-        helper.setText(R.id.tv_device_address,mContext.getString(R.string.设备编号)+":"+ LocalUserManager.getSn());
+        helper.setText(R.id.tv_device_address,mContext.getString(R.string.机器编号_冒号)+ LocalUserManager.getSn());
         helper.setText(R.id.tv_value,item.getParseValue().trim());
         if(item.isSwitch()&&item.getCode()!=6200){
             helper.setTextColor(R.id.tv_value,item.getValue()==0?

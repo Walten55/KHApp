@@ -14,6 +14,7 @@ import com.codekidlabs.storagechooser.StorageChooser;
 import com.flyco.roundview.RoundTextView;
 import com.gyf.barlibrary.ImmersionBar;
 import com.kehua.energy.monitor.app.R;
+import com.kehua.energy.monitor.app.application.LocalUserManager;
 import com.kehua.energy.monitor.app.base.XMVPActivity;
 import com.kehua.energy.monitor.app.di.component.DaggerActivityComponent;
 import com.kehua.energy.monitor.app.di.module.ActivityModule;
@@ -38,6 +39,9 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
     @BindView(R.id.tv_status)
     TextView mStatusTv;
 
+    @BindView(R.id.tv_submit)
+    TextView mSubmitTv;
+
     @Override
     public int getLayoutResId() {
         return R.layout.activity_upgrade;
@@ -45,6 +49,7 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
+
         setFullScreen();
         cancelFullScreen();
 
@@ -52,15 +57,25 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
             @Override
             public void onClicked(View v, int action, String extra) {
                 if (action == XTitleBar.ACTION_LEFT_BUTTON) {
-                    finish();
+                    if (mSubmitTv.getVisibility() == View.GONE) {
+                        XToast.error(getString(R.string.升级中请勿退出));
+                    }else {
+                        finish();
+                    }
                 }
             }
         });
     }
 
     @Override
-    public void initData(@Nullable Bundle savedInstanceState) {
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalUserManager.IN_THE_UPGRADE = false;
+    }
 
+    @Override
+    public void initData(@Nullable Bundle savedInstanceState) {
+        LocalUserManager.IN_THE_UPGRADE = true;
     }
 
     @Override
@@ -83,6 +98,9 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
     @OnClick(R.id.tv_choose)
     public void pickFile(View view) {
+        if (mSubmitTv.getVisibility() == View.GONE)
+            return;
+
         new RxPermissions(this).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(new Consumer<Boolean>() {
                     @Override
@@ -128,8 +146,18 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
                 @Override
                 public void accept(Boolean success) throws Exception {
                     if(success){
-                        mPathTv.setText("");
-                        mPresenter.startUpgrade();
+                        mPathTv.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                stopWaiting();
+                                XToast.success(getString(R.string.上传成功));
+                                mSubmitTv.setVisibility(View.GONE);
+                                mPresenter.startUpgrade();
+                            }
+                        },1000*12);
+
+                    }else {
+                        stopWaiting();
                     }
                 }
             });
@@ -137,12 +165,27 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
             XToast.error(getString(R.string.请选择升级文件));
         }
 
-
     }
 
     @Override
-    public void onUpgrade(String status) {
+    public void onUpgrade(String status,int statusCode) {
         mStatusTv.setVisibility(View.VISIBLE);
         mStatusTv.setText(status);
+
+        if(statusCode==3||statusCode==4){
+            mSubmitTv.setVisibility(View.VISIBLE);
+        }else {
+            mSubmitTv.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+        if (mSubmitTv.getVisibility() == View.GONE) {
+            XToast.error(getString(R.string.升级中请勿退出));
+        } else {
+            super.onBackPressedSupport();
+        }
+
     }
 }

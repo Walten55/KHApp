@@ -1,5 +1,7 @@
 package com.kehua.energy.monitor.app.model.entity;
 
+import java.util.List;
+
 /*
  * -----------------------------------------------------------------
  * Copyright by 2018 Walten, All rights reserved.
@@ -10,13 +12,15 @@ package com.kehua.energy.monitor.app.model.entity;
  * -----------------------------------------------------------------
  */
 public class Upgrade {
+
+
     private int num;
 
-    private int upprogress;
+    private List<InvInfo> inv;
 
     private int dnprogress;
 
-    private int status;
+    private int upprogress;
 
     public int getNum() {
         return num;
@@ -26,12 +30,12 @@ public class Upgrade {
         this.num = num;
     }
 
-    public int getUpprogress() {
-        return upprogress;
+    public List<InvInfo> getInv() {
+        return inv;
     }
 
-    public void setUpprogress(int upprogress) {
-        this.upprogress = upprogress;
+    public void setInv(List<InvInfo> inv) {
+        this.inv = inv;
     }
 
     public int getDnprogress() {
@@ -42,11 +46,33 @@ public class Upgrade {
         this.dnprogress = dnprogress;
     }
 
-    public int getStatus() {
-        return status;
+    public int getUpprogress() {
+        return upprogress;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setUpprogress(int upprogress) {
+        this.upprogress = upprogress;
+    }
+
+    public class InvInfo{
+        private int addr;
+
+        private int status;
+
+        public int getAddr() {
+            return addr;
+        }
+
+        public void setAddr(int addr) {
+            this.addr = addr;
+        }
+
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
     }
 }

@@ -18,6 +18,7 @@ import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.model.APPModel;
 import com.kehua.energy.monitor.app.model.entity.Collector;
 import com.kehua.energy.monitor.app.model.entity.InvInfoList;
+import com.kehua.energy.monitor.app.model.entity.Upgrade;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.kehua.energy.monitor.app.utils.LanguageUtils;
 import com.kehua.energy.monitor.app.utils.PasswordUtils;
@@ -46,6 +47,8 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
     APPModel mModel;
 
     private String mSN;
+
+    private int upgradeStatusCode=-1;
 
     @Inject
     public LocalLoginPresenter() {
@@ -93,6 +96,12 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
     public void login(final int role, final String password) {
         if(!NetworkUtils.isWifiConnected()){
             XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
+            return;
+        }
+
+        if(upgradeStatusCode==1||upgradeStatusCode==2){
+            //升级中不允许登录
+            XToast.error(Fastgo.getContext().getString(R.string.设备升级中));
             return;
         }
 
@@ -197,43 +206,66 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
             return;
         }
 
-        mView.startWaiting(Fastgo.getContext().getString(R.string.加载中));
-
-        mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
+        mModel.getRemoteModel().upgrade(new Consumer<Upgrade>() {
             @Override
-            public void accept(final InvInfoList data) throws Exception {
-                if (data.getInv() != null && data.getInv().size() > 0)
-                    LocalUserManager.setDeviceAddress(data.getInv().get(0).getAddr());
+            public void accept(Upgrade upgrade) throws Exception {
+                if(upgrade.getInv()==null||upgrade.getInv().size()==0){
+                    XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
+                    return;
+                }
+                upgradeStatusCode  = upgrade.getInv().get(0).getStatus();
 
-                mView.canLogin(true);
+                if(upgradeStatusCode==1||upgradeStatusCode==2){
+                    //升级中不允许登录
+                    XToast.error(Fastgo.getContext().getString(R.string.设备升级中));
+                }else {
+                    mView.startWaiting(Fastgo.getContext().getString(R.string.加载中));
 
-                mModel.getRemoteModel().snAndDeviceType(LocalUserManager.getDeviceAddress(), new Consumer<ArrayMap<String, Object>>() {
-                    @Override
-                    public void accept(ArrayMap<String, Object> result) throws Exception {
-                        mView.stopWaiting();
-                        if (result.containsKey("sn") && result.containsKey("deviceType") && result.containsKey("pn")) {
-                            mView.showDeviceInfo(mSN = String.valueOf(result.get("sn")), Frame.getDeviceTypeName((int) result.get("deviceType")));
+                    mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
+                        @Override
+                        public void accept(final InvInfoList data) throws Exception {
+                            if (data.getInv() != null && data.getInv().size() > 0)
+                                LocalUserManager.setDeviceAddress(data.getInv().get(0).getAddr());
 
-                            LocalUserManager.setPn((int) result.get("pn"));
-                            LocalUserManager.setDeviceType((int) result.get("deviceType"));
+                            mView.canLogin(true);
+
+                            mModel.getRemoteModel().snAndDeviceType(LocalUserManager.getDeviceAddress(), new Consumer<ArrayMap<String, Object>>() {
+                                @Override
+                                public void accept(ArrayMap<String, Object> result) throws Exception {
+                                    mView.stopWaiting();
+                                    if (result.containsKey("sn") && result.containsKey("deviceType") && result.containsKey("pn")) {
+                                        mView.showDeviceInfo(mSN = String.valueOf(result.get("sn")), Frame.getDeviceTypeName((int) result.get("deviceType")));
+
+                                        LocalUserManager.setPn((int) result.get("pn"));
+                                        LocalUserManager.setDeviceType((int) result.get("deviceType"));
+
+                                    }
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    mView.stopWaiting();
+                                    Logger.e(throwable.getMessage());
+                                    XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
+                                }
+                            });
 
                         }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        mView.stopWaiting();
-                        Logger.e(throwable.getMessage());
-                        XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
-                    }
-                });
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            mView.stopWaiting();
+                            mView.canLogin(false);
+                            XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
+                        }
+                    });
+                }
 
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                mView.stopWaiting();
-                mView.canLogin(false);
+                Logger.e(throwable.getMessage());
                 XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
             }
         });

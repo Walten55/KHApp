@@ -290,7 +290,25 @@ public class LocalMonitorFragment extends XMVPFragment<LocalMonitorPresenter> im
             String message = getString(R.string.试用期临近);
             DeviceData deviceData = CacheManager.getInstance().get(4874);
             if(deviceData!=null){
-                message+=(","+getString(R.string.试用期剩余时间)+":"+deviceData.getParseValue()+getString(R.string.小时));
+                int hour = deviceData.getIntValue();
+                int handleHour = hour;
+                int handleDay = 0;
+                if(hour>=24){
+                    handleDay = hour/24;
+                    handleHour = hour%24;
+                }
+                if(handleDay>0){
+                    message+=(","+getString(R.string.试用期剩余时间)+":"
+                            +handleDay
+                            +getString(R.string.天)
+                            +handleHour
+                            +getString(R.string.小时));
+                }else {
+                    message+=(","+getString(R.string.试用期剩余时间)+":"
+                            +hour
+                            +getString(R.string.小时));
+                }
+
             }
 
             mTopMessageView.setText(message);

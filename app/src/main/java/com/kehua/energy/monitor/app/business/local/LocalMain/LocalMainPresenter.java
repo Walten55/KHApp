@@ -54,6 +54,9 @@ public class LocalMainPresenter extends LocalMainContract.Presenter {
                     .subscribe(new Consumer<Long>() {
                         @Override
                         public void accept(@NonNull Long aLong) throws Exception {
+                            //升级中不轮询
+                            if(LocalUserManager.IN_THE_UPGRADE)
+                                return;
                             collecting();
                         }
                     });

@@ -7,7 +7,7 @@ import me.walten.fastgo.base.mvp.BaseView;
 public interface UpgradeContract {
 
     interface View extends BaseView {
-        void onUpgrade(String status);
+        void onUpgrade(String status,int statusCode);
     }
 
     abstract class Presenter extends BasePresenter<View> {
