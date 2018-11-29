@@ -36,6 +36,7 @@ import javax.inject.Inject;
 
 import io.objectbox.query.Query;
 import io.objectbox.query.QueryBuilder;
+import io.objectbox.query.QueryFilter;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -506,17 +507,17 @@ public class LocalModel extends BaseModel implements IModel {
             public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
                 if (SPUtils.getInstance().getInt("app_version") != AppUtils.getAppVersionCode()) {
 //                    try {
-                        ObjectBox.get().getBoxStore().boxFor(SGroupInfo.class).removeAll();
-                        ObjectBox.get().getBoxStore().boxFor(GroupInfo.class).removeAll();
-                        ObjectBox.get().getBoxStore().boxFor(PointInfo.class).removeAll();
+                    ObjectBox.get().getBoxStore().boxFor(SGroupInfo.class).removeAll();
+                    ObjectBox.get().getBoxStore().boxFor(GroupInfo.class).removeAll();
+                    ObjectBox.get().getBoxStore().boxFor(PointInfo.class).removeAll();
 
-                        setupPoint();
+                    setupPoint();
 
-                        setupGroup();
+                    setupGroup();
 
-                        setupRecord();
+                    setupRecord();
 
-                        SPUtils.getInstance().put("app_version", AppUtils.getAppVersionCode());
+                    SPUtils.getInstance().put("app_version", AppUtils.getAppVersionCode());
 //                    } catch (IOException e) {
 //                        e.printStackTrace();
 //                    } catch (BiffException e) {
@@ -759,6 +760,25 @@ public class LocalModel extends BaseModel implements IModel {
                         } else {
                             return p1.getSort().compareTo(p2.getSort());
                         }
+                    }
+                }
+            });
+        }
+
+        //如果是光伏逆变器、光伏交流器，则剔除充电项
+        PointInfo pointInfo = ObjectBox.get().getBoxStore().boxFor(PointInfo.class)
+                .query().build().findFirst();
+
+        if (pointInfo != null && !Frame.isStorageDevice(pointInfo.getDeviceType())) {
+
+            builder.filter(new QueryFilter<PointInfo>() {
+                @Override
+                public boolean keep(PointInfo entity) {
+                    if (entity != null && !StringUtils.isTrimEmpty(entity.getDescriptionCN())
+                            && entity.getDescriptionCN().contains("充电")) {
+                        return false;
+                    } else {
+                        return true;
                     }
                 }
             });

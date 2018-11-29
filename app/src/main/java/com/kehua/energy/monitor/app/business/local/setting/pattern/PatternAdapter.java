@@ -197,8 +197,12 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                     //单条折线
                     if (peLineChartItem.isSingleLine()) {
                         List<DeviceData> deviceDatas = dealLineChartData(peLineChartItem.getData()[0]);
+                        int lineColor = peLineChartItem.getColors() != null && peLineChartItem.getColors().length > 0 ? peLineChartItem.getColors()[0] : R.color.green;
+
                         LineChartHelper.init(helper.itemView.getContext(), (LineChart) helper.getView(R.id.linechart))
-                                .setDataValueTag(peLineChartItem.getValueTags()[0])
+                                .setDataValueTagX(peLineChartItem.getValueTagX())
+                                .setDataValueTagY(peLineChartItem.getValueTagY())
+                                .setDataColor(ContextCompat.getColor(helper.itemView.getContext(), lineColor))
                                 .setDeviceData(deviceDatas);
                     }
                     //多条折线
@@ -213,7 +217,8 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                         List<DeviceData> deviceDatas = dealLineChartData(data[selectedTab]);
                         LineChartHelper.init(helper.itemView.getContext(), (LineChart) helper.getView(R.id.linechart))
                                 .setDataColor(ContextCompat.getColor(helper.itemView.getContext(), peLineChartItem.getColors()[selectedTab]))
-                                .setDataValueTag(peLineChartItem.getValueTags()[selectedTab])
+                                .setDataValueTagX(peLineChartItem.getValueTagX())
+                                .setDataValueTagY(peLineChartItem.getValueTagY())
                                 .setDeviceData(deviceDatas);
 
                         segmentTabLayout.setOnTabSelectListener(new CustomSegTouchListener(LineChartHelper.get(), peLineChartItem) {
@@ -222,7 +227,8 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                                 if (lineChartHelper != null) {
                                     List<DeviceData> deviceDatas = dealLineChartData(data[position]);
                                     lineChartHelper.setDataColor(ContextCompat.getColor(helper.itemView.getContext(), patternEntity.getColors()[position]))
-                                            .setDataValueTag(patternEntity.getValueTags()[position])
+                                            .setDataValueTagX(patternEntity.getValueTagX())
+                                            .setDataValueTagY(patternEntity.getValueTagY())
                                             .setDeviceData(deviceDatas);
 
 //                                    lineChartHelper.getLineChart().animateXY(3000, 3000);

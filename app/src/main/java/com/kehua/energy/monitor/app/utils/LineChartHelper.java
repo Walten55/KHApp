@@ -6,31 +6,28 @@ import android.graphics.DashPathEffect;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.widget.TextView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.model.entity.LineChartEntity;
 import com.kehua.energy.monitor.app.model.entity.LineChartEntityList;
-import com.kehua.energy.monitor.app.view.MPChartHelp.CusLineChartValueFormat;
 import com.kehua.energy.monitor.app.view.MPChartHelp.CustomMarkerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class LineChartHelper {
@@ -60,7 +57,7 @@ public class LineChartHelper {
     private boolean yLeftAxisGridLineEnable = false;
 
     private boolean dataIconEnable = false;
-    private boolean dataCirclesEnable = false;
+    private boolean dataCirclesEnable = true;
     private int dataCircleColor = Color.WHITE;
     private float dataCircleRadius = 2f;
 
@@ -71,14 +68,17 @@ public class LineChartHelper {
     private Drawable fillDrawable;
     private int fillColor = Color.TRANSPARENT;
 
-    private boolean dataDrawValue = true;
-    private String dataValueTag = "";
+    private boolean dataDrawValue = false;
+    private String dataValueTagX = "";
+    private String dataValueTagY = "";
 
     private boolean dataCircleHoleEnable = true;
     private float dataTextSize = 10f;
     private boolean dataDrawFillEnable = false;
     private float dataFormLineWidth = 1f;
     private float dataFormSize = 15f;
+
+    private CustomMarkerView cusValueMarkerView;
 
 
     public static LineChartHelper init(Context context, LineChart lineChart) {
@@ -118,7 +118,9 @@ public class LineChartHelper {
         // if disabled, scaling can be done on x- and y-axis separately
         lineChart.setPinchZoom(pinchZoom);
 //        lineChart.setBackground(ContextCompat.getDrawable(context, R.drawable.fade_blue));
-        lineChart.setMarker(new CustomMarkerView(context));
+        if (cusValueMarkerView != null) {
+            lineChart.setMarker(cusValueMarkerView);
+        }
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setDrawGridLines(xAxisGridLineEnable);
@@ -179,7 +181,7 @@ public class LineChartHelper {
         lineChart.getData().notifyDataChanged();
         lineChart.notifyDataSetChanged();
 
-        lineChart.getViewPortHandler().refresh(new Matrix(),lineChart,true);
+        lineChart.getViewPortHandler().refresh(new Matrix(), lineChart, true);
     }
 
 
@@ -201,6 +203,7 @@ public class LineChartHelper {
                     return value + xUnitStr;
                 }
             });
+
             yLeftAxis.setValueFormatter(new IAxisValueFormatter() {
                 @Override
                 public String getFormattedValue(float value, AxisBase axis) {
@@ -215,12 +218,17 @@ public class LineChartHelper {
 
 
         if (!xAxisMinimumEnable) {
-            xAxis.setAxisMinimum(values != null && values.size() > 0 ? values.get(0).getX() : 0);
+            float minX = values.get(0).getX();
+
+            for (Entry entry : values) {
+                minX = minX < entry.getX() ? minX : entry.getX();
+            }
+            xAxis.setAxisMinimum(minX);
         }
 
         LineDataSet set1 = (LineDataSet) lineChart.getData().getDataSetByIndex(0);
         set1.clear();
-        set1.setValues(values);
+        set1.setValues(sortValues(values));
 
         lineChartSet();
         return this;
@@ -301,6 +309,7 @@ public class LineChartHelper {
             return;
         }
         List<LineChartEntity> data = deviceDatas2LineChartEntitys(deviceDataList);
+        cusValueMarkerView = new CustomMarkerView(context, data, dataValueTagX,dataValueTagY);
         setData(data);
     }
 
@@ -333,7 +342,7 @@ public class LineChartHelper {
             set.setFillColor(fillColor);
         }
 
-        set.setValueFormatter(new CusLineChartValueFormat(dataValueTag));
+//        set.setValueFormatter(new CusLineChartValueFormat(dataValueTag));
     }
 
     public LineChartHelper setTouchEnabl(boolean touchEnabl) {
@@ -346,8 +355,13 @@ public class LineChartHelper {
         return this;
     }
 
-    public LineChartHelper setDataValueTag(String dataValueTag) {
-        this.dataValueTag = dataValueTag;
+    public LineChartHelper setDataValueTagX(String dataValueTagX) {
+        this.dataValueTagX = dataValueTagX;
+        return this;
+    }
+
+    public LineChartHelper setDataValueTagY(String dataValueTagY) {
+        this.dataValueTagY = dataValueTagY;
         return this;
     }
 
@@ -498,6 +512,11 @@ public class LineChartHelper {
         return this;
     }
 
+    public LineChartHelper setCusValueMarkerView(CustomMarkerView cusValueMarkerView) {
+        this.cusValueMarkerView = cusValueMarkerView;
+        return this;
+    }
+
     public void invalidate() {
         lineChartSet();
         lineChart.invalidate();
@@ -536,5 +555,17 @@ public class LineChartHelper {
         return lineChart;
     }
 
+    /**
+     * 将结果排序
+     */
+    private List<Entry> sortValues(List<Entry> values) {
+        Collections.sort(values, new Comparator<Entry>() {
+            @Override
+            public int compare(Entry e1, Entry e2) {
+                return (int) (e1.getX() - e2.getX());
+            }
+        });
+        return values;
+    }
 
 }

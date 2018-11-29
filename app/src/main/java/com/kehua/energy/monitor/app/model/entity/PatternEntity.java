@@ -19,7 +19,7 @@ public class PatternEntity implements MultiItemEntity {
     int[] colors;
     boolean singleLine = true;
     List<PointInfo>[] data;
-    String[] valueTags;
+    String valueTagX, valueTagY;
 
     PointInfo pointInfo;
 
@@ -51,12 +51,20 @@ public class PatternEntity implements MultiItemEntity {
         return itemType;
     }
 
-    public String[] getValueTags() {
-        return valueTags;
+    public String getValueTagX() {
+        return valueTagX;
     }
 
-    public void setValueTags(String... valueTags) {
-        this.valueTags = valueTags;
+    public void setValueTagX(String valueTagX) {
+        this.valueTagX = valueTagX;
+    }
+
+    public String getValueTagY() {
+        return valueTagY;
+    }
+
+    public void setValueTagY(String valueTagY) {
+        this.valueTagY = valueTagY;
     }
 
     public String[] getLables() {
