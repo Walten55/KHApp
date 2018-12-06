@@ -44,5 +44,23 @@ public class HistoryAdapter extends BaseQuickAdapter<RecordData,BaseViewHolder> 
             helper.setTextColor(R.id.tv_value, ContextCompat.getColor(mContext,R.color.text_black));
         }
 
+        if(item.getCode()==6020){
+            int year = item.getValue()/32140800 - 1;
+            int month = (item.getValue()-32140800*year)/2678400;
+            int day = (item.getValue()-32140800*year-2678400*month)/86400;
+            int hour = (item.getValue()-32140800*year-2678400*month-86400*day)/3600;
+            int min = (item.getValue()-32140800*year-2678400*month-86400*day-3600*hour)/60;
+            int second = item.getValue()%60;
+
+            String yearS= year+2000+"";
+            String monthS = month<10?"0"+month:""+month;
+            String dayS = day<10?"0"+day:""+day;
+            String hourS = hour<10?"0"+hour:""+hour;
+            String minS = min<10?"0"+min:""+min;
+            String secondS = second<10?"0"+second:""+second;
+
+            helper.setText(R.id.tv_value,yearS+"-"+monthS+"-"+dayS+" "+hourS+":"+minS+":"+secondS);
+        }
+
     }
 }
