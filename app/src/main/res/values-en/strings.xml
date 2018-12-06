@@ -175,7 +175,7 @@
     <string name="结束时间必须大于开始时间">End time must be greater than start time</string>
     <string name="读取中">Loading</string>
     <string name="输入">Input</string>
-    <string name="确认恢复出厂设置">Recovery Factory Settings？</string>
+    <string name="确认恢复出厂设置">Recovery Factory Setting？</string>
     <string name="确认清除所有发电量">Clear Energy？</string>
     <string name="确认清除历史记录">Clear History Logs？</string>
     <string name="密码为6位数字">Password is 6 digits</string>
@@ -257,7 +257,7 @@
     <string name="无记录">No record</string>
     <string name="无更多记录">No more records</string>
     <string name="设备编号">Device NO.</string>
-    <string name="是否更改设置">Do you want to change the settings?</string>
+    <string name="是否更改设置">Do you want to change the setting?</string>
     <string name="单相并脱网历史故障记录映射模板">Single-phase and off-network, historical fault record mapping template</string>
     <string name="单相用户日志功率调度日志映射模板">Single-phase user log and power scheduling log mapping template</string>
     <!--<string name="三相无屏并脱网历史故障记录映射模板">Three-phase screen less and off-network, historical fault record mapping template</string>-->

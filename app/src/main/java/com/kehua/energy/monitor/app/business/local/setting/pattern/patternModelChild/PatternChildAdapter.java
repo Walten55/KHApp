@@ -28,7 +28,7 @@ public class PatternChildAdapter extends BaseQuickAdapter<PointInfo, BaseViewHol
         DeviceData deviceData = CacheManager.getInstance().get(Integer.valueOf(item.getAddress().trim()));
 
         if (deviceData != null) {
-            helper.setText(R.id.tv_value, deviceData.getParseValue() + deviceData.getUnit());
+            helper.setText(R.id.tv_value, deviceData.getParseValue() +" "+ item.getUnit());
             helper.setGone(R.id.tv_reading, false);
             helper.setGone(R.id.tv_value, true);
         } else {
