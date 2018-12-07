@@ -215,7 +215,7 @@ public class BatteryFragment extends XMVPFragment<BatteryPresenter> implements B
                     Fastgo.getContext().getString(R.string.铅碳电池)
             };
             final ActionSheetDialog dialog = new ActionSheetDialog(mContext, stringItems, null);
-            dialog.isTitleShow(false).show();
+            dialog.cancelText(Fastgo.getContext().getString(R.string.取消)).isTitleShow(false).show();
 
             dialog.setOnOperItemClickL(new OnOperItemClickL() {
                 @Override

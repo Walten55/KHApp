@@ -765,25 +765,6 @@ public class LocalModel extends BaseModel implements IModel {
             });
         }
 
-        //如果是光伏逆变器、光伏交流器，则剔除充电项
-        PointInfo pointInfo = ObjectBox.get().getBoxStore().boxFor(PointInfo.class)
-                .query().build().findFirst();
-
-        if (pointInfo != null && !Frame.isStorageDevice(pointInfo.getDeviceType())) {
-
-            builder.filter(new QueryFilter<PointInfo>() {
-                @Override
-                public boolean keep(PointInfo entity) {
-                    if (entity != null && !StringUtils.isTrimEmpty(entity.getDescriptionCN())
-                            && entity.getDescriptionCN().contains("充电")) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
-            });
-        }
-
         return builder.build().find();
     }
 
