@@ -208,7 +208,7 @@ public class PatternPresenter extends PatternContract.Presenter {
         }
 
         //储能模式下，P-V与P-F是双折线，其余单折线，非储能模式下均为单折线
-        if (Frame.isStorageDevice(dealPointInfos.get(0).getDeviceType())) {
+        if (LocalUserManager.getDeviceType() == 0x02 || LocalUserManager.getDeviceType() == 0x0B) {
             if (!isPVModle && !isPFModle) {
                 patternEntity = new PatternEntity(dealPointInfos);
             } else {
