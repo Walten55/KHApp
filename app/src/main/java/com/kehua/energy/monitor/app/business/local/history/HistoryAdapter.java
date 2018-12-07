@@ -47,6 +47,10 @@ public class HistoryAdapter extends BaseQuickAdapter<RecordData,BaseViewHolder> 
         if(item.getCode()==6020){
             int year = item.getValue()/32140800 - 1;
             int month = (item.getValue()-32140800*year)/2678400;
+            if(month>12){
+                year+=1;
+                month = (item.getValue()-32140800*year)/2678400;
+            }
             int day = (item.getValue()-32140800*year-2678400*month)/86400;
             int hour = (item.getValue()-32140800*year-2678400*month-86400*day)/3600;
             int min = (item.getValue()-32140800*year-2678400*month-86400*day-3600*hour)/60;
