@@ -7,18 +7,23 @@ import com.kehua.energy.monitor.app.cache.CacheManager;
 import com.kehua.energy.monitor.app.configuration.Config;
 import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.model.APPModel;
+import com.kehua.energy.monitor.app.model.entity.Cmd;
 import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.model.entity.GroupInfo;
+import com.kehua.energy.monitor.app.model.entity.ModbusResponse;
 import com.kehua.energy.monitor.app.model.entity.MonitorEntity;
 import com.kehua.energy.monitor.app.model.entity.PointInfo;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.functions.Consumer;
 import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.scope.FragmentScope;
+import me.walten.fastgo.utils.XToast;
 
 @FragmentScope
 public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
@@ -54,6 +59,7 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
     public void setupData() {
         DeviceData expireData = CacheManager.getInstance().get(Frame.试用期到期临近采集()[0]);
         DeviceData nearData = CacheManager.getInstance().get(Frame.试用期到期临近采集()[1]);
+
         if (expireData != null && nearData != null) {
             if (expireData.getIntValue() == 1) {
                 //到期
@@ -65,6 +71,7 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
                 //正常
                 RxBus.get().post(Config.EVENT_CODE_PROBATION_NORMAL, "");
             }
+
         }
 
         result.clear();
@@ -82,14 +89,14 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
 
             if (Frame.单相协议 == LocalUserManager.getPn()) {
                 //单相协议特殊排版
-                if(Frame.电网信息.equals(groupInfo.getGroup())){
+                if (Frame.电网信息.equals(groupInfo.getGroup())) {
                     PointInfo info = getPointInfoWith(Frame.总并网用电量地址()[0]);
-                    if(info!=null){
+                    if (info != null) {
                         result.add(new MonitorEntity(MonitorEntity.SIMPLE_DATA_WITH_ADDRESS, info));
                         result.add(new MonitorEntity(MonitorEntity.MARGIN, ""));
                     }
 
-                }else if (Frame.光伏信息.equals(groupInfo.getGroup())) {
+                } else if (Frame.光伏信息.equals(groupInfo.getGroup())) {
                     DeviceData deviceData = CacheManager.getInstance().get(Frame.MPPT路数地址);
                     if (deviceData != null) {
                         result.add(new MonitorEntity(MonitorEntity.MARGIN, ""));
@@ -317,4 +324,35 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
         return mModel.getLocalModel().getPointInfoWith(LocalUserManager.getPn(), address, LocalUserManager.getRoleAuthority());
     }
 
+    @Override
+    public void save(int address, int end, int value, final Consumer<Boolean> consumer) {
+        mView.startWaiting(Fastgo.getContext().getString(R.string.设置中));
+        mModel.getRemoteModel().fdbgMainThread(Cmd.newWriteCmd(LocalUserManager.getDeviceAddress(), address, end, value), new Consumer<ModbusResponse>() {
+            @Override
+            public void accept(ModbusResponse modbusResponse) throws Exception {
+                mView.stopWaiting();
+                if (modbusResponse.isSuccess()) {
+                    XToast.success(Fastgo.getContext().getString(R.string.设置成功));
+                    if (consumer != null) {
+                        consumer.accept(true);
+                    }
+                } else {
+                    XToast.error(Fastgo.getContext().getString(R.string.设置失败));
+                    if (consumer != null) {
+                        consumer.accept(false);
+                    }
+                }
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                mView.stopWaiting();
+                Logger.e(throwable.getMessage());
+                XToast.error(Fastgo.getContext().getString(R.string.设置失败));
+                if (consumer != null) {
+                    consumer.accept(false);
+                }
+            }
+        });
+    }
 }

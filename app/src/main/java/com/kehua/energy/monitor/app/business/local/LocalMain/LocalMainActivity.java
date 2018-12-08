@@ -6,13 +6,23 @@ import android.support.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.gyf.barlibrary.ImmersionBar;
+import com.hwangjr.rxbus.RxBus;
+import com.hwangjr.rxbus.annotation.Subscribe;
+import com.hwangjr.rxbus.annotation.Tag;
+import com.hwangjr.rxbus.thread.EventThread;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.adapter.CommonViewPagerAdapter;
 import com.kehua.energy.monitor.app.application.LocalUserManager;
 import com.kehua.energy.monitor.app.base.XMVPActivity;
+import com.kehua.energy.monitor.app.cache.CacheManager;
+import com.kehua.energy.monitor.app.configuration.Config;
+import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.di.component.DaggerActivityComponent;
 import com.kehua.energy.monitor.app.di.module.ActivityModule;
+import com.kehua.energy.monitor.app.dialog.UnlockDialogFragment;
+import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.kehua.energy.monitor.app.view.ViewPagerSlide;
 import com.roughike.bottombar.BottomBar;
@@ -21,6 +31,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import io.reactivex.functions.Consumer;
 import me.walten.fastgo.base.fragment.SimpleFragment;
 import me.walten.fastgo.di.component.AppComponent;
 import me.walten.fastgo.utils.XToast;
@@ -34,6 +45,8 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
     @BindView(R.id.bottom_bar)
     BottomBar mBottomBar;
 
+    private UnlockDialogFragment mPwdDialog;
+
     @Override
     public int getLayoutResId() {
         return R.layout.activity_local_main;
@@ -43,6 +56,13 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
     public void initView(@Nullable Bundle savedInstanceState) {
         setFullScreen();
         cancelFullScreen();
+        RxBus.get().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.get().unregister(this);
     }
 
     @Override
@@ -90,7 +110,6 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
             });
         }
 
-
     }
 
     @Override
@@ -122,5 +141,67 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
             super.onBackPressedSupport();
         }
 
+    }
+
+    @Subscribe(
+            thread = EventThread.MAIN_THREAD,
+            tags = {
+                    @Tag(Config.EVENT_CODE_COLLECT_COMPLETE)
+            }
+    )
+    public void collectComplete(Object o) {
+        DeviceData lockData = CacheManager.getInstance().get(Frame.机器锁定状态地址());
+
+        if(lockData!=null&&lockData.getIntValue() == 1){
+            //锁定
+            RxBus.get().post(Config.EVENT_CODE_LOCK, "");
+            locked();
+        }
+    }
+
+    public void locked() {
+        if(CacheManager.getInstance().get(Frame.机器锁定状态地址())!=null
+                &&CacheManager.getInstance().get(Frame.机器锁定状态地址()).getIntValue() == 1){
+            //机器锁定
+            if(mPwdDialog==null){
+                mPwdDialog = new UnlockDialogFragment();
+                mPwdDialog.setCancelable(false);
+                mPwdDialog.show(getSupportFragmentManager(), "pwdDialog",
+                        CacheManager.getInstance().get(Frame.试用状态地址()).getIntValue()==0?getString(R.string.试用期密码)
+                                :getString(R.string.开机密码),
+                        new UnlockDialogFragment.OnEditPwdDialogFragmentListener() {
+                            @Override
+                            public void onSubmit(String msg) {
+                                if(CacheManager.getInstance().get(Frame.试用状态地址()).getIntValue()==0){
+                                    //下发试用期密码
+                                    mPresenter.save(Frame.试用期密码地址[0], Frame.试用期密码地址[1], Integer.valueOf(msg.trim()), new Consumer<Boolean>() {
+                                        @Override
+                                        public void accept(Boolean success) throws Exception {
+                                            if(success){
+                                                mPwdDialog.dismiss();
+                                                KeyboardUtils.hideSoftInput(LocalMainActivity.this);
+                                                mPwdDialog = null;
+                                            }
+                                        }
+                                    });
+                                }else {
+                                    //下发开机密码
+                                    mPresenter.save(Frame.开机密码地址[0], Frame.开机密码地址[1], Integer.valueOf(msg.trim()), new Consumer<Boolean>() {
+                                        @Override
+                                        public void accept(Boolean success) throws Exception {
+                                            if(success){
+                                                mPwdDialog.dismiss();
+                                                KeyboardUtils.hideSoftInput(LocalMainActivity.this);
+                                                mPwdDialog = null;
+                                            }
+                                        }
+                                    });
+                                }
+
+                            }
+                        });
+            }
+
+        }
     }
 }

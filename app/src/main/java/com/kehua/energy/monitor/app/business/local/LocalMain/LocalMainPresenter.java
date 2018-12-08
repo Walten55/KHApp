@@ -1,7 +1,11 @@
 package com.kehua.energy.monitor.app.business.local.LocalMain;
 
+import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.application.LocalUserManager;
 import com.kehua.energy.monitor.app.model.APPModel;
+import com.kehua.energy.monitor.app.model.entity.Cmd;
+import com.kehua.energy.monitor.app.model.entity.ModbusResponse;
+import com.orhanobut.logger.Logger;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,7 +16,9 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.scope.ActivityScope;
+import me.walten.fastgo.utils.XToast;
 
 import static com.kehua.energy.monitor.app.configuration.Frame.单相协议;
 
@@ -72,4 +78,35 @@ public class LocalMainPresenter extends LocalMainContract.Presenter {
         }
     }
 
+    @Override
+    public void save(int address, int end, int value, final Consumer<Boolean> consumer) {
+        mView.startWaiting(Fastgo.getContext().getString(R.string.设置中));
+        mModel.getRemoteModel().fdbgMainThread(Cmd.newWriteCmd(LocalUserManager.getDeviceAddress(), address, end, value), new Consumer<ModbusResponse>() {
+            @Override
+            public void accept(ModbusResponse modbusResponse) throws Exception {
+                mView.stopWaiting();
+                if (modbusResponse.isSuccess()) {
+                    XToast.success(Fastgo.getContext().getString(R.string.设置成功));
+                    if (consumer != null) {
+                        consumer.accept(true);
+                    }
+                } else {
+                    XToast.error(Fastgo.getContext().getString(R.string.设置失败));
+                    if (consumer != null) {
+                        consumer.accept(false);
+                    }
+                }
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                mView.stopWaiting();
+                Logger.e(throwable.getMessage());
+                XToast.error(Fastgo.getContext().getString(R.string.设置失败));
+                if (consumer != null) {
+                    consumer.accept(false);
+                }
+            }
+        });
+    }
 }

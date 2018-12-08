@@ -36,6 +36,7 @@ public class Config {
     public static final String EVENT_CODE_PROBATION_EXPIRE = "event_code_probation_expire";
     public static final String EVENT_CODE_PROBATION_NEAR = "event_code_probation_near";
     public static final String EVENT_CODE_PROBATION_NORMAL = "event_code_probation_normal";
+    public static final String EVENT_CODE_LOCK = "event_code_lock";
     public static final String EVENT_CODE_COLLECT_SETTING_COMPLETE = "event_code_collect_setting_complete";
     public static final String EVENT_CODE_COLLECT_HISTORY_COMPLETE = "event_code_collect_history_complete";
     public static final String EVENT_CODE_STANDARD_CHOOSED = "event_code_standard_choosed";

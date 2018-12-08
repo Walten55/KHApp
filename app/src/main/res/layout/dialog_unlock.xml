@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.flyco.roundview.RoundLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:rv_backgroundColor="@color/white"
+        app:rv_cornerRadius="@dimen/grid_5">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_45"
+            android:gravity="center"
+            android:text="@string/设备已锁定"
+            android:textSize="@dimen/text_size_title"
+            android:visibility="visible" />
+
+        <View style="@style/Line" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/grid_15"
+            android:layout_marginTop="@dimen/grid_10"
+            android:text="@string/串号"
+            android:textSize="@dimen/text_size_sub_title" />
+
+        <com.flyco.roundview.RoundRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/grid_10"
+            android:layout_marginLeft="@dimen/grid_15"
+            android:layout_marginRight="@dimen/grid_15"
+            android:layout_marginTop="@dimen/grid_10"
+            app:rv_cornerRadius="@dimen/grid_5"
+            app:rv_strokeColor="@color/divide_gray"
+            app:rv_strokeWidth="1px">
+
+            <me.walten.fastgo.widget.XEditText
+                android:id="@+id/et_password"
+                style="@style/EditText_Normal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/grid_40"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:maxLength="6"
+                android:paddingLeft="@dimen/grid_20"
+                android:paddingRight="@dimen/grid_20"
+                android:textSize="@dimen/text_size_sub_title"
+                />
+        </com.flyco.roundview.RoundRelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_40"
+            android:layout_marginBottom="@dimen/grid_10"
+            android:layout_marginLeft="@dimen/grid_15"
+            android:layout_marginRight="@dimen/grid_15">
+
+            <com.flyco.roundview.RoundTextView
+                android:id="@+id/tv_submit"
+                style="@style/Btn_Blue_Auto_Width"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:text="@string/确定" />
+
+        </RelativeLayout>
+
+    </com.flyco.roundview.RoundLinearLayout>
+</FrameLayout>

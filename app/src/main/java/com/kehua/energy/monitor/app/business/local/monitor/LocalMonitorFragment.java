@@ -25,6 +25,7 @@ import com.kehua.energy.monitor.app.configuration.Config;
 import com.kehua.energy.monitor.app.configuration.Frame;
 import com.kehua.energy.monitor.app.di.component.DaggerFragmentComponent;
 import com.kehua.energy.monitor.app.di.module.FragmentModule;
+import com.kehua.energy.monitor.app.dialog.UnlockDialogFragment;
 import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.model.entity.GroupInfo;
 import com.kehua.energy.monitor.app.model.entity.MonitorEntity;
@@ -54,6 +55,8 @@ public class LocalMonitorFragment extends XMVPFragment<LocalMonitorPresenter> im
 
     @BindView(R.id.tv_top_message)
     TextView mTopMessageView;
+
+    private UnlockDialogFragment mPwdDialog;
     /**
      * 选中监听
      */
@@ -171,6 +174,7 @@ public class LocalMonitorFragment extends XMVPFragment<LocalMonitorPresenter> im
         }
     };
 
+
     public LocalMonitorFragment() {
         // Required empty public constructor
     }
@@ -283,6 +287,7 @@ public class LocalMonitorFragment extends XMVPFragment<LocalMonitorPresenter> im
     )
     @Override
     public void probationNear(Object o) {
+
         if(CacheManager.getInstance().get(Frame.试用状态地址())!=null
                 &&CacheManager.getInstance().get(Frame.试用状态地址()).getIntValue()==1){
             //试用期状态内
@@ -313,12 +318,6 @@ public class LocalMonitorFragment extends XMVPFragment<LocalMonitorPresenter> im
 
             mTopMessageView.setText(message);
             mTopMessageView.setVisibility(View.VISIBLE);
-        }else if(CacheManager.getInstance().get(Frame.机器锁定状态地址())!=null
-                &&CacheManager.getInstance().get(Frame.机器锁定状态地址()).getIntValue() == 1){
-            //机器锁定
-
-            mTopMessageView.setText(R.string.设备已锁定);
-            mTopMessageView.setVisibility(View.VISIBLE);
         }else {
             mTopMessageView.setVisibility(View.GONE);
         }
@@ -333,6 +332,25 @@ public class LocalMonitorFragment extends XMVPFragment<LocalMonitorPresenter> im
     @Override
     public void normal(Object o) {
         mTopMessageView.setVisibility(View.GONE);
+    }
+
+    @Subscribe(
+            thread = EventThread.MAIN_THREAD,
+            tags = {
+                    @Tag(Config.EVENT_CODE_LOCK)
+            }
+    )
+    @Override
+    public void locked(Object o) {
+        if(CacheManager.getInstance().get(Frame.机器锁定状态地址())!=null
+                &&CacheManager.getInstance().get(Frame.机器锁定状态地址()).getIntValue() == 1){
+            //机器锁定
+            mTopMessageView.setText(R.string.设备已锁定);
+            mTopMessageView.setVisibility(View.VISIBLE);
+
+        }else {
+            mTopMessageView.setVisibility(View.GONE);
+        }
     }
 }
 

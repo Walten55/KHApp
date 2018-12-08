@@ -24,7 +24,7 @@ public class LocalUserManager {
 
     private static int deviceType;
 
-    private static String sn;
+    private static String sn = "";
 
     public static String getSn() {
         return sn;
