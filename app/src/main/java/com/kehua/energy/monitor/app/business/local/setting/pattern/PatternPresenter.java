@@ -207,46 +207,42 @@ public class PatternPresenter extends PatternContract.Presenter {
             lables[1] = Fastgo.getContext().getString(R.string.充电);
         }
 
-        //储能模式下，P-V与P-F是双折线，其余单折线，非储能模式下均为单折线
-        if (LocalUserManager.getDeviceType() == 0x02 || LocalUserManager.getDeviceType() == 0x0B) {
-            if (!isPVModle && !isPFModle) {
-                patternEntity = new PatternEntity(dealPointInfos);
-            } else {
-                List<PointInfo> pointInfoList1 = new ArrayList<>();
-                List<PointInfo> pointInfoList2 = new ArrayList<>();
-                long adress;
-                for (int i = 0; i < dealPointInfos.size(); i++) {
-                    adress = Long.parseLong(dealPointInfos.get(i).getAddress());
-                    //因为点表中放电地址集合在充电地址集合之前
-                    if ((isPVModle && adress < Frame.P_V模式充电起始地址) || (isPFModle && adress < Frame.P_F模式充电起始地址)) {
-                        pointInfoList1.add(dealPointInfos.get(i));
-                    } else {
-                        pointInfoList2.add(dealPointInfos.get(i));
-                    }
+        //储能模式+厂家权限下，P-V与P-F是双折线，其他情况单折线，非储能模式下均为单折线
+        if ((LocalUserManager.getDeviceType() == 0x02 || LocalUserManager.getDeviceType() == 0x0B)
+                && "factory".equals(LocalUserManager.getRoleAuthority())
+                &&(isPVModle || isPFModle)) {
+            List<PointInfo> pointInfoList1 = new ArrayList<>();
+            List<PointInfo> pointInfoList2 = new ArrayList<>();
+            long adress;
+            for (int i = 0; i < dealPointInfos.size(); i++) {
+                adress = Long.parseLong(dealPointInfos.get(i).getAddress());
+                //因为点表中放电地址集合在充电地址集合之前
+                if ((isPVModle && adress < Frame.P_V模式充电起始地址) || (isPFModle && adress < Frame.P_F模式充电起始地址)) {
+                    pointInfoList1.add(dealPointInfos.get(i));
+                } else {
+                    pointInfoList2.add(dealPointInfos.get(i));
                 }
-                List<List<PointInfo>> listArray = new ArrayList<>();
-                if (pointInfoList1.size() > 1) {
-                    listArray.add(pointInfoList1);
-                }
-                if (pointInfoList2.size() > 1) {
-                    listArray.add(pointInfoList2);
-                }
-
-                if (listArray.size() > 0) {
-                    List<PointInfo>[] array = new ArrayList[listArray.size()];
-                    listArray.toArray(array);
-                    patternEntity = new PatternEntity(lables, colors, array);
-                }
-
             }
-        } else {//非储能模式下，只有单折线
+            List<List<PointInfo>> listArray = new ArrayList<>();
+            if (pointInfoList1.size() > 1) {
+                listArray.add(pointInfoList1);
+            }
+            if (pointInfoList2.size() > 1) {
+                listArray.add(pointInfoList2);
+            }
+
+            if (listArray.size() > 0) {
+                List<PointInfo>[] array = new ArrayList[listArray.size()];
+                listArray.toArray(array);
+                patternEntity = new PatternEntity(lables, colors, array);
+            }
+        }else{
             patternEntity = new PatternEntity(dealPointInfos);
+            //单线情况下PV、PF模式折线为红色(只有放电)
             if (isPVModle || isPFModle) {
                 patternEntity.setColors(colors);
             }
         }
-
-
         return patternEntity;
     }
 
