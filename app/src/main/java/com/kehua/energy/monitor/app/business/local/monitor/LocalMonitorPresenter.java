@@ -126,7 +126,7 @@ public class LocalMonitorPresenter extends LocalMonitorContract.Presenter {
                                 "4563",
                                 "4564",
                                 "4565"}));
-                        for (int i = 0; i < deviceData.getIntValue(); i++) {
+                        for (int i = 0; i < 4-deviceData.getIntValue(); i++) {
                             result.remove(result.size() - 1);
                         }
                     }

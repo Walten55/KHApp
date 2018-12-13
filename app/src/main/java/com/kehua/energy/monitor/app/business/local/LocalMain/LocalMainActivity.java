@@ -156,6 +156,10 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
             //锁定
             RxBus.get().post(Config.EVENT_CODE_LOCK, "");
             locked();
+        }else{
+            if(mPwdDialog!=null){
+                mPwdDialog.dismiss();
+            }
         }
     }
 
