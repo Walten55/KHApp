@@ -1,6 +1,7 @@
 package com.kehua.energy.monitor.app.business.local.LocalMain;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -163,6 +164,7 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
         }
     }
 
+    private Handler mHandler = new Handler();
     public void locked() {
         if(CacheManager.getInstance().get(Frame.机器锁定状态地址())!=null
                 &&CacheManager.getInstance().get(Frame.机器锁定状态地址()).getIntValue() == 1){
@@ -171,12 +173,12 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
                 mPwdDialog = new UnlockDialogFragment();
                 mPwdDialog.setCancelable(false);
                 mPwdDialog.show(getSupportFragmentManager(), "pwdDialog",
-                        CacheManager.getInstance().get(Frame.试用状态地址()).getIntValue()==0?getString(R.string.试用期密码)
-                                :getString(R.string.开机密码),
+                        CacheManager.getInstance().get(Frame.试用状态地址()).getIntValue()==0?getString(R.string.开机密码)
+                                :getString(R.string.试用期密码),
                         new UnlockDialogFragment.OnEditPwdDialogFragmentListener() {
                             @Override
                             public void onSubmit(String msg) {
-                                if(CacheManager.getInstance().get(Frame.试用状态地址()).getIntValue()==0){
+                                if(CacheManager.getInstance().get(Frame.试用状态地址()).getIntValue()==1){
                                     //下发试用期密码
                                     mPresenter.save(Frame.试用期密码地址[0], Frame.试用期密码地址[1], Integer.valueOf(msg.trim()), new Consumer<Boolean>() {
                                         @Override
@@ -184,7 +186,12 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
                                             if(success){
                                                 mPwdDialog.dismiss();
                                                 KeyboardUtils.hideSoftInput(LocalMainActivity.this);
-                                                mPwdDialog = null;
+                                                mHandler.postDelayed(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        mPwdDialog = null;
+                                                    }
+                                                },15*1000);
                                             }
                                         }
                                     });
@@ -196,7 +203,12 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
                                             if(success){
                                                 mPwdDialog.dismiss();
                                                 KeyboardUtils.hideSoftInput(LocalMainActivity.this);
-                                                mPwdDialog = null;
+                                                mHandler.postDelayed(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        mPwdDialog = null;
+                                                    }
+                                                },15*1000);
                                             }
                                         }
                                     });

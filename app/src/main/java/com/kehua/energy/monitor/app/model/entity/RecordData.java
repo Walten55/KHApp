@@ -14,6 +14,8 @@ import com.kehua.energy.monitor.app.utils.LanguageUtils;
  * -----------------------------------------------------------------
  */
 public class RecordData {
+    private int template;
+
     private int deviceAddress;
 
     private String name;
@@ -28,7 +30,8 @@ public class RecordData {
 
     private boolean isSwitch;
 
-    public RecordData(int deviceAddress,String name, int code, int value, String parseValue, String time,boolean isSwitch) {
+    public RecordData(int template,int deviceAddress,String name, int code, int value, String parseValue, String time,boolean isSwitch) {
+        this.template = template;
         this.deviceAddress = deviceAddress;
         this.name = name;
         this.code = code;
@@ -36,6 +39,14 @@ public class RecordData {
         this.parseValue = parseValue;
         this.time = time;
         this.isSwitch = isSwitch;
+    }
+
+    public int getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(int template) {
+        this.template = template;
     }
 
     public boolean isSwitch() {

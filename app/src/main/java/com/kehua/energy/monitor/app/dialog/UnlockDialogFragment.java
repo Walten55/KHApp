@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,6 +45,7 @@ public class UnlockDialogFragment extends DialogFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View inflate = View.inflate(Fastgo.getContext(), R.layout.dialog_unlock, null);
         ButterKnife.bind(this,inflate);
         init();

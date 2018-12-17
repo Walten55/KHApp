@@ -17,7 +17,9 @@
             android:gravity="center"
             android:text="@string/设备已锁定"
             android:textSize="@dimen/text_size_title"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:textColor="@color/text_black"
+            />
 
         <View style="@style/Line" />
 
@@ -28,7 +30,9 @@
             android:layout_marginLeft="@dimen/grid_15"
             android:layout_marginTop="@dimen/grid_10"
             android:text="@string/串号"
-            android:textSize="@dimen/text_size_sub_title" />
+            android:textSize="@dimen/text_size_sub_title"
+            android:textColor="@color/text_black"
+            />
 
         <com.flyco.roundview.RoundRelativeLayout
             android:layout_width="match_parent"

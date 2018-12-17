@@ -685,7 +685,7 @@ public class RemoteModel extends BaseModel implements IModel {
                             RxBus.get().post(Config.EVENT_CODE_COLLECT_SETTING_COMPLETE, "");
                         }
 
-                        req.put("data", Cmd.newReadCmd(deviceAddress, 0x01, 5064, 5096));
+                        req.put("data", Cmd.newReadCmd(deviceAddress, 0x01, 5064, 5070));
                         return mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
                                 .fdbg(req);
                     }
@@ -696,7 +696,37 @@ public class RemoteModel extends BaseModel implements IModel {
 
                         if (modbusResponse.isSuccess()) {
                             //解析
-                            List<DeviceData> data = localModel.parse("", modbusResponse.getBytesDat(), 5064, 5096, Frame.三相协议, new Date());
+                            List<DeviceData> data = localModel.parse("", modbusResponse.getBytesDat(), 5064, 5070, Frame.三相协议, new Date());
+                            RxBus.get().post(Config.EVENT_CODE_COLLECT_SETTING_COMPLETE, "");
+                        }
+
+                        req.put("data", Cmd.newReadCmd(deviceAddress, 0x01, 5072, 5074));
+                        return mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
+                                .fdbg(req);
+                    }
+                })
+                .flatMap(new Function<ModbusResponse, Publisher<ModbusResponse>>() {
+                    @Override
+                    public Publisher<ModbusResponse> apply(ModbusResponse modbusResponse) throws Exception {
+
+                        if (modbusResponse.isSuccess()) {
+                            //解析
+                            List<DeviceData> data = localModel.parse("", modbusResponse.getBytesDat(), 5072, 5074, Frame.三相协议, new Date());
+                            RxBus.get().post(Config.EVENT_CODE_COLLECT_SETTING_COMPLETE, "");
+                        }
+
+                        req.put("data", Cmd.newReadCmd(deviceAddress, 0x01, 5096, 5096));
+                        return mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
+                                .fdbg(req);
+                    }
+                })
+                .flatMap(new Function<ModbusResponse, Publisher<ModbusResponse>>() {
+                    @Override
+                    public Publisher<ModbusResponse> apply(ModbusResponse modbusResponse) throws Exception {
+
+                        if (modbusResponse.isSuccess()) {
+                            //解析
+                            List<DeviceData> data = localModel.parse("", modbusResponse.getBytesDat(), 5096, 5096, Frame.三相协议, new Date());
                             RxBus.get().post(Config.EVENT_CODE_COLLECT_SETTING_COMPLETE, "");
                         }
 
@@ -793,14 +823,59 @@ public class RemoteModel extends BaseModel implements IModel {
         final ArrayMap<String, Object> resultMap = new ArrayMap<>();
 
         final HashMap<String, Object> req = new HashMap<>();
-        req.put("data", Cmd.newReadCmd(deviceAddress, 0x01, 5001, 5096));
+        req.put("data", Cmd.newReadCmd(deviceAddress, 0x01, 5001, 5009));
         addSubscribe(mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
                 .fdbg(req)
                 .compose(new FlowableTransformer<ModbusResponse, ModbusResponse>() {
                     @Override
                     public Publisher<ModbusResponse> apply(Flowable<ModbusResponse> upstream) {
                         return upstream.subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread());
+                                .observeOn(Schedulers.io());
+                    }
+                })
+                .flatMap(new Function<ModbusResponse, Publisher<ModbusResponse>>() {
+                    @Override
+                    public Publisher<ModbusResponse> apply(ModbusResponse modbusResponse) throws Exception {
+
+                        if (modbusResponse.isSuccess()) {
+                            //解析
+                            List<DeviceData> data = localModel.parse("", modbusResponse.getBytesDat(), 5001, 5009, Frame.三相协议, new Date());
+                            RxBus.get().post(Config.EVENT_CODE_COLLECT_SETTING_COMPLETE, "");
+                        }
+
+                        req.put("data", Cmd.newReadCmd(deviceAddress, 0x01, 5064, 5070));
+                        return mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
+                                .fdbg(req);
+                    }
+                })
+                .flatMap(new Function<ModbusResponse, Publisher<ModbusResponse>>() {
+                    @Override
+                    public Publisher<ModbusResponse> apply(ModbusResponse modbusResponse) throws Exception {
+
+                        if (modbusResponse.isSuccess()) {
+                            //解析
+                            List<DeviceData> data = localModel.parse("", modbusResponse.getBytesDat(), 5064, 5070, Frame.三相协议, new Date());
+                            RxBus.get().post(Config.EVENT_CODE_COLLECT_SETTING_COMPLETE, "");
+                        }
+
+                        req.put("data", Cmd.newReadCmd(deviceAddress, 0x01, 5072, 5074));
+                        return mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
+                                .fdbg(req);
+                    }
+                })
+                .flatMap(new Function<ModbusResponse, Publisher<ModbusResponse>>() {
+                    @Override
+                    public Publisher<ModbusResponse> apply(ModbusResponse modbusResponse) throws Exception {
+
+                        if (modbusResponse.isSuccess()) {
+                            //解析
+                            List<DeviceData> data = localModel.parse("", modbusResponse.getBytesDat(), 5072, 5074, Frame.三相协议, new Date());
+                            RxBus.get().post(Config.EVENT_CODE_COLLECT_SETTING_COMPLETE, "");
+                        }
+
+                        req.put("data", Cmd.newReadCmd(deviceAddress, 0x01, 5096, 5096));
+                        return mRepositoryManager.obtainRetrofitService(CollectorAPIService.class)
+                                .fdbg(req);
                     }
                 })
                 .subscribe(new Consumer<ModbusResponse>() {
@@ -808,7 +883,7 @@ public class RemoteModel extends BaseModel implements IModel {
                     public void accept(ModbusResponse modbusResponse) throws Exception {
                         if (modbusResponse.isSuccess()) {
                             //解析
-                            List<DeviceData> data = localModel.parse("", modbusResponse.getBytesDat(), 5001, 5096, Frame.三相协议, new Date());
+                            List<DeviceData> data = localModel.parse("", modbusResponse.getBytesDat(), 5096, 5096, Frame.三相协议, new Date());
                             RxBus.get().post(Config.EVENT_CODE_COLLECT_SETTING_COMPLETE, "");
 
                         }

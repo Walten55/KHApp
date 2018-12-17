@@ -36,7 +36,6 @@ import javax.inject.Inject;
 
 import io.objectbox.query.Query;
 import io.objectbox.query.QueryBuilder;
-import io.objectbox.query.QueryFilter;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -448,9 +447,9 @@ public class LocalModel extends BaseModel implements IModel {
                         parseValue = format.format(value / Math.pow(10, pointInfo.getAccuracy())) + " " + pointInfo.getUnit();
                     }
                 }
-                result.add(new RecordData(deviceAddress, pointInfo.getMeans(), code, value, parseValue, time, !StringUtils.isEmpty(pointInfo.getV0())));
+                result.add(new RecordData(pointInfo.getTemplate(),deviceAddress, pointInfo.getMeans(), code, value, parseValue, time, !StringUtils.isEmpty(pointInfo.getV0())));
             } else {
-                result.add(new RecordData(deviceAddress, "Code:" + code + " " + Fastgo.getContext().getString(R.string.映射失败), code, 0, "", time, false));
+                result.add(new RecordData(0,deviceAddress, "Code:" + code + " " + Fastgo.getContext().getString(R.string.映射失败), code, 0, "", time, false));
             }
 
         }

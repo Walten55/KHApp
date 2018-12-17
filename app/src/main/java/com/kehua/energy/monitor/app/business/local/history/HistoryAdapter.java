@@ -36,10 +36,14 @@ public class HistoryAdapter extends BaseQuickAdapter<RecordData,BaseViewHolder> 
         helper.setText(R.id.tv_time,item.getTime().trim());
         helper.setText(R.id.tv_device_address,mContext.getString(R.string.机器编号_冒号)+ LocalUserManager.getSn());
         helper.setText(R.id.tv_value,item.getParseValue().trim());
-        if(item.isSwitch()&&item.getCode()!=6200){
+        if((item.getTemplate()==0||item.getTemplate()==2)&&item.isSwitch()&&item.getCode()!=6200){
             helper.setTextColor(R.id.tv_value,item.getValue()==0?
                     ContextCompat.getColor(mContext,R.color.green):
                     ContextCompat.getColor(mContext,R.color.red));
+        }else if((item.getTemplate()==3)&&item.isSwitch()&&item.getCode()!=6200){
+            helper.setTextColor(R.id.tv_value,item.getValue()==0?
+                    ContextCompat.getColor(mContext,R.color.red):
+                    ContextCompat.getColor(mContext,R.color.green));
         }else {
             helper.setTextColor(R.id.tv_value, ContextCompat.getColor(mContext,R.color.text_black));
         }
