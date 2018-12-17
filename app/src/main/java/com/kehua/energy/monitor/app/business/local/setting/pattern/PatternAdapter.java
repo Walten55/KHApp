@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.widget.NormalDialog;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.github.mikephil.charting.charts.LineChart;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.functions.Consumer;
+import me.walten.fastgo.common.Fastgo;
 
 public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder> {
 
@@ -128,30 +131,53 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                     switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
-                            presenter.save(Integer.valueOf(pdSwitchItem.getPointInfo().getAddress().trim())
-                                    , isChecked ? 1 : 0, new Consumer<Boolean>() {
-                                        @Override
-                                        public void accept(Boolean success) throws Exception {
-                                            DeviceData deviceData = CacheManager.getInstance()
-                                                    .get(Integer.valueOf(pdSwitchItem.getPointInfo().getAddress().trim()));
-                                            if (success && deviceData != null) {
-                                                deviceData.setIntValue(isChecked ? 1 : 0);
-                                                if (isChecked) {
-                                                    PatternAdapter.this.expand(helper.getAdapterPosition(), true);
-                                                } else {
-                                                    PatternAdapter.this.collapse(helper.getAdapterPosition(), true);
-                                                }
+                            final NormalDialog dialog = new NormalDialog(helper.itemView.getContext());
+                            dialog.content(Fastgo.getContext().getString(R.string.是否更改设置)).title(Fastgo.getContext().getString(R.string.温馨提示))
+                                    .style(NormalDialog.STYLE_TWO)//
+                                    .btnNum(2)
+                                    .titleTextSize(23);
+                            dialog.btnText(Fastgo.getContext().getString(R.string.取消), Fastgo.getContext().getString(R.string.确定));
+                            dialog.titleTextColor(ContextCompat.getColor(Fastgo.getContext(), R.color.colorPrimary));
+                            dialog.setCancelable(false);
+                            dialog.setCanceledOnTouchOutside(false);
+                            dialog.setOnBtnClickL(new OnBtnClickL() {
+                                @Override
+                                public void onBtnClick() {
+                                    dialog.dismiss();
+                                    boolean result = switchButton.isChecked();
+                                    switchButton.setCheckedImmediatelyNoEvent(!result);
+                                }
+                            }, new OnBtnClickL() {
+                                @Override
+                                public void onBtnClick() {
+                                    dialog.dismiss();
+                                    presenter.save(Integer.valueOf(pdSwitchItem.getPointInfo().getAddress().trim())
+                                            , isChecked ? 1 : 0, new Consumer<Boolean>() {
+                                                @Override
+                                                public void accept(Boolean success) throws Exception {
+                                                    DeviceData deviceData = CacheManager.getInstance()
+                                                            .get(Integer.valueOf(pdSwitchItem.getPointInfo().getAddress().trim()));
+                                                    if (success && deviceData != null) {
+                                                        deviceData.setIntValue(isChecked ? 1 : 0);
+                                                        if (isChecked) {
+                                                            PatternAdapter.this.expand(helper.getAdapterPosition(), true);
+                                                        } else {
+                                                            PatternAdapter.this.collapse(helper.getAdapterPosition(), true);
+                                                        }
 
-                                                //传递点击事件
-                                                helper.itemView.callOnClick();
-                                            }
-                                            //如果没有设置成功，将结果复原成就有状态
-                                            if (!success) {
-                                                boolean result = switchButton.isChecked();
-                                                switchButton.setCheckedImmediatelyNoEvent(!result);
-                                            }
-                                        }
-                                    });
+                                                        //传递点击事件
+                                                        helper.itemView.callOnClick();
+                                                    }
+                                                    //如果没有设置成功，将结果复原成就有状态
+                                                    if (!success) {
+                                                        boolean result = switchButton.isChecked();
+                                                        switchButton.setCheckedImmediatelyNoEvent(!result);
+                                                    }
+                                                }
+                                            });
+                                }
+                            });
+                            dialog.show();
 //                            CacheManager.getInstance().remove(Integer.valueOf(pdSwitchItem.getPointInfo().getAddress().trim()));
 
                         }
