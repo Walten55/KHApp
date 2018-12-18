@@ -2,6 +2,7 @@ package com.kehua.energy.monitor.app.business.local.setting.pattern;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -216,16 +217,19 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                 helper.addOnClickListener(R.id.tv_linechart_setting);
                 ((TextView) helper.getView(R.id.tv_linechart_setting)).getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
+                LineChart lineChart = (LineChart) helper.getView(R.id.linechart);
                 //已经对应点表对象正常且读取成功才进行数据转化与展示
                 DeviceData deviceInfo = CacheManager.getInstance().get(Integer.valueOf(peLineChartItem.getData()[0].get(0).getAddress().trim()));
+
                 if (deviceInfo != null) {
                     helper.setGone(R.id.segment_tablayout, false);
+                    List<DeviceData> deviceDatas;
                     //单条折线
                     if (peLineChartItem.isSingleLine()) {
-                        List<DeviceData> deviceDatas = dealLineChartData(peLineChartItem.getData()[0]);
+                        deviceDatas = dealLineChartData(peLineChartItem.getData()[0]);
                         int lineColor = peLineChartItem.getColors() != null && peLineChartItem.getColors().length > 0 ? peLineChartItem.getColors()[0] : R.color.green;
 
-                        LineChartHelper.init(helper.itemView.getContext(), (LineChart) helper.getView(R.id.linechart))
+                        LineChartHelper.init(helper.itemView.getContext(), lineChart)
                                 .setDataValueTagX(peLineChartItem.getValueTagX())
                                 .setDataValueTagY(peLineChartItem.getValueTagY())
                                 .setDataColor(ContextCompat.getColor(helper.itemView.getContext(), lineColor))
@@ -240,8 +244,9 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                         segmentTabLayout.setTabData(peLineChartItem.getLables());
 
                         int selectedTab = segmentTabLayout.getCurrentTab();
-                        List<DeviceData> deviceDatas = dealLineChartData(data[selectedTab]);
-                        LineChartHelper.init(helper.itemView.getContext(), (LineChart) helper.getView(R.id.linechart))
+                        deviceDatas = dealLineChartData(data[selectedTab]);
+
+                        LineChartHelper.init(helper.itemView.getContext(), lineChart)
                                 .setDataColor(ContextCompat.getColor(helper.itemView.getContext(), peLineChartItem.getColors()[selectedTab]))
                                 .setDataValueTagX(peLineChartItem.getValueTagX())
                                 .setDataValueTagY(peLineChartItem.getValueTagY())
@@ -317,5 +322,6 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
 
         return deviceDatas;
     }
+
 
 }

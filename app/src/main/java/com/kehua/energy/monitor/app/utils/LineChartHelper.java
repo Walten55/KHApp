@@ -46,6 +46,7 @@ public class LineChartHelper {
     private float xAxisMinimum = 0;
     private float xAxisGranularity = 1f;
     private boolean xAxisGridLineEnable = true;
+    private int xAxisLableCounts = 4;
 
     private boolean yLeftMaxSetted = false;
     private float yLeftMax = 200;
@@ -130,7 +131,9 @@ public class LineChartHelper {
         xAxis.enableGridDashedLine(10f, 0f, 0f);
         xAxis.setTextSize(xAxisTextSize);
         xAxis.setTextColor(xAxisTextColor);
+        xAxis.setLabelCount(xAxisLableCounts);
         xAxis.setYOffset(24f);
+
 
         if (xAxisMinimumEnable) {
             xAxis.setAxisMinimum(xAxisMinimum);
@@ -177,10 +180,15 @@ public class LineChartHelper {
         }
         defaultDataSet(set1);
 
+        refreshChart();
+    }
 
+    public void refreshChart() {
+        if (lineChart == null) {
+            return;
+        }
         lineChart.getData().notifyDataChanged();
         lineChart.notifyDataSetChanged();
-
         lineChart.getViewPortHandler().refresh(new Matrix(), lineChart, true);
     }
 
@@ -309,7 +317,7 @@ public class LineChartHelper {
             return;
         }
         List<LineChartEntity> data = deviceDatas2LineChartEntitys(deviceDataList);
-        cusValueMarkerView = new CustomMarkerView(context, data, dataValueTagX,dataValueTagY);
+        cusValueMarkerView = new CustomMarkerView(context, data, dataValueTagX, dataValueTagY);
         setData(data);
     }
 
@@ -494,6 +502,11 @@ public class LineChartHelper {
 
     public LineChartHelper setxAxisGranularity(float xAxisGranularity) {
         this.xAxisGranularity = xAxisGranularity;
+        return this;
+    }
+
+    public LineChartHelper setxAxisLableCounts(int xAxisLableCounts) {
+        this.xAxisLableCounts = xAxisLableCounts;
         return this;
     }
 
