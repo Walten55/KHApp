@@ -295,17 +295,23 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
                         DeviceData deviceData = CacheManager.getInstance().get(Integer.valueOf(patternHead.getPointInfo().getAddress().trim()));
                         if (success && deviceData != null) {
                             deviceData.setIntValue(position);
+
+                            boolean hasDeviceChild = patternHead.getSubItemData() != null && patternHead.getSubItemData().size() > 0;
                             if (position == 0) {
-                                mAdapter.collapse(adapterPos, true);
-                                mAdapter.notifyDataSetChanged();
+                                if (hasDeviceChild){
+                                    mAdapter.collapse(adapterPos, true);
+                                    mAdapter.notifyDataSetChanged();
+                                }
                             } else {
-                                mAdapter.expand(adapterPos, true);
-                                mRecyclerView.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mAdapter.notifyDataSetChanged();
-                                    }
-                                }, 1500);
+                                if (hasDeviceChild){
+                                    mAdapter.expand(adapterPos, true);
+                                    mRecyclerView.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mAdapter.notifyDataSetChanged();
+                                        }
+                                    }, 1500);
+                                }
 
                                 int adress = Integer.parseInt(patternHead.getPointInfo().getAddress());
                                 //如果不是L_HVRT模式地址,跳转

@@ -127,6 +127,8 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                     helper.setGone(R.id.tv_reading, false);
                     helper.setGone(R.id.sb_value, true);
 
+                    final boolean hasDeviceChild = pdSwitchItem.getSubItemData() != null && pdSwitchItem.getSubItemData().size() > 0;
+
 //                    switchButton.setCheckedImmediatelyNoEvent(targetDeviceData.getIntValue() != Frame.OFF);
                     switchButton.setCheckedImmediatelyNoEvent(targetDeviceData.getIntValue() != Frame.OFF);
 
@@ -161,12 +163,14 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                                                             .get(Integer.valueOf(pdSwitchItem.getPointInfo().getAddress().trim()));
                                                     if (success && deviceData != null) {
                                                         deviceData.setIntValue(isChecked ? 1 : 0);
-                                                        if (isChecked) {
-                                                            PatternAdapter.this.expand(helper.getAdapterPosition(), true);
-                                                        } else {
-                                                            PatternAdapter.this.collapse(helper.getAdapterPosition(), true);
-                                                        }
 
+                                                        if (hasDeviceChild) {
+                                                            if (isChecked) {
+                                                                PatternAdapter.this.expand(helper.getAdapterPosition(), true);
+                                                            } else {
+                                                                PatternAdapter.this.collapse(helper.getAdapterPosition(), true);
+                                                            }
+                                                        }
                                                         //传递点击事件
                                                         helper.itemView.callOnClick();
                                                     }
