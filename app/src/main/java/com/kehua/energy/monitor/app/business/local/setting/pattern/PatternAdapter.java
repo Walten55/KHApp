@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -272,6 +273,8 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
                             }
                         });
 
+                        lineChart.setVisibility(View.GONE);
+                        lineChart.setVisibility(View.VISIBLE);
 //                        List<DeviceData>[] deviceDataLists = new List[peLineChartItem.getData().length];
 //                        List<DeviceData> deviceDatas;
 //                        //折线图多组
@@ -321,6 +324,20 @@ public class PatternAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
         }
 
         return deviceDatas;
+    }
+
+    class LineChartRunnable implements Runnable {
+        LineChartHelper lineChartHelper;
+
+        public LineChartRunnable(LineChartHelper helper) {
+            lineChartHelper = helper;
+        }
+
+        @Override
+        public void run() {
+            lineChartHelper.refreshChart();
+            lineChartHelper.getLineChart().invalidate();
+        }
     }
 
 

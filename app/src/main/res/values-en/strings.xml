@@ -105,7 +105,7 @@
     <string name="主次负载_W">Pri/Sec Load P(W)</string>
     <string name="电池功率_W">Battery P(W)</string>
     <string name="发电功率_W">Inverter P(W)</string>
-    <string name="电网功率_Kw">Grid power(kW)</string>
+    <string name="电网功率_Kw">Grid P(kW)</string>
     <string name="主次负载_Kw">Pri/Sec Load P(kW)</string>
     <string name="电池功率_Kw">Battery P(kW)</string>
     <string name="发电功率_Kw">Inverter P(kW)</string>
@@ -138,8 +138,8 @@
     <string name="逆变电流_单位">Inverter current(A)</string>
     <string name="功率_W">Power(W)</string>
     <string name="功率_Kw"> Power(kW)</string>
-    <string name="单相协议">Single phase optical storage protocol</string>
-    <string name="三相协议">Three-phase optical storage protocol</string>
+    <string name="单相协议">PV Grid Inv.(1-phase)</string>
+    <string name="三相协议">PV Grid Inv.(3-phase)</string>
     <string name="系统运行状态">Running Status</string>
     <string name="有功功率_单位">Active power(kW)</string>
     <string name="无功功率_单位">Reactive power(kVar)</string>
