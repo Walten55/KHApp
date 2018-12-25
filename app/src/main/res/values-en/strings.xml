@@ -114,7 +114,7 @@
     <string name="PV日发电量_单位">E-PV Out Daily(kWh)</string>
     <string name="PV总发电量_单位">E-PV Out Total(kWh)</string>
     <string name="日负载耗电量_单位">Load Consumptionn Daily(kWh)</string>
-    <string name="总负载耗电量_单位">Total Consumptionn Total(kWh)</string>
+    <string name="总负载耗电量_单位">Load Consumptionn Total(kWh)</string>
     <string name="电池日充电量_单位">Battery Charge Daily(kWh)</string>
     <string name="电池日放电量_单位">Battery Discharge Daily(kWh)</string>
     <string name="三相光伏逆变器">PV Grid Inv.(3-phase)</string>
@@ -332,7 +332,7 @@
     <string name="结束时间">End Time</string>
     <string name="站号配置串号不能为空">Serial No. must be not null</string>
     <string name="站号配置站号不能为空">Station No. must be not null</string>
-    <string name="支路">支路</string>
+    <string name="支路">Branch</string>
     <string name="PV支路">PV Branch</string>
     <string name="使能">Enable</string>
     <string name="支路告警屏蔽">Branch Alarm Mask</string>

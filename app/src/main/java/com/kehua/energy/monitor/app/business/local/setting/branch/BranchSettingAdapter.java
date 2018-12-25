@@ -29,12 +29,12 @@ public class BranchSettingAdapter extends BaseQuickAdapter<ArrayMap<String,Boole
         if(address == 6305){
             //支路告警屏蔽
             for(int i = 1;i<=16;i++){
-                itemName.add(Fastgo.getContext().getString(R.string.支路)+i);
+                itemName.add(Fastgo.getContext().getString(R.string.支路)+" "+i);
             }
         }else if(address == 6309){
             //pv支路使能字
             for(int i = 1;i<=16;i++){
-                itemName.add(Fastgo.getContext().getString(R.string.PV支路)+i+Fastgo.getContext().getString(R.string.使能));
+                itemName.add(Fastgo.getContext().getString(R.string.PV支路)+" "+i+" "+Fastgo.getContext().getString(R.string.使能));
             }
         }
     }
