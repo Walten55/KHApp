@@ -180,21 +180,25 @@ public class LocalMonitorAdapter extends BaseMultiItemQuickAdapter<MonitorEntity
 
                 if (null != CacheManager.getInstance().get(address)) {
                     DeviceData deviceData = CacheManager.getInstance().get(Integer.valueOf(pointInfoItem.getData().getAddress()));
-                    switch (address) {
-                        case 4850:
-                            helper.setText(R.id.tv_value, Frame.getDeviceTypeName(deviceData.getIntValue()));
-                            break;
+                    if(StringUtils.isTrimEmpty(deviceData.getParseValue())){
+                        helper.setText(R.id.tv_value, "--");
+                    }else {
+                        switch (address) {
+                            case 4850:
+                                helper.setText(R.id.tv_value, Frame.getDeviceTypeName(deviceData.getIntValue()));
+                                break;
 
-                        case 4852:
-                            helper.setText(R.id.tv_value, Frame.getProtocolTypeName(deviceData.getIntValue()));
-                            break;
-                        default:
-                            helper.setText(R.id.tv_value, (deviceData.getParseValue() + " " + pointInfoItem.getData().getUnit()).trim());
-                            break;
-                    }
+                            case 4852:
+                                helper.setText(R.id.tv_value, Frame.getProtocolTypeName(deviceData.getIntValue()));
+                                break;
+                            default:
+                                helper.setText(R.id.tv_value, (deviceData.getParseValue() + " " + pointInfoItem.getData().getUnit()).trim());
+                                break;
+                        }
 
-                    if (address == Frame.电池状态地址()) {
-                        helper.setText(R.id.tv_value, Frame.getBatStatusName(deviceData.getIntValue()));
+                        if (address == Frame.电池状态地址()) {
+                            helper.setText(R.id.tv_value, Frame.getBatStatusName(deviceData.getIntValue()));
+                        }
                     }
                 } else {
                     helper.setText(R.id.tv_value, "--");

@@ -296,7 +296,7 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
                         if (success && deviceData != null) {
                             deviceData.setIntValue(position);
 
-                            boolean hasDeviceChild = patternHead.getSubItemData() != null && patternHead.getSubItemData().size() > 0;
+                            boolean hasDeviceChild = patternHead.getSubItemData() != null && patternHead.getSubItemData().size() > 1;
                             if (position == 0) {
                                 if (hasDeviceChild){
                                     mAdapter.collapse(adapterPos, true);
