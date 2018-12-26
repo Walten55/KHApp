@@ -21,6 +21,8 @@ import com.kehua.energy.monitor.app.di.module.ActivityModule;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
@@ -106,6 +108,10 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
                     public void accept(Boolean granted) throws Exception {
                         if (granted) {
                             if (mStorageChooser == null) {
+                                // TODO: 2018/12/26  
+//                                ArrayList<String> filterStr=new ArrayList<>();
+//                                filterStr.add("文件后缀或者文件名");
+
                                 Content content = new Content();
                                 content.setOverviewHeading(getString(R.string.存储卡));
                                 content.setInternalStorageText(getString(R.string.内部存储卡));
@@ -117,6 +123,8 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
                                         .withContent(content)
                                         .allowCustomPath(true)
                                         .setType(StorageChooser.FILE_PICKER)
+                                        .filter(StorageChooser.FileType.DOCS)
+//                                        .customFilter(filterStr)
                                         .build();
 
                                 mStorageChooser.setOnSelectListener(new StorageChooser.OnSelectListener() {
