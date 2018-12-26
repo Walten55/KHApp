@@ -224,7 +224,7 @@
     <string name="串号相关试用期功能">Probation Function</string>
     <string name="串号相关试用期天数">Trial Period Days</string>
     <string name="MAC地址">MAC Address</string>
-    <string name="机器型号">Mac Type</string>
+    <string name="机器型号">Inv. Models</string>
     <string name="站号配置串号">Station - Serial No.</string>
     <string name="站号配置站号">Station - Station No.</string>
     <string name="空闲">Idle</string>
@@ -340,4 +340,5 @@
     <string name="天">Day</string>
     <string name="升级中请勿退出">Please do not quit in the upgrade</string>
     <string name="设备升级中">Device upgrades, please try again later</string>
+    <string name="加载更多">Load more</string>
 </resources>

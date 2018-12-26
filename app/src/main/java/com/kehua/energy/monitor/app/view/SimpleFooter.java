@@ -35,7 +35,7 @@ public class SimpleFooter extends ClassicsFooter {
         setBackgroundColor(ContextCompat.getColor(Fastgo.getContext(), R.color.transparent));
         int textColor = Color.parseColor("#bdbdbd");
         mTitleText.setTextColor(textColor);
-        mTitleText.setText("加载更多");
+        mTitleText.setText(Fastgo.getContext().getString(R.string.加载更多));
         mProgressDrawable.setColor(textColor);
         mProgressView.setImageDrawable(mProgressDrawable);
         mArrowDrawable.setColor(textColor);

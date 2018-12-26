@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -41,8 +44,8 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
     @BindView(R.id.tv_sn)
     TextView mSnView;
 
-    @BindView(R.id.tv_device_type)
-    TextView mDeviceTypeView;
+//    @BindView(R.id.tv_device_type)
+//    TextView mDeviceTypeView;
 
     @BindView(R.id.et_password)
     XEditText mPasswordView;
@@ -96,7 +99,7 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
     }
 
     @OnClick(R.id.dev_container)
-    public void devContainerClick(View view){
+    public void devContainerClick(View view) {
         mPresenter.gatherDeviceInfo();
     }
 
@@ -148,10 +151,11 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
     @Override
     public void showDeviceInfo(String sn, String deviceType) {
 
-        String _n = LanguageUtils.getSysDefaultLanguage(this).equals(LanguageUtils.Chinese) ? "" : "\n";
+//        String _n = LanguageUtils.getSysDefaultLanguage(this).equals(LanguageUtils.Chinese) ? "" : "\n";
 
-        mSnView.setText(getString(R.string.机器编号_冒号) + _n + (sn == null ? "" : sn));
-        mDeviceTypeView.setText(getString(R.string.设备类型_冒号) + _n + deviceType);
+        mSnView.setText(getString(R.string.机器编号_冒号) + (sn == null ? "" : sn)
+                + "\n" + getString(R.string.设备类型_冒号) + deviceType);
+//        mDeviceTypeView.setText(getString(R.string.设备类型_冒号) + _n + deviceType);
     }
 
     @OnClick(R.id.tv_login)
