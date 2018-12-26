@@ -156,6 +156,7 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
                         && adress != Frame.L_HFRT模式地址) {
                     RouterMgr.get().localSettingPatternChild(patternHeadSW.getPointInfo().getDescriptionCN());
                 }
+                mAdapter.notifyDataSetChanged();
                 break;
             case PatternAdapter.TYPE_CONTENT_TEXT:
                 PatternEntity patternEntity = (PatternEntity) multiItemEntity;
@@ -298,12 +299,12 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
 
                             boolean hasDeviceChild = patternHead.getSubItemData() != null && patternHead.getSubItemData().size() > 1;
                             if (position == 0) {
-                                if (hasDeviceChild){
+                                if (hasDeviceChild) {
                                     mAdapter.collapse(adapterPos, true);
-                                    mAdapter.notifyDataSetChanged();
                                 }
+                                mAdapter.notifyDataSetChanged();
                             } else {
-                                if (hasDeviceChild){
+                                if (hasDeviceChild) {
                                     mAdapter.expand(adapterPos, true);
                                     mRecyclerView.postDelayed(new Runnable() {
                                         @Override
@@ -311,7 +312,10 @@ public class PatternFragment extends XMVPFragment<PatternPresenter> implements P
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     }, 1500);
+                                } else {
+                                    mAdapter.notifyDataSetChanged();
                                 }
+
 
                                 int adress = Integer.parseInt(patternHead.getPointInfo().getAddress());
                                 //如果不是L_HVRT模式地址,跳转

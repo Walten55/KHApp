@@ -210,7 +210,7 @@ public class PatternPresenter extends PatternContract.Presenter {
         //储能模式+厂家权限下，P-V与P-F是双折线，其他情况单折线，非储能模式下均为单折线
         if ((LocalUserManager.getDeviceType() == 0x02 || LocalUserManager.getDeviceType() == 0x0B)
                 && "factory".equals(LocalUserManager.getRoleAuthority())
-                &&(isPVModle || isPFModle)) {
+                && (isPVModle || isPFModle)) {
             List<PointInfo> pointInfoList1 = new ArrayList<>();
             List<PointInfo> pointInfoList2 = new ArrayList<>();
             long adress;
@@ -236,7 +236,7 @@ public class PatternPresenter extends PatternContract.Presenter {
                 listArray.toArray(array);
                 patternEntity = new PatternEntity(lables, colors, array);
             }
-        }else{
+        } else {
             patternEntity = new PatternEntity(dealPointInfos);
             //单线情况下PV、PF模式折线为红色(只有放电)
             if (isPVModle || isPFModle) {
@@ -259,13 +259,17 @@ public class PatternPresenter extends PatternContract.Presenter {
                     if (data.get(i) instanceof PatternHead) {
                         patternHead = (PatternHead) data.get(i);
                         deviceData = CacheManager.getInstance().get(Integer.valueOf(patternHead.getPointInfo().getAddress().trim()));
+                        boolean hasDeviceChild = patternHead.getSubItemData() != null && patternHead.getSubItemData().size() > 1;
+
                         switch (patternHead.getItemType()) {
                             case PatternAdapter.TYPE_HEAD_TEXT:
                             case PatternAdapter.TYPE_HEAD_SWITCH:
-                                if (deviceData.getIntValue() == Frame.OFF) {
-                                    patternAdapter.collapse(i, true);
-                                } else {
-                                    patternAdapter.expand(i, true);
+                                if (hasDeviceChild) {
+                                    if (deviceData.getIntValue() == Frame.OFF) {
+                                        patternAdapter.collapse(i, true);
+                                    } else {
+                                        patternAdapter.expand(i, true);
+                                    }
                                 }
                                 break;
                         }
