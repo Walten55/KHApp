@@ -72,9 +72,9 @@ public class LocalMainPresenter extends LocalMainContract.Presenter {
     @Override
     public void collecting() {
         if(单相协议 == LocalUserManager.getPn()){
-            mModel.getRemoteModel().collectingSinglePhaseProtocol(1);
+            mModel.getRemoteModel().collectingSinglePhaseProtocol(LocalUserManager.getDeviceAddress());
         }else {
-            mModel.getRemoteModel().collectingThreePhaseProtocol(1);
+            mModel.getRemoteModel().collectingThreePhaseProtocol(LocalUserManager.getDeviceAddress());
         }
     }
 
