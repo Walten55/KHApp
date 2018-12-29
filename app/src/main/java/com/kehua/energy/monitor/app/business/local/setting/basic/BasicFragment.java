@@ -143,7 +143,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
                 mPresenter.setWorkPattern(position, new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean success) throws Exception {
-                        if(!success){
+                        if (!success) {
                             mWorkPatternTextView.setText(oldText);
                             mTimeFrameContainer.setVisibility(oldVisibility);
                         }
@@ -151,9 +151,9 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
                 });
                 mWorkPatternTextView.setText(stringItems[position]);
 
-                if(position == 2||position == 3){
+                if (position == 2 || position == 3) {
                     mTimeFrameContainer.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     mTimeFrameContainer.setVisibility(View.GONE);
                 }
                 dialog.dismiss();
@@ -177,7 +177,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
             pvTime = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
                 @Override
                 public void onTimeSelect(Date date, View v) {//选中事件回调
-                    mPresenter.setSystemTime(date,null);
+                    mPresenter.setSystemTime(date, null);
                 }
             })
                     .setType(new boolean[]{true, true, true, true, true, true})// 默认全部显示
@@ -266,7 +266,8 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
                 .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
                 .setRangDate(startDate, endDate)//起始终止年月日设定
 //                .setLabel(getString(R.string.年), getString(R.string.月), getString(R.string.日), getString(R.string.时), getString(R.string.分), getString(R.string.秒))//默认设置为年月日时分秒
-                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .setLabel("", "", "", "", "", "")//默认设置为年月日时分秒
+                .isCenterLabel(true) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
                 .isDialog(true)//是否显示为对话框样式
                 .build();
 
@@ -291,25 +292,25 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
     @Override
     public void onClickSubmitTimeFrame(View view) {
         List<String> listSlot = new ArrayList<>();
-        List<String> listCharge = getTimeFrameList(mChargeTimeContainer,listSlot);
-        List<String> listDischarge = getTimeFrameList(mDischargeTimeContainer,listSlot);
+        List<String> listCharge = getTimeFrameList(mChargeTimeContainer, listSlot);
+        List<String> listDischarge = getTimeFrameList(mDischargeTimeContainer, listSlot);
 
-        if(TimeSlotUtils.checkOverlap(listSlot)){
+        if (TimeSlotUtils.checkOverlap(listSlot)) {
             XToast.error(getString(R.string.时段重叠));
             return;
         }
-        mPresenter.setTimeFrame(listCharge, listDischarge,null);
+        mPresenter.setTimeFrame(listCharge, listDischarge, null);
     }
 
     @Override
-    public List<String> getTimeFrameList(LinearLayout container,List<String> slotList) {
+    public List<String> getTimeFrameList(LinearLayout container, List<String> slotList) {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < container.getChildCount(); i++) {
             TextView startTimeTv = container.getChildAt(i).findViewById(R.id.tv_start_time);
             TextView endTimeTv = container.getChildAt(i).findViewById(R.id.tv_end_time);
             list.add(startTimeTv.getText().toString());
             list.add(endTimeTv.getText().toString());
-            slotList.add(startTimeTv.getText().toString()+"-"+endTimeTv.getText().toString());
+            slotList.add(startTimeTv.getText().toString() + "-" + endTimeTv.getText().toString());
         }
 
         return list;
@@ -395,9 +396,9 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
 
             if (CacheManager.getInstance().get(Frame.工作模式地址).getIntValue() == Frame.自用优先
                     || CacheManager.getInstance().get(Frame.工作模式地址).getIntValue() == Frame.储能优先) {
-                //mTimeFrameContainer.setVisibility(View.GONE);
+                mTimeFrameContainer.setVisibility(View.GONE);
             } else {
-                if(mWorkPatternContainer.getVisibility() == View.VISIBLE)
+                if (mWorkPatternContainer.getVisibility() == View.VISIBLE)
                     mTimeFrameContainer.setVisibility(View.VISIBLE);
                 CacheManager.getInstance().remove(Frame.工作模式地址);
             }
@@ -423,7 +424,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
 
         int start = container.getId() == R.id.ll_charge_time_container ? 6027 : 6040;
         for (int i = 0; i < count; i++) {
-            if(i>5)
+            if (i > 5)
                 return;
 
             SwipeMenuLayout child = (SwipeMenuLayout) LayoutInflater.from(Fastgo.getContext()).inflate(R.layout.time_frame, null);
@@ -433,15 +434,15 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
             TextView endTimeTv = child.findViewById(R.id.tv_end_time);
 
             DeviceData startTimeDeviceData = CacheManager.getInstance().get(start++);
-            if(startTimeDeviceData==null)
+            if (startTimeDeviceData == null)
                 return;
             DeviceData endTimeDeviceData = CacheManager.getInstance().get(start++);
-            if(endTimeDeviceData==null)
+            if (endTimeDeviceData == null)
                 return;
 
             nameTv.setText(getString(R.string.时段) + (i + 1));
             startTimeTv.setText(startTimeDeviceData.getParseValue());
-            endTimeTv.setText("24:00".equals(endTimeDeviceData.getParseValue())?"23:59":endTimeDeviceData.getParseValue());
+            endTimeTv.setText("24:00".equals(endTimeDeviceData.getParseValue()) ? "23:59" : endTimeDeviceData.getParseValue());
 
 
             startTimeTv.setTag(endTimeTv);
@@ -484,7 +485,7 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView,final boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
 
         final NormalDialog dialog = new NormalDialog(getActivity());
         dialog.content(Fastgo.getContext().getString(R.string.是否更改设置)).title(Fastgo.getContext().getString(R.string.温馨提示))
@@ -505,10 +506,10 @@ public class BasicFragment extends XMVPFragment<BasicPresenter> implements Basic
             @Override
             public void onBtnClick() {
                 dialog.dismiss();
-                mPresenter.power(isChecked,new Consumer<Boolean>() {
+                mPresenter.power(isChecked, new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean success) throws Exception {
-                        if(!success)
+                        if (!success)
                             mPowerSwitchButton.setCheckedImmediatelyNoEvent(!isChecked);
                     }
                 });

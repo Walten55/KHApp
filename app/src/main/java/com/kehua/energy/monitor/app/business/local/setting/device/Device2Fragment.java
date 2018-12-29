@@ -300,6 +300,7 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
                                     mProbationPeriodDayTv.setText("");
                                     mPowerOnPwdSwitchButton.setCheckedImmediatelyNoEvent(false);
                                     mProbationPeriodSwitchButton.setCheckedImmediatelyNoEvent(false);
+                                    mProbationPeriodDayContainer.setVisibility(View.GONE);
                                 }
                             }
                         });

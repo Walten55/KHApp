@@ -339,4 +339,11 @@
     <string name="升级中请勿退出">升级中请勿退出</string>
     <string name="设备升级中">设备升级中，请稍后重试</string>
     <string name="加载更多">Load more</string>
+
+    <string name="pickerview_year"> </string>
+    <string name="pickerview_month"> </string>
+    <string name="pickerview_day"> </string>
+    <string name="pickerview_hours"> </string>
+    <string name="pickerview_minutes"> </string>
+    <string name="pickerview_seconds"> </string>
 </resources>
