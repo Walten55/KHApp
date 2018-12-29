@@ -17,7 +17,7 @@
     <string name="信号强">Signal：Strong</string>
     <string name="信号弱">Signal：Weak</string>
     <string name="信号一般"> Signal：General</string>
-    <string name="确定">Confirm</string>
+    <string name="确定">Complete</string>
     <string name="取消">Cancel</string>
     <string name="采集器未连接">The collector is not connected</string>
     <string name="缺少相关权限">Lack of relevant permissions</string>
@@ -130,8 +130,8 @@
     <string name="设备信息">Device Information</string>
     <string name="电压_单位">Voltage(V)</string>
     <string name="电流_单位">Current(A)</string>
-    <string name="电网电压_单位">Grid Voltage(V)</string>
-    <string name="电网电流_单位">Grid Current(A)</string>
+    <string name="电网电压_单位">Grid \n Voltage(V)</string>
+    <string name="电网电流_单位">Grid \n Current(A)</string>
     <string name="负载电压_单位">Load Voltage(V)</string>
     <string name="负载电流_单位">Load Current(A)</string>
     <string name="逆变电压_单位">Inverter Voltage(V)</string>
