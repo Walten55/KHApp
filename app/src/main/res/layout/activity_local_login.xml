@@ -61,7 +61,9 @@
                 android:lines="2"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_size_main"
-                app:minTextSize="@dimen/grid_2" />
+                app:minTextSize="@dimen/grid_2"
+                android:lineSpacingExtra="@dimen/grid_8"
+                />
 
             <!--<TextView-->
                 <!--android:id="@+id/tv_device_type"-->

@@ -447,13 +447,13 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
             public int getInputType() {
                 if (deviceData != null && "string".equals(deviceData.getDataType())) {
                     return InputType.TYPE_CLASS_TEXT;
-                } else if (deviceData != null && ("double".equals(deviceData.getDataType()) )) {
+                } else if (deviceData != null && ("double".equals(deviceData.getDataType()))) {
                     return InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
                 } else if (deviceData != null && "double_signed".equals(deviceData.getDataType())) {
                     return InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_NUMBER_FLAG_DECIMAL;
-                }else {
+                } else {
                     //为了让站号与试用期天数输入有限制
-                    return InputType.TYPE_CLASS_NUMBER| InputType.TYPE_NUMBER_FLAG_DECIMAL;
+                    return InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
                 }
             }
 

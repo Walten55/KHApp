@@ -63,7 +63,7 @@ public class LocalMainPresenter extends LocalMainContract.Presenter {
                             //升级中不轮询
                             if(LocalUserManager.IN_THE_UPGRADE)
                                 return;
-                            collecting();
+//                            collecting();
                         }
                     });
         }

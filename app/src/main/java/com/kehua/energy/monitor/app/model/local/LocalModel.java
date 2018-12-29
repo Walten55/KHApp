@@ -83,7 +83,6 @@ public class LocalModel extends BaseModel implements IModel {
     public List<DeviceData> parse(String sn, byte[] data, int start, int end, int protocol, Date updateTime, boolean popCache) {
         //int end = start + len;
         List<DeviceData> resultList = new ArrayList<>();
-
         while (start <= end) {
             long count = ObjectBox.get().getBoxStore().boxFor(PointInfo.class).query()
                     .equal(PointInfo_.pn, String.valueOf(protocol))
@@ -117,7 +116,6 @@ public class LocalModel extends BaseModel implements IModel {
 
             //
             byte[] temp = new byte[info.getByteCount()];
-
             System.arraycopy(data, 0, temp, 0, temp.length > data.length ? data.length : temp.length);
 
             if ("boolean".equals(info.getDataType()) || "boolean_int".equals(info.getDataType()) || "boolean_int_no_parse".equals(info.getDataType())) {

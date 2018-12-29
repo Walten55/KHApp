@@ -1363,6 +1363,8 @@ public class RemoteModel extends BaseModel implements IModel {
                                 sn.put("sn", ByteUtils.bytes2String(modbusResponse.getBytesDat()));
                                 LocalUserManager.setSn(ByteUtils.bytes2String(modbusResponse.getBytesDat()));
                                 password = PasswordUtils.createPassword(31, ByteUtils.bytes2String(modbusResponse.getBytesDat()));
+                            }else {
+                                LocalUserManager.setSn("");
                             }
 
                             //授厂家权限
@@ -1574,6 +1576,8 @@ public class RemoteModel extends BaseModel implements IModel {
                                 sn.put("sn", ByteUtils.bytes2String(modbusResponse.getBytesDat()));
                                 LocalUserManager.setSn(ByteUtils.bytes2String(modbusResponse.getBytesDat()));
                                 password = PasswordUtils.createPassword(31, ByteUtils.bytes2String(modbusResponse.getBytesDat()));
+                            }else {
+                                LocalUserManager.setSn("");
                             }
 
                             //授厂家权限
