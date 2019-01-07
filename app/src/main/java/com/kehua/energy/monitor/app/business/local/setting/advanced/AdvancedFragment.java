@@ -336,7 +336,7 @@ public class AdvancedFragment extends XMVPFragment<AdvancedPresenter> implements
 
                 @Override
                 public String getHintMsg() {
-                    if (item.getData().getAddress().equals(Frame.功率因数地址() + "")) {
+                    if (item.getData().getAddress().equals(Frame.功率因数地址() + "")&& Frame.单相协议 != LocalUserManager.getPn()) {
                         return "[-0.99,-0.8][0.8,1.00]";
                     }
 

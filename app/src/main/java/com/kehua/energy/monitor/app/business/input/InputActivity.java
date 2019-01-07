@@ -86,7 +86,7 @@ public class InputActivity extends XSimpleActivity {
             @Override
             public void onClicked(View v, int action, String extra) {
 
-                if (action == XTitleBar.ACTION_RIGHT_TEXT) {
+                if (action == XTitleBar.ACTION_RIGHT_TEXT&&!"-".equals(mMsgEt.getTrimmedString().toString())) {
                     if (StringUtils.isEmpty(mConfig.check(mMsgEt.getTrimmedString().toString()))) {
                         if (digits > 0) {
                             if (!mMsgEt.getTrimmedString().toString().contains(".")) {
@@ -148,7 +148,7 @@ public class InputActivity extends XSimpleActivity {
                 ||mConfig.getInputType() == (InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_NUMBER_FLAG_DECIMAL)
                 ||mConfig.getInputType() == (InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER))){
 
-            mMsgEt.setFilters(new InputFilter[]{new CashierInputFilter(digits),new InputFilterMinMax(-65535,65535)});
+            mMsgEt.setFilters(new InputFilter[]{new CashierInputFilter(digits),new InputFilterMinMax(-65535,65535),new EmojiInputFilter()});
         } else if(digits != 0){
             mMsgEt.setFilters(new InputFilter[]{new CashierInputFilter(digits)});
         } else if((mConfig.getInputType() == (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL)
@@ -156,7 +156,9 @@ public class InputActivity extends XSimpleActivity {
                 ||mConfig.getInputType() == (InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER))
                 ||mConfig.getInputType() == InputType.TYPE_CLASS_NUMBER){
 
-            mMsgEt.setFilters(new InputFilter[]{new InputFilterMinMax(-65535,65535)});
+            mMsgEt.setFilters(new InputFilter[]{new InputFilterMinMax(-65535,65535),new EmojiInputFilter()});
+        }else {
+            mMsgEt.setFilters(new InputFilter[]{new EmojiInputFilter()});
         }
         mConfig.customSetting(mMsgEt);
     }
@@ -344,4 +346,19 @@ public class InputActivity extends XSimpleActivity {
             return b > a ? c >= a && c <= b : c >= b && c <= a;
         }
     }
+
+    class EmojiInputFilter implements InputFilter{
+        Pattern emoji = Pattern.compile("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]",
+                Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            Matcher emojiMatcher = emoji.matcher(source);
+            if (emojiMatcher.find()) {
+                return "";
+            }
+            return null;
+        }
+    }
+
 }

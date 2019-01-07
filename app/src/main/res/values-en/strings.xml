@@ -233,6 +233,8 @@
     <string name="异常">Abnormal</string>
     <string name="时段重叠">Stage Overlap</string>
     <string name="串号长度为20位字符">The Serial No. is 20 characters long</string>
+    <string name="型号长度为20位字符">Inv. Models is 20 characters long</string>
+    <string name="MAC地址长度为6位字符">MAC Address is 6 characters long</string>
     <string name="站号范围">Station number range(1~247)</string>
     <string name="点击设置">Click To Set</string>
     <string name="非法密码">Illegal password</string>
@@ -337,6 +339,8 @@
     <string name="使能">Enable</string>
     <string name="支路告警屏蔽">Branch Alarm Mask</string>
     <string name="PV支路使能字">PV Branch Enable Word</string>
+    <string name="支路告警屏蔽解释">OFF-Enable ON-Mask</string>
+    <string name="PV支路使能字解释">OFF-Disabled ON-Mask</string>
     <string name="天">Day</string>
     <string name="升级中请勿退出">Please do not quit in the upgrade</string>
     <string name="设备升级中">Device upgrades, please try again later</string>
@@ -348,4 +352,5 @@
     <string name="pickerview_hours"> </string>
     <string name="pickerview_minutes"> </string>
     <string name="pickerview_seconds"> </string>
+    <string name="非法升级文件">Illegal upgrade file</string>
 </resources>

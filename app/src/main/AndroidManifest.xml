@@ -98,7 +98,8 @@
             android:theme="@style/NoTitleFullscreen" />
         <activity
             android:name=".business.local.setting.upgrade.UpgradeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name=".business.local.setting.branch.BranchSettingActivity"
             android:screenOrientation="portrait"></activity>

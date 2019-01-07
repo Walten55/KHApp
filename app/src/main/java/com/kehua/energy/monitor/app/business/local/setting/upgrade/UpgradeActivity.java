@@ -21,8 +21,6 @@ import com.kehua.energy.monitor.app.di.module.ActivityModule;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
@@ -108,9 +106,9 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
                     public void accept(Boolean granted) throws Exception {
                         if (granted) {
                             if (mStorageChooser == null) {
-                                ArrayList<String> filterStr=new ArrayList<>();
-                                filterStr.add(".bin");
-                                filterStr.add(".hex");
+//                                ArrayList<String> filterStr=new ArrayList<>();
+//                                filterStr.add(".bin");
+//                                filterStr.add(".hex");
 
                                 Content content = new Content();
                                 content.setOverviewHeading(getString(R.string.存储卡));
@@ -124,13 +122,17 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
                                         .allowCustomPath(true)
                                         .setType(StorageChooser.FILE_PICKER)
 //                                        .filter(StorageChooser.FileType.DOCS)
-                                        .customFilter(filterStr)
+//                                        .customFilter(filterStr)
                                         .build();
 
                                 mStorageChooser.setOnSelectListener(new StorageChooser.OnSelectListener() {
                                     @Override
                                     public void onSelect(String path) {
-                                        mPathTv.setText(path);
+                                        if(path.endsWith(".bin")||path.endsWith(".hex"))
+                                            mPathTv.setText(path);
+                                        else {
+                                            XToast.error(getString(R.string.非法升级文件));
+                                        }
                                     }
                                 });
                             }
