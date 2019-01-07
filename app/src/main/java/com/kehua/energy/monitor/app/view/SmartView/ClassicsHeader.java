@@ -1,4 +1,4 @@
-package com.kehua.energy.monitor.app.view;
+package com.kehua.energy.monitor.app.view.SmartView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

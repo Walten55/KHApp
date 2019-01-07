@@ -1,4 +1,4 @@
-package com.kehua.energy.monitor.app.view;
+package com.kehua.energy.monitor.app.view.SmartView;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -6,7 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
 import com.kehua.energy.monitor.app.R;
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.kehua.energy.monitor.app.view.SmartView.ClassicsFooter;
 
 import me.walten.fastgo.common.Fastgo;
 
