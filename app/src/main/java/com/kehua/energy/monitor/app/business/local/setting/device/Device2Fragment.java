@@ -468,7 +468,7 @@ public class Device2Fragment extends XMVPFragment<DevicePresenter> implements De
                     } else if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.机器型号设置地址) {
                         return msg.length() < 1 || msg.length() > 20 ? getString(R.string.型号长度为20位字符) : null;
                     } else if (Integer.valueOf(deviceData.getRegisterAddress()) == Frame.MAC地址) {
-                        return msg.length() != 6 ? getString(R.string.MAC地址长度为6位字符) : null;
+                        return msg.length() < 1 || msg.length() > 6 ? getString(R.string.MAC地址长度为6位字符) : null;
                     }
                     return null;
                 } catch (Exception e) {
