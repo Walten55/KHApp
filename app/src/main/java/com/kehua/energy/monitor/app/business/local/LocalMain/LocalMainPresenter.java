@@ -4,6 +4,7 @@ import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.application.LocalUserManager;
 import com.kehua.energy.monitor.app.model.APPModel;
 import com.kehua.energy.monitor.app.model.entity.Cmd;
+import com.kehua.energy.monitor.app.model.entity.Collector;
 import com.kehua.energy.monitor.app.model.entity.ModbusResponse;
 import com.orhanobut.logger.Logger;
 
@@ -27,6 +28,8 @@ public class LocalMainPresenter extends LocalMainContract.Presenter {
 
     LocalMainContract.View mView;
 
+    private String collectorKey;
+
     @Inject
     APPModel mModel;
 
@@ -44,6 +47,7 @@ public class LocalMainPresenter extends LocalMainContract.Presenter {
     @Override
     public void detachView() {
         mView = null;
+        collectorKey = null;
         mModel.destroy();
         //结束采集
         if(mCollDisposable!=null)
@@ -64,6 +68,22 @@ public class LocalMainPresenter extends LocalMainContract.Presenter {
                             if(LocalUserManager.IN_THE_UPGRADE)
                                 return;
                             collecting();
+
+                            mModel.getRemoteModel().getdev(new Consumer<Collector>() {
+                                @Override
+                                public void accept(Collector collector) throws Exception {
+                                    if(collectorKey!=null&&!collectorKey.equals(collector.getKey())){
+                                        mView.collectorDisconnected();
+                                    }else {
+                                        collectorKey = collector.getKey();
+                                    }
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                   mView.collectorDisconnected();
+                                }
+                            });
                         }
                     });
         }

@@ -7,7 +7,7 @@ import me.walten.fastgo.base.mvp.BaseView;
 public interface LocalMainContract {
 
     interface View extends BaseView {
-
+        void collectorDisconnected();
     }
 
     abstract class Presenter extends BasePresenter<View> {

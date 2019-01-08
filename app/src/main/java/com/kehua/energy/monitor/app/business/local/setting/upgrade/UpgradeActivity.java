@@ -2,6 +2,7 @@ package com.kehua.energy.monitor.app.business.local.setting.upgrade;
 
 import android.Manifest;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -150,21 +151,35 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
     @OnClick(R.id.tv_submit)
     public void submit(View view) {
-        if (!StringUtils.isEmpty(mPathTv.getText().toString())) {
-            mPresenter.upload(mPathTv.getText().toString(), new Consumer<Boolean>() {
+        final String filePath = mPathTv.getText().toString();
+
+        if (!StringUtils.isEmpty(filePath)) {
+            mPresenter.upload(filePath, new Consumer<Boolean>() {
                 @Override
                 public void accept(Boolean success) throws Exception {
                     if(success){
-                        mPathTv.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                stopWaiting();
-                                XToast.success(getString(R.string.上传成功));
-                                mSubmitTv.setVisibility(View.GONE);
-                                mPresenter.startUpgrade();
-                            }
-                        },1000*12);
-
+                        if(filePath.endsWith("magpie.bin")){
+                            stopWaiting();
+                            //升级采集器
+                            XToast.normal(getString(R.string.正在升级采集器请稍后重新登录));
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    RouterMgr.get().localMain();
+                                    RouterMgr.get().localLogin();
+                                }
+                            },1500);
+                        }else {
+                            mPathTv.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    stopWaiting();
+                                    XToast.success(getString(R.string.上传成功));
+                                    mSubmitTv.setVisibility(View.GONE);
+                                    mPresenter.startUpgrade();
+                                }
+                            },1000*12);
+                        }
                     }else {
                         stopWaiting();
                     }

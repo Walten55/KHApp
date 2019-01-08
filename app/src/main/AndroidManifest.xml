@@ -57,8 +57,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".business.input.InputActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".business.local.login.LocalLoginActivity"
             android:launchMode="singleTask"
@@ -98,8 +97,7 @@
             android:theme="@style/NoTitleFullscreen" />
         <activity
             android:name=".business.local.setting.upgrade.UpgradeActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".business.local.setting.branch.BranchSettingActivity"
             android:screenOrientation="portrait"></activity>

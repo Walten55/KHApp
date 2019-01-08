@@ -461,7 +461,8 @@ public class Cmd {
         for (int i = 0;i<byteCount;i++){
             if(i<temp.length){
                 sb.append(temp[i]);
-                sb.append(" ");
+                if(i != byteCount-1)
+                    sb.append(" ");
             }
             else {
                 sb.append("00");

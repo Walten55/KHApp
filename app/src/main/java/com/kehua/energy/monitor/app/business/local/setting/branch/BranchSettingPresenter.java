@@ -7,6 +7,7 @@ import com.kehua.energy.monitor.app.utils.ByteUtils;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,7 +42,7 @@ public class BranchSettingPresenter extends BranchSettingContract.Presenter {
         List<ArrayMap<String,Boolean>> data = new ArrayList<>();
 
         byte[] dataBytes = ByteUtils.hexStringToBytes(hexValue);
-        if(dataBytes.length!=2){
+         if(dataBytes.length!=2){
             for(int i=0;i<16;i++){
                 ArrayMap<String,Boolean> map = new ArrayMap<>();
                 map.put("boolean",false);
@@ -66,6 +67,7 @@ public class BranchSettingPresenter extends BranchSettingContract.Presenter {
             data.add(map);
         }
 
+        Collections.reverse(data);
         mView.showData(data);
     }
 

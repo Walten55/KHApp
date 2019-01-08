@@ -233,8 +233,8 @@
     <string name="异常">异常</string>
     <string name="时段重叠">时段重叠</string>
     <string name="串号长度为20位字符">串号长度为20位字符</string>
-    <string name="型号长度为20位字符">机器型号长度为20位字符</string>
-    <string name="MAC地址长度为6位字符">MAC地址长度为20位字符</string>
+    <string name="型号长度为20位字符">机器型号长度为20位字符以内</string>
+    <string name="MAC地址长度为6位字符">MAC地址长度为6位字符以内</string>
     <string name="站号范围">站号范围(1~247)</string>
     <string name="点击设置">点击设置</string>
     <string name="非法密码">非法密码</string>
@@ -345,4 +345,6 @@
     <string name="设备升级中">设备升级中，请稍后重试</string>
     <string name="加载更多">Load more</string>
     <string name="非法升级文件">非法升级文件</string>
+    <string name="采集器已断开">采集器已断开</string>
+    <string name="正在升级采集器请稍后重新登录">正在升级采集器,请稍后重新登录</string>
 </resources>

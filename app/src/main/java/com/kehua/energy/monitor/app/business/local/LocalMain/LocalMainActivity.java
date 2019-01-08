@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import io.reactivex.functions.Consumer;
 import me.walten.fastgo.base.fragment.SimpleFragment;
+import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.component.AppComponent;
 import me.walten.fastgo.utils.XToast;
 
@@ -219,5 +220,18 @@ public class LocalMainActivity extends XMVPActivity<LocalMainPresenter> implemen
             }
 
         }
+    }
+
+    @Override
+    public void collectorDisconnected() {
+        XToast.error(Fastgo.getContext().getString(R.string.采集器已断开));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                RouterMgr.get().localLogin();
+                finish();
+            }
+        },1500);
+
     }
 }
