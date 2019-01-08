@@ -19,6 +19,7 @@ import com.kehua.energy.monitor.app.model.APPModel;
 import com.kehua.energy.monitor.app.model.entity.Collector;
 import com.kehua.energy.monitor.app.model.entity.InvInfoList;
 import com.kehua.energy.monitor.app.model.entity.Upgrade;
+import com.kehua.energy.monitor.app.model.local.LocalModel;
 import com.kehua.energy.monitor.app.route.RouterMgr;
 import com.kehua.energy.monitor.app.utils.LanguageUtils;
 import com.kehua.energy.monitor.app.utils.PasswordUtils;
@@ -48,7 +49,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     private String mSN;
 
-    private int upgradeStatusCode=-1;
+    private int upgradeStatusCode = -1;
 
     @Inject
     public LocalLoginPresenter() {
@@ -94,12 +95,12 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     @Override
     public void login(final int role, final String password) {
-        if(!NetworkUtils.isWifiConnected()){
+        if (!NetworkUtils.isWifiConnected()) {
             XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
             return;
         }
 
-        if(upgradeStatusCode==1||upgradeStatusCode==2){
+        if (upgradeStatusCode == 1 || upgradeStatusCode == 2) {
             //升级中不允许登录
             XToast.error(Fastgo.getContext().getString(R.string.设备升级中));
             return;
@@ -201,7 +202,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
 
     @Override
     public void gatherDeviceInfo() {
-        if(!NetworkUtils.isWifiConnected()){
+        if (!NetworkUtils.isWifiConnected()) {
             XToast.error(Fastgo.getContext().getString(R.string.无法获取设备信息));
             return;
         }
@@ -209,14 +210,14 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
         mModel.getRemoteModel().upgrade(new Consumer<Upgrade>() {
             @Override
             public void accept(Upgrade upgrade) throws Exception {
-                if(upgrade.getInv()!=null&&upgrade.getInv().size()!=0){
-                    upgradeStatusCode  = upgrade.getInv().get(0).getStatus();
+                if (upgrade.getInv() != null && upgrade.getInv().size() != 0) {
+                    upgradeStatusCode = upgrade.getInv().get(0).getStatus();
                 }
 
-                if(upgradeStatusCode==1||upgradeStatusCode==2){
+                if (upgradeStatusCode == 1 || upgradeStatusCode == 2) {
                     //升级中不允许登录
                     XToast.error(Fastgo.getContext().getString(R.string.设备升级中));
-                }else {
+                } else {
                     mView.startWaiting(Fastgo.getContext().getString(R.string.加载中));
 
                     mModel.getRemoteModel().invinfo(new Consumer<InvInfoList>() {
@@ -268,6 +269,16 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
             }
         });
 
+    }
+
+    @Override
+    public void initLanguage() {
+        String defaultLanguage = LanguageUtils.getSysDefaultLanguage(Fastgo.getContext());
+        String spSelectedLanguage = LocalModel.getLanguageSelect();
+
+        if (StringUtils.isTrimEmpty(defaultLanguage) || !defaultLanguage.equals(spSelectedLanguage)) {
+            LanguageUtils.languageSelect(Fastgo.getContext(), spSelectedLanguage, true);
+        }
     }
 
     @Override

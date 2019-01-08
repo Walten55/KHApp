@@ -122,6 +122,7 @@ public class LocalLoginActivity extends XMVPActivity<LocalLoginPresenter> implem
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         languageNames = LanguageUtils.getLanguageNames(this);
+        mPresenter.initLanguage();
     }
 
     @Override

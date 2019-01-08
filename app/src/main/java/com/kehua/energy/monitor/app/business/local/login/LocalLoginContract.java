@@ -8,7 +8,7 @@ import me.walten.fastgo.base.mvp.BaseView;
 public interface LocalLoginContract {
 
     interface View extends BaseView {
-        void showDeviceInfo(String sn,String deviceType);
+        void showDeviceInfo(String sn, String deviceType);
 
         void login(android.view.View view);
 
@@ -20,9 +20,11 @@ public interface LocalLoginContract {
     }
 
     abstract class Presenter extends BasePresenter<View> {
-        public abstract void login(int role,String password);
+        public abstract void login(int role, String password);
 
         public abstract void gatherDeviceInfo();
+
+        public abstract void initLanguage();
 
         public abstract void selectLanguage(String languageName);
 
