@@ -29,13 +29,13 @@ import android.support.annotation.NonNull;
 @SuppressWarnings({"unused", "UnusedReturnValue", "deprecation"})
 public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements RefreshFooter {
 
-    public static String REFRESH_FOOTER_PULLING = null;//"上拉加载更多";
-    public static String REFRESH_FOOTER_RELEASE = null;//"释放立即加载";
-    public static String REFRESH_FOOTER_LOADING = null;//"正在加载...";
-    public static String REFRESH_FOOTER_REFRESHING = null;//"正在刷新...";
-    public static String REFRESH_FOOTER_FINISH = null;//"加载完成";
-    public static String REFRESH_FOOTER_FAILED = null;//"加载失败";
-    public static String REFRESH_FOOTER_NOTHING = null;//"没有更多数据了";
+    public  String REFRESH_FOOTER_PULLING = null;//"上拉加载更多";
+    public  String REFRESH_FOOTER_RELEASE = null;//"释放立即加载";
+    public  String REFRESH_FOOTER_LOADING = null;//"正在加载...";
+    public  String REFRESH_FOOTER_REFRESHING = null;//"正在刷新...";
+    public  String REFRESH_FOOTER_FINISH = null;//"加载完成";
+    public  String REFRESH_FOOTER_FAILED = null;//"加载失败";
+    public  String REFRESH_FOOTER_NOTHING = null;//"没有更多数据了";
 
     protected boolean mNoMoreData = false;
 
