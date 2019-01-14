@@ -67,6 +67,7 @@ public class EnergyFlowChart extends RelativeLayout {
     private float topY2;
     private float bTopY1;
     private float bTopY2;
+    private float centerOffset = 10;
 
     private boolean isFirst = true;
 
@@ -179,15 +180,15 @@ public class EnergyFlowChart extends RelativeLayout {
             Path path1 = new Path();
             path1.moveTo(leftX1, topY1);
             path1.lineTo(leftX1, topY2);
-            path1.lineTo(getWidth() / 2.0f, topY2);
-            path1.lineTo(getWidth() / 2.0f, getHeight() / 2.0f);
+            path1.lineTo(getWidth() / 2.0f-centerOffset, topY2);
+            path1.lineTo(getWidth() / 2.0f-centerOffset, getHeight() / 2.0f);
             mPaths.add(path1);
             addView(getPathView(setupPath(path1)), getChildCount() - 2);
 
             //左上出
             Path path2 = new Path();
-            path2.moveTo(getWidth() / 2.0f, getHeight() / 2.0f);
-            path2.lineTo(getWidth() / 2.0f, topY2);
+            path2.moveTo(getWidth() / 2.0f-centerOffset, getHeight() / 2.0f);
+            path2.lineTo(getWidth() / 2.0f-centerOffset, topY2);
             path2.lineTo(leftX1, topY2);
             path2.lineTo(leftX1, topY1);
             mPaths.add(path2);
@@ -197,15 +198,15 @@ public class EnergyFlowChart extends RelativeLayout {
             Path path3 = new Path();
             path3.moveTo(leftX1, bTopY1);
             path3.lineTo(leftX1, bTopY2);
-            path3.lineTo(getWidth() / 2.0f, bTopY2);
-            path3.lineTo(getWidth() / 2.0f, getHeight() / 2.0f);
+            path3.lineTo(getWidth() / 2.0f-centerOffset, bTopY2);
+            path3.lineTo(getWidth() / 2.0f-centerOffset, getHeight() / 2.0f);
             mPaths.add(path3);
             addView(getPathView(setupPath(path3)), getChildCount() - 2);
 
             //左下出
             Path path4 = new Path();
-            path4.moveTo(getWidth() / 2.0f, getHeight() / 2.0f);
-            path4.lineTo(getWidth() / 2.0f, bTopY2);
+            path4.moveTo(getWidth() / 2.0f-centerOffset, getHeight() / 2.0f);
+            path4.lineTo(getWidth() / 2.0f-centerOffset, bTopY2);
             path4.lineTo(leftX1, bTopY2);
             path4.lineTo(leftX1, bTopY1);
             mPaths.add(path4);
@@ -215,15 +216,15 @@ public class EnergyFlowChart extends RelativeLayout {
             Path path5 = new Path();
             path5.moveTo(leftX2, topY1);
             path5.lineTo(leftX2, topY2);
-            path5.lineTo(getWidth() / 2.0f, topY2);
-            path5.lineTo(getWidth() / 2.0f, getHeight() / 2.0f);
+            path5.lineTo(getWidth() / 2.0f+centerOffset, topY2);
+            path5.lineTo(getWidth() / 2.0f+centerOffset, getHeight() / 2.0f);
             mPaths.add(path5);
             addView(getPathView(setupPath(path5)), getChildCount() - 2);
 
             //右上出
             Path path6 = new Path();
-            path6.moveTo(getWidth() / 2.0f, getHeight() / 2.0f);
-            path6.lineTo(getWidth() / 2.0f, topY2);
+            path6.moveTo(getWidth() / 2.0f+centerOffset, getHeight() / 2.0f);
+            path6.lineTo(getWidth() / 2.0f+centerOffset, topY2);
             path6.lineTo(leftX2, topY2);
             path6.lineTo(leftX2, topY1);
             mPaths.add(path6);
@@ -233,15 +234,15 @@ public class EnergyFlowChart extends RelativeLayout {
             Path path7 = new Path();
             path7.moveTo(leftX2, bTopY1);
             path7.lineTo(leftX2, bTopY2);
-            path7.lineTo(getWidth() / 2.0f, bTopY2);
-            path7.lineTo(getWidth() / 2.0f, getHeight() / 2.0f);
+            path7.lineTo(getWidth() / 2.0f+centerOffset, bTopY2);
+            path7.lineTo(getWidth() / 2.0f+centerOffset, getHeight() / 2.0f);
             mPaths.add(path7);
             addView(getPathView(setupPath(path7)), getChildCount() - 2);
 
             //右下出
             Path path8 = new Path();
-            path8.moveTo(getWidth() / 2.0f, getHeight() / 2.0f);
-            path8.lineTo(getWidth() / 2.0f, bTopY2);
+            path8.moveTo(getWidth() / 2.0f+centerOffset, getHeight() / 2.0f);
+            path8.lineTo(getWidth() / 2.0f+centerOffset, bTopY2);
             path8.lineTo(leftX2, bTopY2);
             path8.lineTo(leftX2, bTopY1);
             mPaths.add(path8);
@@ -253,16 +254,23 @@ public class EnergyFlowChart extends RelativeLayout {
         Path path = new Path();
         path.moveTo(leftX1, topY1);
         path.lineTo(leftX1, topY2);
-        path.lineTo(leftX2, topY2);
-        path.lineTo(leftX2, topY1);
+        path.lineTo(getWidth() / 2.0f-centerOffset, topY2);
+        path.lineTo(getWidth() / 2.0f-centerOffset, getHeight() / 2.0f);
 
         path.moveTo(leftX1, bTopY1);
         path.lineTo(leftX1, bTopY2);
-        path.lineTo(leftX2, bTopY2);
-        path.lineTo(leftX2, bTopY1);
+        path.lineTo(getWidth() / 2.0f-centerOffset, bTopY2);
+        path.lineTo(getWidth() / 2.0f-centerOffset, getHeight() / 2.0f);
 
-        path.moveTo(getWidth() / 2.0f, topY2);
-        path.lineTo(getWidth() / 2.0f, bTopY2);
+        path.moveTo(leftX2, topY1);
+        path.lineTo(leftX2, topY2);
+        path.lineTo(getWidth() / 2.0f+centerOffset, topY2);
+        path.lineTo(getWidth() / 2.0f+centerOffset, getHeight() / 2.0f);
+
+        path.moveTo(leftX2, bTopY1);
+        path.lineTo(leftX2, bTopY2);
+        path.lineTo(getWidth() / 2.0f+centerOffset, bTopY2);
+        path.lineTo(getWidth() / 2.0f+centerOffset, getHeight() / 2.0f);
 
         if (canvas != null)
             canvas.drawPath(path, mPaint);
