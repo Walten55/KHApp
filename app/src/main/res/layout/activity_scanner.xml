@@ -41,6 +41,19 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_title" />
 
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/tv_photo_album"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/grid_45"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/margin"
+            android:paddingRight="@dimen/margin"
+            android:text="@string/相册"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_sub_title"
+            android:gravity="center"/>
+
+
     </RelativeLayout>
 
     <com.kehua.energy.monitor.app.view.ZoomRelativeLayout

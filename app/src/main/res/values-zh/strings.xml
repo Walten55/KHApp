@@ -353,4 +353,5 @@
     <string name="非法升级文件">非法升级文件</string>
     <string name="采集器已断开">采集器已断开</string>
     <string name="正在升级采集器请稍后重新登录">正在升级采集器,请稍后重新登录</string>
+    <string name="相册">相册</string>
 </resources>
