@@ -39,6 +39,7 @@ import com.google.zxing.LuminanceSource;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Result;
+import com.google.zxing.ResultPoint;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 import com.gyf.barlibrary.ImmersionBar;
@@ -61,6 +62,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.component.AppComponent;
 import me.walten.fastgo.utils.XRxUtil;
 import me.walten.fastgo.utils.XToast;
@@ -164,7 +166,7 @@ public class ScannerActivity extends XSimpleActivity implements ZXingScannerView
                             if (granted) {
                                 toPhotoAlbum();
                             } else {
-                                XToast.error(getString(R.string.缺少相关权限));
+                                XToast.error(getString(R.string.缺少读取外部存储权限));
                             }
                         }
                     });
@@ -206,7 +208,7 @@ public class ScannerActivity extends XSimpleActivity implements ZXingScannerView
             Glide.with(this)
                     .asBitmap()
                     .load(imgUri)
-                    .into(new SimpleTarget<Bitmap>(800, 600) {//要记得限制大小，否则原图过大会造成OOM
+                    .into(new SimpleTarget<Bitmap>(800, 600) {//需要指定大小，否则容易OOM
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                             //再将Bitmap转BindBitmap
@@ -224,14 +226,24 @@ public class ScannerActivity extends XSimpleActivity implements ZXingScannerView
                                 public Result call() throws Exception {
                                     // 解析二维码/条码
                                     QRCodeReader qrCodeReader = new QRCodeReader();
-                                    return qrCodeReader.decode(binaryBitmap);
+                                    Result result = new Result("", null, null, null);
+                                    try {
+                                        result = qrCodeReader.decode(binaryBitmap);
+                                    } catch (Exception e) {
+
+                                    }
+                                    return result;
                                 }
                             }).subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe(new Consumer<Result>() {
                                         @Override
                                         public void accept(Result rawResult) throws Exception {
-                                            handleResult(rawResult);
+                                            if (rawResult != null && rawResult.getRawBytes() != null) {
+                                                handleResult(rawResult);
+                                            } else {
+                                                XToast.error(Fastgo.getContext().getString(R.string.图片扫描失败));
+                                            }
                                         }
                                     });
                         }

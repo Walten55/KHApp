@@ -108,7 +108,7 @@ public class HotspotActivity extends XMVPActivity<HotspotPresenter> implements H
                             mPresenter.pollScan();
                             mPresenter.pollLinkedState();
                         } else {
-                            XToast.error(getString(R.string.缺少相关权限));
+                            XToast.error(getString(R.string.缺少获取wifi列表相关权限));
                         }
                     }
                 });
