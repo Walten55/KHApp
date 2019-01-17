@@ -140,7 +140,7 @@ public class UpgradeActivity extends XMVPActivity<UpgradePresenter> implements U
 
                             mStorageChooser.show();
                         } else {
-                            XToast.error(UpgradeActivity.this.getString(R.string.缺少相关权限));
+                            XToast.error(UpgradeActivity.this.getString(R.string.缺少读写外部存储权限));
                         }
                     }
                 });

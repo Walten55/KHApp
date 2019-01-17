@@ -19,6 +19,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:name="me.walten.fastgo.base.application.BaseApplication"
@@ -31,6 +36,14 @@
         <meta-data
             android:name="com.kehua.energy.monitor.app.configuration.GlobalConfiguration"
             android:value="ConfigModule" />
+
+        <!-- 高德地图 -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="56053d191ee929e62638be4b1a455e8c" />
+
+        <!-- 定位服务 -->
+        <service android:name="com.amap.api.location.APSService" />
 
         <activity
             android:name=".business.main.MainActivity"
@@ -62,11 +75,7 @@
             android:name=".business.local.login.LocalLoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".business.local.setting.workPattern.WorkPatternActivity"
@@ -97,10 +106,19 @@
             android:theme="@style/NoTitleFullscreen" />
         <activity
             android:name=".business.local.setting.upgrade.UpgradeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".business.local.setting.branch.BranchSettingActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".business.map.MapForLocationActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

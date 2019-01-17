@@ -134,7 +134,7 @@ public class LocalLoginPresenter extends LocalLoginContract.Presenter {
                                                         XToast.normal(Fastgo.getContext().getString(R.string.首次连接采集棒需验证采集棒));
                                                         RouterMgr.get().scan();
                                                     } else {
-                                                        XToast.error(Fastgo.getContext().getString(R.string.缺少相关权限));
+                                                        XToast.error(Fastgo.getContext().getString(R.string.缺少相机权限));
                                                     }
                                                 }
                                             });

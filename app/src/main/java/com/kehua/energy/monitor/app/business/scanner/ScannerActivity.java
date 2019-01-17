@@ -166,7 +166,7 @@ public class ScannerActivity extends XSimpleActivity implements ZXingScannerView
                             if (granted) {
                                 toPhotoAlbum();
                             } else {
-                                XToast.error(getString(R.string.缺少读取外部存储权限));
+                                XToast.error(getString(R.string.缺少读写外部存储权限));
                             }
                         }
                     });

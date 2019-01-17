@@ -17,6 +17,7 @@ import com.kehua.energy.monitor.app.business.local.setting.upgrade.UpgradeActivi
 import com.kehua.energy.monitor.app.business.local.setting.workPattern.WorkPatternActivity;
 import com.kehua.energy.monitor.app.business.login.LoginActivity;
 import com.kehua.energy.monitor.app.business.main.MainActivity;
+import com.kehua.energy.monitor.app.business.map.MapForLocationActivity;
 import com.kehua.energy.monitor.app.business.personal.about.AboutActivity;
 import com.kehua.energy.monitor.app.business.personal.language.LanguageActivity;
 import com.kehua.energy.monitor.app.business.register.RegisterActivity;
@@ -71,4 +72,6 @@ public interface ActivityComponent {
     void inject(UpgradeActivity upgradeActivity);
 
     void inject(BranchSettingActivity branchSettingActivity);
+
+    void inject(MapForLocationActivity mapForLocationActivity);
 }
