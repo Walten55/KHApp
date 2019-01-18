@@ -362,4 +362,5 @@
     <string name="相册">Photo Album</string>
     <string name="图片扫描失败">Scan fail for photo</string>
     <string name="定位失败">Local fail</string>
+    <string name="搜索失败">搜索失败</string>
 </resources>

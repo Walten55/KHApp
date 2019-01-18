@@ -354,4 +354,5 @@
     <string name="缺少相机权限">缺少相机权限</string>
     <string name="缺少获取定位相关权限">缺少获取定位相关权限</string>
     <string name="定位失败">定位失败</string>
+    <string name="搜索失败">搜索失败</string>
 </resources>

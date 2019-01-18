@@ -25,4 +25,29 @@
 
     </com.kehua.energy.monitor.app.view.ZoomRelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/rl_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rv_iv_back"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginTop="@dimen/grid_5"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/grid_5"
+            android:textSize="@dimen/text_size_main" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_poi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_search" />
+
+    </RelativeLayout>
+
 </RelativeLayout>
