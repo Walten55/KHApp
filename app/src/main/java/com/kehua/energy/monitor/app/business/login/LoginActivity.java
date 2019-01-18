@@ -3,6 +3,7 @@ package com.kehua.energy.monitor.app.business.login;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.flyco.roundview.RoundTextView;
@@ -15,11 +16,18 @@ import com.kehua.energy.monitor.app.route.RouterMgr;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.component.AppComponent;
 import me.walten.fastgo.widget.XEditText;
 
 @Route(path = RouterMgr.LOGIN)
 public class LoginActivity extends XMVPActivity<LoginPresenter> implements LoginContract.View {
+
+//    @BindView(R.id.tv_title)
+//    TextView mTvTitle;
+//
+//    @BindView(R.id.tv_title_right)
+//    RoundTextView mTvTitleRight;
 
     @BindView(R.id.et_account)
     XEditText mEtAccount;
@@ -38,7 +46,8 @@ public class LoginActivity extends XMVPActivity<LoginPresenter> implements Login
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
-
+//        mTvTitle.setText(Fastgo.getContext().getString(R.string.登录));
+//        mTvTitleRight.setText(Fastgo.getContext().getString(R.string.本地模式));
     }
 
     @Override
@@ -57,7 +66,8 @@ public class LoginActivity extends XMVPActivity<LoginPresenter> implements Login
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarColor(R.color.white);
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar.statusBarColor(R.color.white);
         return true;
     }
 

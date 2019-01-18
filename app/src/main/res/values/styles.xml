@@ -61,7 +61,7 @@
         <item name="leftImageResource">@mipmap/icon_login_return</item>
         <item name="leftType">imageButton</item>
         <item name="bottomShadowHeight">0dp</item>
-        <item name="rightTextColor">@color/colorPrimary</item>
+        <item name="rightTextColor">@color/text_black</item>
     </style>
 
     <style name="Text_Style_Title">

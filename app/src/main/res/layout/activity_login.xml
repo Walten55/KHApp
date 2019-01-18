@@ -8,13 +8,18 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+    <me.walten.fastgo.widget.titlebar.XTitleBar
+        android:id="@+id/title_bar"
+        style="@style/ToolbarStyle_White_With_Back_Icon"
+        app:centerText="@string/登录"
+        app:rightText="@string/本地模式"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/grid_40"
         android:layout_marginRight="@dimen/grid_40"
-        android:layout_marginTop="@dimen/grid_80"
+        android:layout_marginTop="@dimen/grid_60"
         android:orientation="vertical">
 
         <me.walten.fastgo.widget.XEditText
@@ -48,10 +53,20 @@
             android:textColorHint="@color/text_gray"
             android:textSize="@dimen/text_size_title" />
 
+
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/tv_login"
+            style="@style/Btn_Blue_Auto_Width"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_45"
+            android:layout_marginTop="@dimen/grid_65"
+            android:text="@string/登录"
+            app:rv_backgroundColor="@color/btn_blue_nor"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/grid_25">
+            android:layout_marginTop="@dimen/margin">
 
             <TextView
                 android:id="@+id/tv_register"
@@ -77,26 +92,18 @@
         </RelativeLayout>
 
         <com.flyco.roundview.RoundTextView
-            android:id="@+id/tv_login"
-            style="@style/Btn_Blue_Auto_Width"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/grid_45"
-            android:layout_marginTop="@dimen/grid_65"
-            android:text="@string/登录"
-            app:rv_backgroundColor="@color/btn_blue_nor"/>
-
-        <com.flyco.roundview.RoundTextView
             android:id="@+id/tv_示例电站"
             style="@style/Btn_Blue_Stroke_Auto_Width"
             android:layout_width="match_parent"
             android:layout_height="@dimen/grid_45"
-            android:layout_marginTop="@dimen/grid_10"
+            android:layout_marginTop="@dimen/grid_45"
             android:text="@string/示例电站" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/grid_50">
+            android:layout_marginTop="@dimen/grid_50"
+            android:visibility="gone">
 
             <View
                 android:layout_width="match_parent"
@@ -120,7 +127,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/grid_25"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_login_qq"

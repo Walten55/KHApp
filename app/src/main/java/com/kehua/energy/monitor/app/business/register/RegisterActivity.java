@@ -99,7 +99,8 @@ public class RegisterActivity extends XMVPActivity<RegisterPresenter> implements
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarColor(R.color.colorPrimary);
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar.statusBarColor(R.color.white);
         return true;
     }
 
@@ -110,7 +111,7 @@ public class RegisterActivity extends XMVPActivity<RegisterPresenter> implements
     }
 
     @OnClick(R.id.view_agreement)
-    void agree(){
+    void agree() {
         mCheckboxAgreement.setChecked(!mCheckboxAgreement.isChecked());
     }
 

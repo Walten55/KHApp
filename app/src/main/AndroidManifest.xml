@@ -55,9 +55,17 @@
         <activity
             android:name=".business.NetworkSetting.WifiConfig.WifiConfigActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".business.login.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".business.register.RegisterActivity"
             android:screenOrientation="portrait" />
@@ -111,13 +119,10 @@
             android:name=".business.local.setting.branch.BranchSettingActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".business.map.MapForLocationActivity"
+        <activity
+            android:name=".business.map.MapForLocationActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
