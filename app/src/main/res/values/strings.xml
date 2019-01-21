@@ -355,4 +355,7 @@
     <string name="缺少获取定位相关权限">缺少获取定位相关权限</string>
     <string name="定位失败">定位失败</string>
     <string name="搜索失败">搜索失败</string>
+    <string name="采集器编码">采集器编码</string>
+    <string name="邮箱">邮箱</string>
+    <string name="手机号码">手机号码</string>
 </resources>

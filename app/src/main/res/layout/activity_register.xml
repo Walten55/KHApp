@@ -12,68 +12,138 @@
         style="@style/ToolbarStyle_White_With_Back_Icon"
         app:centerText="@string/注册" />
 
-    <LinearLayout
-        android:id="@+id/view_input"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/grid_40"
-        android:layout_marginRight="@dimen/grid_40"
-        android:layout_marginTop="@dimen/grid_50"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <me.walten.fastgo.widget.XEditText
-            android:id="@+id/et_nick_name"
-            style="@style/XEdittext_Style"
-            android:hint="@string/昵称" />
-
-        <me.walten.fastgo.widget.XEditText
-            android:id="@+id/et_account"
-            style="@style/XEdittext_Style"
-            android:layout_marginTop="@dimen/grid_10"
-            android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789@."
-            android:hint="@string/手机号码_邮箱"
-            android:inputType="text" />
-
-        <me.walten.fastgo.widget.XEditText
-            android:id="@+id/et_password"
-            style="@style/XEdittext_Style"
-            android:layout_marginTop="@dimen/grid_10"
-            android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789"
-            android:hint="@string/密码"
-            android:inputType="textPassword" />
-
-        <LinearLayout android:id="@+id/view_agreement"
+        <LinearLayout
+            android:id="@+id/view_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/grid_10"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:background="@drawable/ripple_inner">
+            android:layout_marginLeft="@dimen/grid_40"
+            android:layout_marginRight="@dimen/grid_40"
+            android:layout_marginTop="@dimen/grid_50"
+            android:orientation="vertical">
 
-            <CheckBox
-                android:id="@+id/checkbox_agreement"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="false"
-                android:layout_marginRight="@dimen/grid_5" />
+                android:layout_marginBottom="@dimen/grid_30">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <me.walten.fastgo.widget.XEditText
+                    android:id="@+id/et_pn"
+                    style="@style/XEdittext_Style"
+                    android:hint="@string/采集器编码"
+                    android:paddingRight="@dimen/grid_50" />
+
+                <com.kehua.energy.monitor.app.view.ZoomRelativeLayout
+                    android:id="@+id/zrl_scan"
+                    android:layout_width="@dimen/grid_50"
+                    android:layout_height="@dimen/grid_50"
+                    android:layout_alignParentRight="true">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/scan_icon" />
+                </com.kehua.energy.monitor.app.view.ZoomRelativeLayout>
+
+            </RelativeLayout>
+
+
+            <me.walten.fastgo.widget.XEditText
+                android:id="@+id/et_nick_name"
+                style="@style/XEdittext_Style"
+                android:hint="@string/邮箱" />
+
+            <me.walten.fastgo.widget.XEditText
+                android:id="@+id/et_account"
+                style="@style/XEdittext_Style"
+                android:layout_marginTop="@dimen/grid_10"
+                android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789@."
+                android:hint="@string/手机号码"
+                android:inputType="text" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/grid_50">
+
+                <me.walten.fastgo.widget.XEditText
+                    android:id="@+id/et_phone_code"
+                    style="@style/XEdittext_Style"
+                    android:layout_marginTop="@dimen/grid_10"
+                    android:hint="@string/验证码"
+                    android:paddingRight="@dimen/grid_60" />
+
+                <com.kehua.energy.monitor.app.view.ZoomRelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignBottom="@id/et_phone_code"
+                    android:layout_alignParentRight="true"
+                    android:paddingBottom="@dimen/grid_10">
+
+                    <com.flyco.roundview.RoundTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/grid_5"
+                        android:paddingLeft="@dimen/margin"
+                        android:paddingRight="@dimen/margin"
+                        android:paddingTop="@dimen/grid_5"
+                        android:text="@string/获取验证码"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/text_size_main"
+                        app:rv_cornerRadius="@dimen/grid_5"
+                        app:rv_strokeColor="@color/text_gray"
+                        app:rv_strokeWidth="@dimen/grid_1"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"/>
+                </com.kehua.energy.monitor.app.view.ZoomRelativeLayout>
+            </RelativeLayout>
+
+            <me.walten.fastgo.widget.XEditText
+                android:id="@+id/et_password"
+                style="@style/XEdittext_Style"
+                android:layout_marginTop="@dimen/grid_10"
+                android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789"
+                android:hint="@string/密码"
+                android:inputType="textPassword" />
+
+            <LinearLayout
+                android:id="@+id/view_agreement"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/我已阅读并同意用户服务协议"
-                android:layout_marginRight="@dimen/grid_5"/>
+                android:layout_marginTop="@dimen/grid_10"
+                android:background="@drawable/ripple_inner"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkbox_agreement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/grid_5"
+                    android:checked="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/grid_5"
+                    android:text="@string/我已阅读并同意用户服务协议" />
+            </LinearLayout>
+
+            <com.flyco.roundview.RoundTextView
+                android:id="@+id/tv_register"
+                style="@style/Btn_Blue_Auto_Width"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/grid_45"
+                android:layout_marginTop="@dimen/grid_35"
+                android:text="@string/注册"
+                app:rv_backgroundColor="@color/btn_blue_nor" />
+
         </LinearLayout>
 
-        <com.flyco.roundview.RoundTextView
-            android:id="@+id/tv_register"
-            style="@style/Btn_Blue_Auto_Width"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/grid_45"
-            android:layout_marginTop="@dimen/grid_35"
-            android:text="@string/注册"
-            app:rv_backgroundColor="@color/btn_blue_nor"/>
-
-    </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>
