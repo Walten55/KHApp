@@ -376,4 +376,5 @@
     <string name="再次确认密码">再次确认密码</string>
     <string name="请设置新密码">请设置6-16位新密码</string>
     <string name="设置新密码">设置新密码</string>
+    <string name="重新发送验证码">获取验证码</string>
 </resources>

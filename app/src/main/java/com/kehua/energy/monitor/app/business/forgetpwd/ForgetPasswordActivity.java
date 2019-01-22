@@ -68,6 +68,8 @@ public class ForgetPasswordActivity extends XMVPActivity<ForgetPasswordPresenter
                     } else if (mViewPagerSlide.getCurrentItem() == 2) {
                         mViewPagerSlide.setCurrentItem(1);
                     }
+                } else if (action == XTitleBar.ACTION_RIGHT_TEXT) {
+                    mPresenter.loadVerCode();
                 }
             }
         });
@@ -88,10 +90,22 @@ public class ForgetPasswordActivity extends XMVPActivity<ForgetPasswordPresenter
         mViewPagerSlide.setCurrentPageCallBacker(new ViewPagerSlide.CurrentPageCallBacker() {
             @Override
             public void call(int item) {
-                if (item == 2) {
-                    mTitleBar.getCenterTextView().setText(Fastgo.getContext().getString(R.string.设置新密码));
-                } else {
-                    mTitleBar.getCenterTextView().setText(Fastgo.getContext().getString(R.string.忘记密码));
+                switch (item) {
+                    case 0:
+                        mTitleBar.getRightTextView().setText("");
+                        requestVerCodeOnClickAble(false);
+                        break;
+                    case 1:
+                        mTitleBar.getCenterTextView().setText(Fastgo.getContext().getString(R.string.忘记密码));
+                        mTitleBar.getRightTextView().setText(Fastgo.getContext().getString(R.string.重新发送验证码));
+                        mTitleBar.getRightTextView().setTextColor(ContextCompat.getColor(Fastgo.getContext(), R.color.text_blue));
+                        requestVerCodeOnClickAble(true);
+                        break;
+                    case 2:
+                        mTitleBar.getCenterTextView().setText(Fastgo.getContext().getString(R.string.设置新密码));
+                        mTitleBar.getRightTextView().setText("");
+                        requestVerCodeOnClickAble(false);
+                        break;
                 }
             }
         });
@@ -149,6 +163,18 @@ public class ForgetPasswordActivity extends XMVPActivity<ForgetPasswordPresenter
         if (mViewPagerSlide != null && mViewPagerSlide.getAdapter().getCount() > 2) {
             mViewPagerSlide.setCurrentItem(2);
         }
+    }
+
+    @Override
+    public void requestVerCodeOnClickAble(boolean clickAble) {
+        int colorId = clickAble ? R.color.btn_blue_nor : R.color.text_gray;
+        mTitleBar.getRightTextView().setClickable(clickAble);
+        mTitleBar.getRightTextView().setTextColor(ContextCompat.getColor(this, colorId));
+    }
+
+    @Override
+    public void updateRequestCodeText(String text) {
+        mTitleBar.getRightTextView().setText(text);
     }
 
 }

@@ -14,10 +14,16 @@ public interface ForgetPasswordContract {
         void toCodeFragment(Object object);
 
         void toNewPasswordFragment(Object object);
+
+        void requestVerCodeOnClickAble(boolean clickAble);
+
+        void updateRequestCodeText(String text);
     }
 
     abstract class Presenter extends BasePresenter<View> {
 
+        abstract void loadVerCode();
 
+        abstract void countDown();
     }
 }
