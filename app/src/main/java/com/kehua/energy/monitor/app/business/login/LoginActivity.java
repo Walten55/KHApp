@@ -67,7 +67,7 @@ public class LoginActivity extends XMVPActivity<LoginPresenter> implements Login
     protected boolean enableImmersive(ImmersionBar immersionBar) {
         mImmersionBar = ImmersionBar.with(this);
         mImmersionBar.statusBarColor(R.color.white);
-        return true;
+        return false;
     }
 
 

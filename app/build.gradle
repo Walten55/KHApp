@@ -86,11 +86,11 @@ dependencies {
     //自定义标签
     api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     //标签文本自动缩放
-    compile 'me.grantland:autofittextview:0.2.+'
+    api 'me.grantland:autofittextview:0.2.+'
     //高德地图
-    compile 'com.amap.api:3dmap:latest.integration'
-    compile 'com.amap.api:search:latest.integration'
-    compile 'com.amap.api:location:latest.integration'
+    api 'com.amap.api:3dmap:latest.integration'
+    api 'com.amap.api:search:latest.integration'
+    api 'com.amap.api:location:latest.integration'
 }
 
 apply plugin: 'io.objectbox'

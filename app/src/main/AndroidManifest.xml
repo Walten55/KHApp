@@ -39,15 +39,21 @@
 
         <!-- 高德地图 -->
         <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="56053d191ee929e62638be4b1a455e8c" />
+        android:name="com.amap.api.v2.apikey"
+        android:value="56053d191ee929e62638be4b1a455e8c" />
 
-        <!-- 定位服务 -->
+         <!--定位服务 -->
         <service android:name="com.amap.api.location.APSService" />
 
         <activity
             android:name=".business.main.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".business.NetworkSetting.hotspot.HotspotActivity"
             android:launchMode="singleTop"
@@ -59,11 +65,7 @@
         <activity
             android:name=".business.login.LoginActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity

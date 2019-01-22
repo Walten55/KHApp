@@ -135,7 +135,7 @@ public class ForgetPasswordActivity extends XMVPActivity<ForgetPasswordPresenter
     protected boolean enableImmersive(ImmersionBar immersionBar) {
         mImmersionBar = ImmersionBar.with(this);
         mImmersionBar.statusBarColor(R.color.white);
-        return true;
+        return false;
     }
 
 

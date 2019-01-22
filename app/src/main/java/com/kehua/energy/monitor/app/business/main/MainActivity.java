@@ -85,7 +85,8 @@ public class MainActivity extends XMVPActivity<MainPresenter> implements MainCon
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        return true;
+        mImmersionBar = ImmersionBar.with(this);
+        return false;
     }
 
 }

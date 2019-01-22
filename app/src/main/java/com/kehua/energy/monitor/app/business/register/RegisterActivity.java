@@ -111,7 +111,7 @@ public class RegisterActivity extends XMVPActivity<RegisterPresenter> implements
     protected boolean enableImmersive(ImmersionBar immersionBar) {
         mImmersionBar = ImmersionBar.with(this);
         mImmersionBar.statusBarColor(R.color.white);
-        return true;
+        return false;
     }
 
 
