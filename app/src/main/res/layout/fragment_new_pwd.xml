@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <me.walten.fastgo.widget.XEditText
+        android:id="@+id/et_password_new"
+        style="@style/XEdittext_Style"
+        android:layout_marginTop="@dimen/grid_45"
+        android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789"
+        android:hint="@string/请设置新密码"
+        android:inputType="textPassword" />
+
+    <me.walten.fastgo.widget.XEditText
+        android:id="@+id/et_password_confirm"
+        style="@style/XEdittext_Style"
+        android:layout_marginTop="@dimen/grid_10"
+        android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789"
+        android:hint="@string/再次确认密码"
+        android:inputType="textPassword" />
+
+    <TextView android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_size_main" />
+
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/tv_submit"
+        style="@style/Btn_Blue_Auto_Width"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_45"
+        android:layout_marginTop="@dimen/grid_35"
+        android:text="@string/确定"
+        app:rv_backgroundColor="@color/btn_blue_nor" />
+</LinearLayout>

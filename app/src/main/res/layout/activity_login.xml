@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/grid_40"
         android:layout_marginRight="@dimen/grid_40"
-        android:layout_marginTop="@dimen/grid_60"
+        android:layout_marginTop="@dimen/margin_title_top"
         android:orientation="vertical">
 
         <me.walten.fastgo.widget.XEditText

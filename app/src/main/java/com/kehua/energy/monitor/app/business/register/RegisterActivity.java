@@ -34,11 +34,17 @@ public class RegisterActivity extends XMVPActivity<RegisterPresenter> implements
     @BindView(R.id.view_input)
     View mInputContainerView;
 
-    @BindView(R.id.et_nick_name)
-    XEditText mEtNickName;
+    @BindView(R.id.et_pn)
+    XEditText mEtPn;
 
-    @BindView(R.id.et_account)
-    XEditText mEtAccount;
+    @BindView(R.id.et_email)
+    XEditText mEtEmail;
+
+    @BindView(R.id.et_phone)
+    XEditText mEtPhone;
+
+    @BindView(R.id.et_vercode)
+    XEditText mEtVerCode;
 
     @BindView(R.id.et_password)
     XEditText mEtPassword;
@@ -48,6 +54,10 @@ public class RegisterActivity extends XMVPActivity<RegisterPresenter> implements
 
     @BindView(R.id.tv_register)
     RoundTextView mRtvRegistern;
+
+
+    @BindView(R.id.rtv_load_code)
+    RoundTextView mTvRequestVerCode;
 
     @Override
     public int getLayoutResId() {
@@ -107,12 +117,31 @@ public class RegisterActivity extends XMVPActivity<RegisterPresenter> implements
 
     @OnClick(R.id.tv_register)
     public void register() {
-        mPresenter.register(mEtNickName.getTrimmedString(), mEtAccount.getTrimmedString(), mEtPassword.getTrimmedString(), mCheckboxAgreement.isChecked());
+        mPresenter.register(mEtPn.getTextTrimmed(), mEtEmail.getTextTrimmed(), mEtPhone.getTextTrimmed()
+                , mEtVerCode.getTextTrimmed(), mEtPassword.getTextTrimmed(), mCheckboxAgreement.isChecked());
     }
 
     @OnClick(R.id.view_agreement)
     void agree() {
         mCheckboxAgreement.setChecked(!mCheckboxAgreement.isChecked());
+    }
+
+    @OnClick(R.id.rtv_load_code)
+    void loadCode() {
+        mPresenter.loadVerCode(mEtPhone.getTextTrimmed());
+    }
+
+    @Override
+    public void requestVerCodeOnClickAble(boolean clickAble) {
+        int colorId = clickAble ? R.color.btn_blue_nor : R.color.text_gray;
+        mTvRequestVerCode.setClickable(clickAble);
+        mTvRequestVerCode.getDelegate().setStrokeColor(ContextCompat.getColor(this, colorId));
+        mTvRequestVerCode.setTextColor(ContextCompat.getColor(this, colorId));
+    }
+
+    @Override
+    public void updateRequestCodeText(String text) {
+        mTvRequestVerCode.setText(text);
     }
 
     @Override

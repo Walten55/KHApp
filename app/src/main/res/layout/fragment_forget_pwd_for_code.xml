@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已向注册手机号发送验证码"
+        android:textColor="@color/text_gray"
+        android:layout_marginTop="@dimen/grid_60"
+        android:textSize="@dimen/text_size_sub_title" />
+
+    <RelativeLayout
+        android:id="@+id/rl_center_input"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_50"
+        android:layout_marginTop="@dimen/grid_30">
+
+        <EditText
+            android:id="@+id/et_code_1"
+            android:layout_width="@dimen/grid_50"
+            android:layout_height="@dimen/grid_50"
+            android:background="@drawable/bg_white_with_frame_line"
+            android:gravity="center"
+            android:maxLength="2"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_title" />
+
+
+        <EditText
+            android:id="@+id/et_code_4"
+            android:layout_width="@dimen/grid_50"
+            android:layout_height="@dimen/grid_50"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_white_with_frame_line"
+            android:gravity="center"
+            android:maxLength="2"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_title" />
+
+        <View
+            android:id="@+id/view_input_blank"
+            android:layout_width="@dimen/grid_35"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+
+        <EditText
+            android:id="@+id/et_code_2"
+            android:layout_width="@dimen/grid_50"
+            android:layout_height="@dimen/grid_50"
+            android:layout_marginLeft="@dimen/grid_35"
+            android:layout_toLeftOf="@id/view_input_blank"
+            android:background="@drawable/bg_white_with_frame_line"
+            android:gravity="center"
+            android:maxLength="2"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_title" />
+
+        <EditText
+            android:id="@+id/et_code_3"
+            android:layout_width="@dimen/grid_50"
+            android:layout_height="@dimen/grid_50"
+            android:layout_marginRight="@dimen/grid_35"
+            android:layout_toRightOf="@id/view_input_blank"
+            android:background="@drawable/bg_white_with_frame_line"
+            android:gravity="center"
+            android:maxLength="2"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_title" />
+
+
+    </RelativeLayout>
+
+
+    <TextView android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_size_main" />
+
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/tv_submit"
+        style="@style/Btn_Blue_Auto_Width"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_45"
+        android:layout_marginTop="@dimen/grid_35"
+        android:text="@string/下一步"
+        app:rv_backgroundColor="@color/btn_blue_nor" />
+
+
+</LinearLayout>

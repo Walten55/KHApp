@@ -28,5 +28,6 @@
 
     <!--边距-->
     <dimen name="margin">@dimen/grid_15</dimen>
+    <dimen name="margin_title_top">@dimen/grid_60</dimen>
 
 </resources>

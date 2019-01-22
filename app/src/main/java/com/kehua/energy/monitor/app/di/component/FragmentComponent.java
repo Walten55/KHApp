@@ -4,6 +4,9 @@ import android.app.Activity;
 
 import com.kehua.energy.monitor.app.business.alarm.AlarmListFragment;
 import com.kehua.energy.monitor.app.business.favorite.FavoriteFragment;
+import com.kehua.energy.monitor.app.business.forgetpwd.forgetPwdForCode.ForgetPwdForCodeFragment;
+import com.kehua.energy.monitor.app.business.forgetpwd.forgetPwdForEmail.ForgetPwdForEmailFragment;
+import com.kehua.energy.monitor.app.business.forgetpwd.newPwd.NewPwdFragment;
 import com.kehua.energy.monitor.app.business.home.HomeFragment;
 import com.kehua.energy.monitor.app.business.local.alarm.LocalAlarmFragment;
 import com.kehua.energy.monitor.app.business.local.data.DataInfoFragment;
@@ -64,4 +67,10 @@ public interface FragmentComponent {
     void inject(Device2Fragment device2Fragment);
 
     void inject(HistoryFragment historyFragment);
+
+    void inject(ForgetPwdForEmailFragment forgetPwdForEmailFragment);
+
+    void inject(ForgetPwdForCodeFragment forgetPwdForCodeFragment);
+
+    void inject(NewPwdFragment newPwdFragment);
 }

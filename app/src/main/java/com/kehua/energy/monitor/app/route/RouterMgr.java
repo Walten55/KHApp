@@ -25,7 +25,7 @@ public class RouterMgr {
     public static final String WIFI_CONFIG="/business/wifiConfig";
     public static final String LOGIN="/business/login";
     public static final String REGISTER="/business/register";
-    public static final String FORGOT_PWD="/business/forgetPassword";
+    public static final String FORGET_PWD="/business/forgetPassword";
     public static final String HOME = "/business/home";
     public static final String FAVORITE = "/business/favorite";
     public static final String ALARM_LIST = "/business/alarmList";
@@ -59,6 +59,9 @@ public class RouterMgr {
     public static final String LANGUAGE = "/business/language";
     public static final String ABOUT = "/business/about";
 
+    public static final String FORGET_PWD_FOR_EMAIL = "/business/forgetPassword/forgetPwdForEmail";
+    public static final String FORGET_PWD_FOR_CODE = "/business/forgetPassword/forgetPwdForCode";
+    public static final String NEW_PASSWORD = "/business/forgetPassword/newPassword";
 
     private List<String> routerPathNeedLogin;
 
@@ -118,7 +121,7 @@ public class RouterMgr {
      */
     public void forgetPassword() {
         ARouter.getInstance()
-                .build(FORGOT_PWD)
+                .build(FORGET_PWD)
                 .navigation(ActivityUtils.getTopActivity());
     }
 
@@ -233,5 +236,17 @@ public class RouterMgr {
                 .build(LOCAL_SCAN)
                 .navigation(ActivityUtils.getTopActivity());
     }
+
+//    public void forgetPwdForEmail() {
+//        ARouter.getInstance()
+//                .build(FORGET_PWD_FOR_EMAIL)
+//                .navigation(ActivityUtils.getTopActivity());
+//    }
+//
+//    public void forgetPwdForCode() {
+//        ARouter.getInstance()
+//                .build(FORGET_PWD_FOR_CODE)
+//                .navigation(ActivityUtils.getTopActivity());
+//    }
 
 }

@@ -43,4 +43,7 @@ public class Config {
     public static final String EVENT_CODE_BRANCH_SET = "event_code_branch_set";
     public static final String EVENT_CODE_SCAN_RESULT = "event_code_scan_result";
     public static final int REFRESH_DELAY = 1000;
+
+    public static final String EVENT_CODE_FROGET_PHONECODE = "event_code_froget_phonecode";
+    public static final String EVENT_CODE_NEW_PASSWORD = "event_code_new_password";
 }

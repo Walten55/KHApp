@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/grid_40"
             android:layout_marginRight="@dimen/grid_40"
-            android:layout_marginTop="@dimen/grid_50"
+            android:layout_marginTop="@dimen/margin_title_top"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -53,12 +53,12 @@
 
 
             <me.walten.fastgo.widget.XEditText
-                android:id="@+id/et_nick_name"
+                android:id="@+id/et_email"
                 style="@style/XEdittext_Style"
                 android:hint="@string/邮箱" />
 
             <me.walten.fastgo.widget.XEditText
-                android:id="@+id/et_account"
+                android:id="@+id/et_phone"
                 style="@style/XEdittext_Style"
                 android:layout_marginTop="@dimen/grid_10"
                 android:digits="abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ0123456789@."
@@ -70,35 +70,37 @@
                 android:layout_height="@dimen/grid_50">
 
                 <me.walten.fastgo.widget.XEditText
-                    android:id="@+id/et_phone_code"
+                    android:id="@+id/et_vercode"
                     style="@style/XEdittext_Style"
                     android:layout_marginTop="@dimen/grid_10"
                     android:hint="@string/验证码"
                     android:paddingRight="@dimen/grid_60" />
 
                 <com.kehua.energy.monitor.app.view.ZoomRelativeLayout
+                    android:id="@+id/zrl_load_code"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_alignBottom="@id/et_phone_code"
+                    android:layout_alignBottom="@id/et_vercode"
                     android:layout_alignParentRight="true"
                     android:paddingBottom="@dimen/grid_10">
 
                     <com.flyco.roundview.RoundTextView
+                        android:id="@+id/rtv_load_code"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:gravity="center"
                         android:paddingBottom="@dimen/grid_5"
                         android:paddingLeft="@dimen/margin"
                         android:paddingRight="@dimen/margin"
                         android:paddingTop="@dimen/grid_5"
                         android:text="@string/获取验证码"
-                        android:textColor="@color/text_gray"
+                        android:textColor="@color/text_blue"
                         android:textSize="@dimen/text_size_main"
                         app:rv_cornerRadius="@dimen/grid_5"
-                        app:rv_strokeColor="@color/text_gray"
-                        app:rv_strokeWidth="@dimen/grid_1"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"/>
+                        app:rv_strokeColor="@color/btn_blue_nor"
+                        app:rv_strokeWidth="@dimen/grid_1" />
                 </com.kehua.energy.monitor.app.view.ZoomRelativeLayout>
             </RelativeLayout>
 

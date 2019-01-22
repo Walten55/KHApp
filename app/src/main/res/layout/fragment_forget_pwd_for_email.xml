@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <me.walten.fastgo.widget.XEditText
+        android:id="@+id/et_email"
+        style="@style/XEdittext_Style"
+        android:hint="@string/请输入注册邮箱"
+        android:layout_marginTop="@dimen/grid_45"/>
+
+    <TextView android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_size_main" />
+
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/tv_next"
+        style="@style/Btn_Blue_Auto_Width"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_45"
+        android:layout_marginTop="@dimen/margin_title_top"
+        android:text="@string/下一步"
+        app:rv_backgroundColor="@color/btn_blue_nor" />
+</LinearLayout>

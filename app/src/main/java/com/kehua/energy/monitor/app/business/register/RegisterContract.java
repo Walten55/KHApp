@@ -10,13 +10,23 @@ public interface RegisterContract {
 
     interface View extends BaseView {
 
+        void requestVerCodeOnClickAble(boolean clickAble);
+
+        void updateRequestCodeText(String text);
+
         void toMain();
     }
 
     abstract class Presenter extends BasePresenter<View> {
 
-        abstract boolean checkRegistParam(String nickName, String account, String password,boolean agree);
+        abstract void loadVerCode(String phoneNum);
 
-        abstract void register(String nickName,String account,String password,boolean agree);
+        abstract void countDown();
+
+        abstract boolean checkPhone(String phoneNum);
+
+        abstract boolean checkRegistParam(String pn, String email, String phoneNum, String code, String password, boolean agree);
+
+        abstract void register(String pn, String email, String phoneNum, String code, String password, boolean agree);
     }
 }

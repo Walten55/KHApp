@@ -46,8 +46,7 @@ public class LoginActivity extends XMVPActivity<LoginPresenter> implements Login
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
-//        mTvTitle.setText(Fastgo.getContext().getString(R.string.登录));
-//        mTvTitleRight.setText(Fastgo.getContext().getString(R.string.本地模式));
+
     }
 
     @Override

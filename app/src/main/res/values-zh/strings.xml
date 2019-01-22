@@ -364,4 +364,14 @@
     <string name="采集器编码">采集器编码</string>
     <string name="邮箱">邮箱</string>
     <string name="手机号码">手机号码</string>
+    <string name="采集器编码不能为空">采集器编码不能为空</string>
+    <string name="邮箱不能为空">采集器编码不能为空</string>
+    <string name="手机号不能为空">手机号不能为空</string>
+    <string name="手机号格式错误">手机号格式错误</string>
+    <string name="邮箱格式错误">邮箱格式错误</string>
+    <string name="请输入注册邮箱">请输入注册邮箱</string>
+    <string name="下一步">下一步</string>
+    <string name="再次确认密码">再次确认密码</string>
+    <string name="请设置新密码">请设置6-16位新密码</string>
+    <string name="设置新密码">设置新密码</string>
 </resources>

@@ -9,6 +9,8 @@ public class ViewPagerSlide extends ViewPager {
     //是否可以进行滑动
     private boolean isSlide = false;
 
+    private CurrentPageCallBacker currentPageCallBacker;
+
     public void setSlide(boolean slide) {
         isSlide = slide;
     }
@@ -25,5 +27,21 @@ public class ViewPagerSlide extends ViewPager {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         //这个控件是哪个屌人写的  是不是傻？？   飞哥留。
         return isSlide;
+    }
+
+    @Override
+    public void setCurrentItem(int item) {
+        super.setCurrentItem(item);
+        if (currentPageCallBacker != null) {
+            currentPageCallBacker.call(item);
+        }
+    }
+
+    public void setCurrentPageCallBacker(CurrentPageCallBacker currentPageCallBacker) {
+        this.currentPageCallBacker = currentPageCallBacker;
+    }
+
+    public interface CurrentPageCallBacker {
+        void call(int item);
     }
 }

@@ -13,45 +13,37 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.walten.fastgo.base.fragment.SimpleFragment;
 import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.component.AppComponent;
 import me.walten.fastgo.widget.XEditText;
 import me.walten.fastgo.widget.titlebar.XTitleBar;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.flyco.roundview.RoundTextView;
 import com.gyf.barlibrary.ImmersionBar;
+import com.hwangjr.rxbus.RxBus;
+import com.hwangjr.rxbus.annotation.Subscribe;
+import com.hwangjr.rxbus.annotation.Tag;
+import com.hwangjr.rxbus.thread.EventThread;
 import com.kehua.energy.monitor.app.R;
+import com.kehua.energy.monitor.app.adapter.CommonViewPagerAdapter;
 import com.kehua.energy.monitor.app.base.XMVPActivity;
+import com.kehua.energy.monitor.app.configuration.Config;
 import com.kehua.energy.monitor.app.di.component.DaggerActivityComponent;
 import com.kehua.energy.monitor.app.di.module.ActivityModule;
 import com.kehua.energy.monitor.app.route.RouterMgr;
+import com.kehua.energy.monitor.app.view.ViewPagerSlide;
 
-@Route(path = RouterMgr.FORGOT_PWD)
+import java.util.ArrayList;
+
+@Route(path = RouterMgr.FORGET_PWD)
 public class ForgetPasswordActivity extends XMVPActivity<ForgetPasswordPresenter> implements ForgetPasswordContract.View {
 
-    @BindView(R.id.view_input)
-    View mInputContainerView;
-
-    @BindView(R.id.et_account)
-    XEditText mEtAccount;
-
-    @BindView(R.id.et_vercode)
-    XEditText mEtVerCode;
-
-    @BindView(R.id.tv_获取验证码)
-    RoundTextView mTvRequestVerCode;
-
-    @BindView(R.id.et_password_new)
-    XEditText mEtPasswordNew;
-
-    @BindView(R.id.et_password_confirm)
-    XEditText mEtPasswordConfirm;
-
-    @BindView(R.id.tv_submit)
-    RoundTextView mRtvUpdate;
-
+    @BindView(R.id.view_pager)
+    ViewPagerSlide mViewPagerSlide;
 
     @Override
     public int getLayoutResId() {
@@ -62,50 +54,53 @@ public class ForgetPasswordActivity extends XMVPActivity<ForgetPasswordPresenter
     public void initView(@Nullable Bundle savedInstanceState) {
         setFullScreen();
         cancelFullScreen();
+        RxBus.get().register(this);
+
         mTitleBar.setListener(new XTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {
                 if (action == XTitleBar.ACTION_LEFT_BUTTON) {
-                    finish();
+                    //除了第一页返回键是结束当前活动,其他的都是返回上一个页面
+                    if (mViewPagerSlide.getCurrentItem() == 0) {
+                        finish();
+                    } else if (mViewPagerSlide.getCurrentItem() == 1) {
+                        mViewPagerSlide.setCurrentItem(0);
+                    } else if (mViewPagerSlide.getCurrentItem() == 2) {
+                        mViewPagerSlide.setCurrentItem(1);
+                    }
                 }
             }
         });
 
-        KeyboardUtils.registerSoftInputChangedListener(this, new KeyboardUtils.OnSoftInputChangedListener() {
+        ArrayList<String> titleDatas = new ArrayList<>();
+        titleDatas.add(getString(R.string.邮箱));
+        titleDatas.add(getString(R.string.验证码));
+        titleDatas.add(getString(R.string.设置新密码));
+
+        ArrayList<SimpleFragment> fragmentList = new ArrayList<>();
+        fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.FORGET_PWD_FOR_EMAIL).navigation());
+        fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.FORGET_PWD_FOR_CODE).navigation());
+        fragmentList.add((SimpleFragment) ARouter.getInstance().build(RouterMgr.NEW_PASSWORD).navigation());
+
+        CommonViewPagerAdapter commonViewPagerAdapter = new CommonViewPagerAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
+        mViewPagerSlide.setAdapter(commonViewPagerAdapter);
+        mViewPagerSlide.setSlide(false);
+        mViewPagerSlide.setCurrentPageCallBacker(new ViewPagerSlide.CurrentPageCallBacker() {
             @Override
-            public void onSoftInputChanged(int height) {
-                if (height > 0) {
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(mInputContainerView, "translationY", 0, -Fastgo.getContext().getResources().getDimension(R.dimen.grid_65));
-                    anim.setDuration(150);
-                    anim.start();
+            public void call(int item) {
+                if (item == 2) {
+                    mTitleBar.getCenterTextView().setText(Fastgo.getContext().getString(R.string.设置新密码));
                 } else {
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(mInputContainerView, "translationY", -Fastgo.getContext().getResources().getDimension(R.dimen.grid_65), 0);
-                    anim.setDuration(150);
-                    anim.start();
+                    mTitleBar.getCenterTextView().setText(Fastgo.getContext().getString(R.string.忘记密码));
                 }
             }
         });
-        checkEtAccount();
-
     }
 
-    private void checkEtAccount() {
-        mEtAccount.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mPresenter.saveLocalAccount(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.get().unregister(this);
     }
 
     @Override
@@ -124,36 +119,36 @@ public class ForgetPasswordActivity extends XMVPActivity<ForgetPasswordPresenter
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarColor(R.color.colorPrimary);
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar.statusBarColor(R.color.white);
         return true;
     }
 
-    @OnClick(R.id.tv_获取验证码)
-    public void requestVerCode() {
-        mPresenter.loadVerCode();
-    }
 
-    @OnClick(R.id.tv_submit)
-    public void updatePassword() {
-        mPresenter.updatePassword(mEtAccount.getTrimmedString(), mEtVerCode.getTrimmedString()
-                , mEtPasswordNew.getTrimmedString(), mEtPasswordConfirm.getTrimmedString());
+    @Override
+    @Subscribe(
+            thread = EventThread.MAIN_THREAD,
+            tags = {
+                    @Tag(Config.EVENT_CODE_FROGET_PHONECODE)
+            }
+    )
+    public void toCodeFragment(Object object) {
+        if (mViewPagerSlide != null && mViewPagerSlide.getAdapter().getCount() > 1) {
+            mViewPagerSlide.setCurrentItem(1);
+        }
     }
 
     @Override
-    public void requestVerCodeOnClickAble(boolean clickAble) {
-        int colorId = clickAble ? R.color.btn_blue_nor : R.color.text_gray;
-        mTvRequestVerCode.setClickable(clickAble);
-        mTvRequestVerCode.getDelegate().setStrokeColor(ContextCompat.getColor(this, colorId));
-        mTvRequestVerCode.setTextColor(ContextCompat.getColor(this, colorId));
+    @Subscribe(
+            thread = EventThread.MAIN_THREAD,
+            tags = {
+                    @Tag(Config.EVENT_CODE_NEW_PASSWORD)
+            }
+    )
+    public void toNewPasswordFragment(Object object) {
+        if (mViewPagerSlide != null && mViewPagerSlide.getAdapter().getCount() > 2) {
+            mViewPagerSlide.setCurrentItem(2);
+        }
     }
 
-    @Override
-    public void updateRequestCodeText(String text) {
-        mTvRequestVerCode.setText(text);
-    }
-
-    @Override
-    public void toMain() {
-
-    }
 }

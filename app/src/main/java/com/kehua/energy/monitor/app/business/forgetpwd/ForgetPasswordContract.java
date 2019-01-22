@@ -11,23 +11,13 @@ public interface ForgetPasswordContract {
 
     interface View extends BaseView {
 
-        void requestVerCodeOnClickAble(boolean clickAble);
+        void toCodeFragment(Object object);
 
-        void updateRequestCodeText(String text);
-
-        void toMain();
+        void toNewPasswordFragment(Object object);
     }
 
     abstract class Presenter extends BasePresenter<View> {
 
-        abstract void saveLocalAccount(String account);
 
-        abstract void loadVerCode();
-
-        abstract void countDown();
-
-        abstract void updatePassword(String account, String verCode, String newPwd, String confirmPwd);
-
-        abstract boolean checkUpdateParam(String account, String verCode, String newPwd, String confirmPwd);
     }
 }
