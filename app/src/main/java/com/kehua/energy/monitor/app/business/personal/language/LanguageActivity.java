@@ -65,8 +65,9 @@ public class LanguageActivity extends XMVPActivity<LanguagePresenter> implements
 
     @Override
     protected boolean enableImmersive(ImmersionBar immersionBar) {
-        immersionBar.statusBarColor(R.color.colorPrimary);
-        return true;
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar.statusBarColor(R.color.colorPrimary);
+        return false;
     }
 
 }

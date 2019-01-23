@@ -7,9 +7,19 @@ public interface ForgetPwdForCodeContract {
 
     interface View extends BaseView {
 
+        void clearAllInput();
+
+        void requestVerCodeOnClickAble(boolean clickAble);
+
+        void updateRequestCodeText(String text);
     }
 
     abstract class Presenter extends BasePresenter<View> {
 
+        abstract void verCode(String code);
+
+        abstract void loadVerCode();
+
+        abstract void countDown();
     }
 }

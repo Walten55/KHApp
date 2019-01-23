@@ -24,7 +24,6 @@ public class ForgetPasswordPresenter extends ForgetPasswordContract.Presenter {
 
     @Inject
     APPModel mModel;
-    private boolean mVerCodeInWaitting = false;
 
     @Inject
     public ForgetPasswordPresenter() {
@@ -43,51 +42,4 @@ public class ForgetPasswordPresenter extends ForgetPasswordContract.Presenter {
     }
 
 
-    @Override
-    void loadVerCode() {
-        countDown();
-    }
-
-    @Override
-    void countDown() {
-        Observable.interval(0, 1, TimeUnit.SECONDS)
-                .take(Config.WAIT_SECONDS + 1)//限制时长，否则会一直循环下去
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(new Function<Long, Integer>() {
-
-                    @Override
-                    public Integer apply(Long aLong) throws Exception {
-                        return Config.WAIT_SECONDS - aLong.intValue();
-                    }
-                })
-                .subscribe(new Observer<Integer>() {
-                               @Override
-                               public void onSubscribe(Disposable d) {
-
-                               }
-
-                               @Override
-                               public void onNext(Integer waitSeconds) {
-                                   mVerCodeInWaitting = true;
-                                   mView.requestVerCodeOnClickAble(false);
-                                   mView.updateRequestCodeText(waitSeconds + "s");
-                               }
-
-                               @Override
-                               public void onError(Throwable e) {
-                                   mVerCodeInWaitting = false;
-                                   mView.requestVerCodeOnClickAble(true);
-                                   mView.updateRequestCodeText(Fastgo.getContext().getString(R.string.获取验证码));
-                               }
-
-                               @Override
-                               public void onComplete() {
-                                   mVerCodeInWaitting = false;
-                                   mView.requestVerCodeOnClickAble(true);
-                                   mView.updateRequestCodeText(Fastgo.getContext().getString(R.string.获取验证码));
-                               }
-                           }
-                );
-    }
 }

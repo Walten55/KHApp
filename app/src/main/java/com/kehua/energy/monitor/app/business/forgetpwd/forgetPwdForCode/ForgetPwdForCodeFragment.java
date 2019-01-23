@@ -1,28 +1,22 @@
 package com.kehua.energy.monitor.app.business.forgetpwd.forgetPwdForCode;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.KeyboardUtils;
+import com.flyco.roundview.RoundTextView;
 import com.hwangjr.rxbus.RxBus;
-import com.hwangjr.rxbus.annotation.Subscribe;
-import com.hwangjr.rxbus.annotation.Tag;
-import com.hwangjr.rxbus.thread.EventThread;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.configuration.Config;
 import com.kehua.energy.monitor.app.di.component.DaggerFragmentComponent;
@@ -32,8 +26,8 @@ import com.kehua.energy.monitor.app.route.RouterMgr;
 import butterknife.BindView;
 import butterknife.OnClick;
 import me.walten.fastgo.base.fragment.MVPFragment;
+import me.walten.fastgo.common.Fastgo;
 import me.walten.fastgo.di.component.AppComponent;
-import me.walten.fastgo.utils.XToast;
 
 @Route(path = RouterMgr.FORGET_PWD_FOR_CODE)
 public class ForgetPwdForCodeFragment extends MVPFragment<ForgetPwdForCodePresenter> implements ForgetPwdForCodeContract.View {
@@ -63,6 +57,9 @@ public class ForgetPwdForCodeFragment extends MVPFragment<ForgetPwdForCodePresen
 
     @BindView(R.id.et_code_4)
     EditText mEtCode4;
+
+    @BindView(R.id.tv_vercode)
+    RoundTextView mRtvVercode;
 
     public ForgetPwdForCodeFragment() {
         // Required empty public constructor
@@ -134,6 +131,15 @@ public class ForgetPwdForCodeFragment extends MVPFragment<ForgetPwdForCodePresen
                 //填写动作
                 if (oriLenght < 2 && s.length() > 1 && nextEdittext != null) {
                     nextEdittext.requestFocus();
+                } else if (oriLenght < 2 && s.length() > 1 && nextEdittext == null) {//如果是最后一栏输入完成，则进行验证码验证
+
+                    StringBuilder stringBuilder = new StringBuilder(mEtCode1.getText().toString().trim());
+                    stringBuilder.append(mEtCode2.getText().toString().trim());
+                    stringBuilder.append(mEtCode3.getText().toString().trim());
+                    stringBuilder.append(mEtCode4.getText().toString().trim());
+
+                    clearAllInput();
+                    mPresenter.verCode(stringBuilder.toString());
                 } else if (s.length() == 0) {
                     if (preEdittext != null) {
                         preEdittext.requestFocus();
@@ -168,10 +174,32 @@ public class ForgetPwdForCodeFragment extends MVPFragment<ForgetPwdForCodePresen
 
     }
 
-    @OnClick(R.id.tv_submit)
-    void toNext() {
-        RxBus.get().post(Config.EVENT_CODE_NEW_PASSWORD, "");
+    @OnClick(R.id.tv_vercode)
+    void requestVercode() {
+        mPresenter.loadVerCode();
     }
 
+    @Override
+    public void clearAllInput() {
+        mEtCode1.setText(ZERO_WIDTH_SPACE);
+        mEtCode2.setText(ZERO_WIDTH_SPACE);
+        mEtCode3.setText(ZERO_WIDTH_SPACE);
+        mEtCode4.setText(ZERO_WIDTH_SPACE);
+
+        mEtCode1.requestFocus();
+    }
+
+    @Override
+    public void requestVerCodeOnClickAble(boolean clickAble) {
+        int colorId = clickAble ? R.color.btn_blue_nor : R.color.text_gray;
+        mRtvVercode.setClickable(clickAble);
+        mRtvVercode.setTextColor(ContextCompat.getColor(Fastgo.getContext(), colorId));
+        mRtvVercode.getDelegate().setStrokeColor(ContextCompat.getColor(Fastgo.getContext(), colorId));
+    }
+
+    @Override
+    public void updateRequestCodeText(String text) {
+        mRtvVercode.setText(text);
+    }
 }
 
