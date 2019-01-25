@@ -375,4 +375,18 @@
     <string name="请设置新密码">请设置6-16位新密码</string>
     <string name="设置新密码">设置新密码</string>
     <string name="重新发送验证码">获取验证码</string>
+    <string name="全部">全部</string>
+    <string name="运行中">运行中</string>
+    <string name="实时功率_带冒号">实时功率：</string>
+    <string name="单位_今日自用电">(kW.h)\\n今日自用电</string>
+    <string name="环境贡献">环境贡献</string>
+    <string name="实时功率曲线图">实时功率曲线图</string>
+    <string name="实时功率">实时功率</string>
+    <string name="CO2减排_带单位">CO2减排(kg)</string>
+    <string name="等效植树_带单位">等效植树(棵)</string>
+    <string name="节能煤标_带单位">节能煤标(kg)</string>
+    <string name="今天">今天</string>
+    <string name="明天">明天</string>
+    <string name="后天">后天</string>
+    <string name="电站详情">电站详情</string>
 </resources>

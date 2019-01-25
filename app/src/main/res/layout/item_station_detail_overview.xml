@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_45"
+        android:layout_marginBottom="@dimen/margin"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_width="@dimen/grid_25"
+            android:layout_height="@dimen/grid_25"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:src="@mipmap/powerstation_sign_icon" />
+
+        <TextView
+            android:id="@+id/tv_power"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/iv_left"
+            android:gravity="center_vertical"
+            android:text="@string/实时功率_带冒号"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_title" />
+
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/tv_power_status"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/grid_45"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin"
+            android:gravity="center"
+            android:text="@string/运行中"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_size_title" />
+
+    </RelativeLayout>
+
+    <!--流图-->
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_250"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/grid_15"
+        android:paddingLeft="@dimen/grid_30"
+        android:paddingRight="@dimen/grid_30"
+        android:paddingTop="@dimen/grid_15">
+
+        <com.kehua.energy.monitor.app.view.EnergyFlowChart
+            android:id="@+id/energy_flow_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.kehua.energy.monitor.app.view.EnergyFlowChart>
+    </FrameLayout>
+
+    <!--今日相关数据-->
+    <View style="@style/Line" />
+
+    <!--两格带圆环-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_120"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:id="@+id/tv_daily_grid_elc_selfuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="--"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/text_size_title" />
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_5"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="@string/单位_今日自用电"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main" />
+        </LinearLayout>
+
+        <View style="@style/Line_V" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <com.kehua.energy.monitor.app.view.CirclePointProgress
+                android:id="@+id/circleprogress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:progress="65"
+                app:text="自用百分比" />
+        </LinearLayout>
+
+        <View style="@style/Line_V" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:id="@+id/tv_daily_grid_elc_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="--"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/text_size_title" />
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_5"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="@string/单位_今日自用电"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/Line" />
+
+    <!--四格-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_100"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:id="@+id/tv_daily_grid_elc_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="--"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/text_size_title" />
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_5"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="@string/单位_今日自用电"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main" />
+        </LinearLayout>
+
+        <View style="@style/Line_V" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:id="@+id/tv_daily_grid_profit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="--"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/text_size_title" />
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_5"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="@string/单位_今日自用电"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main" />
+        </LinearLayout>
+
+        <View style="@style/Line_V" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:id="@+id/tv_daily_grid_cacul_totalelc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="--"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/text_size_title" />
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_5"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="@string/单位_今日自用电"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main" />
+        </LinearLayout>
+
+        <View style="@style/Line_V" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:id="@+id/tv_daily_grid_cacul_totalprofit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="--"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/text_size_title" />
+
+            <me.codeboy.android.aligntextview.AlignTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_5"
+                android:paddingLeft="@dimen/grid_5"
+                android:paddingRight="@dimen/grid_5"
+                android:text="@string/单位_今日自用电"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_main" />
+        </LinearLayout>
+
+        <View style="@style/Line_V" />
+
+    </LinearLayout>
+
+</LinearLayout>

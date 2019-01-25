@@ -19,7 +19,7 @@ import java.util.List;
 import static me.walten.fastgo.common.Fastgo.getContext;
 
 public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeEntity, BaseViewHolder> {
-    final String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536209922460&di=e481f7025eb9d102c79ad1ad3147944e&imgtype=0&src=http%3A%2F%2Fww2.sinaimg.cn%2Fcrop.0.83.800.449.1000.562%2F006ahoQKgw1f72mtqyci6j30m80etjwo.jpg";
+    public static final String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536209922460&di=e481f7025eb9d102c79ad1ad3147944e&imgtype=0&src=http%3A%2F%2Fww2.sinaimg.cn%2Fcrop.0.83.800.449.1000.562%2F006ahoQKgw1f72mtqyci6j30m80etjwo.jpg";
 
     public HomeAdapter(List data) {
         super(data);

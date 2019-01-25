@@ -39,16 +39,20 @@
 
         <!-- 高德地图 -->
         <meta-data
-        android:name="com.amap.api.v2.apikey"
-        android:value="56053d191ee929e62638be4b1a455e8c" />
+            android:name="com.amap.api.v2.apikey"
+            android:value="56053d191ee929e62638be4b1a455e8c" />
 
-         <!--定位服务 -->
+        <!-- 定位服务 -->
         <service android:name="com.amap.api.location.APSService" />
 
         <activity
             android:name=".business.main.MainActivity"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".business.NetworkSetting.hotspot.HotspotActivity"
@@ -57,17 +61,9 @@
         <activity
             android:name=".business.NetworkSetting.WifiConfig.WifiConfigActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".business.login.LoginActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".business.register.RegisterActivity"
             android:screenOrientation="portrait" />
@@ -84,9 +80,7 @@
         <activity
             android:name=".business.local.login.LocalLoginActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".business.local.setting.workPattern.WorkPatternActivity"
             android:screenOrientation="portrait" />
@@ -120,12 +114,10 @@
         <activity
             android:name=".business.local.setting.branch.BranchSettingActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".business.map.MapForLocationActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".business.home.stationDetail.StationDetailActivity"></activity>
     </application>
 
 </manifest>

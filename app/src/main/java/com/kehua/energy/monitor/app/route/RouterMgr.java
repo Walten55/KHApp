@@ -21,17 +21,17 @@ public class RouterMgr {
      */
     public static final int TYPE_OFF_NETWORK = 2;
 
-    public static final String HOTSPOT="/business/hotspot";
-    public static final String WIFI_CONFIG="/business/wifiConfig";
-    public static final String LOGIN="/business/login";
-    public static final String REGISTER="/business/register";
-    public static final String FORGET_PWD="/business/forgetPassword";
+    public static final String HOTSPOT = "/business/hotspot";
+    public static final String WIFI_CONFIG = "/business/wifiConfig";
+    public static final String LOGIN = "/business/login";
+    public static final String REGISTER = "/business/register";
+    public static final String FORGET_PWD = "/business/forgetPassword";
     public static final String HOME = "/business/home";
     public static final String FAVORITE = "/business/favorite";
     public static final String ALARM_LIST = "/business/alarmList";
 
 
-    public static final String LOCAL_MAIN="/business/local/main";
+    public static final String LOCAL_MAIN = "/business/local/main";
     public static final String LOCAL_MONITOR = "/business/local/monitor";
     public static final String LOCAL_HISTORY = "/business/local/history";
     public static final String LOCAL_HISTORY_INFO = "/business/local/historyInfo";
@@ -39,8 +39,8 @@ public class RouterMgr {
     public static final String LOCAL_SETTING = "/business/local/setting";
     public static final String LOCAL_LOGIN = "/business/local/login";
     public static final String LOCAL_SCAN = "/business/local/scan";
-    public static final String LOCAL_ABOUT_SN= "/business/local/aboutSN";
-    public static final String LOCAL_UPGRADE= "/business/local/upgrade";
+    public static final String LOCAL_ABOUT_SN = "/business/local/aboutSN";
+    public static final String LOCAL_UPGRADE = "/business/local/upgrade";
     public static final String LOCAL_DATA = "/business/local/data";
 
     public static final String LOCAL_SETTING_BASIC = "/business/local/setting/basic";
@@ -62,6 +62,7 @@ public class RouterMgr {
     public static final String FORGET_PWD_FOR_EMAIL = "/business/forgetPassword/forgetPwdForEmail";
     public static final String FORGET_PWD_FOR_CODE = "/business/forgetPassword/forgetPwdForCode";
     public static final String NEW_PASSWORD = "/business/forgetPassword/newPassword";
+    public static final String STATION_DETAIL = "/business/home/stationDetail";
 
     private List<String> routerPathNeedLogin;
 
@@ -70,7 +71,7 @@ public class RouterMgr {
 
     }
 
-    public static RouterMgr get(){
+    public static RouterMgr get() {
         return new RouterMgr();
     }
 
@@ -80,6 +81,7 @@ public class RouterMgr {
 
     /**
      * 热点列表
+     *
      * @param type
      */
     public void hotspot(int type) {
@@ -162,7 +164,6 @@ public class RouterMgr {
     }
 
 
-
     /**
      * 本地模式角色页面(登录)
      */
@@ -178,7 +179,7 @@ public class RouterMgr {
     public void localSettingPatternChild(String sGroup) {
         ARouter.getInstance()
                 .build(LOCAL_SETTING_PATTERN_CHILD)
-                .withString("sGroup",sGroup)
+                .withString("sGroup", sGroup)
                 .navigation(ActivityUtils.getTopActivity());
     }
 
@@ -201,31 +202,29 @@ public class RouterMgr {
     }
 
     /**
-     *
      * @param count
      * @param index
      * @param recordType
      * @param template
      */
-    public void localHistoryInfo(int count,int index,int recordType,int template) {
+    public void localHistoryInfo(int count, int index, int recordType, int template) {
         ARouter.getInstance()
                 .build(LOCAL_HISTORY_INFO)
-                .withInt("count",count)
-                .withInt("index",index)
-                .withInt("recordType",recordType)
-                .withInt("template",template)
+                .withInt("count", count)
+                .withInt("index", index)
+                .withInt("recordType", recordType)
+                .withInt("template", template)
                 .navigation(ActivityUtils.getTopActivity());
     }
 
 
-    public void localBranchSetting(int address,String hexValue) {
+    public void localBranchSetting(int address, String hexValue) {
         ARouter.getInstance()
                 .build(LOCAL_BRANCH_SETTING)
-                .withInt("address",address)
-                .withString("hexValue",hexValue)
+                .withInt("address", address)
+                .withString("hexValue", hexValue)
                 .navigation(ActivityUtils.getTopActivity());
     }
-
 
 
     /**
@@ -234,6 +233,15 @@ public class RouterMgr {
     public void scan() {
         ARouter.getInstance()
                 .build(LOCAL_SCAN)
+                .navigation(ActivityUtils.getTopActivity());
+    }
+
+    /**
+     * 电站详情页面
+     */
+    public void stationDetail() {
+        ARouter.getInstance()
+                .build(STATION_DETAIL)
                 .navigation(ActivityUtils.getTopActivity());
     }
 

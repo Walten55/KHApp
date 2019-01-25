@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.kehua.energy.monitor.app.business.NetworkSetting.WifiConfig.WifiConfigActivity;
 import com.kehua.energy.monitor.app.business.NetworkSetting.hotspot.HotspotActivity;
 import com.kehua.energy.monitor.app.business.forgetpwd.ForgetPasswordActivity;
+import com.kehua.energy.monitor.app.business.home.stationDetail.StationDetailActivity;
 import com.kehua.energy.monitor.app.business.input.InputActivity;
 import com.kehua.energy.monitor.app.business.local.LocalMain.LocalMainActivity;
 import com.kehua.energy.monitor.app.business.local.first.FirstSettingActivity;
@@ -74,4 +75,6 @@ public interface ActivityComponent {
     void inject(BranchSettingActivity branchSettingActivity);
 
     void inject(MapForLocationActivity mapForLocationActivity);
+
+    void inject(StationDetailActivity stationDetailActivity);
 }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_45"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/实时功率曲线图"
+            android:textColor="@color/text_black" />
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/实时功率"
+            android:textColor="@color/text_black" />
+
+        <View
+            android:layout_width="@dimen/text_size_main"
+            android:layout_height="@dimen/text_size_main"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_toLeftOf="@id/tv_tip"
+            android:background="@color/btn_blue_unable" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/linechart"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_190" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:text="260 kW.h"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_size_title" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_80"
+        android:layout_margin="@dimen/margin"
+        android:orientation="horizontal">
+
+        <!--CO2减排-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@mipmap/powerstation_co2">
+
+            <TextView
+                android:id="@+id/tv_co2_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="620"
+                android:textColor="@color/white"
+                android:textSize="@dimen/grid_25" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_co2_value"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/grid_5"
+                android:text="@string/CO2减排_带单位"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_main" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="@dimen/margin"
+            android:layout_height="match_parent" />
+
+        <!--等效植树-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@mipmap/powerstation_cut">
+
+            <TextView
+                android:id="@+id/tv_cut_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="620"
+                android:textColor="@color/white"
+                android:textSize="@dimen/grid_25" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_cut_value"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/grid_5"
+                android:text="@string/等效植树_带单位"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_main" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="@dimen/margin"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@mipmap/powerstation_coa">
+
+            <TextView
+                android:id="@+id/tv_coa_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="620"
+                android:textColor="@color/white"
+                android:textSize="@dimen/grid_25" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_coa_value"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/grid_5"
+                android:text="@string/节能煤标_带单位"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_main" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--天气-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_140"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:background="@color/bg_weather"
+        android:orientation="horizontal">
+
+        <!--今日-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/今天"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_sub_title" />
+
+
+            <ImageView
+                android:id="@+id/iv_weather_today"
+                android:layout_width="@dimen/grid_45"
+                android:layout_height="@dimen/grid_45"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:src="@mipmap/powerstation_fine" />
+
+            <TextView
+                android:id="@+id/tv_temp_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="32%"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_sub_title" />
+
+        </LinearLayout>
+        <!--明日-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/明天"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_sub_title" />
+
+
+            <ImageView
+                android:id="@+id/iv_weather_tomorrow"
+                android:layout_width="@dimen/grid_45"
+                android:layout_height="@dimen/grid_45"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:src="@mipmap/powerstation_cloudy" />
+
+            <TextView
+                android:id="@+id/tv_temp_tomorrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="24%"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_sub_title" />
+
+        </LinearLayout>
+        <!--后天-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/后天"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_sub_title" />
+
+
+            <ImageView
+                android:id="@+id/iv_weather_after_tomorrow"
+                android:layout_width="@dimen/grid_45"
+                android:layout_height="@dimen/grid_45"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:src="@mipmap/powerstation_rain" />
+
+            <TextView
+                android:id="@+id/tv_temp_after_tomorrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="16%"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_sub_title" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

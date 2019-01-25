@@ -175,4 +175,9 @@
         <item name="android:textSize">@dimen/text_size_sub_title</item>
     </style>
 
+    <declare-styleable name="CirclePointProgress">
+        <attr name="progress" format="integer" />
+        <attr name="text" format="string" />
+    </declare-styleable>
+
 </resources>

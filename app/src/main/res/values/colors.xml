@@ -4,4 +4,8 @@
     <color name="btn_blue_unable">#cc2662f2</color>
     <color name="btn_blue_nor">@color/colorPrimary</color>
     <color name="btn_blue_pre">@color/colorPrimaryDark</color>
+
+    <color name="ring_green_bg">#48d578</color>
+    <color name="ring_green_arrived">#41b96a</color>
+    <color name="bg_weather">#e6f0f8</color>
 </resources>
