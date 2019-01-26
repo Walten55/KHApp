@@ -389,4 +389,5 @@
     <string name="明天">明天</string>
     <string name="后天">后天</string>
     <string name="电站详情">电站详情</string>
+    <string name="no_data">暂无数据</string>
 </resources>

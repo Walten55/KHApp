@@ -8,14 +8,23 @@ import com.blankj.utilcode.util.ConvertUtils;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.flyco.roundview.RoundTextView;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.MarkerView;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.hwangjr.rxbus.RxBus;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.business.home.HomeAdapter;
+import com.kehua.energy.monitor.app.configuration.Config;
 import com.kehua.energy.monitor.app.configuration.GlideApp;
-import com.kehua.energy.monitor.app.model.entity.HomeEntity;
+import com.kehua.energy.monitor.app.model.entity.PerData;
 import com.kehua.energy.monitor.app.model.entity.StationEntity;
+import com.kehua.energy.monitor.app.utils.linechart.ChartUtils;
 
 import java.util.List;
 
@@ -39,7 +48,7 @@ public class StationDetailAdapter extends BaseMultiItemQuickAdapter<StationEntit
 
 
     @Override
-    protected void convert(BaseViewHolder helper, StationEntity item) {
+    protected void convert(final BaseViewHolder helper, StationEntity item) {
         switch (item.getItemType()) {
             case StationEntity.OVERVIEW:
 
@@ -68,13 +77,27 @@ public class StationDetailAdapter extends BaseMultiItemQuickAdapter<StationEntit
                 }
                 break;
             case StationEntity.OPERA_DATA:
+                if (item.getData() != null && item.getData() instanceof List) {
+                    LineChart lineChart = (LineChart) helper.getView(R.id.linechart);
+                    ChartUtils.setLineChartStyle(lineChart);
+                    ChartUtils.setLineChartData(lineChart, (List<PerData>) item.getData(), false);
+
+                    lineChart.setMarker(new MarkerView(helper.itemView.getContext(), android.R.layout.simple_list_item_1) {
+                        @Override
+                        public void refreshContent(Entry e, Highlight highlight) {
+                            super.refreshContent(e, highlight);
+                            int value = (int) (e.getY() * 100);
+                            helper.setText(R.id.tv_select_valiue, value + "kW.h");
+                        }
+                    });
+                }
                 break;
             case StationEntity.ENVIRONMENT:
                 break;
             case StationEntity.DEVICE_ITEM:
                 GlideApp.with(getContext())
                         .load(HomeAdapter.url)
-                        .transforms(new CenterCrop(),new RoundedCorners(ConvertUtils.dp2px(getContext().getResources().getDimension(R.dimen.grid_2))))
+                        .transforms(new CenterCrop(), new RoundedCorners(ConvertUtils.dp2px(getContext().getResources().getDimension(R.dimen.grid_2))))
                         .into((ImageView) helper.getView(R.id.iv_img));
                 break;
 

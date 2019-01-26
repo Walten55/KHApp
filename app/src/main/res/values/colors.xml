@@ -8,4 +8,7 @@
     <color name="ring_green_bg">#48d578</color>
     <color name="ring_green_arrived">#41b96a</color>
     <color name="bg_weather">#e6f0f8</color>
+    <color name="chart_text">#33ccff</color>
+    <color name="chart_line">#60b5e7</color>
+    <color name="energy_data_dark">#2bf5f5</color>
 </resources>

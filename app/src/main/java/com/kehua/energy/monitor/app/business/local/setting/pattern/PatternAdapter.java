@@ -1,8 +1,6 @@
 package com.kehua.energy.monitor.app.business.local.setting.pattern;
 
-import android.content.Context;
 import android.graphics.Paint;
-import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -14,7 +12,6 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
 import com.flyco.tablayout.SegmentTabLayout;
-import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.github.mikephil.charting.charts.LineChart;
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.business.local.setting.advanced.AdvancedPresenter;
@@ -24,7 +21,7 @@ import com.kehua.energy.monitor.app.model.entity.DeviceData;
 import com.kehua.energy.monitor.app.model.entity.PatternEntity;
 import com.kehua.energy.monitor.app.model.entity.PatternHead;
 import com.kehua.energy.monitor.app.model.entity.PointInfo;
-import com.kehua.energy.monitor.app.utils.LineChartHelper;
+import com.kehua.energy.monitor.app.utils.linechart.LineChartHelper;
 import com.kyleduo.switchbutton.SwitchButton;
 
 import java.util.ArrayList;

@@ -13,7 +13,7 @@ import com.kehua.energy.monitor.app.base.XMVPActivity;
 import com.kehua.energy.monitor.app.di.component.DaggerActivityComponent;
 import com.kehua.energy.monitor.app.di.module.ActivityModule;
 import com.kehua.energy.monitor.app.route.RouterMgr;
-import com.kehua.energy.monitor.app.utils.LineChartHelper;
+import com.kehua.energy.monitor.app.utils.linechart.LineChartHelper;
 
 import butterknife.BindView;
 import me.walten.fastgo.di.component.AppComponent;

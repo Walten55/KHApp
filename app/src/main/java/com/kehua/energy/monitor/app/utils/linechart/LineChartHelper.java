@@ -1,4 +1,4 @@
-package com.kehua.energy.monitor.app.utils;
+package com.kehua.energy.monitor.app.utils.linechart;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -7,7 +7,6 @@ import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 
-import com.blankj.utilcode.util.StringUtils;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;

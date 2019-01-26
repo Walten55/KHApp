@@ -1,5 +1,6 @@
 package com.kehua.energy.monitor.app.business.home.stationDetail;
 
+import com.kehua.energy.monitor.app.model.entity.PerData;
 import com.kehua.energy.monitor.app.model.entity.StationEntity;
 
 import java.util.List;
@@ -18,6 +19,6 @@ public interface StationDetailContract {
 
         abstract void loadData();
 
-
+        abstract List<PerData> dealChartData();
     }
 }

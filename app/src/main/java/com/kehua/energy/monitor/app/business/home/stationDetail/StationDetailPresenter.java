@@ -2,6 +2,7 @@ package com.kehua.energy.monitor.app.business.home.stationDetail;
 
 import com.kehua.energy.monitor.app.R;
 import com.kehua.energy.monitor.app.model.APPModel;
+import com.kehua.energy.monitor.app.model.entity.PerData;
 import com.kehua.energy.monitor.app.model.entity.StationEntity;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class StationDetailPresenter extends StationDetailContract.Presenter {
         data.add(new StationEntity(StationEntity.OVERVIEW, ""));
 
         data.add(new StationEntity(StationEntity.LEFT_TITLE, Fastgo.getContext().getString(R.string.运行数据)));
-        data.add(new StationEntity(StationEntity.OPERA_DATA, ""));
+        data.add(new StationEntity(StationEntity.OPERA_DATA, dealChartData()));
 
         data.add(new StationEntity(StationEntity.LEFT_TITLE, Fastgo.getContext().getString(R.string.环境贡献)));
         data.add(new StationEntity(StationEntity.ENVIRONMENT, ""));
@@ -53,5 +54,14 @@ public class StationDetailPresenter extends StationDetailContract.Presenter {
         data.add(new StationEntity(StationEntity.DEVICE_ITEM, ""));
 
         mView.showStation(data);
+    }
+
+    @Override
+    List<PerData> dealChartData() {
+        List<PerData> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            list.add(new PerData((float) Math.random()));
+        }
+        return list;
     }
 }
