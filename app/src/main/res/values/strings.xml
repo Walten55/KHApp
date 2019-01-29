@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">新能源监控</string>
+    <string name="app_name">Ecolife</string>
     <string name="主页">主页</string>
     <string name="告警">告警</string>
     <string name="关注">关注</string>
@@ -384,4 +384,6 @@
     <string name="后天">后天</string>
     <string name="电站详情">电站详情</string>
     <string name="no_data">暂无数据</string>
+    <string name="更多">更多</string>
+    <string name="添加设备">+添加</string>
 </resources>

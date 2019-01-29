@@ -88,12 +88,13 @@
                 android:textColor="@color/text_blue"
                 android:textSize="@dimen/text_size_title" />
 
-            <me.codeboy.android.aligntextview.AlignTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/grid_5"
                 android:paddingLeft="@dimen/grid_5"
                 android:paddingRight="@dimen/grid_5"
+                android:gravity="center"
                 android:text="@string/单位_今日自用电"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_size_main" />
@@ -136,12 +137,13 @@
                 android:textColor="@color/text_blue"
                 android:textSize="@dimen/text_size_title" />
 
-            <me.codeboy.android.aligntextview.AlignTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/grid_5"
                 android:paddingLeft="@dimen/grid_5"
                 android:paddingRight="@dimen/grid_5"
+                android:gravity="center"
                 android:text="@string/单位_今日自用电"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_size_main" />
@@ -175,12 +177,13 @@
                 android:textColor="@color/text_blue"
                 android:textSize="@dimen/text_size_title" />
 
-            <me.codeboy.android.aligntextview.AlignTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/grid_5"
                 android:paddingLeft="@dimen/grid_5"
                 android:paddingRight="@dimen/grid_5"
+                android:gravity="center"
                 android:text="@string/单位_今日自用电"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_size_main" />
@@ -205,12 +208,13 @@
                 android:textColor="@color/text_blue"
                 android:textSize="@dimen/text_size_title" />
 
-            <me.codeboy.android.aligntextview.AlignTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/grid_5"
                 android:paddingLeft="@dimen/grid_5"
                 android:paddingRight="@dimen/grid_5"
+                android:gravity="center"
                 android:text="@string/单位_今日自用电"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_size_main" />
@@ -235,12 +239,13 @@
                 android:textColor="@color/text_blue"
                 android:textSize="@dimen/text_size_title" />
 
-            <me.codeboy.android.aligntextview.AlignTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/grid_5"
                 android:paddingLeft="@dimen/grid_5"
                 android:paddingRight="@dimen/grid_5"
+                android:gravity="center"
                 android:text="@string/单位_今日自用电"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_size_main" />
@@ -265,12 +270,13 @@
                 android:textColor="@color/text_blue"
                 android:textSize="@dimen/text_size_title" />
 
-            <me.codeboy.android.aligntextview.AlignTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/grid_5"
                 android:paddingLeft="@dimen/grid_5"
                 android:paddingRight="@dimen/grid_5"
+                android:gravity="center"
                 android:text="@string/单位_今日自用电"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_size_main" />

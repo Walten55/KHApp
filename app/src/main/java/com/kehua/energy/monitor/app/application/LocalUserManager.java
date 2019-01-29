@@ -8,7 +8,7 @@ public class LocalUserManager {
     //厂家人员
     public static final int ROLE_FACTORY = 3;
 
-    public static final String OPS_PASSWORD = "EFA35B80214574A69069DAC7E2D19DFA";
+    public static final String OPS_PASSWORD = "BCBE3365E6AC95EA2C0343A2395834DD";
 
     public static boolean IN_THE_UPGRADE = false;
 

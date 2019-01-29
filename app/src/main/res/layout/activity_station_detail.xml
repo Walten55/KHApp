@@ -23,7 +23,7 @@
         app:srlEnableOverScrollBounce="true"
         app:srlEnableOverScrollDrag="true"
         app:srlEnablePreviewInEditMode="false"
-        >
+        android:background="@color/bg_gray">
 
         <com.kehua.energy.monitor.app.view.SimpleHeader
             android:layout_width="match_parent"

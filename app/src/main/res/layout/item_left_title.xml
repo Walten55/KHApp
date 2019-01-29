@@ -18,23 +18,19 @@
         android:textSize="@dimen/text_size_title" />
 
     <com.flyco.roundview.RoundTextView
-        android:id="@+id/tv_all"
+        android:id="@+id/tv_title_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_toLeftOf="@+id/view_right_margin"
         android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin"
         android:gravity="center"
         android:paddingLeft="@dimen/margin"
         android:paddingRight="@dimen/margin"
         android:text="@string/全部"
-        android:textColor="@color/text_gray"
-        android:textSize="@dimen/text_size_sub_title" />
-
-    <View android:id="@+id/view_right_margin"
-        android:layout_width="@dimen/margin"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:layout_alignParentRight="true"/>
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_sub_title"
+        app:rv_backgroundColor="@color/green"
+        app:rv_cornerRadius="@dimen/grid_5" />
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.kehua.energy.monitor.app.view.SmartView;
+package com.kehua.energy.monitor.app.view;
 
 
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.kehua.energy.monitor.app.R;
+import com.kehua.energy.monitor.app.view.SmartView.ClassicsHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
 

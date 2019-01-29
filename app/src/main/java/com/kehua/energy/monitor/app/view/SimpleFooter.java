@@ -1,4 +1,4 @@
-package com.kehua.energy.monitor.app.view.SmartView;
+package com.kehua.energy.monitor.app.view;
 
 import android.content.Context;
 import android.graphics.Color;

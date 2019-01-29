@@ -40,7 +40,7 @@ public class StationDetailAdapter extends BaseMultiItemQuickAdapter<StationEntit
     public StationDetailAdapter(@Nullable List<StationEntity> data) {
         super(data);
         addItemType(StationEntity.OVERVIEW, R.layout.item_station_detail_overview);
-        addItemType(StationEntity.LEFT_TITLE, R.layout.item_home_2);
+        addItemType(StationEntity.LEFT_TITLE, R.layout.item_left_title);
         addItemType(StationEntity.OPERA_DATA, R.layout.item_station_detail_operational);
         addItemType(StationEntity.ENVIRONMENT, R.layout.item_station_detail_environment);
         addItemType(StationEntity.DEVICE_ITEM, R.layout.item_home_4);
@@ -57,24 +57,20 @@ public class StationDetailAdapter extends BaseMultiItemQuickAdapter<StationEntit
                 String text = (String) item.getData();
                 helper.setText(R.id.tv_name, text);
 
-                RoundTextView rightRtv = helper.getView(R.id.tv_all);
-                rightRtv.getDelegate().setCornerRadius(5);
-                rightRtv.setTextColor(ContextCompat.getColor(Fastgo.getContext(), R.color.white));
-                rightRtv.getDelegate().setBackgroundColor(ContextCompat.getColor(Fastgo.getContext(), R.color.green));
-
-                helper.setGone(R.id.view_right_margin, true);
-
                 if (Fastgo.getContext().getString(R.string.运行数据).equals(text)) {
-                    helper.setVisible(R.id.tv_all, true);
-
+                    helper.setVisible(R.id.tv_title_right, true);
+                    helper.setText(R.id.tv_title_right, Fastgo.getContext().getString(R.string.更多));
                 } else if (Fastgo.getContext().getString(R.string.环境贡献).equals(text)) {
-                    helper.setVisible(R.id.tv_all, true);
+                    helper.setVisible(R.id.tv_title_right, false);
 
                 } else if (Fastgo.getContext().getString(R.string.设备信息).equals(text)) {
-                    helper.setVisible(R.id.tv_all, false);
+                    helper.setVisible(R.id.tv_title_right, true);
+                    helper.setText(R.id.tv_title_right, Fastgo.getContext().getString(R.string.添加设备));
                 } else {
-                    helper.setVisible(R.id.tv_all, false);
+                    helper.setVisible(R.id.tv_title_right, false);
                 }
+
+                helper.addOnClickListener(R.id.tv_title_right);
                 break;
             case StationEntity.OPERA_DATA:
                 if (item.getData() != null && item.getData() instanceof List) {
